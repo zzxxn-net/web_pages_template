@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 82 - 다크 아카이브 비대칭 포커스 이동</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s82 signup-fixed" x-data="signupForm82()" x-init="initFocusOrder()">
+    <div class="s82-bg" aria-hidden="true"></div>
+    <div class="s82-layout" x-ref="layout">
+      <aside class="s82-aside" x-ref="aside" aria-label="회원가입 안내">
+        <div class="s82-aside-inner">
+          <p class="s82-aside-label">Archive · 82</p>
+          <h1 class="s82-aside-title">회원가입</h1>
+          <p class="s82-aside-desc">필드를 순서대로 입력한 뒤, Enter 또는 ‘다음’으로 포커스를 이동할 수 있습니다.</p>
+          <div class="s82-aside-decoration" aria-hidden="true"></div>
+        </div>
+      </aside>
+      <section class="s82-form-section" x-ref="formSection">
+        <form
+          class="s82-form"
+          method="post"
+          action="#"
+          hx-post="#"
+          hx-swap="none"
+          @submit.prevent="handleSubmit"
+          @keydown.enter.prevent="handleEnterKey"
+        >
+          <div
+            class="s82-field"
+            :class="{ 's82-field--focused': focusedField === 'email', 's82-field--invalid': errors.email }"
+          >
+            <label for="s82-email" class="s82-label">이메일</label>
+            <input
+              id="s82-email"
+              type="email"
+              name="email"
+              class="s82-input"
+              placeholder="you@archive.example"
+              autocomplete="email"
+              required
+              x-model="email"
+              x-ref="inputEmail"
+              @focus="focusedField = 'email'"
+              @blur="focusedField = null; validateEmail()"
+              :aria-invalid="errors.email ? 'true' : 'false'"
+              :aria-describedby="errors.email ? 's82-err-email' : undefined"
+            />
+            <span id="s82-err-email" class="s82-error" x-show="errors.email" x-text="errors.email" x-cloak role="alert"></span>
+            <button type="button" class="s82-next-btn" @click="focusNext('email')" tabindex="-1" aria-label="다음 필드로 이동">다음</button>
+          </div>
+
+          <div
+            class="s82-field"
+            :class="{ 's82-field--focused': focusedField === 'name', 's82-field--invalid': errors.name }"
+          >
+            <label for="s82-name" class="s82-label">이름</label>
+            <input
+              id="s82-name"
+              type="text"
+              name="name"
+              class="s82-input"
+              placeholder="홍길동"
+              autocomplete="name"
+              required
+              x-model="name"
+              x-ref="inputName"
+              @focus="focusedField = 'name'"
+              @blur="focusedField = null; validateName()"
+              :aria-invalid="errors.name ? 'true' : 'false'"
+              :aria-describedby="errors.name ? 's82-err-name' : undefined"
+            />
+            <span id="s82-err-name" class="s82-error" x-show="errors.name" x-text="errors.name" x-cloak role="alert"></span>
+            <button type="button" class="s82-next-btn" @click="focusNext('name')" tabindex="-1" aria-label="다음 필드로 이동">다음</button>
+          </div>
+
+          <div
+            class="s82-field"
+            :class="{ 's82-field--focused': focusedField === 'password', 's82-field--invalid': errors.password }"
+          >
+            <label for="s82-password" class="s82-label">비밀번호</label>
+            <div class="s82-pw-wrap">
+              <input
+                id="s82-password"
+                :type="showPassword ? 'text' : 'password'"
+                name="password"
+                class="s82-input"
+                placeholder="8자 이상"
+                autocomplete="new-password"
+                required
+                minlength="8"
+                x-model="password"
+                x-ref="inputPassword"
+                @focus="focusedField = 'password'"
+                @blur="focusedField = null; validatePassword()"
+                :aria-invalid="errors.password ? 'true' : 'false'"
+                :aria-describedby="errors.password ? 's82-err-password' : undefined"
+              />
+              <button type="button" class="s82-pw-toggle" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword">
+                <span x-text="showPassword ? '숨기기' : '보기'"></span>
+              </button>
+            </div>
+            <span id="s82-err-password" class="s82-error" x-show="errors.password" x-text="errors.password" x-cloak role="alert"></span>
+            <button type="button" class="s82-next-btn" @click="focusNext('password')" tabindex="-1" aria-label="다음 필드로 이동">다음</button>
+          </div>
+
+          <div
+            class="s82-field"
+            :class="{ 's82-field--focused': focusedField === 'passwordConfirm', 's82-field--invalid': errors.passwordConfirm }"
+          >
+            <label for="s82-passwordConfirm" class="s82-label">비밀번호 확인</label>
+            <input
+              id="s82-passwordConfirm"
+              :type="showPassword ? 'text' : 'password'"
+              name="password_confirm"
+              class="s82-input"
+              placeholder="다시 입력"
+              autocomplete="new-password"
+              required
+              minlength="8"
+              x-model="passwordConfirm"
+              x-ref="inputPasswordConfirm"
+              @focus="focusedField = 'passwordConfirm'"
+              @blur="focusedField = null; validatePasswordConfirm()"
+              :aria-invalid="errors.passwordConfirm ? 'true' : 'false'"
+              :aria-describedby="errors.passwordConfirm ? 's82-err-passwordConfirm' : undefined"
+            />
+            <span id="s82-err-passwordConfirm" class="s82-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak role="alert"></span>
+          </div>
+
+          <div class="s82-actions">
+            <button
+              type="submit"
+              class="s82-submit"
+              :disabled="submitting"
+              :aria-busy="submitting"
+            >
+              <span class="s82-submit-text" x-text="submitting ? '처리 중…' : '가입하기'"></span>
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>
