@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 81 - 네오 브루탈리즘 카드 분리형 입력 반응형</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s81 signup-fixed" x-data="signupForm81()">
+    <div class="s81-viewport" x-ref="viewport">
+      <h1 class="s81-title">JOIN</h1>
+      <p class="s81-desc">Neo brutal · Card layout</p>
+
+      <form class="s81-form" method="post" action="#" hx-post="#" hx-swap="none" @submit.prevent="handleSubmit">
+        <article class="s81-card s81-card--account" x-ref="cardAccount">
+          <h2 class="s81-card-title">계정 정보</h2>
+          <div class="s81-field" :class="{ 's81-field--invalid': errors.email }" x-ref="fieldEmail">
+            <label for="s81-email" class="s81-label">EMAIL</label>
+            <input id="s81-email" type="email" name="email" class="s81-input" placeholder="you@example.com" autocomplete="email" required x-model="email" @focus="onFocus($event, 'email')" @blur="onBlur($event, 'email'); validateEmail()" @keydown.enter.prevent="focusNext('email')" :aria-invalid="errors.email ? 'true' : 'false'" />
+            <span class="s81-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+          </div>
+          <div class="s81-field" :class="{ 's81-field--invalid': errors.name }" x-ref="fieldName">
+            <label for="s81-name" class="s81-label">NAME</label>
+            <input id="s81-name" type="text" name="name" class="s81-input" placeholder="홍길동" autocomplete="name" required x-model="name" @focus="onFocus($event, 'name')" @blur="onBlur($event, 'name'); validateName()" @keydown.enter.prevent="focusNext('name')" :aria-invalid="errors.name ? 'true' : 'false'" />
+            <span class="s81-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+          </div>
+        </article>
+
+        <article class="s81-card s81-card--password" x-ref="cardPassword">
+          <h2 class="s81-card-title">비밀번호</h2>
+          <div class="s81-field" :class="{ 's81-field--invalid': errors.password }" x-ref="fieldPassword">
+            <label for="s81-password" class="s81-label">PASSWORD</label>
+            <div class="s81-pw-wrap">
+              <input id="s81-password" :type="showPassword ? 'text' : 'password'" name="password" class="s81-input" placeholder="8자 이상" autocomplete="new-password" required minlength="8" x-model="password" @focus="onFocus($event, 'password')" @blur="onBlur($event, 'password'); validatePassword()" :aria-invalid="errors.password ? 'true' : 'false'" />
+              <button type="button" class="s81-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword"><span x-text="showPassword ? 'HIDE' : 'SHOW'"></span></button>
+            </div>
+            <span class="s81-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+          </div>
+          <div class="s81-field" :class="{ 's81-field--invalid': errors.passwordConfirm }" x-ref="fieldPasswordConfirm">
+            <label for="s81-passwordConfirm" class="s81-label">CONFIRM</label>
+            <input id="s81-passwordConfirm" :type="showPassword ? 'text' : 'password'" name="password_confirm" class="s81-input" placeholder="다시 입력" autocomplete="new-password" required minlength="8" x-model="passwordConfirm" @focus="onFocus($event, 'passwordConfirm')" @blur="onBlur($event, 'passwordConfirm'); validatePasswordConfirm()" :aria-invalid="errors.passwordConfirm ? 'true' : 'false'" />
+            <span class="s81-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+          </div>
+        </article>
+
+        <div class="s81-actions">
+          <button type="submit" class="s81-btn" :disabled="submitting" :aria-busy="submitting"><span x-text="submitting ? '처리 중…' : '가입하기'"></span></button>
+        </div>
+      </form>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>
