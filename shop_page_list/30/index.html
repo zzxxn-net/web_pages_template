@@ -1,0 +1,104 @@
+<!-- mvp -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — 미래적 클린 · 풀스크린 몰입</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="shop-page-30" x-data="shopPage30()">
+    <div class="shop-page-30__full">
+      <h1 class="shop-page-30__title">Shop</h1>
+      <p class="shop-page-30__lead">Future clean</p>
+      <div class="shop-page-30__grid" id="shop-grid-30">
+        <article
+          class="card-30"
+          :class="{ 'card-30--in-cart': inCart(1) }"
+          data-product="1"
+        >
+          <img class="card-30__image" src="https://placehold.co/220x220/f5f5f5/e0e0e0?text=1" alt="Product 1" width="220" height="220">
+          <div class="card-30__body">
+            <h2 class="card-30__name">Product 1</h2>
+            <p class="card-30__price">₩29,000</p>
+            <button
+              type="button"
+              class="btn-30"
+              :class="{ 'btn-30--added': inCart(1) }"
+              :aria-pressed="inCart(1)"
+              @click="addToCart(1)"
+            >
+              <span class="btn-30__label" x-text="inCart(1) ? '담김' : '장바구니'"></span>
+            </button>
+          </div>
+        </article>
+        <article
+          class="card-30"
+          :class="{ 'card-30--in-cart': inCart(2) }"
+          data-product="2"
+        >
+          <img class="card-30__image" src="https://placehold.co/220x220/f5f5f5/e0e0e0?text=2" alt="Product 2" width="220" height="220">
+          <div class="card-30__body">
+            <h2 class="card-30__name">Product 2</h2>
+            <p class="card-30__price">₩39,000</p>
+            <button
+              type="button"
+              class="btn-30"
+              :class="{ 'btn-30--added': inCart(2) }"
+              :aria-pressed="inCart(2)"
+              @click="addToCart(2)"
+            >
+              <span class="btn-30__label" x-text="inCart(2) ? '담김' : '장바구니'"></span>
+            </button>
+          </div>
+        </article>
+        <article
+          class="card-30"
+          :class="{ 'card-30--in-cart': inCart(3) }"
+          data-product="3"
+        >
+          <img class="card-30__image" src="https://placehold.co/220x220/f5f5f5/e0e0e0?text=3" alt="Product 3" width="220" height="220">
+          <div class="card-30__body">
+            <h2 class="card-30__name">Product 3</h2>
+            <p class="card-30__price">₩49,000</p>
+            <button
+              type="button"
+              class="btn-30"
+              :class="{ 'btn-30--added': inCart(3) }"
+              :aria-pressed="inCart(3)"
+              @click="addToCart(3)"
+            >
+              <span class="btn-30__label" x-text="inCart(3) ? '담김' : '장바구니'"></span>
+            </button>
+          </div>
+        </article>
+        <article
+          class="card-30"
+          :class="{ 'card-30--in-cart': inCart(4) }"
+          data-product="4"
+        >
+          <img class="card-30__image" src="https://placehold.co/220x220/f5f5f5/e0e0e0?text=4" alt="Product 4" width="220" height="220">
+          <div class="card-30__body">
+            <h2 class="card-30__name">Product 4</h2>
+            <p class="card-30__price">₩19,000</p>
+            <button
+              type="button"
+              class="btn-30"
+              :class="{ 'btn-30--added': inCart(4) }"
+              :aria-pressed="inCart(4)"
+              @click="addToCart(4)"
+            >
+              <span class="btn-30__label" x-text="inCart(4) ? '담김' : '장바구니'"></span>
+            </button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+// mvp
+$bp-tablet: 768px;
+$color-bg: #fafafa;
+$color-surface: #ffffff;
+$color-border: #e5e5e5;
+$color-text: #171717;
+$color-muted: #737373;
+$color-accent: #0ea5e9;
+$color-added: #22c55e;
+$radius: 12px;
+$ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+.shop-page-30 {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  background: $color-bg;
+  color: $color-text;
+}
+
+.shop-page-30__full {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.shop-page-30__title {
+  text-align: center;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 600;
+  margin: 0 0 0.2rem;
+  letter-spacing: 0.02em;
+  color: $color-text;
+}
+
+.shop-page-30__lead {
+  text-align: center;
+  font-size: 0.85rem;
+  color: $color-muted;
+  margin: 0 0 1.5rem;
+}
+
+.shop-page-30__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  justify-items: center;
+  width: 100%;
+}
+
+.card-30 {
+  width: 100%;
+  max-width: 220px;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  transition: border-color 0.25s $ease, box-shadow 0.25s $ease;
+}
+
+.card-30:hover {
+  border-color: darken($color-border, 8%);
+}
+
+.card-30--in-cart {
+  border-color: $color-added;
+  box-shadow: 0 0 0 1px $color-added;
+}
+
+.card-30__image {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+}
+
+.card-30__body {
+  text-align: center;
+  width: 100%;
+}
+
+.card-30__name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 0.3rem;
+  color: $color-text;
+}
+
+.card-30__price {
+  font-size: 0.9rem;
+  color: $color-muted;
+  margin: 0 0 0.6rem;
+}
+
+.btn-30 {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid $color-accent;
+  background: transparent;
+  color: $color-accent;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.25s $ease, color 0.25s $ease, border-color 0.25s $ease;
+}
+
+.btn-30:hover {
+  background: rgba($color-accent, 0.08);
+}
+
+.btn-30--added {
+  border-color: $color-added;
+  color: $color-added;
+  background: rgba($color-added, 0.08);
+}
+
+.btn-30:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px $color-bg, 0 0 0 4px $color-accent;
+}
+
+@media (min-width: $bp-tablet) {
+  .shop-page-30__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+}
