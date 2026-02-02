@@ -43,6 +43,7 @@ $s131-ease: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
 
+// MVP: 배경 - 고정 풀스크린 그라데이션, 포인터 이벤트 없어 스크롤/클릭은 내부로 전달
 .s131-bg {
   position: fixed;
   inset: 0;
@@ -92,6 +93,7 @@ $s131-ease: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   max-width: 380px;
 }
 
+// MVP: 폼 카드 - 반투명·블러로 몰입형, border·shadow로 입력 영역만 떠 있는 느낌
 .s131-form {
   width: 100%;
   background: $s131-surface;
@@ -219,6 +221,7 @@ $s131-ease: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   margin-top: 1.5rem;
 }
 
+// MVP: 가입 버튼 - 골드 악센트·hover 시 translateY(-1px)·shadow로 클릭 유도
 .s131-btn {
   width: 100%;
   padding: 0.9rem 1.25rem;
