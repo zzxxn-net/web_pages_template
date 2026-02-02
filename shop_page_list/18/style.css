@@ -1,0 +1,114 @@
+/* mvp */
+.shop-page-18 {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  background: linear-gradient(165deg, #fef2f2 0%, #fce7f3 100%);
+  color: #831843;
+}
+
+.shop-page-18__container {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.shop-page-18__title {
+  text-align: center;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #831843;
+  letter-spacing: 0.02em;
+}
+
+.shop-page-18__hint {
+  text-align: center;
+  margin: 0 0 1.25rem;
+  color: #9d174d;
+  font-size: 0.9rem;
+}
+
+.shop-page-18__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  justify-items: center;
+}
+
+.card-18 {
+  width: 100%;
+  max-width: 220px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(190, 24, 93, 0.25);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  cursor: pointer;
+  transition: border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-18:hover {
+  border-color: #9d174d;
+}
+
+.card-18--focused {
+  border-color: #db2777;
+  box-shadow: 0 6px 24px rgba(219, 39, 119, 0.18);
+}
+
+.card-18__image {
+  width: 100%;
+  max-width: 160px;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 0.75rem;
+}
+
+.card-18__body {
+  text-align: center;
+  width: 100%;
+}
+
+.card-18__name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 0.35rem;
+  color: #831843;
+}
+
+.card-18__price {
+  font-size: 0.9rem;
+  color: #db2777;
+  margin: 0 0 0.75rem;
+}
+
+.btn-18 {
+  padding: 0.55rem 1.1rem;
+  border-radius: 14px;
+  border: 1px solid #db2777;
+  background: #db2777;
+  color: #fff;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.3s cubic-bezier(0.22, 1, 0.36, 1), transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-18:hover {
+  background: #be185d;
+}
+
+@media (min-width: 768px) {
+  .shop-page-18__grid {
+    gap: 1.25rem;
+  }
+}
