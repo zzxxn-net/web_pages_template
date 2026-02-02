@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="로그인 — 현대 판타지 · 풀스크린 몰입형 시안">
+  <title>Login — Fantasy Fullscreen</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/login.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+  <main class="login-fantasy-full" role="main" aria-label="로그인">
+    <div class="login-fantasy-full__bg" aria-hidden="true">
+      <div class="login-fantasy-full__glow login-fantasy-full__glow--1"></div>
+      <div class="login-fantasy-full__glow login-fantasy-full__glow--2"></div>
+    </div>
+    <div class="login-fantasy-full__center" x-data="fantasyFullLogin()">
+      <h1 class="login-fantasy-full__title">Realm</h1>
+      <p class="login-fantasy-full__desc">로그인하여 영역에 들어가세요</p>
+
+      <form class="login-fantasy-full__form" action="#" method="post" autocomplete="on" @submit.prevent="handleSubmit" hx-post="#" hx-swap="none" hx-trigger="submit">
+        <div class="fantasy-field">
+          <label for="email" class="fantasy-field__label">이메일</label>
+          <input id="email" type="email" name="email" class="fantasy-field__input" placeholder="you@realm.example" autocomplete="email" required x-model="email">
+        </div>
+        <div class="fantasy-field">
+          <label for="password" class="fantasy-field__label">비밀번호</label>
+          <div class="fantasy-field__wrap">
+            <input id="password" :type="showPassword ? 'text' : 'password'" name="password" class="fantasy-field__input" placeholder="••••••••" autocomplete="current-password" required x-model="password">
+            <button type="button" class="fantasy-field__toggle" aria-label="비밀번호 표시" @click="showPassword = !showPassword">보기</button>
+          </div>
+        </div>
+        <button type="submit" class="fantasy-btn" :disabled="loading">
+          <span x-show="!loading">들어가기</span>
+          <span x-show="loading" x-cloak>확인 중…</span>
+        </button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
