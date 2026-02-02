@@ -1,0 +1,135 @@
+// Design 53: Experimental interface · Single focus flow · GSAP smooth transitions
+$bg: #0a0a0e;
+$card: #0e0e12;
+$border: rgba(0, 255, 200, 0.18);
+$text: #e0e4e8;
+$muted: #6a6e78;
+$accent: #00ffc8;
+$focus-glow: rgba(0, 255, 200, 0.22);
+$radius: 8px;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "JetBrains Mono", monospace;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-exp-single {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+}
+.login-exp-single__wrap { width: 100%; max-width: 400px; }
+
+.exp-single-card {
+  padding: $space-xl;
+  background: $card;
+  border: 1px solid $border;
+  border-radius: $radius;
+  box-shadow: 0 0 0 1px rgba(0, 255, 200, 0.06);
+}
+
+.exp-single-card__head { margin-bottom: $space-xl; text-align: center; }
+.exp-single-card__title {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.35rem, 3.2vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: $accent;
+}
+.exp-single-card__desc { margin: 0; font-size: 0.8125rem; color: $muted; }
+.exp-single-card__form { display: flex; flex-direction: column; gap: $space-lg; }
+
+.exp-single-field {
+  padding: $space $space-lg;
+  border: 1px solid $border;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.25);
+  transition: opacity $ease, border-color $ease, box-shadow $ease;
+  &.is-active {
+    border-color: rgba($accent, 0.45);
+    box-shadow: 0 0 0 2px $focus-glow;
+  }
+  &.is-dimmed { opacity: 0.55; }
+}
+.exp-single-field__label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: $muted;
+}
+.exp-single-field.is-active .exp-single-field__label { color: $accent; }
+.exp-single-field__input {
+  width: 100%;
+  padding: 0.4rem 0;
+  font-size: 1rem;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+  &::placeholder { color: rgba(255, 255, 255, 0.15); }
+}
+.exp-single-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  .exp-single-field__input { flex: 1; }
+}
+.exp-single-field__toggle {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  color: $accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background $ease, color $ease;
+  &:hover { background: rgba($accent, 0.12); }
+}
+
+.exp-single-btn {
+  margin-top: 0.25rem;
+  padding: 0.85rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: $bg;
+  background: $accent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: opacity $ease, transform $ease, box-shadow $ease;
+  box-shadow: 0 2px 12px $focus-glow;
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px $focus-glow;
+  }
+  &:disabled { cursor: not-allowed; opacity: 0.75; }
+  &.is-loading { opacity: 0.9; }
+}
+
+@media (max-width: $bp) {
+  .login-exp-single { padding: $space; }
+  .exp-single-card { padding: $space-lg; }
+}
