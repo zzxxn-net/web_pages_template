@@ -1,0 +1,28 @@
+// Design 17: Futuristic Clean · Fullscreen · Input-reactive
+$bg:#f8fafc;$surf:#fff;$bor:#e2e8f0;$txt:#0f172a;$muted:#64748b;$acc:#3b82f6;$focus:rgba(59,130,246,0.25);$r:12px;$sm:8px;$md:1rem;$lg:1.5rem;$xl:2rem;$2xl:3rem;$ease:0.25s ease;$bp:480px;
+*,*::before,*::after{box-sizing:border-box;}
+html{font-size:16px;-webkit-text-size-adjust:100%;}
+body{margin:0;min-height:100vh;min-height:100dvh;font-family:"Inter",-apple-system,sans-serif;font-weight:500;line-height:1.5;color:$txt;background:$bg;display:flex;align-items:center;justify-content:center;padding:$md;}
+.login-future-full{width:100%;min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:$xl;}
+.login-future-full__inner{width:100%;max-width:380px;margin:0 auto;}
+.login-future-full__head{margin-bottom:$xl;text-align:center;}
+.login-future-full__title{margin:0 0 0.25rem;font-size:clamp(1.5rem,3.5vw,1.75rem);font-weight:700;letter-spacing:-0.02em;color:$txt;}
+.login-future-full__desc{margin:0;font-size:0.9375rem;color:$muted;}
+.login-future-full__form{display:flex;flex-direction:column;gap:$lg;}
+.future-field{transition:box-shadow $ease,border-color $ease;border-radius:$sm;border:1px solid $bor;background:$surf;padding:$md;box-shadow:0 1px 3px rgba(0,0,0,0.06);}
+.future-field.has-focus{border-color:$acc;box-shadow:0 0 0 2px $focus;}
+.future-field.has-value:not(.has-focus){border-color:#cbd5e1;}
+.future-field__label{display:block;font-size:0.8125rem;font-weight:600;color:$muted;margin-bottom:0.35rem;transition:color $ease;}
+.future-field.has-focus .future-field__label{color:$acc;}
+.future-field__input{width:100%;font:inherit;font-size:1rem;color:$txt;background:transparent;border:none;padding:0.25rem 0;outline:none;}
+.future-field__input::placeholder{color:$muted;}
+.future-field__wrap{display:flex;align-items:center;gap:$md;}
+.future-field__wrap .future-field__input{flex:1;min-width:0;}
+.future-field__toggle{font:inherit;font-size:0.8125rem;color:$muted;background:none;border:1px solid $bor;border-radius:6px;padding:0.25rem 0.5rem;cursor:pointer;transition:color $ease,border-color $ease;}
+.future-field__toggle:hover{color:$acc;border-color:$acc;}
+.future-field__toggle:focus-visible{outline:2px solid $acc;outline-offset:2px;}
+.future-btn{margin-top:$md;font:inherit;font-size:1rem;font-weight:600;color:#fff;background:$acc;border:none;border-radius:$sm;padding:$md $xl;cursor:pointer;transition:opacity $ease,transform $ease;}
+.future-btn:hover:not(:disabled){opacity:0.95;transform:translateY(-1px);}
+.future-btn:focus-visible{outline:2px solid $acc;outline-offset:2px;}
+.future-btn:disabled{opacity:0.7;cursor:not-allowed;}
+@media (max-width:$bp){.login-future-full{padding:$md;}}
