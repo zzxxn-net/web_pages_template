@@ -1,0 +1,37 @@
+<!-- mvp -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — 감성 테크</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="shop-page-4" x-data="shopPage4()">
+    <div class="shop-page-4__container">
+      <h1 class="shop-page-4__title">Shop</h1>
+      <section class="shop-page-4__hero" :key="products[current].id">
+        <img class="shop-page-4__hero-image" :src="products[current].img" :alt="products[current].name" width="420" height="420">
+        <div class="shop-page-4__hero-body">
+          <h2 class="shop-page-4__hero-name" x-text="products[current].name"></h2>
+          <p class="shop-page-4__hero-price" x-text="products[current].price"></p>
+          <button type="button" class="btn-4" @click="addToCart(products[current].id)">장바구니</button>
+        </div>
+      </section>
+      <div class="shop-page-4__strip" id="shop-strip-4">
+        <template x-for="(p, i) in products" :key="p.id">
+          <button type="button" class="product-thumb-4" :class="{ 'product-thumb-4--active': current === i }" @click="selectProduct(i)" :aria-pressed="current === i">
+            <img class="product-thumb-4__image" :src="p.img" :alt="p.name" width="120" height="120">
+            <p class="product-thumb-4__name" x-text="p.name"></p>
+          </button>
+        </template>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>
