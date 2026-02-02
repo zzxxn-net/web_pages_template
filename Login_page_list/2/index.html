@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="로그인 — 다크 아카이브 · 풀스크린 몰입형 시안">
+  <title>Login — Dark Archive</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/login.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+  <main class="login-screen" role="main" aria-label="로그인">
+    <div class="login-screen__bg" aria-hidden="true"></div>
+    <div class="login-screen__content" x-data="loginScreen()">
+      <header class="login-head">
+        <h1 class="login-head__title">Archive</h1>
+        <p class="login-head__desc">로그인하여 계속하세요</p>
+      </header>
+
+      <form class="login-form" action="#" method="post" autocomplete="on" @submit.prevent="handleSubmit" hx-post="#" hx-swap="none" hx-trigger="submit">
+        <div class="field" data-field>
+          <label for="email" class="field__label">이메일</label>
+          <input id="email" type="email" name="email" class="field__input" placeholder="you@archive.example" autocomplete="email" required x-model="email" @focus="onFieldFocus($event)" @blur="onFieldBlur($event)">
+          <span class="field__line" data-line></span>
+        </div>
+        <div class="field" data-field>
+          <label for="password" class="field__label">비밀번호</label>
+          <div class="field__input-wrap">
+            <input id="password" :type="showPassword ? 'text' : 'password'" name="password" class="field__input" placeholder="••••••••" autocomplete="current-password" required x-model="password" @focus="onFieldFocus($event)" @blur="onFieldBlur($event)">
+            <button type="button" class="field__toggle" aria-label="비밀번호 표시" @click="showPassword = !showPassword"><span x-text="showPassword ? '숨기기' : '보기'">보기</span></button>
+          </div>
+          <span class="field__line" data-line></span>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn--primary" :disabled="loading" :aria-busy="loading">
+            <span class="btn__text" x-show="!loading">로그인</span>
+            <span class="btn__text btn__text--busy" x-show="loading">확인 중…</span>
+          </button>
+        </div>
+      </form>
+
+      <footer class="login-foot">
+        <a href="#" class="login-foot__link">비밀번호 찾기</a>
+        <a href="#" class="login-foot__link">회원가입</a>
+      </footer>
+    </div>
+  </main>
+</body>
+</html>
