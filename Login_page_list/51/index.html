@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="로그인 — 다크 아카이브 · 단계 분할형(Progressive Form) · GSAP 기반 부드러운 전환 시안">
+  <title>Login — Dark Archive Progressive GSAP</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/login.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+  <main class="login-dark-prog" role="main" aria-label="로그인">
+    <div class="login-dark-prog__bg" aria-hidden="true"></div>
+    <div class="login-dark-prog__box" x-data="darkArchProgLogin()">
+      <div class="dark-prog-indicator" aria-hidden="true">
+        <span class="dark-prog-dot" :class="{ 'is-active': step === 1, 'is-done': step > 1 }">1</span>
+        <span class="dark-prog-line" :class="{ 'is-done': step > 1 }"></span>
+        <span class="dark-prog-dot" :class="{ 'is-active': step === 2 }">2</span>
+      </div>
+      <header class="login-dark-prog__head">
+        <h1 class="login-dark-prog__title">아카이브 로그인</h1>
+        <p class="login-dark-prog__desc" x-text="step === 1 ? '이메일을 입력하세요' : '비밀번호를 입력하세요'">이메일을 입력하세요</p>
+      </header>
+      <form class="login-dark-prog__form" action="#" method="post" autocomplete="on" x-on:submit.prevent="handleSubmit($event)" hx-post="#" hx-swap="none" hx-trigger="submit">
+        <div class="dark-prog-panel" data-step="1" :class="{ 'is-hidden': step !== 1 }" data-gsap-panel>
+          <div class="dark-prog-field" data-gsap-field>
+            <label for="dp51-email" class="dark-prog-field__label">이메일</label>
+            <input id="dp51-email" type="email" name="email" class="dark-prog-field__input" placeholder="you@archive.example" autocomplete="email" required x-model="email" tabindex="0">
+          </div>
+          <button type="button" class="dark-prog-btn dark-prog-btn--next" x-on:click="goStep2()" :disabled="!email.trim()">다음</button>
+        </div>
+        <div class="dark-prog-panel" data-step="2" :class="{ 'is-hidden': step !== 2 }" data-gsap-panel>
+          <div class="dark-prog-field" data-gsap-field>
+            <label for="dp51-pw" class="dark-prog-field__label">비밀번호</label>
+            <div class="dark-prog-field__row">
+              <input id="dp51-pw" x-bind:type="showPassword ? 'text' : 'password'" name="password" class="dark-prog-field__input" placeholder="••••••••" autocomplete="current-password" required x-model="password" tabindex="0">
+              <button type="button" class="dark-prog-field__toggle" aria-label="비밀번호 표시" x-on:click="showPassword = !showPassword" tabindex="0"><span x-text="showPassword ? '숨기기' : '보기'">보기</span></button>
+            </div>
+          </div>
+          <div class="dark-prog-actions">
+            <button type="button" class="dark-prog-btn dark-prog-btn--back" x-on:click="step = 1">이전</button>
+            <button type="submit" class="dark-prog-btn dark-prog-btn--primary" :class="{ 'is-loading': loading }" :disabled="loading" tabindex="0">
+              <span x-show="!loading">접속</span>
+              <span x-show="loading" x-cloak>확인 중…</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
