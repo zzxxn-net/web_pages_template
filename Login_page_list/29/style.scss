@@ -1,0 +1,190 @@
+// Design 29: Futuristic Clean · Progressive Form · State change emphasis
+$bg: #f0f4f8;
+$card: #ffffff;
+$border: rgba(0, 80, 120, 0.15);
+$text: #0a1628;
+$muted: #5a7a8a;
+$accent: #0088cc;
+$focus: rgba(0, 136, 204, 0.25);
+$radius: 12px;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.25s ease;
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-future-prog {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+}
+.login-future-prog__box {
+  width: 100%;
+  max-width: 380px;
+  background: $card;
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: $space-xl;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+}
+
+.future-prog-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: $space-xl;
+}
+.future-prog-step {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: $muted;
+  border: 2px solid $border;
+  border-radius: 50%;
+  transition: color $ease, border-color $ease, background $ease;
+}
+.future-prog-step.is-active {
+  color: $accent;
+  border-color: $accent;
+  background: rgba(0, 136, 204, 0.08);
+}
+.future-prog-step.is-done {
+  color: $accent;
+  border-color: $accent;
+  background: $accent;
+  color: $card;
+}
+.future-prog-line {
+  width: 24px;
+  height: 2px;
+  background: $border;
+  transition: background $ease;
+}
+.future-prog-line.is-done { background: $accent; }
+
+.login-future-prog__head { margin-bottom: $space-xl; text-align: center; }
+.login-future-prog__title {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.35rem, 3vw, 1.5rem);
+  font-weight: 700;
+  color: $text;
+}
+.login-future-prog__desc { margin: 0; font-size: 0.875rem; color: $muted; }
+
+.login-future-prog__form { position: relative; min-height: 140px; }
+.future-prog-panel {
+  transition: opacity $ease;
+  &.is-hidden { position: absolute; left: 0; right: 0; top: 0; opacity: 0; pointer-events: none; visibility: hidden; }
+}
+.future-prog-field {
+  padding: $space $space-lg;
+  border: 1px solid $border;
+  border-radius: 8px;
+  background: $bg;
+  margin-bottom: $space-lg;
+  transition: border-color $ease, box-shadow $ease;
+  &.is-filled { border-color: rgba(0, 136, 204, 0.35); box-shadow: 0 0 0 1px rgba(0, 136, 204, 0.1); }
+}
+.future-prog-field:focus-within { border-color: $accent; box-shadow: 0 0 0 2px $focus; }
+.future-prog-field__label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: $muted;
+  margin-bottom: 0.35rem;
+}
+.future-prog-field__input {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  color: $text;
+  background: transparent;
+  border: none;
+  padding: 0.4rem 0;
+  outline: none;
+}
+.future-prog-field__input::placeholder { color: $muted; opacity: 0.7; }
+.future-prog-field__wrap { display: flex; align-items: center; gap: 0.5rem; }
+.future-prog-field__wrap .future-prog-field__input { flex: 1; min-width: 0; }
+.future-prog-field__toggle {
+  font: inherit;
+  font-size: 0.8125rem;
+  color: $muted;
+  background: none;
+  border: 1px solid $border;
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  transition: color $ease, border-color $ease;
+}
+.future-prog-field__toggle:hover { color: $accent; border-color: $accent; }
+
+.future-prog-btn {
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: $space $space-xl;
+  cursor: pointer;
+  transition: opacity $ease, transform $ease, background $ease;
+}
+.future-prog-btn--next {
+  width: 100%;
+  color: $card;
+  background: $accent;
+  border: none;
+}
+.future-prog-btn--next:disabled { opacity: 0.5; cursor: not-allowed; }
+.future-prog-btn--back {
+  color: $muted;
+  background: $bg;
+  border: 1px solid $border;
+}
+.future-prog-btn--back:hover { color: $text; border-color: $text; }
+.future-prog-btn--primary {
+  color: $card;
+  background: $accent;
+  border: none;
+}
+.future-prog-btn--primary.is-loading { opacity: 0.8; pointer-events: none; }
+.future-prog-btn--primary:disabled { cursor: not-allowed; }
+.future-prog-actions {
+  display: flex;
+  gap: $space;
+  margin-top: $space-lg;
+}
+.future-prog-actions .future-prog-btn--back { flex: 0 0 auto; }
+.future-prog-actions .future-prog-btn--primary { flex: 1; }
+
+@media (max-width: $bp) {
+  .login-future-prog { padding: $space-lg; }
+  .login-future-prog__box { padding: $space-lg; }
+}
