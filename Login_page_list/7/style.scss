@@ -1,0 +1,230 @@
+// =============================================================================
+// Login Page — Design 7: Experimental Interface · Card · Input-reactive animation
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Variables (실험적: bold, high contrast, unconventional)
+// -----------------------------------------------------------------------------
+$color-bg: #0c0c0c;
+$color-card: #111111;
+$color-border: #33ff88;
+$color-text: #e0e0e0;
+$color-text-muted: #888;
+$color-accent: #33ff88;
+$color-accent-dim: rgba(51, 255, 136, 0.15);
+$radius: 4px;
+$space-xs: 0.25rem;
+$space-sm: 0.5rem;
+$space-md: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$font-mono: "JetBrains Mono", "SF Mono", "Consolas", monospace;
+$transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+$bp-mobile: 480px;
+
+// -----------------------------------------------------------------------------
+// Base & center layout
+// -----------------------------------------------------------------------------
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: $font-mono;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $color-text;
+  background: $color-bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-md;
+}
+
+.login-exp {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+}
+
+// -----------------------------------------------------------------------------
+// Card (분리형 + 실험적: clip-path or border accent)
+// -----------------------------------------------------------------------------
+.login-exp__card {
+  width: 100%;
+  background: $color-card;
+  border: 1px solid $color-border;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 0);
+  padding: $space-xl;
+}
+
+.login-exp__card-inner {
+  padding: $space-md 0;
+}
+
+.login-exp__head {
+  text-align: center;
+  margin-bottom: $space-xl;
+}
+
+.login-exp__title {
+  margin: 0 0 $space-xs;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: $color-accent;
+}
+
+.login-exp__desc {
+  margin: 0;
+  font-size: 0.75rem;
+  color: $color-text-muted;
+  letter-spacing: 0.1em;
+}
+
+.login-exp__form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+
+// -----------------------------------------------------------------------------
+// Input-reactive (label shift, border glow)
+// -----------------------------------------------------------------------------
+.exp-field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+  transition: transform $transition;
+
+  &.is-active .exp-field__label {
+    transform: translateY(-1.5rem);
+    color: $color-accent;
+    opacity: 1;
+  }
+
+  &.is-active .exp-field__input {
+    border-color: $color-accent;
+    box-shadow: 0 0 0 1px $color-accent, 0 0 12px $color-accent-dim;
+  }
+}
+
+.exp-field__label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: $color-text-muted;
+  transform: translateY(0);
+  opacity: 0.9;
+  transition: transform $transition, color $transition, opacity $transition;
+}
+
+.exp-field__input {
+  width: 100%;
+  padding: $space-md $space-lg;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  color: $color-text;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: $radius;
+  transition: border-color $transition, box-shadow $transition;
+
+  &::placeholder {
+    color: $color-text-muted;
+    opacity: 0.6;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.exp-field__wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .exp-field__input {
+    padding-inline-end: 4rem;
+  }
+}
+
+.exp-field__toggle {
+  position: absolute;
+  right: $space-md;
+  font-size: 0.6875rem;
+  font-family: inherit;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: $color-text-muted;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: $space-sm;
+  transition: color $transition;
+
+  &:hover {
+    color: $color-accent;
+  }
+}
+
+.exp-btn {
+  width: 100%;
+  margin-top: $space-sm;
+  padding: $space-md $space-lg;
+  font-size: 0.875rem;
+  font-weight: 700;
+  font-family: inherit;
+  letter-spacing: 0.15em;
+  color: $color-bg;
+  background: $color-accent;
+  border: none;
+  border-radius: $radius;
+  cursor: pointer;
+  transition: background $transition, transform 0.15s ease, box-shadow $transition;
+
+  &:hover:not(:disabled) {
+    background: lighten($color-accent, 8%);
+    transform: scale(1.01);
+    box-shadow: 0 0 20px $color-accent-dim;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.99);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+@media (max-width: $bp-mobile) {
+  .login-exp__card {
+    padding: $space-lg;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 0);
+  }
+}
