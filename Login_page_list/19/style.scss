@@ -1,0 +1,38 @@
+// Design 19: Cyber Minimal · Progressive Form · Input-reactive
+$bg:#0a0a0f;$surf:#12121a;$bor:rgba(255,255,255,0.06);$txt:#e8e8ed;$muted:#8a8a9a;$acc:#00d4aa;$focus:rgba(0,212,170,0.3);$r:12px;$sm:8px;$md:1rem;$lg:1.5rem;$xl:2rem;$2xl:3rem;$ease:0.25s ease;$bp:480px;
+*,*::before,*::after{box-sizing:border-box;}
+html{font-size:16px;-webkit-text-size-adjust:100%;}
+body{margin:0;min-height:100vh;min-height:100dvh;font-family:"Inter",-apple-system,sans-serif;font-weight:500;line-height:1.5;color:$txt;background:$bg;display:flex;align-items:center;justify-content:center;padding:$md;}
+.login-cyber-prog{width:100%;min-height:100%;display:flex;align-items:center;justify-content:center;padding:$xl;}
+.login-cyber-prog__box{width:100%;max-width:380px;margin:0 auto;background:$surf;border:1px solid $bor;border-radius:$r;padding:$2xl $xl;box-shadow:0 20px 48px rgba(0,0,0,0.35);}
+.cyber-steps{display:flex;align-items:center;gap:$sm;margin-bottom:$xl;}
+.cyber-step{width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;font-size:0.875rem;font-weight:700;border:1px solid $bor;border-radius:50%;background:$surf;color:$muted;transition:background $ease,color $ease,border-color $ease;}
+.cyber-step.is-active{background:$acc;color:$bg;border-color:$acc;}
+.cyber-step.is-done{background:rgba(0,212,170,0.2);color:$acc;border-color:$acc;}
+.cyber-step__line{width:1.5rem;height:2px;background:$bor;transition:background $ease;}
+.cyber-step__line.is-done{background:$acc;}
+.login-cyber-prog__head{margin-bottom:$xl;}
+.login-cyber-prog__title{margin:0 0 0.25rem;font-size:clamp(1.5rem,3.5vw,1.75rem);font-weight:600;letter-spacing:-0.02em;color:$txt;}
+.login-cyber-prog__desc{margin:0;font-size:0.9375rem;color:$muted;}
+.login-cyber-prog__form{position:relative;min-height:180px;}
+.cyber-panel{transition:opacity 0.2s ease;}
+.cyber-panel.is-hidden{position:absolute;left:0;right:0;top:0;pointer-events:none;visibility:hidden;}
+.cyber-field{transition:border-color $ease,box-shadow $ease,transform $ease;border-radius:$sm;border:1px solid $bor;background:rgba(0,0,0,0.2);padding:$md;margin-bottom:$lg;}
+.cyber-field.has-focus{border-color:$acc;box-shadow:0 0 0 2px $focus;}
+.cyber-field__label{display:block;font-size:0.8125rem;font-weight:600;color:$muted;margin-bottom:0.35rem;}
+.cyber-field__input{width:100%;font:inherit;font-size:1rem;color:$txt;background:transparent;border:none;padding:0.25rem 0;outline:none;}
+.cyber-field__input::placeholder{color:$muted;}
+.cyber-field__wrap{display:flex;align-items:center;gap:$md;}
+.cyber-field__wrap .cyber-field__input{flex:1;min-width:0;}
+.cyber-field__toggle{font:inherit;font-size:0.8125rem;color:$muted;background:none;border:1px solid $bor;border-radius:6px;padding:0.25rem 0.5rem;cursor:pointer;transition:color $ease,border-color $ease;}
+.cyber-field__toggle:hover{color:$acc;border-color:$acc;}
+.cyber-field__toggle:focus-visible{outline:2px solid $acc;outline-offset:2px;}
+.cyber-btn{font:inherit;font-size:0.9375rem;font-weight:600;padding:$md $xl;border-radius:$sm;cursor:pointer;transition:opacity $ease,transform $ease;border:none;}
+.cyber-btn:focus-visible{outline:2px solid $acc;outline-offset:2px;}
+.cyber-btn:disabled{opacity:0.5;cursor:not-allowed;}
+.cyber-btn--next{width:100%;color:$bg;background:$acc;}
+.cyber-btn--back{color:$muted;background:transparent;border:1px solid $bor;}
+.cyber-btn--back:hover:not(:disabled){color:$txt;border-color:$muted;}
+.cyber-btn--primary{color:$bg;background:$acc;flex:1;}
+.cyber-panel__actions{display:flex;gap:$md;margin-top:$lg;}
+@media (max-width:$bp){.login-cyber-prog{padding:$md;}.login-cyber-prog__box{padding:$xl $lg;}}
