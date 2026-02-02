@@ -1,0 +1,190 @@
+// Design 80: Neo Brutalism, Asymmetric Layout, Input Reactive Animation
+$bg: #f5f0e8;
+$card: #fffef9;
+$border: #1a1a1a;
+$text: #1a1a1a;
+$muted: #4a4a4a;
+$accent: #1a1a1a;
+$shadow: 4px 4px 0 #1a1a1a;
+$radius: 0;
+$space: 1rem;
+$space-lg: 1.25rem;
+$ease: 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 640px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Space Mono", "Courier New", monospace;
+  font-weight: 400;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.brutal-login {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-lg;
+  overflow: auto;
+}
+
+.brutal-login__wrap {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto;
+  gap: 2rem;
+  align-items: center;
+  width: 100%;
+  max-width: 720px;
+}
+@media (max-width: $bp) {
+  .brutal-login__wrap {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.brutal-aside {
+  padding: $space-lg 0;
+}
+@media (max-width: $bp) {
+  .brutal-aside {
+    padding: 0;
+    text-align: center;
+  }
+}
+
+.brutal-aside__title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  color: $text;
+  letter-spacing: -0.03em;
+}
+.brutal-aside__desc {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: $muted;
+}
+
+.brutal-card {
+  padding: $space-lg;
+  background: $card;
+  border: 3px solid $border;
+  border-radius: $radius;
+  box-shadow: $shadow;
+  transition: box-shadow $ease, transform $ease;
+}
+.brutal-card.is-loading {
+  box-shadow: 2px 2px 0 $border;
+}
+
+.brutal-card__form {
+  display: flex;
+  flex-direction: column;
+  gap: $space;
+}
+
+.brutal-field {
+  padding: 0.75rem 1rem;
+  border: 2px solid $border;
+  border-radius: $radius;
+  background: #fff;
+  transition: transform $ease, box-shadow $ease, border-color $ease;
+}
+.brutal-field.has-focus {
+  border-color: $accent;
+  box-shadow: 3px 3px 0 $accent;
+  transform: translate(-1px, -1px);
+}
+.brutal-field.has-value:not(.has-focus) {
+  border-color: $muted;
+}
+
+.brutal-field__label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: $muted;
+  transition: color $ease;
+}
+.brutal-field.has-focus .brutal-field__label { color: $text; }
+
+.brutal-field__input {
+  width: 100%;
+  padding: 0.2rem 0;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.brutal-field__input::placeholder { color: rgba($muted, 0.7); }
+
+.brutal-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.brutal-field__row .brutal-field__input { flex: 1; }
+
+.brutal-field__toggle {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: inherit;
+  text-transform: uppercase;
+  color: $muted;
+  background: #fff;
+  border: 2px solid $border;
+  border-radius: $radius;
+  cursor: pointer;
+  transition: color $ease, transform $ease;
+}
+.brutal-field__toggle:hover { color: $text; transform: translate(1px, 1px); }
+
+.brutal-btn {
+  margin-top: 0.25rem;
+  padding: 0.85rem 1.2rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: $card;
+  background: $accent;
+  border: 3px solid $border;
+  border-radius: $radius;
+  box-shadow: 3px 3px 0 $border;
+  cursor: pointer;
+  transition: transform $ease, box-shadow $ease;
+}
+.brutal-btn:hover:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 $border;
+}
+.brutal-btn:disabled { cursor: not-allowed; opacity: 0.7; }
+.brutal-btn.is-loading {
+  pointer-events: none;
+  box-shadow: 1px 1px 0 $border;
+}
+
+@media (max-width: $bp) {
+  .brutal-login { padding: $space; }
+  .brutal-card { padding: $space; }
+}
