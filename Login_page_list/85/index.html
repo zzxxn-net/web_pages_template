@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="로그인, 감성 테크, 카드 분리형 레이아웃, 스크롤 없는 고정 플로우">
+  <title>Login - Emotional Tech Card Separated</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600&display=swap" rel="stylesheet">
+  <script defer src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/login.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+  <!-- MVP: 스크롤 없는 고정 플로우 루트 — 한 뷰포트 내에서만 노출, 가로·세로 중앙 정렬 -->
+  <main class="emotech-login" role="main" aria-label="로그인">
+    <div class="emotech-login__wrap" x-data="emotechCardLogin()" data-gsap-wrap>
+      <!-- MVP: 카드 분리형 — 헤더 카드(타이틀·부제) 분리 -->
+      <header class="emotech-header" data-gsap-header aria-label="로그인 제목">
+        <h1 class="emotech-header__title">로그인</h1>
+        <p class="emotech-header__desc">계정으로 시작하세요.</p>
+      </header>
+      <!-- MVP: 카드 분리형 — 폼 전용 카드, 스크롤 없이 고정 플로우 -->
+      <div class="emotech-card" data-gsap-card :class="{ 'is-loading': loading }">
+        <form class="emotech-card__form" action="#" method="post" autocomplete="on" x-on:submit.prevent="handleSubmit($event)" hx-post="#" hx-swap="none" hx-trigger="submit">
+          <div class="emotech-field" :class="{ 'has-focus': focusField === 'email', 'has-value': email.length > 0 }" data-gsap-field>
+            <label for="emotech85-email" class="emotech-field__label">이메일</label>
+            <input id="emotech85-email" type="email" name="email" class="emotech-field__input" placeholder="you@example.com" autocomplete="email" required x-model="email" x-on:focus="focusField = 'email'" x-on:blur="focusField = ''" tabindex="0">
+          </div>
+          <div class="emotech-field" :class="{ 'has-focus': focusField === 'password', 'has-value': password.length > 0 }" data-gsap-field>
+            <label for="emotech85-pw" class="emotech-field__label">비밀번호</label>
+            <div class="emotech-field__row">
+              <input id="emotech85-pw" x-bind:type="showPassword ? 'text' : 'password'" name="password" class="emotech-field__input" placeholder="••••••••" autocomplete="current-password" required x-model="password" x-on:focus="focusField = 'password'" x-on:blur="focusField = ''" tabindex="0">
+              <button type="button" class="emotech-field__toggle" aria-label="비밀번호 표시" x-on:click="showPassword = !showPassword" tabindex="0"><span x-text="showPassword ? '숨기기' : '보기'">보기</span></button>
+            </div>
+          </div>
+          <button type="submit" class="emotech-btn" :class="{ 'is-loading': loading }" :disabled="loading" tabindex="0">
+            <span x-show="!loading">로그인</span>
+            <span x-show="loading" x-cloak>확인 중...</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
