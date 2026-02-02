@@ -1,0 +1,161 @@
+/* Design 70: Modern Fantasy · Asymmetric · Input Reactive */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", Georgia, serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #2a2420;
+  background: #f8f4ee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.login-fantasy-asym {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.75rem;
+  overflow: auto;
+}
+
+.login-fantasy-asym__wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%;
+  max-width: 680px;
+  min-height: 340px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 16px 48px rgba(42, 36, 32, 0.12);
+  background: rgba(255, 252, 248, 0.96);
+  border: 1px solid rgba(120, 95, 75, 0.28);
+}
+@media (max-width: 560px) {
+  .login-fantasy-asym__wrap { flex-direction: column; max-width: 400px; }
+}
+
+.fantasy-asym-side {
+  width: 38%;
+  min-width: 180px;
+  padding: 1.75rem;
+  background: linear-gradient(180deg, #2d2420 0%, #1e1814 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #e8e2d8;
+}
+@media (max-width: 560px) {
+  .fantasy-asym-side { width: 100%; min-width: 0; padding: 1.25rem; text-align: center; }
+}
+.fantasy-asym-side__badge {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(232, 226, 216, 0.7);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.fantasy-asym-side__title {
+  margin: 0 0 0.25rem;
+  font-size: clamp(1.2rem, 2.2vw, 1.45rem);
+  font-weight: 600;
+  color: #e8e2d8;
+  letter-spacing: -0.02em;
+}
+.fantasy-asym-side__desc { margin: 0; font-size: 0.8125rem; color: rgba(232, 226, 216, 0.75); }
+
+.fantasy-asym-form-area {
+  flex: 1;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+@media (max-width: 560px) { .fantasy-asym-form-area { padding: 1.25rem; } }
+
+.fantasy-asym-form { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.fantasy-asym-field {
+  padding: 0.7rem 1.25rem;
+  border: 1px solid rgba(120, 95, 75, 0.28);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.6);
+  transition: border-color 0.26s, box-shadow 0.26s, background 0.26s;
+}
+.fantasy-asym-field.has-focus {
+  border-color: #8b6914;
+  box-shadow: 0 0 0 2px rgba(139, 105, 20, 0.2);
+  background: rgba(255, 255, 255, 0.95);
+}
+.fantasy-asym-field.has-focus .fantasy-asym-field__label { color: #8b6914; font-weight: 600; }
+.fantasy-asym-field.has-value:not(.has-focus) { border-color: rgba(139, 105, 20, 0.4); }
+.fantasy-asym-field.has-value:not(.has-focus) .fantasy-asym-field__label { color: #2a2420; }
+
+.fantasy-asym-field__label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #6b5d52;
+  transition: color 0.26s, font-weight 0.26s;
+}
+
+.fantasy-asym-field__input {
+  width: 100%;
+  padding: 0.3rem 0;
+  font-size: 1rem;
+  color: #2a2420;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.fantasy-asym-field__input::placeholder { color: rgba(107, 93, 82, 0.75); }
+
+.fantasy-asym-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.fantasy-asym-field__row .fantasy-asym-field__input { flex: 1; }
+
+.fantasy-asym-field__toggle {
+  padding: 0.3rem 0.55rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6b5d52;
+  background: transparent;
+  border: 1px solid rgba(120, 95, 75, 0.28);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.26s, border-color 0.26s;
+}
+.fantasy-asym-field__toggle:hover { color: #8b6914; border-color: #8b6914; }
+
+.fantasy-asym-btn {
+  margin-top: 0.2rem;
+  padding: 0.85rem 1.3rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #fff;
+  background: #8b6914;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.26s, transform 0.26s;
+}
+.fantasy-asym-btn:hover:not(:disabled) { background: #7a5c10; transform: translateY(-1px); }
+.fantasy-asym-btn:disabled { cursor: not-allowed; opacity: 0.65; }
+.fantasy-asym-btn.is-loading { pointer-events: none; }
+
+@media (max-width: 560px) { .login-fantasy-asym { padding: 1rem; } }
