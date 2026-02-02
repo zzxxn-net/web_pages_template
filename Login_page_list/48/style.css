@@ -1,0 +1,32 @@
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body { margin: 0; min-height: 100vh; min-height: 100dvh; font-family: "Inter", "JetBrains Mono", monospace; font-weight: 500; line-height: 1.5; color: #e0e4e8; background: #0a0a0e; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+.login-exp-card { width: 100%; min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding: 2rem; }
+.login-exp-card__wrap { width: 100%; max-width: 440px; display: flex; flex-direction: column; gap: 1.5rem; }
+@media (min-width: 520px) { .login-exp-card__wrap { flex-direction: row; max-width: 720px; align-items: stretch; } }
+.exp-card-brand { flex: 0 0 auto; padding: 2rem; border-radius: 8px; background: #12121a; border: 1px solid rgba(0, 255, 200, 0.2); display: flex; flex-direction: column; justify-content: center; }
+.exp-card-brand__title { margin: 0 0 0.5rem; font-size: clamp(1.5rem, 3.5vw, 1.75rem); font-weight: 700; letter-spacing: 0.05em; color: #00ffc8; }
+.exp-card-brand__desc { margin: 0; font-size: 0.875rem; color: #6a6e78; }
+.exp-card-form { flex: 1; min-width: 0; padding: 2rem; background: #0e0e12; border-radius: 8px; border: 1px solid rgba(0, 255, 200, 0.2); }
+.exp-card-form__head { margin-bottom: 2rem; }
+.exp-card-form__title { margin: 0 0 0.35rem; font-size: clamp(1.2rem, 3vw, 1.35rem); font-weight: 600; color: #e0e4e8; }
+.exp-card-form__desc { margin: 0; font-size: 0.8125rem; color: #6a6e78; }
+.exp-card-form__form { display: flex; flex-direction: column; gap: 1.5rem; }
+.exp-card-field { padding: 1rem 1.5rem; border: 1px solid rgba(0, 255, 200, 0.2); border-radius: 6px; background: rgba(0, 0, 0, 0.2); transition: border-color 0.26s, box-shadow 0.26s; }
+.exp-card-field.has-focus { border-color: #00ffc8; box-shadow: 0 0 0 2px rgba(0, 255, 200, 0.25); }
+.exp-card-field.has-value { border-color: rgba(0, 255, 200, 0.4); }
+.exp-card-field__label { display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; color: #6a6e78; margin-bottom: 0.4rem; }
+.exp-card-field__input { width: 100%; font: inherit; font-size: 1rem; color: #e0e4e8; background: transparent; border: none; padding: 0.35rem 0; outline: none; }
+.exp-card-field__input::placeholder { color: #6a6e78; opacity: 0.7; }
+.exp-card-field__row { display: flex; align-items: center; gap: 1rem; }
+.exp-card-field__row .exp-card-field__input { flex: 1; min-width: 0; }
+.exp-card-field__toggle { font: inherit; font-size: 0.75rem; font-weight: 600; color: #6a6e78; background: none; border: 1px solid rgba(0, 255, 200, 0.2); border-radius: 4px; padding: 0.3rem 0.6rem; cursor: pointer; flex-shrink: 0; transition: color 0.26s, border-color 0.26s; }
+.exp-card-field__toggle:hover { color: #00ffc8; border-color: #00ffc8; }
+.exp-card-field__toggle:focus-visible { outline: 2px solid #00ffc8; outline-offset: 2px; }
+.exp-card-btn { margin-top: 0.5rem; font: inherit; font-size: 1rem; font-weight: 600; color: #0a0a0e; background: #00ffc8; border: none; border-radius: 6px; padding: 1.5rem 2rem; cursor: pointer; transition: opacity 0.26s, background 0.26s; }
+.exp-card-btn:hover:not(:disabled) { background: #00e6b8; }
+.exp-card-btn:focus-visible { outline: 2px solid #00ffc8; outline-offset: 2px; }
+.exp-card-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+.exp-card-btn.is-loading { opacity: 0.85; pointer-events: none; }
+@media (max-width: 520px) { .login-exp-card { padding: 1rem; } .exp-card-brand, .exp-card-form { padding: 1.5rem; } }
+[x-cloak] { display: none !important; }
