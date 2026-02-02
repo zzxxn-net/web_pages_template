@@ -1,0 +1,235 @@
+// Design 84: 다크 아카이브, 풀스크린 몰입형, 상태 변화 강조
+// MVP: 시안 전용 변수 — 아카이브 톤(다크·세피아·골드)
+$bg: #0f0e0c;
+$bg-pattern: #141210;
+$surface: rgba(26, 24, 20, 0.92);
+$border: rgba(180, 165, 140, 0.25);
+$text: #e8e2d8;
+$muted: #9a8f7e;
+$accent: #c4a35a;
+$accent-soft: rgba(196, 163, 90, 0.2);
+$state-ok: #7a9e6a;
+$radius: 6px;
+$space: 1rem;
+$space-lg: 1.25rem;
+$ease: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+// MVP: 전역 — 풀스크린 몰입형, 스크롤 없음(모바일에서만 auto)
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Crimson Pro", "Georgia", serif;
+  font-weight: 400;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  overflow: hidden;
+}
+@media (max-width: $bp) {
+  body { overflow: auto; }
+}
+
+// MVP: 풀스크린 몰입형 — 고정 뷰포트, 중앙 정렬
+.archive-login {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-lg;
+  overflow: auto;
+}
+
+// MVP: 다크 아카이브 배경 — 그라데이션·패턴 느낌
+.archive-login__bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(165deg, $bg 0%, $bg-pattern 50%, darken($bg-pattern, 2%) 100%);
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(ellipse 80% 50% at 50% 50%, rgba($accent, 0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+}
+
+.archive-login__wrap {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 420px;
+}
+
+// MVP: 중앙 카드 — 풀스크린 내 유일 콘텐츠, 상태 변화 강조 베이스
+.archive-card {
+  width: 100%;
+  padding: $space-lg;
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $radius;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+  transition: box-shadow $ease, opacity $ease;
+  backdrop-filter: blur(8px);
+}
+.archive-card.is-loading {
+  opacity: 0.88;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+}
+
+.archive-card__head {
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid $border;
+  text-align: center;
+}
+
+.archive-card__title {
+  margin: 0 0 0.25rem;
+  font-size: clamp(1.35rem, 3vw, 1.6rem);
+  font-weight: 600;
+  color: $text;
+  letter-spacing: 0.02em;
+}
+.archive-card__desc {
+  margin: 0;
+  font-size: 0.875rem;
+  color: $muted;
+  font-style: italic;
+}
+
+.archive-card__form {
+  display: flex;
+  flex-direction: column;
+  gap: $space;
+}
+
+// MVP: 상태 변화 강조 — has-focus·has-value 시 테두리·라벨·체크 아이콘 뚜렷하게
+.archive-field {
+  position: relative;
+  padding: 0.75rem 1rem;
+  border: 1px solid $border;
+  border-radius: $radius;
+  background: rgba(15, 14, 12, 0.5);
+  transition: border-color $ease, box-shadow $ease, background $ease;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.archive-field:focus-within {
+  border-color: $accent;
+  box-shadow: 0 0 0 3px $accent-soft;
+  outline-color: $accent;
+  background: rgba(15, 14, 12, 0.7);
+}
+.archive-field.has-focus {
+  border-color: $accent;
+  box-shadow: 0 0 0 3px $accent-soft;
+  outline-color: $accent;
+  background: rgba(15, 14, 12, 0.7);
+}
+.archive-field.has-value:not(.has-focus) {
+  border-color: rgba($accent, 0.5);
+  background: rgba(15, 14, 12, 0.55);
+}
+
+.archive-field__label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: $muted;
+  transition: color $ease;
+}
+.archive-field.has-focus .archive-field__label,
+.archive-field:focus-within .archive-field__label {
+  color: $accent;
+}
+.archive-field.has-value .archive-field__label {
+  color: rgba($text, 0.95);
+}
+
+// MVP: 상태 표시 아이콘 — 입력 시 ✓ 노출로 상태 변화 강조
+.archive-field__state {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  font-size: 0.875rem;
+  color: $state-ok;
+  opacity: 0;
+  transition: opacity $ease;
+}
+.archive-field.has-value .archive-field__state,
+.archive-field:focus-within .archive-field__state { opacity: 1; }
+.archive-field__row + .archive-field__state { right: 3.5rem; }
+
+.archive-field__input {
+  width: 100%;
+  padding: 0.2rem 0;
+  padding-right: 1.5rem;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.archive-field__input::placeholder { color: rgba($muted, 0.6); }
+.archive-field__input:focus { outline: none; }
+
+.archive-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.archive-field__row .archive-field__input { flex: 1; padding-right: 0; }
+
+.archive-field__toggle {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: $muted;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid $border;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color $ease, border-color $ease;
+}
+.archive-field__toggle:hover { color: $accent; border-color: $accent; }
+.archive-field__toggle:focus-visible { outline: 2px solid $accent; outline-offset: 2px; }
+
+// MVP: 제출 버튼 — 로딩 시 상태 변화 강조
+.archive-btn {
+  margin-top: 0.25rem;
+  padding: 0.85rem 1.2rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: $bg;
+  background: $accent;
+  border: none;
+  border-radius: $radius;
+  cursor: pointer;
+  transition: background $ease, transform $ease, opacity $ease;
+}
+.archive-btn:hover:not(:disabled) { background: lighten($accent, 8%); transform: translateY(-1px); }
+.archive-btn:focus-visible { outline: 2px solid $accent; outline-offset: 2px; }
+.archive-btn:disabled { cursor: not-allowed; opacity: 0.7; }
+.archive-btn.is-loading { pointer-events: none; opacity: 0.85; }
+
+@media (max-width: $bp) {
+  .archive-login { padding: $space; }
+  .archive-card { padding: $space; }
+}
