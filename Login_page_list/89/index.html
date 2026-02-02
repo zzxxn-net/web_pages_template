@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="로그인, 네오 브루탈리즘, 풀스크린 몰입형, GSAP 부드러운 전환">
+  <title>Login - Neo Brutalism Fullscreen Immersive</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script defer src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/login.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+  <!-- MVP: 풀스크린 몰입형 루트 — 한 뷰포트 전체 사용, 가로·세로 중앙 정렬 -->
+  <main class="brutal-full-login" role="main" aria-label="로그인">
+    <div class="brutal-full-login__wrap" x-data="brutalFullLogin()" data-gsap-wrap>
+      <!-- MVP: 풀스크린 내 중앙 카드, GSAP 부드러운 전환 타깃 -->
+      <div class="brutal-full-card" data-gsap-card :class="{ 'is-loading': loading }">
+        <header class="brutal-full-card__head" data-gsap-head aria-label="로그인 제목">
+          <h1 class="brutal-full-card__title">로그인</h1>
+          <p class="brutal-full-card__desc">이메일과 비밀번호를 입력하세요.</p>
+        </header>
+        <form class="brutal-full-card__form" action="#" method="post" autocomplete="on" x-on:submit.prevent="handleSubmit($event)" hx-post="#" hx-swap="none" hx-trigger="submit">
+          <div class="brutal-full-field" :class="{ 'has-focus': focusField === 'email', 'has-value': email.length > 0 }" data-gsap-field>
+            <label for="brutal89-email" class="brutal-full-field__label">이메일</label>
+            <input id="brutal89-email" type="email" name="email" class="brutal-full-field__input" placeholder="you@example.com" autocomplete="email" required x-model="email" x-on:focus="focusField = 'email'" x-on:blur="focusField = ''" tabindex="0">
+          </div>
+          <div class="brutal-full-field" :class="{ 'has-focus': focusField === 'password', 'has-value': password.length > 0 }" data-gsap-field>
+            <label for="brutal89-pw" class="brutal-full-field__label">비밀번호</label>
+            <div class="brutal-full-field__row">
+              <input id="brutal89-pw" x-bind:type="showPassword ? 'text' : 'password'" name="password" class="brutal-full-field__input" placeholder="••••••••" autocomplete="current-password" required x-model="password" x-on:focus="focusField = 'password'" x-on:blur="focusField = ''" tabindex="0">
+              <button type="button" class="brutal-full-field__toggle" aria-label="비밀번호 표시" x-on:click="showPassword = !showPassword" tabindex="0"><span x-text="showPassword ? '숨기기' : '보기'">보기</span></button>
+            </div>
+          </div>
+          <button type="submit" class="brutal-full-btn" :class="{ 'is-loading': loading }" :disabled="loading" tabindex="0">
+            <span x-show="!loading">로그인</span>
+            <span x-show="loading" x-cloak>확인 중...</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
