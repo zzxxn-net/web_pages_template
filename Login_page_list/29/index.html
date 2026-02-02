@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="로그인 — 미래적 클린 · 단계 분할형(Progressive Form) · 상태 변화 강조 시안">
+  <title>Login — Futuristic Clean Progressive</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/login.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+  <main class="login-future-prog" role="main" aria-label="로그인">
+    <div class="login-future-prog__box" x-data="futureProgLogin()">
+      <div class="future-prog-steps" aria-hidden="true">
+        <span class="future-prog-step" :class="{ 'is-active': step === 1, 'is-done': step > 1 }">1</span>
+        <span class="future-prog-line" :class="{ 'is-done': step > 1 }"></span>
+        <span class="future-prog-step" :class="{ 'is-active': step === 2 }">2</span>
+      </div>
+      <header class="login-future-prog__head">
+        <h1 class="login-future-prog__title">로그인</h1>
+        <p class="login-future-prog__desc" x-text="step === 1 ? '이메일을 입력하세요' : '비밀번호를 입력하세요'">이메일을 입력하세요</p>
+      </header>
+      <form class="login-future-prog__form" action="#" method="post" autocomplete="on" @submit.prevent="handleSubmit" hx-post="#" hx-swap="none" hx-trigger="submit">
+        <div class="future-prog-panel" data-step="1" :class="{ 'is-hidden': step !== 1 }">
+          <div class="future-prog-field" :class="{ 'is-filled': email.length }">
+            <label for="fut-email" class="future-prog-field__label">이메일</label>
+            <input id="fut-email" type="email" name="email" class="future-prog-field__input" placeholder="you@example.com" autocomplete="email" required x-model="email">
+          </div>
+          <button type="button" class="future-prog-btn future-prog-btn--next" @click="goStep2" :disabled="!email.trim()">다음</button>
+        </div>
+        <div class="future-prog-panel" data-step="2" :class="{ 'is-hidden': step !== 2 }">
+          <div class="future-prog-field" :class="{ 'is-filled': password.length }">
+            <label for="fut-pw" class="future-prog-field__label">비밀번호</label>
+            <div class="future-prog-field__wrap">
+              <input id="fut-pw" :type="showPassword ? 'text' : 'password'" name="password" class="future-prog-field__input" placeholder="••••••••" autocomplete="current-password" required x-model="password">
+              <button type="button" class="future-prog-field__toggle" aria-label="비밀번호 표시" @click="showPassword = !showPassword"><span x-text="showPassword ? '숨기기' : '보기'">보기</span></button>
+            </div>
+          </div>
+          <div class="future-prog-actions">
+            <button type="button" class="future-prog-btn future-prog-btn--back" @click="step = 1">이전</button>
+            <button type="submit" class="future-prog-btn future-prog-btn--primary" :class="{ 'is-loading': loading }" :disabled="loading">
+              <span x-show="!loading">로그인</span>
+              <span x-show="loading" x-cloak>확인 중…</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
