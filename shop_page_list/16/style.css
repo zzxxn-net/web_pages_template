@@ -1,0 +1,142 @@
+/* mvp */
+.shop-page-16 {
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a0e14;
+  color: #e6edf3;
+}
+
+.shop-page-16__viewport {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  box-sizing: border-box;
+}
+
+.shop-page-16__container {
+  width: 100%;
+  max-width: 640px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.shop-page-16__title {
+  text-align: center;
+  font-size: clamp(1.2rem, 3vw, 1.45rem);
+  font-weight: 600;
+  margin: 0;
+  color: #e6edf3;
+  letter-spacing: 0.02em;
+}
+
+.shop-page-16__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  width: 100%;
+  justify-items: center;
+}
+
+.card-16 {
+  background: #131920;
+  border: 1px solid #1e2633;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  max-width: 180px;
+  width: 100%;
+  transition: border-color 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-16:hover {
+  border-color: #8b949e;
+}
+
+.card-16__image {
+  width: 100%;
+  max-width: 140px;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 0.65rem;
+}
+
+.card-16__body {
+  text-align: center;
+  width: 100%;
+}
+
+.card-16__name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 0.3rem;
+  color: #e6edf3;
+}
+
+.card-16__price {
+  font-size: 0.85rem;
+  color: #22d3ee;
+  margin: 0 0 0.6rem;
+}
+
+.btn-16 {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #22d3ee;
+  background: transparent;
+  color: #22d3ee;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.25s cubic-bezier(0.22, 1, 0.36, 1), color 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-16:hover {
+  background: rgba(34, 211, 238, 0.15);
+}
+
+.shop-page-16__nav {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.shop-page-16__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: #1e2633;
+  cursor: pointer;
+  transition: background 0.25s cubic-bezier(0.22, 1, 0.36, 1), transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.shop-page-16__dot--active {
+  background: #22d3ee;
+  transform: scale(1.2);
+}
+
+@media (min-width: 768px) {
+  .shop-page-16__grid {
+    gap: 1.25rem;
+  }
+  .card-16 {
+    max-width: 200px;
+  }
+}

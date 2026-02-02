@@ -1,0 +1,40 @@
+<!-- mvp -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — 사이버 미니멀</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="shop-page-16" x-data="shopPage16()">
+    <div class="shop-page-16__viewport">
+      <div class="shop-page-16__container">
+        <h1 class="shop-page-16__title">Shop</h1>
+        <div class="shop-page-16__grid" id="shop-grid-16">
+          <template x-for="p in currentProducts" :key="p.id">
+            <article class="card-16" :data-product-id="p.id">
+              <img class="card-16__image" :src="p.img" :alt="p.name" width="180" height="180">
+              <div class="card-16__body">
+                <h2 class="card-16__name" x-text="p.name"></h2>
+                <p class="card-16__price" x-text="p.price"></p>
+                <button type="button" class="btn-16" @click="addToCart(p.id)">장바구니</button>
+              </div>
+            </article>
+          </template>
+        </div>
+        <nav class="shop-page-16__nav" role="tablist" aria-label="페이지">
+          <template x-for="(_, i) in pageCount" :key="i">
+            <button type="button" class="shop-page-16__dot" :class="{ 'shop-page-16__dot--active': pageIndex === i }" @click="goPage(i)" :aria-selected="pageIndex === i" :aria-label="'페이지 ' + (i+1)"></button>
+          </template>
+        </nav>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>
