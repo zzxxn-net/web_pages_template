@@ -1,0 +1,171 @@
+// Design 59: Sensible Tech · Card split layout · Input-reactive animation
+$bg: #faf8f6;
+$card-brand: linear-gradient(145deg, #f5e6e8 0%, #e8e4f0 100%);
+$card-form: #ffffff;
+$border: rgba(120, 100, 120, 0.18);
+$text: #2d2430;
+$muted: #6b5d6f;
+$accent: #8b6b8c;
+$focus-ring: rgba(139, 107, 140, 0.22);
+$radius: 14px;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 640px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-sense-split {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+}
+
+.login-sense-split__wrap {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+  width: 100%;
+  max-width: 420px;
+  @media (min-width: $bp) {
+    flex-direction: row;
+    max-width: 720px;
+    align-items: stretch;
+  }
+}
+
+.sense-split-card {
+  padding: $space-xl;
+  border-radius: $radius;
+  border: 1px solid $border;
+  box-shadow: 0 8px 32px rgba(45, 36, 48, 0.06);
+  transition: box-shadow $ease, transform $ease;
+  &--brand {
+    background: $card-brand;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 140px;
+    @media (min-width: $bp) { flex: 0 0 42%; min-height: auto; }
+  }
+  &--form {
+    background: $card-form;
+    @media (min-width: $bp) { flex: 1 1 58%; }
+  }
+}
+
+.sense-split-card__label {
+  margin: 0 0 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: $muted;
+  text-transform: uppercase;
+}
+.sense-split-card__title {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.3rem, 2.8vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: $text;
+}
+.sense-split-card__desc { margin: 0; font-size: 0.875rem; color: $muted; }
+
+.sense-split-form { display: flex; flex-direction: column; gap: $space-lg; }
+
+.sense-split-field {
+  padding: $space $space-lg;
+  border: 1px solid $border;
+  border-radius: 10px;
+  background: rgba(250, 248, 246, 0.6);
+  transition: border-color $ease, box-shadow $ease, background $ease, transform $ease;
+  &.has-focus {
+    border-color: $accent;
+    box-shadow: 0 0 0 3px $focus-ring;
+    background: rgba(255, 255, 255, 0.9);
+    .sense-split-field__label { color: $accent; font-weight: 600; }
+  }
+  &.has-value:not(.has-focus) {
+    border-color: rgba($accent, 0.35);
+    .sense-split-field__label { color: $text; }
+  }
+}
+
+.sense-split-field__label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: $muted;
+  transition: color $ease, font-weight $ease;
+}
+
+.sense-split-field__input {
+  width: 100%;
+  padding: 0.35rem 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+  &::placeholder { color: lighten($muted, 12%); }
+}
+
+.sense-split-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  .sense-split-field__input { flex: 1; }
+}
+
+.sense-split-field__toggle {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $muted;
+  background: transparent;
+  border: 1px solid $border;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: color $ease, border-color $ease, background $ease;
+  &:hover { color: $accent; border-color: $accent; background: rgba($accent, 0.08); }
+}
+
+.sense-split-btn {
+  margin-top: 0.25rem;
+  padding: 0.9rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: $accent;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background $ease, opacity $ease, transform $ease;
+  &:hover:not(:disabled) { background: darken($accent, 8%); }
+  &:active:not(:disabled) { transform: scale(0.98); }
+  &:disabled { opacity: 0.7; cursor: not-allowed; }
+  &.is-loading { pointer-events: none; }
+}
