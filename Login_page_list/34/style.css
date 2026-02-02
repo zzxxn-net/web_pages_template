@@ -1,0 +1,26 @@
+*,*::before,*::after{box-sizing:border-box}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;min-height:100dvh;font-family:"Inter","Noto Sans KR",sans-serif;font-weight:500;line-height:1.5;color:#f0e6f4;background:#0c0b0f;display:flex;align-items:center;justify-content:center;padding:1rem;overflow:hidden}
+.login-exp-micro{width:100%;min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:2rem;overflow:hidden}
+.login-exp-micro__inner{width:100%;max-width:360px}
+.exp-micro-card{width:100%;background:#141218;border:1px solid rgba(255,100,180,.15);border-radius:8px;padding:2rem;transform:rotate(-.5deg);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.exp-micro-card__title{margin:0 0 .35rem;font-size:clamp(1.4rem,3.2vw,1.6rem);font-weight:700;color:#f0e6f4;letter-spacing:-.02em}
+.exp-micro-card__desc{margin:0 0 1.5rem;font-size:.8125rem;color:#8a7d94}
+.exp-micro-form{display:flex;flex-direction:column;gap:0}
+.exp-micro-field{margin-bottom:1.5rem;position:relative}
+.exp-micro-field__label{display:block;font-size:.75rem;font-weight:600;letter-spacing:.04em;color:#8a7d94;margin-bottom:.35rem}
+.exp-micro-field__input{width:100%;font:inherit;font-size:1rem;color:#f0e6f4;background:transparent;border:none;padding:.4rem 0;outline:none}
+.exp-micro-field__input::placeholder{color:#8a7d94;opacity:.6}
+.exp-micro-field__line{position:absolute;left:0;bottom:-4px;width:0;height:2px;background:#ff64b4;border-radius:1px;transition:width .25s cubic-bezier(.4,0,.2,1)}
+.exp-micro-field:focus-within .exp-micro-field__line{width:100%}
+.exp-micro-field__row{display:flex;align-items:center;gap:.5rem}
+.exp-micro-field__row .exp-micro-field__input{flex:1;min-width:0}
+.exp-micro-field__eye{font:inherit;font-size:.75rem;color:#8a7d94;background:rgba(255,100,180,.08);border:1px solid rgba(255,100,180,.15);border-radius:6px;padding:.3rem .6rem;cursor:pointer;transition:color .25s,transform .25s,border-color .25s}
+.exp-micro-field__eye:hover{color:#ff64b4;border-color:rgba(255,100,180,.35);transform:scale(1.05)}
+.exp-micro-field__eye:focus-visible{outline:2px solid #ff64b4;outline-offset:2px}
+.exp-micro-btn{width:100%;font:inherit;font-size:1rem;font-weight:600;color:#0c0b0f;background:#ff64b4;border:none;border-radius:8px;padding:1rem 2rem;cursor:pointer;margin-top:.5rem;transition:transform .25s,box-shadow .25s;box-shadow:0 4px 16px rgba(255,100,180,.35)}
+.exp-micro-btn:hover:not(:disabled){transform:scale(1.02);box-shadow:0 6px 20px rgba(255,100,180,.4)}
+.exp-micro-btn:active:not(:disabled){transform:scale(.98)}
+.exp-micro-btn.is-loading{opacity:.9;pointer-events:none}
+.exp-micro-btn:disabled{cursor:not-allowed}
+@media (max-width:480px){.login-exp-micro{padding:1.5rem}.exp-micro-card{padding:1.5rem}}
