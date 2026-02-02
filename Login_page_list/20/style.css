@@ -1,0 +1,27 @@
+/* Design 20: Neo Brutalism · Micro · Input-reactive */
+*,*::before,*::after{box-sizing:border-box;}
+html{font-size:16px;-webkit-text-size-adjust:100%;}
+body{margin:0;min-height:100vh;min-height:100dvh;font-family:"Inter",-apple-system,sans-serif;font-weight:600;line-height:1.5;color:#1a1a1a;background:#f5f5f0;display:flex;align-items:center;justify-content:center;padding:1rem;}
+.login-brutal-micro{width:100%;min-height:100%;display:flex;align-items:center;justify-content:center;padding:2rem;}
+.login-brutal-micro__box{width:100%;max-width:360px;margin:0 auto;background:#fff;border:3px solid #1a1a1a;padding:3rem 2rem;box-shadow:6px 6px 0 #1a1a1a;}
+.login-brutal-micro__head{margin-bottom:2rem;}
+.login-brutal-micro__title{margin:0 0 0.25rem;font-size:clamp(1.5rem,3.5vw,1.75rem);font-weight:800;letter-spacing:0.05em;color:#1a1a1a;}
+.login-brutal-micro__desc{margin:0;font-size:0.875rem;color:#4a4a4a;}
+.login-brutal-micro__form{display:flex;flex-direction:column;gap:1.5rem;}
+.brutal-micro-field{transition:transform 0.2s ease,border-color 0.2s ease,box-shadow 0.2s ease;border:3px solid #1a1a1a;background:#fff;padding:1rem;margin-bottom:1.5rem;}
+.brutal-micro-field.is-focused{border-color:#e63946;box-shadow:0 0 0 2px rgba(230,57,70,0.3);}
+.brutal-micro-field__label{display:block;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#4a4a4a;margin-bottom:0.25rem;}
+.brutal-micro-field__input{width:100%;font:inherit;font-size:1rem;color:#1a1a1a;background:transparent;border:none;padding:0.25rem 0;outline:none;}
+.brutal-micro-field__input::placeholder{color:#4a4a4a;}
+.brutal-micro-field__wrap{display:flex;align-items:center;gap:1rem;}
+.brutal-micro-field__wrap .brutal-micro-field__input{flex:1;min-width:0;}
+.brutal-micro-field__toggle{font:inherit;font-size:0.8125rem;font-weight:600;color:#4a4a4a;background:none;border:3px solid #1a1a1a;padding:0.25rem 0.5rem;cursor:pointer;transition:background 0.2s ease,color 0.2s ease,transform 0.2s ease;}
+.brutal-micro-field__toggle:hover{background:#1a1a1a;color:#fff;}
+.brutal-micro-field__toggle:active{transform:scale(0.98);}
+.brutal-micro-field__toggle:focus-visible{outline:2px solid #e63946;outline-offset:2px;}
+.brutal-micro-btn{margin-top:1rem;font:inherit;font-size:1rem;font-weight:700;color:#fff;background:#e63946;border:3px solid #1a1a1a;padding:1rem 2rem;cursor:pointer;box-shadow:4px 4px 0 #1a1a1a;transition:transform 0.2s ease,box-shadow 0.2s ease;}
+.brutal-micro-btn:hover:not(:disabled){transform:translate(2px,2px);box-shadow:2px 2px 0 #1a1a1a;}
+.brutal-micro-btn:active:not(:disabled){transform:translate(3px,3px);box-shadow:1px 1px 0 #1a1a1a;}
+.brutal-micro-btn:focus-visible{outline:2px solid #e63946;outline-offset:2px;}
+.brutal-micro-btn:disabled{opacity:0.7;cursor:not-allowed;}
+@media (max-width:480px){.login-brutal-micro{padding:1rem;}.login-brutal-micro__box{padding:2rem 1.5rem;}}
