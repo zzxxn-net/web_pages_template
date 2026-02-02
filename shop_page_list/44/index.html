@@ -1,0 +1,69 @@
+<!-- mvp -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — 다크 아카이브 · 마이크로 인터랙션 · 입력 반응형</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="shop-page-44" x-data="shopPage44()">
+    <div class="shop-page-44__center">
+      <header class="shop-page-44__header">
+        <h1 class="shop-page-44__title">SHOP</h1>
+        <p class="shop-page-44__lead">다크 아카이브 · 마이크로 인터랙션 · 입력 반응형</p>
+      </header>
+      <div class="shop-page-44__grid" id="shop-grid-44">
+        <article class="card-44" data-product="1" tabindex="0">
+          <div class="card-44__img-wrap">
+            <img class="card-44__image" src="https://placehold.co/200x200/334155/94a3b8?text=1" alt="Product 1" width="200" height="200">
+          </div>
+          <div class="card-44__body">
+            <h2 class="card-44__name">Product 1</h2>
+            <p class="card-44__price">₩29,000</p>
+            <button type="button" class="btn-44" @click="addToCart(1)">장바구니</button>
+          </div>
+        </article>
+        <article class="card-44" data-product="2" tabindex="0">
+          <div class="card-44__img-wrap">
+            <img class="card-44__image" src="https://placehold.co/200x200/334155/94a3b8?text=2" alt="Product 2" width="200" height="200">
+          </div>
+          <div class="card-44__body">
+            <h2 class="card-44__name">Product 2</h2>
+            <p class="card-44__price">₩39,000</p>
+            <button type="button" class="btn-44" @click="addToCart(2)">장바구니</button>
+          </div>
+        </article>
+        <article class="card-44" data-product="3" tabindex="0">
+          <div class="card-44__img-wrap">
+            <img class="card-44__image" src="https://placehold.co/200x200/334155/94a3b8?text=3" alt="Product 3" width="200" height="200">
+          </div>
+          <div class="card-44__body">
+            <h2 class="card-44__name">Product 3</h2>
+            <p class="card-44__price">₩49,000</p>
+            <button type="button" class="btn-44" @click="addToCart(3)">장바구니</button>
+          </div>
+        </article>
+        <article class="card-44" data-product="4" tabindex="0">
+          <div class="card-44__img-wrap">
+            <img class="card-44__image" src="https://placehold.co/200x200/334155/94a3b8?text=4" alt="Product 4" width="200" height="200">
+          </div>
+          <div class="card-44__body">
+            <h2 class="card-44__name">Product 4</h2>
+            <p class="card-44__price">₩19,000</p>
+            <button type="button" class="btn-44" @click="addToCart(4)">장바구니</button>
+          </div>
+        </article>
+      </div>
+      <footer class="shop-page-44__footer">
+        <span class="shop-page-44__cart" x-show="cart.length > 0">장바구니 <span x-text="cart.length"></span>개</span>
+      </footer>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>
