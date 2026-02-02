@@ -1,0 +1,103 @@
+/* mvp */
+.shop-page-31 {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  background: linear-gradient(160deg, #fefce8 0%, #fef3c7 35%, #fde68a 70%, #fcd34d 100%);
+  color: #422006;
+}
+.shop-page-31__container {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.shop-page-31__title {
+  text-align: center;
+  font-size: clamp(1.3rem, 3.2vw, 1.55rem);
+  font-weight: 600;
+  margin: 0 0 0.3rem;
+  letter-spacing: 0.03em;
+  color: #422006;
+  font-family: Georgia, "Times New Roman", serif;
+}
+.shop-page-31__lead {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #92400e;
+  margin: 0 0 1.25rem;
+}
+.shop-page-31__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  justify-items: center;
+  width: 100%;
+}
+.card-31 {
+  width: 100%;
+  max-width: 200px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(180, 83, 9, 0.25);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  cursor: pointer;
+  transition: border-color 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  outline: none;
+  box-sizing: border-box;
+}
+.card-31:hover { border-color: rgba(180, 83, 9, 0.5); }
+.card-31--focused {
+  border-color: #d97706;
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.35);
+}
+.card-31:focus-visible { outline: none; }
+.card-31__image {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 0.7rem;
+}
+.card-31__body { text-align: center; width: 100%; }
+.card-31__name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 0.3rem;
+  color: #422006;
+}
+.card-31__price { font-size: 0.9rem; color: #b45309; margin: 0 0 0.6rem; }
+.btn-31 {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #b45309;
+  background: rgba(180, 83, 9, 0.1);
+  color: #b45309;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.25s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.btn-31:hover {
+  background: rgba(180, 83, 9, 0.2);
+  border-color: #92400e;
+}
+.btn-31:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9), 0 0 0 4px #d97706;
+}
+@media (min-width: 768px) {
+  .shop-page-31__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+}
