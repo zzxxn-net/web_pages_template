@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="로그인 — 미래적 클린 · 카드 분리형 · 스크롤 없는 고정 플로우 시안">
+  <title>Login — Futuristic Card Fixed</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/login.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+  <main class="login-future-card" role="main" aria-label="로그인">
+    <div class="login-future-card__brand" aria-hidden="true">
+      <span class="login-future-card__logo">→</span>
+      <p class="login-future-card__tagline">Sign in</p>
+    </div>
+    <div class="login-future-card__form-card" x-data="futureCardLogin()">
+      <header class="login-future-card__head">
+        <h1 class="login-future-card__title">로그인</h1>
+        <p class="login-future-card__desc">이메일과 비밀번호를 입력하세요</p>
+      </header>
+      <form class="login-future-card__form" action="#" method="post" autocomplete="on" @submit.prevent="handleSubmit" hx-post="#" hx-swap="none" hx-trigger="submit">
+        <div class="future-card-field">
+          <label for="email" class="future-card-field__label">이메일</label>
+          <input id="email" type="email" name="email" class="future-card-field__input" placeholder="you@example.com" autocomplete="email" required x-model="email">
+        </div>
+        <div class="future-card-field">
+          <label for="password" class="future-card-field__label">비밀번호</label>
+          <div class="future-card-field__wrap">
+            <input id="password" :type="showPassword ? 'text' : 'password'" name="password" class="future-card-field__input" placeholder="••••••••" autocomplete="current-password" required x-model="password">
+            <button type="button" class="future-card-field__toggle" aria-label="비밀번호 표시" @click="showPassword = !showPassword"><span x-text="showPassword ? '숨기기' : '보기'">보기</span></button>
+          </div>
+        </div>
+        <button type="submit" class="future-card-btn" :disabled="loading"><span x-show="!loading">로그인</span><span x-show="loading" x-cloak>확인 중…</span></button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
