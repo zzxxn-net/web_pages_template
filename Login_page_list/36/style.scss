@@ -1,0 +1,197 @@
+// Design 36: Modern Fantasy · Progressive Form · Input-reactive animation
+$bg: #1a1625;
+$card: #252030;
+$border: rgba(212, 175, 55, 0.25);
+$text: #f0ebe3;
+$muted: #9a8f7e;
+$accent: #d4af37;
+$glow: rgba(212, 175, 55, 0.2);
+$radius: 14px;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-fantasy-prog {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+}
+.login-fantasy-prog__box {
+  width: 100%;
+  max-width: 380px;
+  background: $card;
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: $space-xl;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(212, 175, 55, 0.08);
+}
+
+.fantasy-prog-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: $space-xl;
+}
+.fantasy-prog-step {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: $muted;
+  border: 2px solid $border;
+  border-radius: 50%;
+  transition: color $ease, border-color $ease, background $ease, transform $ease;
+}
+.fantasy-prog-step.is-active {
+  color: $accent;
+  border-color: $accent;
+  background: rgba(212, 175, 55, 0.12);
+  transform: scale(1.05);
+}
+.fantasy-prog-step.is-done {
+  color: $card;
+  border-color: $accent;
+  background: $accent;
+}
+.fantasy-prog-line {
+  width: 30px;
+  height: 2px;
+  background: $border;
+  border-radius: 1px;
+  transition: background $ease;
+}
+.fantasy-prog-line.is-done { background: $accent; }
+
+.login-fantasy-prog__head { margin-bottom: $space-xl; text-align: center; }
+.login-fantasy-prog__title {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.35rem, 3vw, 1.5rem);
+  font-weight: 700;
+  color: $text;
+}
+.login-fantasy-prog__desc { margin: 0; font-size: 0.875rem; color: $muted; }
+
+.login-fantasy-prog__form { position: relative; min-height: 160px; }
+.fantasy-prog-panel {
+  transition: opacity $ease;
+  &.is-hidden { position: absolute; left: 0; right: 0; top: 0; opacity: 0; pointer-events: none; visibility: hidden; }
+}
+.fantasy-prog-field {
+  padding: $space $space-lg;
+  border: 1px solid $border;
+  border-radius: 12px;
+  background: rgba(26, 22, 37, 0.5);
+  margin-bottom: $space-lg;
+  transition: border-color $ease, box-shadow $ease, transform $ease;
+}
+.fantasy-prog-field:focus-within {
+  border-color: $accent;
+  box-shadow: 0 0 0 2px $glow;
+  transform: scale(1.01);
+}
+.fantasy-prog-field__label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: $muted;
+  margin-bottom: 0.4rem;
+}
+.fantasy-prog-field__input {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  color: $text;
+  background: transparent;
+  border: none;
+  padding: 0.4rem 0;
+  outline: none;
+}
+.fantasy-prog-field__input::placeholder { color: $muted; opacity: 0.7; }
+.fantasy-prog-field__wrap { display: flex; align-items: center; gap: 0.5rem; }
+.fantasy-prog-field__wrap .fantasy-prog-field__input { flex: 1; min-width: 0; }
+.fantasy-prog-field__toggle {
+  font: inherit;
+  font-size: 0.8125rem;
+  color: $muted;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid $border;
+  border-radius: 8px;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  transition: color $ease, border-color $ease, transform $ease;
+}
+.fantasy-prog-field__toggle:hover { color: $accent; border-color: rgba(212, 175, 55, 0.4); transform: scale(1.03); }
+
+.fantasy-prog-btn {
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: $space $space-xl;
+  cursor: pointer;
+  transition: opacity $ease, transform $ease, background $ease, box-shadow $ease;
+}
+.fantasy-prog-btn--next {
+  width: 100%;
+  color: $card;
+  background: $accent;
+  border: none;
+  box-shadow: 0 4px 14px $glow;
+}
+.fantasy-prog-btn--next:disabled { opacity: 0.5; cursor: not-allowed; }
+.fantasy-prog-btn--next:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 20px $glow; }
+.fantasy-prog-btn--back {
+  color: $muted;
+  background: rgba(26, 22, 37, 0.6);
+  border: 1px solid $border;
+}
+.fantasy-prog-btn--back:hover { color: $text; border-color: $accent; }
+.fantasy-prog-btn--primary {
+  color: $card;
+  background: $accent;
+  border: none;
+  box-shadow: 0 4px 14px $glow;
+}
+.fantasy-prog-btn--primary.is-loading { opacity: 0.85; pointer-events: none; }
+.fantasy-prog-btn--primary:disabled { cursor: not-allowed; }
+.fantasy-prog-btn--primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 20px $glow; }
+.fantasy-prog-actions {
+  display: flex;
+  gap: $space;
+  margin-top: $space-lg;
+}
+.fantasy-prog-actions .fantasy-prog-btn--back { flex: 0 0 auto; }
+.fantasy-prog-actions .fantasy-prog-btn--primary { flex: 1; }
+
+@media (max-width: $bp) {
+  .login-fantasy-prog { padding: $space-lg; }
+  .login-fantasy-prog__box { padding: $space-lg; }
+}
