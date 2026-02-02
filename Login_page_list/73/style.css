@@ -1,0 +1,91 @@
+/* Design 73: Cyber Minimal · Asymmetric · State Change */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #e8eaed;
+  background: #0a0c10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.login-cyber-asym {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  overflow: auto;
+}
+.login-cyber-asym__grid {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+.login-cyber-asym__wrap {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 720px;
+  min-height: 380px;
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  border-radius: 4px;
+  background: rgba(17, 19, 24, 0.92);
+  box-shadow: 0 0 0 1px rgba(0, 212, 255, 0.06), 0 24px 48px rgba(0, 0, 0, 0.4);
+}
+.cyber-asym__brand {
+  flex: 0 0 38%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.25rem 1.5rem;
+  border-right: 1px solid rgba(0, 212, 255, 0.15);
+  background: rgba(10, 12, 16, 0.5);
+}
+.cyber-asym__tag { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.12em; color: #00d4ff; margin-bottom: 0.5rem; }
+.cyber-asym__title { margin: 0 0 0.35rem; font-size: clamp(1.35rem, 2.5vw, 1.6rem); font-weight: 700; letter-spacing: 0.06em; color: #e8eaed; }
+.cyber-asym__lead { margin: 0; font-size: 0.8125rem; color: #6b7280; line-height: 1.45; }
+.cyber-asym__card { flex: 1 1 auto; display: flex; align-items: center; justify-content: center; padding: 1.25rem 2rem; }
+.cyber-asym__form { width: 100%; max-width: 320px; display: flex; flex-direction: column; gap: 1rem; }
+.cyber-asym-field {
+  padding: 0.65rem 1rem;
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  border-radius: 4px;
+  background: rgba(10, 12, 16, 0.5);
+  transition: border-color 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1), background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cyber-asym-field.has-focus { border-color: #00d4ff; box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.12); background: rgba(10, 12, 16, 0.7); }
+.cyber-asym-field.has-focus .cyber-asym-field__label { color: #00d4ff; font-weight: 600; }
+.cyber-asym-field.has-value:not(.has-focus) { border-color: rgba(0, 212, 255, 0.35); }
+.cyber-asym-field.has-value:not(.has-focus) .cyber-asym-field__label { color: #e8eaed; }
+.cyber-asym-field.has-error { border-color: #ef4444; box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.15); }
+.cyber-asym-field.has-error .cyber-asym-field__label { color: #ef4444; }
+.cyber-asym-field__label { display: block; margin-bottom: 0.25rem; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.1em; color: #6b7280; transition: color 0.28s cubic-bezier(0.4, 0, 0.2, 1), font-weight 0.28s cubic-bezier(0.4, 0, 0.2, 1); }
+.cyber-asym-field__input { width: 100%; padding: 0.2rem 0; font-size: 0.9375rem; font-family: inherit; color: #e8eaed; background: transparent; border: none; outline: none; }
+.cyber-asym-field__input::placeholder { color: rgba(107, 114, 128, 0.6); }
+.cyber-asym-field__row { display: flex; align-items: center; gap: 0.5rem; }
+.cyber-asym-field__row .cyber-asym-field__input { flex: 1; }
+.cyber-asym-field__toggle { padding: 0.25rem 0.5rem; font-size: 0.6875rem; font-weight: 600; font-family: inherit; letter-spacing: 0.06em; color: #6b7280; background: transparent; border: 1px solid rgba(0, 212, 255, 0.15); border-radius: 4px; cursor: pointer; transition: color 0.28s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.28s cubic-bezier(0.4, 0, 0.2, 1); }
+.cyber-asym-field__toggle:hover { color: #00d4ff; border-color: #00d4ff; }
+.cyber-asym-btn { margin-top: 0.25rem; padding: 0.85rem 1.25rem; font-size: 0.875rem; font-weight: 700; font-family: inherit; letter-spacing: 0.06em; color: #0a0c10; background: #00d4ff; border: none; border-radius: 4px; cursor: pointer; transition: background 0.28s cubic-bezier(0.4, 0, 0.2, 1), color 0.28s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1); }
+.cyber-asym-btn:hover:not(:disabled) { background: #33dcff; }
+.cyber-asym-btn:disabled { cursor: not-allowed; }
+.cyber-asym-btn.is-loading { opacity: 0.85; pointer-events: none; }
+.cyber-asym-btn.is-success { background: #22c55e; color: #fff; }
+.cyber-asym-btn__text { display: block; }
+@media (max-width: 640px) {
+  .login-cyber-asym__wrap { flex-direction: column; max-width: 420px; min-height: auto; }
+  .cyber-asym__brand { flex: 0 0 auto; border-right: none; border-bottom: 1px solid rgba(0, 212, 255, 0.15); padding: 1rem 1.25rem; text-align: center; }
+  .cyber-asym__card { padding: 1rem 1.25rem; }
+}
