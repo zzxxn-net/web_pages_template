@@ -1,0 +1,145 @@
+// mvp
+$bp-mobile: 480px;
+$bp-tablet: 768px;
+$bp-desktop: 1024px;
+$color-bg: #0c0a09;
+$color-surface: #1c1917;
+$color-border: #292524;
+$color-text: #e7e5e4;
+$color-muted: #78716c;
+$color-accent: #a8a29e;
+$color-highlight: #d6d3d1;
+$radius: 6px;
+$ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+.shop-page-21 {
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $color-bg;
+  color: $color-text;
+}
+
+.shop-page-21__viewport {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  box-sizing: border-box;
+}
+
+.shop-page-21__container {
+  width: 100%;
+  max-width: 620px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.shop-page-21__title {
+  text-align: center;
+  font-size: clamp(1.35rem, 3.2vw, 1.6rem);
+  font-weight: 600;
+  margin: 0;
+  color: $color-highlight;
+  letter-spacing: 0.04em;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.shop-page-21__lead {
+  text-align: center;
+  font-size: 0.9rem;
+  color: $color-muted;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.shop-page-21__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  width: 100%;
+  justify-items: center;
+}
+
+.card-21 {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  max-width: 180px;
+  width: 100%;
+  transition: border-color 0.25s $ease, box-shadow 0.25s $ease;
+}
+
+.card-21:hover {
+  border-color: $color-muted;
+}
+
+.card-21__image {
+  width: 100%;
+  max-width: 140px;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+}
+
+.card-21__body {
+  text-align: center;
+  width: 100%;
+}
+
+.card-21__name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 0.3rem;
+  color: $color-text;
+}
+
+.card-21__price {
+  font-size: 0.85rem;
+  color: $color-accent;
+  margin: 0 0 0.6rem;
+}
+
+.btn-21 {
+  padding: 0.5rem 1rem;
+  border-radius: $radius;
+  border: 1px solid $color-muted;
+  background: transparent;
+  color: $color-muted;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: border-color 0.25s $ease, color 0.25s $ease, background 0.25s $ease;
+}
+
+.btn-21:hover {
+  border-color: $color-highlight;
+  color: $color-highlight;
+}
+
+@media (min-width: $bp-tablet) {
+  .shop-page-21__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+  .card-21 {
+    max-width: 140px;
+  }
+}
