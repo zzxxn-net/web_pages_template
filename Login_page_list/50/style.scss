@@ -1,0 +1,165 @@
+// Design 50: Cyber Minimal · Micro-interaction · Scroll-free fixed flow
+$bg: #eef1f5;
+$card: #ffffff;
+$border: #e2e8f0;
+$text: #2d3748;
+$muted: #718096;
+$accent: #3182ce;
+$accent-light: rgba(49, 130, 206, 0.12);
+$radius: 12px;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+$ease-micro: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; overflow: hidden; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+  overflow: hidden;
+}
+
+.login-cyber-micro {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+  overflow: hidden;
+}
+.login-cyber-micro__box {
+  width: 100%;
+  max-width: 380px;
+  background: $card;
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: $space-xl;
+  box-shadow: 0 4px 24px rgba(45, 55, 72, 0.06);
+}
+
+.login-cyber-micro__head { margin-bottom: $space-lg; text-align: center; }
+.login-cyber-micro__title {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.25rem, 3vw, 1.375rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: $text;
+}
+.login-cyber-micro__desc { margin: 0; font-size: 0.875rem; color: $muted; }
+.login-cyber-micro__form { display: flex; flex-direction: column; gap: $space-lg; }
+
+.cyber-micro-field {
+  position: relative;
+  padding: $space $space-lg;
+  border: 1px solid $border;
+  border-radius: 8px;
+  background: $card;
+  overflow: hidden;
+  transition: border-color $ease-micro, box-shadow $ease-micro;
+  &:hover { border-color: darken($border, 6%); }
+  &.has-focus {
+    border-color: $accent;
+    box-shadow: 0 0 0 3px $accent-light;
+  }
+  &.has-value:not(.has-focus) { border-color: darken($border, 4%); }
+}
+.cyber-micro-field__label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: $muted;
+}
+.cyber-micro-field__input {
+  width: 100%;
+  padding: 0.4rem 0;
+  font-size: 1rem;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+  &::placeholder { color: lighten($muted, 12%); }
+}
+.cyber-micro-field__ripple {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle, $accent-light 0%, transparent 60%);
+  transition: opacity $ease-micro;
+}
+.cyber-micro-field:active .cyber-micro-field__ripple { opacity: 1; }
+.cyber-micro-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  .cyber-micro-field__input { flex: 1; }
+}
+.cyber-micro-field__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.8125rem;
+  color: $accent;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background $ease-micro, transform $ease-micro;
+  &:hover { background: $accent-light; }
+  &:active { transform: scale(0.97); }
+}
+.cyber-micro-field__toggle-icon {
+  display: inline-block;
+  width: 14px;
+  height: 8px;
+  border-left: 2px solid $accent;
+  border-bottom: 2px solid $accent;
+  transform: rotate(-45deg);
+  transition: transform $ease-micro;
+}
+.cyber-micro-field__toggle-icon.is-open { transform: rotate(-225deg) translateY(-2px); }
+
+.cyber-micro-btn {
+  margin-top: 0.25rem;
+  padding: 0.85rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $card;
+  background: $accent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background $ease-micro, transform $ease-micro, box-shadow $ease-micro;
+  box-shadow: 0 2px 8px rgba(49, 130, 206, 0.3);
+  &:hover:not(:disabled) {
+    background: darken($accent, 6%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(49, 130, 206, 0.35);
+  }
+  &:active:not(:disabled) { transform: translateY(0) scale(0.99); }
+  &:disabled { cursor: not-allowed; opacity: 0.8; }
+  &.is-loading { opacity: 0.9; }
+}
+
+@media (max-width: $bp) {
+  .login-cyber-micro { padding: $space; }
+  .login-cyber-micro__box { padding: $space-lg; }
+}
