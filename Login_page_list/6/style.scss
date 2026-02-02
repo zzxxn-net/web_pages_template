@@ -1,0 +1,271 @@
+// =============================================================================
+// Login Page — Design 6: Modern Fantasy · Single focus input flow · GSAP smooth
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Variables (현대 판타지: mystical, soft glow)
+// -----------------------------------------------------------------------------
+$color-bg: #0f0e17;
+$color-surface: rgba(26, 24, 38, 0.9);
+$color-border: rgba(167, 139, 250, 0.25);
+$color-text: #e8e4f0;
+$color-text-muted: #9a94a8;
+$color-accent: #a78bfa;
+$color-glow: rgba(167, 139, 250, 0.2);
+$color-focus-ring: rgba(167, 139, 250, 0.4);
+$radius: 16px;
+$radius-sm: 10px;
+$space-xs: 0.25rem;
+$space-sm: 0.5rem;
+$space-md: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$space-2xl: 3rem;
+$font-serif: "Georgia", "Times New Roman", serif;
+$font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+$transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+$bp-mobile: 480px;
+
+// -----------------------------------------------------------------------------
+// Base & center layout
+// -----------------------------------------------------------------------------
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: $font-sans;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $color-text;
+  background: $color-bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-md;
+}
+
+.login-fantasy {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+  overflow: auto;
+}
+
+.login-fantasy__bg {
+  position: fixed;
+  inset: 0;
+  background: $color-bg;
+  pointer-events: none;
+}
+
+.login-fantasy__glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.5;
+  pointer-events: none;
+
+  &--1 {
+    width: 320px;
+    height: 320px;
+    background: rgba(139, 92, 246, 0.25);
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
+  &--2 {
+    width: 240px;
+    height: 240px;
+    background: rgba(99, 102, 241, 0.2);
+    bottom: 20%;
+    right: 20%;
+  }
+}
+
+.login-fantasy__wrap {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-fantasy__card {
+  width: 100%;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  padding: $space-2xl $space-xl;
+  backdrop-filter: blur(12px);
+}
+
+.login-fantasy__title {
+  margin: 0 0 $space-sm;
+  font-family: $font-serif;
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 600;
+  color: $color-text;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.login-fantasy__desc {
+  margin: 0 0 $space-xl;
+  font-size: 0.9375rem;
+  color: $color-text-muted;
+  text-align: center;
+}
+
+.login-fantasy__form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xl;
+}
+
+// -----------------------------------------------------------------------------
+// Single focus input flow (one field emphasized at a time)
+// -----------------------------------------------------------------------------
+.single-focus {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+  transition: transform $transition, opacity $transition;
+
+  &.is-active {
+    transform: scale(1.02);
+    opacity: 1;
+  }
+
+  &:not(.is-active) {
+    opacity: 0.85;
+  }
+}
+
+.single-focus__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: $color-text-muted;
+  transition: color $transition;
+}
+
+.single-focus.is-active .single-focus__label {
+  color: $color-accent;
+}
+
+.single-focus__input {
+  width: 100%;
+  padding: $space-md $space-lg;
+  font-size: 1rem;
+  font-family: inherit;
+  color: $color-text;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid $color-border;
+  border-radius: $radius-sm;
+  transition: border-color $transition, box-shadow $transition, padding $transition;
+
+  &::placeholder {
+    color: $color-text-muted;
+    opacity: 0.7;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent;
+    box-shadow: 0 0 0 3px $color-focus-ring;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.single-focus.is-active .single-focus__input {
+  padding: $space-lg $space-xl;
+  border-color: rgba(167, 139, 250, 0.4);
+}
+
+.single-focus__wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .single-focus__input {
+    padding-inline-end: 4rem;
+  }
+}
+
+.single-focus__toggle {
+  position: absolute;
+  right: $space-md;
+  font-size: 0.8125rem;
+  color: $color-text-muted;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: $space-sm;
+  transition: color $transition;
+
+  &:hover {
+    color: $color-accent;
+  }
+}
+
+.login-fantasy__actions {
+  margin-top: $space-sm;
+}
+
+.btn-fantasy {
+  width: 100%;
+  padding: $space-md $space-lg;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: $color-bg;
+  background: $color-accent;
+  border: none;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: background $transition, transform 0.2s ease, box-shadow $transition;
+
+  &:hover:not(:disabled) {
+    background: lighten($color-accent, 6%);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px -8px rgba(167, 139, 250, 0.5);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+@media (max-width: $bp-mobile) {
+  .login-fantasy__card {
+    padding: $space-xl $space-lg;
+  }
+}
