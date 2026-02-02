@@ -1,0 +1,169 @@
+// Design 49: Emotion Tech · Fullscreen immersive · Input-reactive animation
+$bg-start: #1a1625;
+$bg-end: #2d2438;
+$surface: rgba(255, 255, 255, 0.06);
+$border: rgba(255, 255, 255, 0.12);
+$text: #f0ecf4;
+$muted: #a89bb8;
+$accent: #c9a0dc;
+$accent-glow: rgba(201, 160, 220, 0.35);
+$radius: 12px;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: $bg-start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-emotion-full {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+  overflow: auto;
+}
+.login-emotion-full__bg {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(165deg, $bg-start 0%, $bg-end 50%, #252030 100%);
+  pointer-events: none;
+}
+.login-emotion-full__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  padding: $space-xl;
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $radius;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+}
+
+.login-emotion-full__head { margin-bottom: $space-xl; text-align: center; }
+.login-emotion-full__title {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.35rem, 3.5vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: $text;
+}
+.login-emotion-full__desc {
+  margin: 0;
+  font-size: 0.875rem;
+  color: $muted;
+}
+.login-emotion-full__form { display: flex; flex-direction: column; gap: $space-lg; }
+
+.emotion-full-field {
+  position: relative;
+  padding: $space 0 0;
+  transition: transform $ease, box-shadow $ease;
+  &.has-focus,
+  &.has-value {
+    .emotion-full-field__label {
+      transform: translateY(-1.6rem) scale(0.88);
+      color: $accent;
+    }
+    .emotion-full-field__line {
+      transform: scaleX(1);
+      background: $accent;
+      box-shadow: 0 0 12px $accent-glow;
+    }
+  }
+  &.has-focus {
+    transform: translateY(-2px);
+  }
+}
+.emotion-full-field__label {
+  position: absolute;
+  left: 0;
+  top: 1.1rem;
+  font-size: 0.9375rem;
+  color: $muted;
+  pointer-events: none;
+  transform-origin: left center;
+  transition: transform $ease, color $ease;
+}
+.emotion-full-field__input {
+  width: 100%;
+  padding: 0.85rem 0 0.6rem;
+  font-size: 1rem;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+  &::placeholder { color: rgba(255, 255, 255, 0.25); }
+}
+.emotion-full-field__line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: $border;
+  transform: scaleX(0.6);
+  transform-origin: left;
+  transition: transform $ease, background $ease, box-shadow $ease;
+}
+.emotion-full-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  .emotion-full-field__input { flex: 1; }
+}
+.emotion-full-field__toggle {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.8125rem;
+  color: $accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background $ease, color $ease;
+  &:hover { background: rgba(201, 160, 220, 0.15); }
+}
+
+.emotion-full-btn {
+  margin-top: 0.5rem;
+  padding: 0.9rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $bg-start;
+  background: linear-gradient(135deg, $accent 0%, #b08fc9 100%);
+  border: none;
+  border-radius: $radius;
+  cursor: pointer;
+  transition: opacity $ease, transform $ease, box-shadow $ease;
+  box-shadow: 0 4px 20px $accent-glow;
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px $accent-glow;
+  }
+  &:disabled { cursor: not-allowed; opacity: 0.85; }
+  &.is-loading { opacity: 0.9; }
+}
+
+@media (max-width: $bp) {
+  .login-emotion-full { padding: $space; }
+  .login-emotion-full__inner { padding: $space-lg; }
+}
