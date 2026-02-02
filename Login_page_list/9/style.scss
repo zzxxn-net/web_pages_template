@@ -1,0 +1,243 @@
+// =============================================================================
+// Login Page — Design 9: Cyber Minimal · Full-screen immersive · State change
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Variables (사이버 미니멀: dark, neon accent)
+// -----------------------------------------------------------------------------
+$color-bg: #08090c;
+$color-text: #e0e4e8;
+$color-text-muted: #6a7078;
+$color-accent: #00d4aa;
+$color-accent-dim: rgba(0, 212, 170, 0.2);
+$color-border: rgba(255, 255, 255, 0.06);
+$radius: 6px;
+$space-xs: 0.25rem;
+$space-sm: 0.5rem;
+$space-md: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+$transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+$bp-mobile: 480px;
+
+// -----------------------------------------------------------------------------
+// Base & full-screen center layout
+// -----------------------------------------------------------------------------
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: $font-sans;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $color-text;
+  background: $color-bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.login-cyber-full {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+  overflow: auto;
+}
+
+.login-cyber-full__center {
+  width: 100%;
+  max-width: 380px;
+  position: relative;
+}
+
+// -----------------------------------------------------------------------------
+// State change emphasis (상태 변화 강조)
+// -----------------------------------------------------------------------------
+.login-cyber-full__status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-sm;
+  margin-bottom: $space-xl;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  transition: color $transition;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: $color-text-muted;
+  transition: background $transition, box-shadow $transition;
+
+  &.is-idle {
+    background: $color-text-muted;
+  }
+
+  &.is-focus {
+    background: $color-accent;
+    box-shadow: 0 0 8px $color-accent-dim;
+  }
+
+  &.is-loading {
+    background: $color-accent;
+    animation: pulse 1s ease-in-out infinite;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.status-text {
+  transition: color $transition;
+}
+
+.login-cyber-full__status .status-dot.is-focus ~ .status-text,
+.login-cyber-full__status .status-dot.is-loading ~ .status-text {
+  color: $color-accent;
+}
+
+.login-cyber-full__title {
+  margin: 0 0 $space-xl;
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: $color-text;
+  text-align: center;
+}
+
+.login-cyber-full__form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+
+.cyber-field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+}
+
+.cyber-field__label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: $color-text-muted;
+}
+
+.cyber-field__input {
+  width: 100%;
+  padding: $space-md $space-lg;
+  font-size: 1rem;
+  font-family: inherit;
+  color: $color-text;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  transition: border-color $transition, box-shadow $transition;
+
+  &::placeholder {
+    color: $color-text-muted;
+    opacity: 0.7;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent;
+    box-shadow: 0 0 0 2px $color-accent-dim;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.cyber-field__wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .cyber-field__input {
+    padding-inline-end: 4rem;
+  }
+}
+
+.cyber-field__toggle {
+  position: absolute;
+  right: $space-md;
+  font-size: 0.8125rem;
+  color: $color-text-muted;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: $space-sm;
+  transition: color $transition;
+
+  &:hover {
+    color: $color-accent;
+  }
+}
+
+.cyber-btn {
+  width: 100%;
+  margin-top: $space-sm;
+  padding: $space-md $space-lg;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: inherit;
+  color: $color-bg;
+  background: $color-accent;
+  border: none;
+  border-radius: $radius;
+  cursor: pointer;
+  transition: background $transition, opacity $transition, transform 0.15s ease;
+
+  &:hover:not(:disabled) {
+    background: lighten($color-accent, 6%);
+    transform: scale(1.01);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.99);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &.is-loading {
+    opacity: 0.9;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+@media (max-width: $bp-mobile) {
+  .login-cyber-full {
+    padding: $space-lg;
+  }
+}
