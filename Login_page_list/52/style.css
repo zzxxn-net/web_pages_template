@@ -1,0 +1,30 @@
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; }
+body { margin: 0; min-height: 100dvh; font-family: "Inter", "Noto Sans KR", Georgia, serif; color: #f0ebe3; background: #1a1625; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+.login-fantasy-card { width: 100%; min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding: 2rem; }
+.login-fantasy-card__wrap { width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 1.5rem; }
+@media (min-width: 520px) {
+  .login-fantasy-card__wrap { flex-direction: row; max-width: 680px; align-items: stretch; }
+}
+.fantasy-card-brand { flex: 0 0 auto; padding: 2rem; border-radius: 12px; background: #221e2e; border: 1px solid rgba(212,175,55,0.2); display: flex; flex-direction: column; justify-content: center; }
+.fantasy-card-brand__title { margin: 0 0 0.5rem; font-size: clamp(1.4rem, 3.2vw, 1.6rem); font-weight: 700; color: #d4af37; text-shadow: 0 0 20px rgba(212,175,55,0.28); }
+.fantasy-card-brand__desc { margin: 0; font-size: 0.875rem; color: #9a8f7e; }
+.fantasy-card-form { flex: 1; min-width: 0; padding: 2rem; background: #252030; border: 1px solid rgba(212,175,55,0.2); border-radius: 12px; box-shadow: 0 16px 48px rgba(0,0,0,0.35); }
+.fantasy-card-form__head { margin-bottom: 1.5rem; }
+.fantasy-card-form__title { margin: 0 0 0.35rem; font-size: clamp(1.2rem, 2.8vw, 1.35rem); font-weight: 600; color: #f0ebe3; }
+.fantasy-card-form__desc { margin: 0; font-size: 0.8125rem; color: #9a8f7e; }
+.fantasy-card-form__form { display: flex; flex-direction: column; gap: 1.5rem; }
+.fantasy-card-field { padding: 1rem 1.5rem; border: 1px solid rgba(212,175,55,0.2); border-radius: 8px; background: rgba(0,0,0,0.2); transition: border-color 0.28s, box-shadow 0.28s; }
+.fantasy-card-field.has-focus { border-color: rgba(212,175,55,0.5); box-shadow: 0 0 0 3px rgba(212,175,55,0.28); }
+.fantasy-card-field__label { display: block; margin-bottom: 0.35rem; font-size: 0.8125rem; font-weight: 600; color: #9a8f7e; }
+.fantasy-card-field__input { width: 100%; padding: 0.4rem 0; font-size: 1rem; color: #f0ebe3; background: transparent; border: none; outline: none; }
+.fantasy-card-field__input::placeholder { color: rgba(255,255,255,0.2); }
+.fantasy-card-field__row { display: flex; align-items: center; gap: 0.5rem; }
+.fantasy-card-field__row .fantasy-card-field__input { flex: 1; }
+.fantasy-card-field__toggle { padding: 0.35rem 0.6rem; font-size: 0.8125rem; color: #d4af37; background: transparent; border: none; cursor: pointer; border-radius: 6px; }
+.fantasy-card-field__toggle:hover { background: rgba(212,175,55,0.15); }
+.fantasy-card-btn { margin-top: 0.25rem; padding: 0.85rem 1.5rem; font-size: 1rem; font-weight: 600; color: #1a1625; background: #d4af37; border: none; border-radius: 8px; cursor: pointer; transition: opacity 0.28s, transform 0.28s, box-shadow 0.28s; box-shadow: 0 4px 20px rgba(212,175,55,0.28); }
+.fantasy-card-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(212,175,55,0.28); }
+.fantasy-card-btn:disabled { cursor: not-allowed; opacity: 0.8; }
+.fantasy-card-btn.is-loading { opacity: 0.9; }
+@media (max-width: 519px) { .login-fantasy-card { padding: 1rem; } .fantasy-card-brand, .fantasy-card-form { padding: 1.5rem; } }
