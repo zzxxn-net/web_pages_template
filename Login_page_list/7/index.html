@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="로그인 — 실험적 인터페이스 · 카드 분리형 시안">
+  <title>Login — Experimental</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/login.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+  <main class="login-exp" role="main" aria-label="로그인">
+    <div class="login-exp__card" x-data="experimentalLogin()">
+      <div class="login-exp__card-inner">
+        <header class="login-exp__head">
+          <h1 class="login-exp__title">LOG IN</h1>
+          <p class="login-exp__desc">실험실</p>
+        </header>
+
+        <form class="login-exp__form" action="#" method="post" autocomplete="on" @submit.prevent="handleSubmit" hx-post="#" hx-swap="none" hx-trigger="submit">
+          <div class="exp-field" data-exp-field>
+            <label for="email" class="exp-field__label">EMAIL</label>
+            <input id="email" type="email" name="email" class="exp-field__input" placeholder="you@lab.example" autocomplete="email" required x-model="email" @focus="reactIn($event)" @blur="reactOut($event)">
+          </div>
+          <div class="exp-field" data-exp-field>
+            <label for="password" class="exp-field__label">PASSWORD</label>
+            <div class="exp-field__wrap">
+              <input id="password" :type="showPassword ? 'text' : 'password'" name="password" class="exp-field__input" placeholder="••••••••" autocomplete="current-password" required x-model="password" @focus="reactIn($event)" @blur="reactOut($event)">
+              <button type="button" class="exp-field__toggle" aria-label="비밀번호 표시" @click="showPassword = !showPassword">보기</button>
+            </div>
+          </div>
+          <button type="submit" class="exp-btn" :disabled="loading">
+            <span x-show="!loading">ENTER</span>
+            <span x-show="loading" x-cloak>…</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
