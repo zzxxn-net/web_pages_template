@@ -1,0 +1,159 @@
+// Design 76: Dark Archive · Card Separated · Focus Movement UX
+$bg: #1a1816;
+$card: rgba(32, 28, 26, 0.95);
+$border: rgba(140, 120, 100, 0.3);
+$border-focus: rgba(180, 160, 140, 0.6);
+$text: #e8e4e0;
+$muted: #9a9088;
+$accent: #c4a882;
+$radius: 6px;
+$space: 1rem;
+$space-lg: 1.25rem;
+$ease: 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Georgia", "Times New Roman", serif;
+  font-weight: 400;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-dark-card {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-lg;
+  overflow: auto;
+}
+
+.login-dark-card__wrap {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+
+.dark-card__head {
+  text-align: center;
+}
+
+.dark-card__title {
+  margin: 0 0 0.25rem;
+  font-size: clamp(1.35rem, 3vw, 1.6rem);
+  font-weight: 600;
+  color: $text;
+}
+
+.dark-card__desc {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: $muted;
+}
+
+.dark-card__form-card {
+  padding: $space-lg;
+  background: $card;
+  border: 1px solid $border;
+  border-radius: $radius;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+.dark-card__form {
+  display: flex;
+  flex-direction: column;
+  gap: $space;
+}
+
+.dark-card-field {
+  padding: 0.7rem 1rem;
+  border: 1px solid $border;
+  border-radius: 4px;
+  background: rgba(26, 24, 22, 0.6);
+  transition: border-color $ease, box-shadow $ease;
+  &:focus-within { outline: none; }
+  &.has-focus {
+    border-color: $border-focus;
+    box-shadow: 0 0 0 2px rgba($accent, 0.12);
+    .dark-card-field__label { color: $accent; }
+  }
+  &.has-value:not(.has-focus) { border-color: rgba($accent, 0.35); .dark-card-field__label { color: $text; } }
+}
+
+.dark-card-field__label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $muted;
+  transition: color $ease;
+}
+
+.dark-card-field__input {
+  width: 100%;
+  padding: 0.2rem 0;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+  &::placeholder { color: rgba($muted, 0.6); }
+  &:focus { outline: none; }
+}
+
+.dark-card-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  .dark-card-field__input { flex: 1; }
+}
+
+.dark-card-field__toggle {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: $muted;
+  background: transparent;
+  border: 1px solid $border;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color $ease, border-color $ease;
+  &:hover { color: $accent; border-color: $accent; }
+}
+
+.dark-card-btn {
+  margin-top: 0.5rem;
+  padding: 0.8rem 1.2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: $bg;
+  background: $accent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background $ease, opacity $ease;
+  &:hover:not(:disabled) { background: lighten($accent, 8%); }
+  &:disabled { cursor: not-allowed; opacity: 0.6; }
+  &.is-loading { pointer-events: none; }
+}
+
+@media (max-width: $bp) {
+  .login-dark-card { padding: $space; }
+  .dark-card__form-card { padding: $space; }
+}
