@@ -1,0 +1,253 @@
+// =============================================================================
+// Login Page — Design 5: Emotional Tech · Micro-interaction · Scroll-free fixed
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Variables (감성 테크: soft, warm, gentle)
+// -----------------------------------------------------------------------------
+$color-bg: #f8f6fc;
+$color-bg-soft: linear-gradient(160deg, #f0ecf9 0%, #e8f4fc 50%, #f5f0fa 100%);
+$color-surface: rgba(255, 255, 255, 0.85);
+$color-surface-border: rgba(167, 139, 250, 0.2);
+$color-text: #2d2a3a;
+$color-text-muted: #6b6578;
+$color-accent: #8b7cf0;
+$color-accent-soft: #a78bfa;
+$color-accent-hover: #7c6cf0;
+$color-focus-glow: rgba(139, 124, 240, 0.35);
+$radius: 20px;
+$radius-sm: 12px;
+$space-xs: 0.25rem;
+$space-sm: 0.5rem;
+$space-md: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$space-2xl: 3rem;
+$font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+$transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+$shadow-soft: 0 20px 50px -15px rgba(139, 124, 240, 0.12);
+$bp-mobile: 480px;
+
+// -----------------------------------------------------------------------------
+// Base & center layout (스크롤 없는 고정 플로우)
+// -----------------------------------------------------------------------------
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: $font-sans;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $color-text;
+  background: $color-bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-md;
+  overflow: auto;
+}
+
+.login-emotional {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+  overflow: auto;
+}
+
+.login-emotional__bg {
+  position: fixed;
+  inset: 0;
+  background: $color-bg-soft;
+  pointer-events: none;
+}
+
+.login-emotional__card {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  background: $color-surface;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius;
+  padding: $space-2xl $space-xl;
+  box-shadow: $shadow-soft;
+  backdrop-filter: blur(12px);
+}
+
+// -----------------------------------------------------------------------------
+// Header
+// -----------------------------------------------------------------------------
+.login-emotional__head {
+  text-align: center;
+  margin-bottom: $space-xl;
+}
+
+.login-emotional__title {
+  margin: 0 0 $space-sm;
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 600;
+  color: $color-text;
+  letter-spacing: -0.02em;
+}
+
+.login-emotional__desc {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: $color-text-muted;
+}
+
+// -----------------------------------------------------------------------------
+// Form — 마이크로 인터랙션 (hover/focus scale, glow)
+// -----------------------------------------------------------------------------
+.login-emotional__form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+
+.micro-field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+  transition: transform $transition;
+
+  &.is-focused {
+    transform: scale(1.01);
+  }
+}
+
+.micro-field__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: $color-text-muted;
+  transition: color $transition;
+}
+
+.micro-field.is-focused .micro-field__label {
+  color: $color-accent;
+}
+
+.micro-field__input {
+  width: 100%;
+  padding: $space-md $space-lg;
+  font-size: 1rem;
+  font-family: inherit;
+  color: $color-text;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(139, 124, 240, 0.25);
+  border-radius: $radius-sm;
+  transition: border-color $transition, box-shadow $transition, transform 0.15s ease;
+
+  &::placeholder {
+    color: $color-text-muted;
+    opacity: 0.7;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent;
+    box-shadow: 0 0 0 3px $color-focus-glow;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.micro-field__wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .micro-field__input {
+    padding-inline-end: 4rem;
+  }
+}
+
+.micro-field__toggle {
+  position: absolute;
+  right: $space-md;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: $color-text-muted;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: $space-sm $space-md;
+  border-radius: $radius-sm;
+  transition: color $transition, background $transition, transform 0.15s ease;
+
+  &:hover {
+    color: $color-accent;
+    background: rgba(139, 124, 240, 0.08);
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+.micro-field__icon {
+  display: inline-block;
+}
+
+.login-emotional__actions {
+  margin-top: $space-sm;
+}
+
+.micro-btn {
+  width: 100%;
+  padding: $space-md $space-lg;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #fff;
+  background: $color-accent;
+  border: none;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: background $transition, transform 0.2s ease, box-shadow $transition;
+
+  &:hover:not(:disabled) {
+    background: $color-accent-hover;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px -6px rgba(139, 124, 240, 0.4);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0) scale(0.99);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  &--primary {
+    // primary
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+@media (max-width: $bp-mobile) {
+  .login-emotional__card {
+    padding: $space-xl $space-lg;
+  }
+}
