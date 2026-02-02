@@ -1,0 +1,42 @@
+/* Design 14: Experimental · Progressive Form · GSAP */
+*,*::before,*::after{box-sizing:border-box;}
+html{font-size:16px;-webkit-text-size-adjust:100%;}
+body{margin:0;min-height:100vh;min-height:100dvh;font-family:"Inter",-apple-system,sans-serif;font-weight:500;line-height:1.5;color:#e8e8ec;background:#0c0c0e;display:flex;align-items:center;justify-content:center;padding:1rem;}
+.login-exp-prog{width:100%;min-height:100%;display:flex;align-items:center;justify-content:center;padding:2rem;}
+.login-exp-prog__wrap{width:100%;max-width:400px;margin:0 auto;}
+.login-exp-prog__steps{display:flex;align-items:center;gap:0;margin-bottom:2rem;}
+.exp-step{display:flex;flex-direction:column;align-items:center;gap:0.25rem;padding:0.5rem 1rem;border-radius:8px;background:#16161a;border:1px solid #2a2a30;transition:background 0.25s ease,border-color 0.25s ease,color 0.25s ease;}
+.exp-step.is-active{background:rgba(0,212,170,0.15);border-color:#00d4aa;}
+.exp-step.is-active .exp-step__num{color:#00d4aa;}
+.exp-step.is-done .exp-step__num{color:#00d4aa;}
+.exp-step__num{font-size:0.75rem;font-weight:700;letter-spacing:0.05em;color:#8888a0;}
+.exp-step__label{font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.08em;color:#8888a0;}
+.exp-step__connector{width:24px;height:2px;background:#2a2a30;transition:background 0.25s ease;}
+.exp-step__connector.is-done{background:#00d4aa;}
+.login-exp-prog__head{margin-bottom:1.5rem;}
+.login-exp-prog__title{margin:0 0 0.5rem;font-size:clamp(1.5rem,3.5vw,1.875rem);font-weight:700;letter-spacing:-0.02em;color:#e8e8ec;}
+.login-exp-prog__desc{margin:0;font-size:0.9375rem;color:#8888a0;}
+.login-exp-prog__form{position:relative;min-height:200px;}
+.exp-panel{transition:opacity 0.2s ease;}
+.exp-panel.is-hidden{position:absolute;left:0;right:0;top:0;pointer-events:none;visibility:hidden;}
+.exp-field{margin-bottom:1.5rem;}
+.exp-field__label{display:block;font-size:0.8125rem;font-weight:600;color:#8888a0;margin-bottom:0.5rem;}
+.exp-field__input{width:100%;font:inherit;font-size:1rem;color:#e8e8ec;background:#16161a;border:1px solid #2a2a30;border-radius:8px;padding:1rem 1.5rem;outline:none;transition:border-color 0.25s ease,box-shadow 0.25s ease;}
+.exp-field__input::placeholder{color:#8888a0;}
+.exp-field__input:focus{border-color:#00d4aa;box-shadow:0 0 0 2px rgba(0,212,170,0.15);}
+.exp-field__wrap{display:flex;align-items:center;gap:0.5rem;}
+.exp-field__wrap .exp-field__input{flex:1;min-width:0;}
+.exp-field__toggle{font:inherit;font-size:0.8125rem;color:#8888a0;background:transparent;border:1px solid #2a2a30;border-radius:8px;padding:0.5rem 1rem;cursor:pointer;transition:color 0.25s ease,border-color 0.25s ease;}
+.exp-field__toggle:hover{color:#00d4aa;border-color:#00d4aa;}
+.exp-field__toggle:focus-visible{outline:2px solid #00d4aa;outline-offset:2px;}
+.exp-btn{font:inherit;font-size:0.9375rem;font-weight:600;padding:1rem 1.5rem;border-radius:8px;cursor:pointer;transition:background 0.25s ease,color 0.25s ease,opacity 0.25s ease;border:none;}
+.exp-btn:focus-visible{outline:2px solid #00d4aa;outline-offset:2px;}
+.exp-btn:disabled{opacity:0.5;cursor:not-allowed;}
+.exp-btn--next{width:100%;color:#0c0c0e;background:#00d4aa;}
+.exp-btn--next:hover:not(:disabled){filter:brightness(1.08);}
+.exp-btn--back{color:#8888a0;background:#16161a;border:1px solid #2a2a30;}
+.exp-btn--back:hover:not(:disabled){color:#e8e8ec;border-color:#8888a0;}
+.exp-btn--primary{color:#0c0c0e;background:#00d4aa;flex:1;}
+.exp-btn--primary:hover:not(:disabled){filter:brightness(1.08);}
+.exp-panel__actions{display:flex;gap:1rem;margin-top:1.5rem;}
+@media (max-width:480px){.login-exp-prog{padding:1rem;}.login-exp-prog__steps{margin-bottom:1.5rem;}.exp-step__label{display:none;}}
