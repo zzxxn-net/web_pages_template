@@ -1,0 +1,219 @@
+// Design 88: 현대 판타지, 마이크로 인터랙션 중심, 입력 반응형 애니메이션
+// MVP: 시안 전용 변수 — 현대 판타지 톤(다크·골드·베이지)
+$bg: #1c1624;
+$card: rgba(44, 36, 52, 0.92);
+$border: rgba(212, 180, 140, 0.2);
+$text: #e8e0d8;
+$muted: #a89888;
+$accent: #c9a86c;
+$accent-soft: rgba(201, 168, 108, 0.2);
+$accent-glow: rgba(201, 168, 108, 0.35);
+$radius: 14px;
+$space: 1rem;
+$space-lg: 1.25rem;
+$ease: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+// MVP: 전역 — 현대 판타지 배경, 중앙 정렬
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Cormorant Garamond", "Georgia", serif;
+  font-weight: 400;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+// MVP: 마이크로 인터랙션 중심 — 카드 호버·로딩 시 반응
+.fantasy-micro-login {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-lg;
+  overflow: auto;
+}
+
+.fantasy-micro-login__wrap {
+  width: 100%;
+  max-width: 400px;
+}
+
+// MVP: 마이크로 인터랙션 — 카드 호버 시 shadow 강화, 로딩 시 약화
+.fantasy-micro-card {
+  padding: $space-lg;
+  background: $card;
+  border: 1px solid $border;
+  border-radius: $radius;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
+  transition: box-shadow $ease, transform $ease;
+  &:hover {
+    box-shadow: 0 16px 44px rgba(0, 0, 0, 0.35);
+  }
+  &.is-loading {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.fantasy-micro-card__head {
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid $border;
+  text-align: center;
+}
+
+.fantasy-micro-card__title {
+  margin: 0 0 0.3rem;
+  font-size: clamp(1.4rem, 3vw, 1.65rem);
+  font-weight: 600;
+  color: $text;
+  letter-spacing: 0.02em;
+}
+.fantasy-micro-card__desc {
+  margin: 0;
+  font-size: 0.875rem;
+  color: $muted;
+}
+
+.fantasy-micro-card__form {
+  display: flex;
+  flex-direction: column;
+  gap: $space;
+}
+
+// MVP: 입력 반응형 애니메이션 — has-focus·has-value 시 테두리·라벨·글로우·마이크로 스케일
+.fantasy-micro-field {
+  padding: 0.75rem 1rem;
+  border: 1px solid $border;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.15);
+  transition: border-color $ease, box-shadow $ease;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  // MVP: 마이크로 — 필드 호버 시 보더 살짝 강조
+  &:hover {
+    border-color: rgba($accent, 0.35);
+  }
+  &:focus-within {
+    border-color: $accent;
+    box-shadow: 0 0 0 3px $accent-soft, 0 0 12px $accent-glow;
+    outline-color: $accent;
+  }
+  &.has-focus {
+    border-color: $accent;
+    box-shadow: 0 0 0 3px $accent-soft, 0 0 12px $accent-glow;
+    outline-color: $accent;
+  }
+  &.has-value:not(.has-focus) {
+    border-color: rgba($accent, 0.45);
+  }
+}
+
+.fantasy-micro-field__label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: $muted;
+  transition: color $ease;
+}
+.fantasy-micro-field.has-focus .fantasy-micro-field__label,
+.fantasy-micro-field:focus-within .fantasy-micro-field__label {
+  color: $accent;
+}
+
+.fantasy-micro-field__input {
+  width: 100%;
+  padding: 0.25rem 0;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.fantasy-micro-field__input::placeholder { color: rgba($muted, 0.65); }
+.fantasy-micro-field__input:focus { outline: none; }
+
+.fantasy-micro-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.fantasy-micro-field__row .fantasy-micro-field__input { flex: 1; }
+
+// MVP: 마이크로 인터랙션 — 토글 호버·포커스 시 색·테두리
+.fantasy-micro-field__toggle {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: $muted;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid $border;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: color $ease, border-color $ease, transform $ease;
+  &:hover {
+    color: $accent;
+    border-color: $accent;
+    transform: scale(1.03);
+  }
+  &:active {
+    transform: scale(0.98);
+  }
+  &:focus-visible {
+    outline: 2px solid $accent;
+    outline-offset: 2px;
+  }
+}
+
+// MVP: 마이크로 인터랙션 — 버튼 호버·액티브·로딩 시 반응
+.fantasy-micro-btn {
+  margin-top: 0.25rem;
+  padding: 0.85rem 1.2rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: $bg;
+  background: $accent;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background $ease, transform $ease, box-shadow $ease;
+  &:hover:not(:disabled) {
+    background: lighten($accent, 8%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(201, 168, 108, 0.4);
+  }
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(201, 168, 108, 0.3);
+  }
+  &:focus-visible {
+    outline: 2px solid $accent;
+    outline-offset: 2px;
+  }
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.75;
+  }
+  &.is-loading {
+    pointer-events: none;
+    opacity: 0.88;
+  }
+}
+
+@media (max-width: $bp) {
+  .fantasy-micro-login { padding: $space; }
+  .fantasy-micro-card { padding: $space; }
+}
