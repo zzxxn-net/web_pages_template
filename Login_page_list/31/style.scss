@@ -1,0 +1,192 @@
+// Design 31: Sensible Tech · Progressive Form · GSAP smooth transitions
+$bg: #f5f2ed;
+$card: #ffffff;
+$border: rgba(140, 115, 90, 0.2);
+$text: #2c2620;
+$muted: #7a6e62;
+$accent: #b8926a;
+$glow: rgba(184, 146, 106, 0.18);
+$radius: 16px;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.28s ease;
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-sense-prog {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+}
+.login-sense-prog__box {
+  width: 100%;
+  max-width: 380px;
+  background: $card;
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: $space-xl;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+}
+
+.sense-prog-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: $space-xl;
+}
+.sense-prog-step {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: $muted;
+  border: 2px solid $border;
+  border-radius: 50%;
+  transition: color $ease, border-color $ease, background $ease;
+}
+.sense-prog-step.is-active {
+  color: $accent;
+  border-color: $accent;
+  background: rgba(184, 146, 106, 0.1);
+}
+.sense-prog-step.is-done {
+  color: $card;
+  border-color: $accent;
+  background: $accent;
+}
+.sense-prog-line {
+  width: 28px;
+  height: 2px;
+  background: $border;
+  border-radius: 1px;
+  transition: background $ease;
+}
+.sense-prog-line.is-done { background: $accent; }
+
+.login-sense-prog__head { margin-bottom: $space-xl; text-align: center; }
+.login-sense-prog__title {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.35rem, 3vw, 1.5rem);
+  font-weight: 700;
+  color: $text;
+}
+.login-sense-prog__desc { margin: 0; font-size: 0.875rem; color: $muted; }
+
+.login-sense-prog__form { position: relative; min-height: 150px; }
+.sense-prog-panel {
+  transition: opacity $ease;
+  &.is-hidden { position: absolute; left: 0; right: 0; top: 0; opacity: 0; pointer-events: none; visibility: hidden; }
+}
+.sense-prog-field {
+  padding: $space $space-lg;
+  border: 1px solid $border;
+  border-radius: 12px;
+  background: $bg;
+  margin-bottom: $space-lg;
+  transition: border-color $ease, box-shadow $ease;
+}
+.sense-prog-field:focus-within { border-color: $accent; box-shadow: 0 0 0 2px $glow; }
+.sense-prog-field__label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: $muted;
+  margin-bottom: 0.4rem;
+}
+.sense-prog-field__input {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  color: $text;
+  background: transparent;
+  border: none;
+  padding: 0.4rem 0;
+  outline: none;
+}
+.sense-prog-field__input::placeholder { color: $muted; opacity: 0.75; }
+.sense-prog-field__wrap { display: flex; align-items: center; gap: 0.5rem; }
+.sense-prog-field__wrap .sense-prog-field__input { flex: 1; min-width: 0; }
+.sense-prog-field__toggle {
+  font: inherit;
+  font-size: 0.8125rem;
+  color: $muted;
+  background: none;
+  border: 1px solid $border;
+  border-radius: 8px;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  transition: color $ease, border-color $ease;
+}
+.sense-prog-field__toggle:hover { color: $accent; border-color: $accent; }
+
+.sense-prog-btn {
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: $space $space-xl;
+  cursor: pointer;
+  transition: opacity $ease, transform $ease, background $ease;
+}
+.sense-prog-btn--next {
+  width: 100%;
+  color: $card;
+  background: $accent;
+  border: none;
+  box-shadow: 0 4px 14px $glow;
+}
+.sense-prog-btn--next:disabled { opacity: 0.5; cursor: not-allowed; }
+.sense-prog-btn--next:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 18px $glow; }
+.sense-prog-btn--back {
+  color: $muted;
+  background: $bg;
+  border: 1px solid $border;
+}
+.sense-prog-btn--back:hover { color: $text; border-color: $accent; }
+.sense-prog-btn--primary {
+  color: $card;
+  background: $accent;
+  border: none;
+  box-shadow: 0 4px 14px $glow;
+}
+.sense-prog-btn--primary.is-loading { opacity: 0.85; pointer-events: none; }
+.sense-prog-btn--primary:disabled { cursor: not-allowed; }
+.sense-prog-btn--primary:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 18px $glow; }
+.sense-prog-actions {
+  display: flex;
+  gap: $space;
+  margin-top: $space-lg;
+}
+.sense-prog-actions .sense-prog-btn--back { flex: 0 0 auto; }
+.sense-prog-actions .sense-prog-btn--primary { flex: 1; }
+
+@media (max-width: $bp) {
+  .login-sense-prog { padding: $space-lg; }
+  .login-sense-prog__box { padding: $space-lg; }
+}
