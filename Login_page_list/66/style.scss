@@ -1,0 +1,166 @@
+// Design 66: Sensible Tech · Fullscreen Immersive · State Change Emphasis
+$bg-start: #fef7f0;
+$bg-end: #f5e6dc;
+$card-bg: rgba(255, 252, 249, 0.92);
+$border-idle: rgba(180, 150, 130, 0.25);
+$border-focus: #c49a7a;
+$text: #2c2420;
+$muted: #7a6b62;
+$accent: #b8734a;
+$accent-soft: rgba(184, 115, 74, 0.18);
+$state-focus-shadow: 0 0 0 3px $accent-soft;
+$state-loading-bg: rgba(184, 115, 74, 0.12);
+$radius: 12px;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", -apple-system, sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: linear-gradient(165deg, $bg-start 0%, $bg-end 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-sense-full {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+  overflow: auto;
+}
+
+.login-sense-full__bg {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(165deg, $bg-start 0%, $bg-end 50%, darken($bg-end, 2%) 100%);
+  pointer-events: none;
+}
+
+.login-sense-full__card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  padding: $space-xl;
+  background: $card-bg;
+  border: 1px solid $border-idle;
+  border-radius: $radius;
+  box-shadow: 0 20px 50px rgba(44, 36, 32, 0.08);
+  transition: box-shadow $ease, border-color $ease;
+}
+
+.sense-full__head { margin-bottom: $space-lg; text-align: center; }
+.sense-full__title {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.4rem, 3.2vw, 1.6rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: $text;
+}
+.sense-full__desc { margin: 0; font-size: 0.875rem; color: $muted; }
+.sense-full__form { display: flex; flex-direction: column; gap: $space-lg; }
+
+// State change emphasis: idle → focus → value → loading
+.sense-full-field {
+  padding: $space $space-lg;
+  border: 2px solid $border-idle;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.6);
+  transition: border-color $ease, box-shadow $ease, background $ease, transform $ease;
+  &.has-focus {
+    border-color: $border-focus;
+    box-shadow: $state-focus-shadow;
+    background: rgba(255, 255, 255, 0.95);
+    .sense-full-field__label { color: $accent; font-weight: 600; }
+  }
+  &.has-value:not(.has-focus) {
+    border-color: rgba($accent, 0.45);
+    .sense-full-field__label { color: $text; }
+  }
+}
+
+.sense-full-field__label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: $muted;
+  transition: color $ease, font-weight $ease;
+}
+
+.sense-full-field__input {
+  width: 100%;
+  padding: 0.35rem 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+  &::placeholder { color: rgba($muted, 0.7); }
+}
+
+.sense-full-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  .sense-full-field__input { flex: 1; }
+}
+
+.sense-full-field__toggle {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $muted;
+  background: transparent;
+  border: 1px solid $border-idle;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color $ease, border-color $ease, background $ease;
+  &:hover { color: $accent; border-color: $accent; background: $accent-soft; }
+}
+
+// Button state: idle vs loading (strong visual change)
+.sense-full-btn {
+  margin-top: 0.25rem;
+  padding: 0.9rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #fff;
+  background: $accent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background $ease, transform $ease, box-shadow $ease;
+  &.is-idle:hover:not(:disabled) {
+    background: darken($accent, 6%);
+    box-shadow: 0 4px 14px rgba(184, 115, 74, 0.35);
+  }
+  &:disabled { cursor: not-allowed; }
+  &.is-loading {
+    background: $state-loading-bg;
+    color: $accent;
+    pointer-events: none;
+  }
+}
+
+@media (max-width: $bp) {
+  .login-sense-full { padding: $space; }
+  .login-sense-full__card { padding: $space-lg; }
+}
