@@ -1,0 +1,25 @@
+/* Design 28: Neo Brutal Card Reactive */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; }
+body { margin: 0; min-height: 100vh; font-family: Inter, sans-serif; font-weight: 600; line-height: 1.5; color: #1a1a1a; background: #f5f3ef; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+.login-brutal-card { width: 100%; max-width: 420px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; min-height: 100%; padding: 2rem; }
+.login-brutal-card__brand { width: 100%; max-width: 320px; padding: 1.5rem 2rem; background: #fff; border: 3px solid #1a1a1a; border-radius: 0; text-align: center; box-shadow: 6px 6px 0 #1a1a1a; }
+.brutal-card-brand__logo { display: block; font-size: 1.5rem; font-weight: 800; letter-spacing: 0.08em; color: #1a1a1a; margin-bottom: 0.35rem; }
+.brutal-card-brand__tagline { margin: 0; font-size: 0.8125rem; color: #5a5a5a; }
+.login-brutal-card__form-card { width: 100%; max-width: 320px; padding: 2rem; background: #fff; border: 3px solid #1a1a1a; border-radius: 0; box-shadow: 6px 6px 0 #1a1a1a; }
+.brutal-card-form__head { margin-bottom: 2rem; text-align: center; }
+.brutal-card-form__title { margin: 0 0 0.35rem; font-size: clamp(1.35rem, 3vw, 1.5rem); font-weight: 800; color: #1a1a1a; }
+.brutal-card-form__desc { margin: 0; font-size: 0.875rem; color: #5a5a5a; }
+.brutal-card-form__form { display: flex; flex-direction: column; gap: 1.5rem; }
+.brutal-card-field { padding: 1rem 1.5rem; border: 2px solid #1a1a1a; border-radius: 0; background: #f5f3ef; transition: transform 0.2s ease; }
+.brutal-card-field__label { display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #5a5a5a; margin-bottom: 0.35rem; }
+.brutal-card-field__input { width: 100%; font: inherit; font-size: 1rem; font-weight: 600; color: #1a1a1a; background: transparent; border: none; padding: 0.4rem 0; outline: none; }
+.brutal-card-field__input::placeholder { color: #5a5a5a; opacity: 0.8; }
+.brutal-card-field__wrap { display: flex; align-items: center; gap: 0.5rem; }
+.brutal-card-field__wrap .brutal-card-field__input { flex: 1; min-width: 0; }
+.brutal-card-field__toggle { font: inherit; font-size: 0.8125rem; font-weight: 600; color: #5a5a5a; background: none; border: 2px solid #1a1a1a; border-radius: 0; padding: 0.25rem 0.5rem; cursor: pointer; }
+.brutal-card-field__toggle:hover { color: #ff3366; border-color: #ff3366; }
+.brutal-card-btn { margin-top: 0.25rem; font: inherit; font-size: 1rem; font-weight: 800; color: #fff; background: #1a1a1a; border: 3px solid #1a1a1a; border-radius: 0; padding: 1rem 2rem; cursor: pointer; transition: transform 0.2s ease; box-shadow: 4px 4px 0 #1a1a1a; }
+.brutal-card-btn:hover:not(:disabled) { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #1a1a1a; }
+.brutal-card-btn:disabled { cursor: not-allowed; opacity: 0.6; }
+@media (max-width: 480px) { .login-brutal-card { padding: 1.5rem; gap: 1.5rem; } .login-brutal-card__form-card { padding: 1.5rem; } }
