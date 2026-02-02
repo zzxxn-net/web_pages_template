@@ -1,0 +1,153 @@
+/* Design 83: 사이버 미니멀, 단일 포커스 입력 흐름, GSAP 부드러운 전환 - MVP 시안 전용 */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "JetBrains Mono", "SF Mono", monospace;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #e6edf3;
+  background: #0d1117;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.cyber-login {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  overflow: auto;
+}
+.cyber-login__wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+}
+.cyber-header {
+  padding: 1rem 0;
+  text-align: center;
+  border-bottom: 1px solid #30363d;
+}
+.cyber-header__title {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 600;
+  color: #e6edf3;
+  letter-spacing: 0.02em;
+}
+.cyber-header__step { margin: 0; font-size: 0.8125rem; color: #58a6ff; font-weight: 500; }
+.cyber-card {
+  padding: 1.25rem;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  transition: box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cyber-card.is-loading { opacity: 0.92; }
+.cyber-card__form { display: flex; flex-direction: column; gap: 1rem; }
+.cyber-field {
+  padding: 0.75rem 1rem;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  background: rgba(22, 27, 34, 0.6);
+  transition: border-color 0.35s, box-shadow 0.35s, opacity 0.35s, transform 0.35s;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.cyber-field--password {
+  opacity: 0;
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin: 0;
+  overflow: hidden;
+  border-width: 0;
+}
+.cyber-field--password.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 120px;
+  padding: 0.75rem 1rem;
+  margin: 0;
+  border-width: 1px;
+}
+.cyber-field:focus-within {
+  border-color: #58a6ff;
+  box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15);
+  outline-color: #58a6ff;
+}
+.cyber-field.has-focus {
+  border-color: #58a6ff;
+  box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15);
+  outline-color: #58a6ff;
+}
+.cyber-field.has-value:not(.has-focus) { border-color: rgba(88, 166, 255, 0.5); }
+.cyber-field__label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #8b949e;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.35s;
+}
+.cyber-field.has-focus .cyber-field__label,
+.cyber-field:focus-within .cyber-field__label { color: #58a6ff; }
+.cyber-field__input {
+  width: 100%;
+  padding: 0.25rem 0;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  color: #e6edf3;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.cyber-field__input::placeholder { color: rgba(139, 148, 158, 0.6); }
+.cyber-field__input:focus { outline: none; }
+.cyber-field__row { display: flex; align-items: center; gap: 0.5rem; }
+.cyber-field__row .cyber-field__input { flex: 1; }
+.cyber-field__toggle {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-family: inherit;
+  color: #8b949e;
+  background: rgba(48, 54, 61, 0.5);
+  border: 1px solid #30363d;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.35s, border-color 0.35s;
+}
+.cyber-field__toggle:hover { color: #58a6ff; border-color: #58a6ff; }
+.cyber-field__toggle:focus-visible { outline: 2px solid #58a6ff; outline-offset: 2px; }
+.cyber-btn {
+  margin-top: 0.25rem;
+  padding: 0.85rem 1.2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #0d1117;
+  background: #58a6ff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.35s, transform 0.35s;
+}
+.cyber-btn:hover:not(:disabled) { background: #79b8ff; transform: translateY(-1px); }
+.cyber-btn:focus-visible { outline: 2px solid #58a6ff; outline-offset: 2px; }
+.cyber-btn:disabled { cursor: not-allowed; opacity: 0.7; }
+.cyber-btn.is-loading { pointer-events: none; opacity: 0.85; }
+@media (max-width: 480px) {
+  .cyber-login { padding: 1rem; }
+  .cyber-card { padding: 1rem; }
+}
