@@ -1,0 +1,73 @@
+<!-- mvp -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — 다크 아카이브</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="shop-page-2" x-data="shopPage2()">
+    <div class="shop-page-2__container">
+      <h1 class="shop-page-2__title">Shop</h1>
+      <div class="shop-page-2__grid" id="shop-grid-2">
+        <section class="shop-page-2__feature">
+          <article class="product-card--feature" data-product="1">
+            <img class="product-card__image" src="https://placehold.co/420x315/2a2522/7a7269?text=Featured" alt="Featured" width="420" height="315">
+            <div class="product-card__body">
+              <h2 class="product-card__name">Featured Product</h2>
+              <p class="product-card__price">₩59,000</p>
+              <div class="product-card__actions">
+                <button class="btn-2" :class="{ 'btn-2--added': addedIds.has(1) }" @click="addWithFeedback(1)">
+                  <span x-text="addedIds.has(1) ? '담김' : '장바구니'"></span>
+                </button>
+                <button class="btn-2 btn-2--primary" @click="toggleLike(1)" :aria-pressed="likes.has(1)">좋아요</button>
+              </div>
+            </div>
+          </article>
+        </section>
+        <div class="shop-page-2__list">
+          <article class="product-card--compact" data-product="2">
+            <img class="product-card__image" src="https://placehold.co/72x72/2a2522/7a7269?text=2" alt="Product 2" width="72" height="72">
+            <div class="product-card__body">
+              <h2 class="product-card__name">Product 2</h2>
+              <p class="product-card__price">₩39,000</p>
+            </div>
+            <div class="product-card__actions">
+              <button class="btn-2" :class="{ 'btn-2--added': addedIds.has(2) }" @click="addWithFeedback(2)" x-text="addedIds.has(2) ? '담김' : '장바구니'"></button>
+              <button class="btn-2 btn-2--primary" @click="toggleLike(2)" :aria-pressed="likes.has(2)">♥</button>
+            </div>
+          </article>
+          <article class="product-card--compact" data-product="3">
+            <img class="product-card__image" src="https://placehold.co/72x72/2a2522/7a7269?text=3" alt="Product 3" width="72" height="72">
+            <div class="product-card__body">
+              <h2 class="product-card__name">Product 3</h2>
+              <p class="product-card__price">₩49,000</p>
+            </div>
+            <div class="product-card__actions">
+              <button class="btn-2" :class="{ 'btn-2--added': addedIds.has(3) }" @click="addWithFeedback(3)" x-text="addedIds.has(3) ? '담김' : '장바구니'"></button>
+              <button class="btn-2 btn-2--primary" @click="toggleLike(3)" :aria-pressed="likes.has(3)">♥</button>
+            </div>
+          </article>
+          <article class="product-card--compact" data-product="4">
+            <img class="product-card__image" src="https://placehold.co/72x72/2a2522/7a7269?text=4" alt="Product 4" width="72" height="72">
+            <div class="product-card__body">
+              <h2 class="product-card__name">Product 4</h2>
+              <p class="product-card__price">₩19,000</p>
+            </div>
+            <div class="product-card__actions">
+              <button class="btn-2" :class="{ 'btn-2--added': addedIds.has(4) }" @click="addWithFeedback(4)" x-text="addedIds.has(4) ? '담김' : '장바구니'"></button>
+              <button class="btn-2 btn-2--primary" @click="toggleLike(4)" :aria-pressed="likes.has(4)">♥</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>
