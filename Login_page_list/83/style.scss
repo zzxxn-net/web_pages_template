@@ -1,0 +1,208 @@
+// Design 83: 사이버 미니멀, 단일 포커스 입력 흐름, GSAP 기반 부드러운 전환
+// MVP: 시안 전용 변수 — 다크 배경·시안 악센트·타이포
+$bg: #0d1117;
+$surface: #161b22;
+$border: #30363d;
+$text: #e6edf3;
+$muted: #8b949e;
+$accent: #58a6ff;
+$accent-soft: rgba(88, 166, 255, 0.15);
+$radius: 8px;
+$space: 1rem;
+$space-lg: 1.25rem;
+$ease: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+$ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+// MVP: 전역 레이아웃 — 중앙 정렬, 다크 배경
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "JetBrains Mono", "SF Mono", monospace;
+  font-weight: 400;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+// MVP: 로그인 래퍼 — 고정 풀스크린 중앙
+.cyber-login {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-lg;
+  overflow: auto;
+}
+
+.cyber-login__wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+// MVP: 사이버 미니멀 헤더 — 미니멀 타이포
+.cyber-header {
+  padding: $space 0;
+  text-align: center;
+  border-bottom: 1px solid $border;
+}
+
+.cyber-header__title {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 600;
+  color: $text;
+  letter-spacing: 0.02em;
+}
+.cyber-header__step {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: $accent;
+  font-weight: 500;
+}
+
+// MVP: 카드 — 단일 포커스 입력 컨테이너
+.cyber-card {
+  padding: $space-lg;
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $radius;
+  transition: box-shadow $ease;
+}
+.cyber-card.is-loading {
+  opacity: 0.92;
+}
+
+.cyber-card__form {
+  display: flex;
+  flex-direction: column;
+  gap: $space;
+}
+
+// MVP: 단일 포커스 필드 — 이메일 항상 노출, 비밀번호는 전환 시 노출
+.cyber-field {
+  padding: 0.75rem 1rem;
+  border: 1px solid $border;
+  border-radius: $radius;
+  background: rgba(22, 27, 34, 0.6);
+  transition: border-color $ease, box-shadow $ease, opacity $ease, transform $ease;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.cyber-field--password {
+  opacity: 0.4;
+  transform: translateY(-4px);
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin: 0;
+  overflow: hidden;
+  border-width: 0;
+  opacity: 0;
+}
+.cyber-field--password.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 120px;
+  padding: 0.75rem 1rem;
+  margin: 0;
+  border-width: 1px;
+}
+.cyber-field:focus-within {
+  border-color: $accent;
+  box-shadow: 0 0 0 3px $accent-soft;
+  outline-color: $accent;
+}
+.cyber-field.has-focus {
+  border-color: $accent;
+  box-shadow: 0 0 0 3px $accent-soft;
+  outline-color: $accent;
+}
+.cyber-field.has-value:not(.has-focus) {
+  border-color: rgba($accent, 0.5);
+}
+
+.cyber-field__label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: $muted;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color $ease;
+}
+.cyber-field.has-focus .cyber-field__label,
+.cyber-field:focus-within .cyber-field__label {
+  color: $accent;
+}
+
+.cyber-field__input {
+  width: 100%;
+  padding: 0.25rem 0;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.cyber-field__input::placeholder { color: rgba($muted, 0.6); }
+.cyber-field__input:focus { outline: none; }
+
+.cyber-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.cyber-field__row .cyber-field__input { flex: 1; }
+
+.cyber-field__toggle {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-family: inherit;
+  color: $muted;
+  background: rgba(48, 54, 61, 0.5);
+  border: 1px solid $border;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color $ease, border-color $ease;
+}
+.cyber-field__toggle:hover { color: $accent; border-color: $accent; }
+.cyber-field__toggle:focus-visible { outline: 2px solid $accent; outline-offset: 2px; }
+
+// MVP: 제출 버튼 — 사이버 악센트
+.cyber-btn {
+  margin-top: 0.25rem;
+  padding: 0.85rem 1.2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: $bg;
+  background: $accent;
+  border: none;
+  border-radius: $radius;
+  cursor: pointer;
+  transition: background $ease, transform $ease;
+}
+.cyber-btn:hover:not(:disabled) { background: lighten($accent, 8%); transform: translateY(-1px); }
+.cyber-btn:focus-visible { outline: 2px solid $accent; outline-offset: 2px; }
+.cyber-btn:disabled { cursor: not-allowed; opacity: 0.7; }
+.cyber-btn.is-loading { pointer-events: none; opacity: 0.85; }
+
+@media (max-width: $bp) {
+  .cyber-login { padding: $space; }
+  .cyber-card { padding: $space; }
+}
