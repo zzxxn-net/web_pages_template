@@ -1,0 +1,136 @@
+/* Design 78: Cyber Minimal · Single Focus Input Flow · GSAP Smooth Transition */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "JetBrains Mono", "SF Mono", "Consolas", monospace;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #e4e4e7;
+  background: #0d0d0f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.cyber-login {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  overflow: auto;
+}
+
+.cyber-login__wrap { width: 100%; max-width: 380px; }
+
+.cyber-card {
+  padding: 1.25rem;
+  background: #161618;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.02);
+}
+
+.cyber-card__title {
+  margin: 0 0 0.25rem;
+  font-size: clamp(1.25rem, 2.8vw, 1.4375rem);
+  font-weight: 600;
+  color: #e4e4e7;
+  letter-spacing: -0.02em;
+}
+.cyber-card__desc {
+  margin: 0 0 1rem;
+  font-size: 0.8125rem;
+  color: #71717a;
+}
+.cyber-card__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cyber-field {
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cyber-field.has-focus {
+  border-color: #22d3ee;
+  box-shadow: 0 1px 0 0 #22d3ee;
+}
+.cyber-field.has-focus .cyber-field__label { color: #22d3ee; }
+.cyber-field.has-value:not(.has-focus) { border-color: rgba(34, 211, 238, 0.35); }
+.cyber-field.has-value:not(.has-focus) .cyber-field__label { color: #e4e4e7; }
+
+.cyber-field__label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #71717a;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cyber-field__input {
+  width: 100%;
+  padding: 0.2rem 0;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  color: #e4e4e7;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.cyber-field__input::placeholder { color: rgba(113, 113, 122, 0.7); }
+
+.cyber-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.cyber-field__row .cyber-field__input { flex: 1; }
+
+.cyber-field__toggle {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #71717a;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cyber-field__toggle:hover { color: #22d3ee; border-color: rgba(34, 211, 238, 0.5); }
+
+.cyber-btn {
+  margin-top: 0.5rem;
+  padding: 0.8rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: inherit;
+  color: #0d0d0f;
+  background: #22d3ee;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cyber-btn:hover:not(:disabled) { background: #67e8f9; }
+.cyber-btn:disabled { cursor: not-allowed; opacity: 0.6; }
+.cyber-btn.is-loading { pointer-events: none; }
+
+@media (max-width: 480px) {
+  .cyber-login { padding: 1rem; }
+  .cyber-card { padding: 1rem; }
+}
