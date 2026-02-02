@@ -22,6 +22,7 @@
   position: relative;
 }
 
+/* MVP: 고정 배경 - 풀스크린 그라데이션, 포인터 이벤트 없음 */
 .s131-bg {
   position: fixed;
   inset: 0;
