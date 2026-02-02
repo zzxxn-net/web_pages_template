@@ -1,0 +1,198 @@
+/* Login Page — Design 7: Experimental Interface · Card · Input-reactive animation */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "JetBrains Mono", "SF Mono", "Consolas", monospace;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #e0e0e0;
+  background: #0c0c0c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.login-exp {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+}
+
+.login-exp__card {
+  width: 100%;
+  background: #111111;
+  border: 1px solid #33ff88;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 0);
+  padding: 2rem;
+}
+
+.login-exp__card-inner {
+  padding: 1rem 0;
+}
+
+.login-exp__head {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-exp__title {
+  margin: 0 0 0.25rem;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #33ff88;
+}
+
+.login-exp__desc {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #888;
+  letter-spacing: 0.1em;
+}
+
+.login-exp__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.exp-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.exp-field.is-active .exp-field__label {
+  transform: translateY(-1.5rem);
+  color: #33ff88;
+  opacity: 1;
+}
+
+.exp-field.is-active .exp-field__input {
+  border-color: #33ff88;
+  box-shadow: 0 0 0 1px #33ff88, 0 0 12px rgba(51, 255, 136, 0.15);
+}
+
+.exp-field__label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: #888;
+  transform: translateY(0);
+  opacity: 0.9;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.exp-field__input {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  color: #e0e0e0;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  transition: border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.exp-field__input::placeholder {
+  color: #888;
+  opacity: 0.6;
+}
+
+.exp-field__input:focus {
+  outline: none;
+}
+
+.exp-field__input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.exp-field__wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.exp-field__wrap .exp-field__input {
+  padding-inline-end: 4rem;
+}
+
+.exp-field__toggle {
+  position: absolute;
+  right: 1rem;
+  font-size: 0.6875rem;
+  font-family: inherit;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #888;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.exp-field__toggle:hover {
+  color: #33ff88;
+}
+
+.exp-btn {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 1rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  font-family: inherit;
+  letter-spacing: 0.15em;
+  color: #0c0c0c;
+  background: #33ff88;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.15s ease, box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.exp-btn:hover:not(:disabled) {
+  background: #4dff9e;
+  transform: scale(1.01);
+  box-shadow: 0 0 20px rgba(51, 255, 136, 0.15);
+}
+
+.exp-btn:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.exp-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+@media (max-width: 480px) {
+  .login-exp__card {
+    padding: 1.5rem;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 0);
+  }
+}
