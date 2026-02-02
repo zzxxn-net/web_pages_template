@@ -1,0 +1,54 @@
+<!-- mvp -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — 실험적 · 단일 포커스 · 상태 강조</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="shop-page-38" x-data="shopPage38()">
+    <div class="shop-page-38__wrap">
+      <h1 class="shop-page-38__title">SHOP</h1>
+      <p class="shop-page-38__lead">단일 포커스 · 상태 변화 강조</p>
+      <div class="shop-page-38__focus">
+        <div class="shop-page-38__main" id="main-38">
+          <template x-for="id in [focusedId]" :key="id">
+            <article class="card-38 card-38--main" :data-product="id">
+              <img class="card-38__image" :src="'https://placehold.co/280x280/0f0f0f/22c55e?text=' + id" :alt="'Product ' + id" width="280" height="280">
+              <div class="card-38__body">
+                <h2 class="card-38__name" x-text="'Product ' + id">Product</h2>
+                <p class="card-38__price" x-text="prices[id]">₩0</p>
+                <button type="button" class="btn-38" @click="addToCart(id)">장바구니</button>
+              </div>
+            </article>
+          </template>
+        </div>
+        <div class="shop-page-38__list" role="list">
+          <button type="button" class="item-38" role="listitem" :class="{ 'item-38--active': focusedId === 1 }" @click="setFocus(1)" data-product="1">
+            <img class="item-38__thumb" src="https://placehold.co/64x64/0f0f0f/22c55e?text=1" alt="1" width="64" height="64">
+            <span class="item-38__name">Product 1</span>
+          </button>
+          <button type="button" class="item-38" role="listitem" :class="{ 'item-38--active': focusedId === 2 }" @click="setFocus(2)" data-product="2">
+            <img class="item-38__thumb" src="https://placehold.co/64x64/0f0f0f/22c55e?text=2" alt="2" width="64" height="64">
+            <span class="item-38__name">Product 2</span>
+          </button>
+          <button type="button" class="item-38" role="listitem" :class="{ 'item-38--active': focusedId === 3 }" @click="setFocus(3)" data-product="3">
+            <img class="item-38__thumb" src="https://placehold.co/64x64/0f0f0f/22c55e?text=3" alt="3" width="64" height="64">
+            <span class="item-38__name">Product 3</span>
+          </button>
+          <button type="button" class="item-38" role="listitem" :class="{ 'item-38--active': focusedId === 4 }" @click="setFocus(4)" data-product="4">
+            <img class="item-38__thumb" src="https://placehold.co/64x64/0f0f0f/22c55e?text=4" alt="4" width="64" height="64">
+            <span class="item-38__name">Product 4</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>
