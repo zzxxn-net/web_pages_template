@@ -1,0 +1,56 @@
+<!-- mvp -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — 사이버 미니멀 · 풀스크린 · 입력 반응</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="shop-page-41" x-data="shopPage41()">
+    <div class="shop-page-41__full">
+      <h1 class="shop-page-41__title">SHOP</h1>
+      <p class="shop-page-41__lead">Cyber minimal · Fullscreen · Input reactive</p>
+      <div class="shop-page-41__grid" id="shop-grid-41">
+        <article class="card-41" data-product="1">
+          <img class="card-41__image" src="https://placehold.co/200x200/f1f5f9/64748b?text=1" alt="Product 1" width="200" height="200">
+          <div class="card-41__body">
+            <h2 class="card-41__name">Product 1</h2>
+            <p class="card-41__price">₩29,000</p>
+            <button type="button" class="btn-41" @click="addToCart(1)">장바구니</button>
+          </div>
+        </article>
+        <article class="card-41" data-product="2">
+          <img class="card-41__image" src="https://placehold.co/200x200/f1f5f9/64748b?text=2" alt="Product 2" width="200" height="200">
+          <div class="card-41__body">
+            <h2 class="card-41__name">Product 2</h2>
+            <p class="card-41__price">₩39,000</p>
+            <button type="button" class="btn-41" @click="addToCart(2)">장바구니</button>
+          </div>
+        </article>
+        <article class="card-41" data-product="3">
+          <img class="card-41__image" src="https://placehold.co/200x200/f1f5f9/64748b?text=3" alt="Product 3" width="200" height="200">
+          <div class="card-41__body">
+            <h2 class="card-41__name">Product 3</h2>
+            <p class="card-41__price">₩49,000</p>
+            <button type="button" class="btn-41" @click="addToCart(3)">장바구니</button>
+          </div>
+        </article>
+        <article class="card-41" data-product="4">
+          <img class="card-41__image" src="https://placehold.co/200x200/f1f5f9/64748b?text=4" alt="Product 4" width="200" height="200">
+          <div class="card-41__body">
+            <h2 class="card-41__name">Product 4</h2>
+            <p class="card-41__price">₩19,000</p>
+            <button type="button" class="btn-41" @click="addToCart(4)">장바구니</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>
