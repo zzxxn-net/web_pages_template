@@ -1,0 +1,248 @@
+// Design 23: Modern Fantasy · Asymmetric · State change emphasis
+$bg: #0f0d12;
+$surface: #1a1625;
+$card: #221e2d;
+$border: rgba(180, 160, 220, 0.18);
+$text: #e6e2ef;
+$muted: #8a8299;
+$accent: #b896f0;
+$gold: #d4a84b;
+$glow: rgba(184, 150, 240, 0.2);
+$focus: rgba(184, 150, 240, 0.35);
+$error: rgba(220, 100, 100, 0.5);
+$radius: 14px;
+$radius-sm: 8px;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$space-2xl: 2.5rem;
+$ease: 0.28s ease;
+$bp: 640px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-fantasy-asym {
+  width: 100%;
+  max-width: 960px;
+  min-height: 100%;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: 35% 1fr;
+  grid-template-rows: 1fr;
+  align-items: stretch;
+  border-radius: $radius;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  @media (max-width: $bp) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    max-height: none;
+  }
+}
+
+.login-fantasy-asym__visual {
+  position: relative;
+  background: $surface;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+}
+.fantasy-visual__bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 30% 50%, rgba(184, 150, 240, 0.08), transparent 55%);
+  pointer-events: none;
+}
+.fantasy-visual__shape {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border: 2px solid rgba(212, 168, 75, 0.25);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.fantasy-visual__brand {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+.fantasy-visual__logo {
+  display: block;
+  font-size: 2.5rem;
+  color: $gold;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 24px rgba(212, 168, 75, 0.3);
+}
+.fantasy-visual__tagline {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: $muted;
+  letter-spacing: 0.12em;
+}
+
+.login-fantasy-asym__form-section {
+  background: $card;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+}
+.fantasy-form-panel {
+  width: 100%;
+  max-width: 360px;
+}
+.fantasy-form-panel__head {
+  margin-bottom: $space-xl;
+}
+.fantasy-form-panel__title {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.35rem, 3vw, 1.6rem);
+  font-weight: 700;
+  color: $text;
+}
+.fantasy-form-panel__desc {
+  margin: 0;
+  font-size: 0.875rem;
+  color: $muted;
+}
+.fantasy-form-panel__form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+.fantasy-row {
+  position: relative;
+  padding: $space $space-lg;
+  border-radius: $radius-sm;
+  border: 1px solid $border;
+  background: rgba(0, 0, 0, 0.2);
+  transition: border-color $ease, box-shadow $ease, background $ease;
+  &.is-filled {
+    border-color: rgba(184, 150, 240, 0.3);
+    box-shadow: 0 0 0 1px rgba(184, 150, 240, 0.1);
+  }
+  &.is-focused {
+    border-color: $accent;
+    box-shadow: 0 0 0 2px $focus;
+    background: rgba(184, 150, 240, 0.05);
+  }
+  &.is-error {
+    border-color: $error;
+    box-shadow: 0 0 0 1px rgba(220, 100, 100, 0.2);
+  }
+}
+.fantasy-row__label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $muted;
+  margin-bottom: 0.35rem;
+}
+.fantasy-row__input {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  color: $text;
+  background: transparent;
+  border: none;
+  padding: 0.4rem 0;
+  outline: none;
+}
+.fantasy-row__input::placeholder {
+  color: $muted;
+  opacity: 0.75;
+}
+.fantasy-row__wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.fantasy-row__wrap .fantasy-row__input { flex: 1; min-width: 0; }
+.fantasy-row__toggle {
+  font: inherit;
+  font-size: 0.8125rem;
+  color: $muted;
+  background: none;
+  border: 1px solid $border;
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  transition: color $ease, border-color $ease;
+}
+.fantasy-row__toggle:hover {
+  color: $accent;
+  border-color: $accent;
+}
+.fantasy-row__state {
+  position: absolute;
+  top: $space;
+  right: $space-lg;
+  font-size: 0.5rem;
+  color: $accent;
+}
+.fantasy-form-btn {
+  margin-top: 0.25rem;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0f0d12;
+  background: linear-gradient(135deg, $accent, #9b7ad4);
+  border: none;
+  border-radius: $radius-sm;
+  padding: $space $space-xl;
+  cursor: pointer;
+  transition: transform $ease, box-shadow $ease, opacity $ease;
+  box-shadow: 0 4px 16px $glow;
+}
+.fantasy-form-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px $glow;
+}
+.fantasy-form-btn:focus-visible {
+  outline: 2px solid $accent;
+  outline-offset: 2px;
+}
+.fantasy-form-btn:disabled { cursor: not-allowed; }
+.fantasy-form-btn.is-loading {
+  opacity: 0.88;
+  pointer-events: none;
+}
+.fantasy-form-panel__foot {
+  margin-top: $space-xl;
+  display: flex;
+  gap: $space-lg;
+  font-size: 0.875rem;
+}
+.fantasy-form-panel__link {
+  color: $muted;
+  text-decoration: none;
+  transition: color $ease;
+}
+.fantasy-form-panel__link:hover { color: $accent; }
+
+@media (max-width: $bp) {
+  .login-fantasy-asym__visual { min-height: 180px; padding: $space-lg; }
+  .login-fantasy-asym__form-section { padding: $space-lg; }
+}
