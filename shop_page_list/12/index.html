@@ -1,0 +1,74 @@
+<!-- mvp -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — 현대 판타지</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="shop-page-12" x-data="shopPage12()">
+    <div class="shop-page-12__container">
+      <h1 class="shop-page-12__title">Shop</h1>
+      <div class="shop-page-12__steps" role="tablist" aria-label="단계">
+        <span class="shop-page-12__step-dot" :class="{ 'shop-page-12__step-dot--active': step >= 1 }" aria-hidden="true"></span>
+        <span class="shop-page-12__step-dot" :class="{ 'shop-page-12__step-dot--active': step >= 2 }" aria-hidden="true"></span>
+      </div>
+      <div class="shop-page-12__content">
+        <template x-if="step === 1">
+          <div class="shop-page-12__step1">
+            <p class="shop-page-12__hint">카테고리를 선택한 뒤 다음으로 진행하세요.</p>
+            <div class="shop-page-12__categories">
+              <template x-for="cat in categories" :key="cat.id">
+                <button type="button" class="shop-page-12__category" :class="{ 'shop-page-12__category--selected': selectedCategory === cat.id }" :aria-pressed="selectedCategory === cat.id" @click="selectCategory(cat.id)" x-text="cat.label"></button>
+              </template>
+            </div>
+            <button type="button" class="btn-12" @click="goNext()">다음: 상품 보기</button>
+          </div>
+        </template>
+        <template x-if="step === 2">
+          <div class="shop-page-12__grid" id="shop-grid-12">
+            <article class="product-card-12" data-product="1" tabindex="0">
+              <img class="product-card-12__image" src="https://placehold.co/200x200/fef3c7/d97706?text=1" alt="Product 1" width="200" height="200">
+              <div class="product-card-12__body">
+                <h2 class="product-card-12__name">Product 1</h2>
+                <p class="product-card-12__price">₩29,000</p>
+                <button type="button" class="btn-12 btn-12--sm" @click="addToCart(1)">장바구니</button>
+              </div>
+            </article>
+            <article class="product-card-12" data-product="2" tabindex="0">
+              <img class="product-card-12__image" src="https://placehold.co/200x200/fef3c7/d97706?text=2" alt="Product 2" width="200" height="200">
+              <div class="product-card-12__body">
+                <h2 class="product-card-12__name">Product 2</h2>
+                <p class="product-card-12__price">₩39,000</p>
+                <button type="button" class="btn-12 btn-12--sm" @click="addToCart(2)">장바구니</button>
+              </div>
+            </article>
+            <article class="product-card-12" data-product="3" tabindex="0">
+              <img class="product-card-12__image" src="https://placehold.co/200x200/fef3c7/d97706?text=3" alt="Product 3" width="200" height="200">
+              <div class="product-card-12__body">
+                <h2 class="product-card-12__name">Product 3</h2>
+                <p class="product-card-12__price">₩49,000</p>
+                <button type="button" class="btn-12 btn-12--sm" @click="addToCart(3)">장바구니</button>
+              </div>
+            </article>
+            <article class="product-card-12" data-product="4" tabindex="0">
+              <img class="product-card-12__image" src="https://placehold.co/200x200/fef3c7/d97706?text=4" alt="Product 4" width="200" height="200">
+              <div class="product-card-12__body">
+                <h2 class="product-card-12__name">Product 4</h2>
+                <p class="product-card-12__price">₩19,000</p>
+                <button type="button" class="btn-12 btn-12--sm" @click="addToCart(4)">장바구니</button>
+              </div>
+            </article>
+          </div>
+        </template>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>
