@@ -27,6 +27,7 @@ function signupForm131(): Record<string, unknown> {
     submitting: false,
     errors: {} as Record<string, string>,
 
+    // MVP: Enter 시 다음 필드로 포커스 이동 → 키보드만으로 입력 흐름 유지
     focusNext(nextId: string): void {
       const el = document.getElementById('s131-' + nextId);
       if (el && typeof (el as HTMLInputElement).focus === 'function') {
@@ -117,6 +118,7 @@ function registerAlpine(): void {
   });
 }
 
+// MVP: 진입 애니메이션 - inner→header→formWrap→fields 순차 등장, stagger로 자연스러운 로딩 UX
 function runGsapAnimations(): void {
   const g = window.gsap;
   if (!g) return;
