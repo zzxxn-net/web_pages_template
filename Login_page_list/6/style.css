@@ -1,0 +1,238 @@
+/* Login Page — Design 6: Modern Fantasy · Single focus input flow · GSAP smooth */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #e8e4f0;
+  background: #0f0e17;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.login-fantasy {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow: auto;
+}
+
+.login-fantasy__bg {
+  position: fixed;
+  inset: 0;
+  background: #0f0e17;
+  pointer-events: none;
+}
+
+.login-fantasy__glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.login-fantasy__glow--1 {
+  width: 320px;
+  height: 320px;
+  background: rgba(139, 92, 246, 0.25);
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.login-fantasy__glow--2 {
+  width: 240px;
+  height: 240px;
+  background: rgba(99, 102, 241, 0.2);
+  bottom: 20%;
+  right: 20%;
+}
+
+.login-fantasy__wrap {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-fantasy__card {
+  width: 100%;
+  background: rgba(26, 24, 38, 0.9);
+  border: 1px solid rgba(167, 139, 250, 0.25);
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  backdrop-filter: blur(12px);
+}
+
+.login-fantasy__title {
+  margin: 0 0 0.5rem;
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 600;
+  color: #e8e4f0;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.login-fantasy__desc {
+  margin: 0 0 2rem;
+  font-size: 0.9375rem;
+  color: #9a94a8;
+  text-align: center;
+}
+
+.login-fantasy__form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.single-focus {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.single-focus.is-active {
+  transform: scale(1.02);
+  opacity: 1;
+}
+
+.single-focus:not(.is-active) {
+  opacity: 0.85;
+}
+
+.single-focus__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #9a94a8;
+  transition: color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.single-focus.is-active .single-focus__label {
+  color: #a78bfa;
+}
+
+.single-focus__input {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #e8e4f0;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(167, 139, 250, 0.25);
+  border-radius: 10px;
+  transition: border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1), padding 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.single-focus__input::placeholder {
+  color: #9a94a8;
+  opacity: 0.7;
+}
+
+.single-focus__input:focus {
+  outline: none;
+  border-color: #a78bfa;
+  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.4);
+}
+
+.single-focus__input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.single-focus.is-active .single-focus__input {
+  padding: 1.5rem 2rem;
+  border-color: rgba(167, 139, 250, 0.4);
+}
+
+.single-focus__wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.single-focus__wrap .single-focus__input {
+  padding-inline-end: 4rem;
+}
+
+.single-focus__toggle {
+  position: absolute;
+  right: 1rem;
+  font-size: 0.8125rem;
+  color: #9a94a8;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.single-focus__toggle:hover {
+  color: #a78bfa;
+}
+
+.login-fantasy__actions {
+  margin-top: 0.5rem;
+}
+
+.btn-fantasy {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #0f0e17;
+  background: #a78bfa;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s ease, box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-fantasy:hover:not(:disabled) {
+  background: #b49cf8;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px -8px rgba(167, 139, 250, 0.5);
+}
+
+.btn-fantasy:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-fantasy:disabled {
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+@media (max-width: 480px) {
+  .login-fantasy__card {
+    padding: 2rem 1.5rem;
+  }
+}
