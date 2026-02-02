@@ -20,6 +20,7 @@
       submitting: false,
       errors: {},
 
+      // MVP: Enter 시 다음 필드 포커스 → 키보드만으로 입력 흐름 유지
       focusNext: function (nextId) {
         var el = document.getElementById('s131-' + nextId);
         if (el && typeof el.focus === 'function') el.focus();
