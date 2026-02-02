@@ -1,0 +1,203 @@
+/* Login Page — Design 11: Modern Fantasy · Full-screen immersive · Scroll-free */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #e6e4ef;
+  background: #0c0b12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.login-fantasy-full {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow: auto;
+}
+
+.login-fantasy-full__bg {
+  position: fixed;
+  inset: 0;
+  background: #0c0b12;
+  pointer-events: none;
+}
+
+.login-fantasy-full__glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.login-fantasy-full__glow--1 {
+  width: 400px;
+  height: 400px;
+  background: rgba(139, 92, 246, 0.3);
+  top: 5%;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.login-fantasy-full__glow--2 {
+  width: 280px;
+  height: 280px;
+  background: rgba(99, 102, 241, 0.25);
+  bottom: 15%;
+  right: 15%;
+}
+
+.login-fantasy-full__center {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  z-index: 1;
+}
+
+.login-fantasy-full__title {
+  margin: 0 0 0.5rem;
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: clamp(1.75rem, 4vw, 2rem);
+  font-weight: 600;
+  color: #a78bfa;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+.login-fantasy-full__desc {
+  margin: 0 0 2rem;
+  font-size: 0.9375rem;
+  color: #9a96a8;
+  text-align: center;
+}
+
+.login-fantasy-full__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.fantasy-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.fantasy-field__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #9a96a8;
+}
+
+.fantasy-field__input {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #e6e4ef;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: 10px;
+  transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fantasy-field__input::placeholder {
+  color: #9a96a8;
+  opacity: 0.7;
+}
+
+.fantasy-field__input:focus {
+  outline: none;
+  border-color: #a78bfa;
+  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.25);
+}
+
+.fantasy-field__input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.fantasy-field__wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.fantasy-field__wrap .fantasy-field__input {
+  padding-inline-end: 4rem;
+}
+
+.fantasy-field__toggle {
+  position: absolute;
+  right: 1rem;
+  font-size: 0.8125rem;
+  color: #9a96a8;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fantasy-field__toggle:hover {
+  color: #a78bfa;
+}
+
+.fantasy-btn {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #0c0b12;
+  background: #a78bfa;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.15s ease;
+}
+
+.fantasy-btn:hover:not(:disabled) {
+  background: #b49cf8;
+  transform: scale(1.01);
+}
+
+.fantasy-btn:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.fantasy-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+@media (max-width: 480px) {
+  .login-fantasy-full {
+    padding: 1.5rem;
+  }
+}
