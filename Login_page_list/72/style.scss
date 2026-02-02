@@ -1,0 +1,149 @@
+// Design 72: Experimental · Single Focus · Input Reactive
+$bg: #0f0e12;
+$card: rgba(22, 20, 28, 0.95);
+$border: rgba(140, 130, 180, 0.2);
+$text: #e4e2ec;
+$muted: #7a7590;
+$accent: #a78bfa;
+$accent-soft: rgba(167, 139, 250, 0.18);
+$radius: 6px;
+$space: 1rem;
+$space-lg: 1.25rem;
+$ease: 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-exp-single {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-lg;
+  overflow: auto;
+}
+
+.login-exp-single__wrap {
+  width: 100%;
+  max-width: 420px;
+}
+
+.exp-single-card {
+  padding: $space-lg;
+  background: $card;
+  border: 1px solid $border;
+  border-radius: $radius;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.exp-single-card__head { margin-bottom: $space-lg; text-align: center; }
+.exp-single-card__title {
+  margin: 0 0 0.25rem;
+  font-size: clamp(1.25rem, 2.8vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: $text;
+}
+.exp-single-card__desc { margin: 0; font-size: 0.75rem; color: $muted; letter-spacing: 0.04em; }
+.exp-single-card__form { display: flex; flex-direction: column; gap: $space; }
+
+// Single focus: active field full, others dimmed; input-reactive: has-focus, has-value
+.exp-single-field {
+  padding: 0.7rem 1rem;
+  border: 1px solid $border;
+  border-radius: 4px;
+  background: rgba(15, 14, 18, 0.6);
+  transition: opacity $ease, border-color $ease, box-shadow $ease, background $ease;
+  &.is-dimmed { opacity: 0.45; }
+  &.is-active { opacity: 1; }
+  &.has-focus {
+    border-color: $accent;
+    box-shadow: 0 0 0 2px $accent-soft;
+    background: rgba(15, 14, 18, 0.85);
+    .exp-single-field__label { color: $accent; font-weight: 600; }
+  }
+  &.has-value:not(.has-focus) { border-color: rgba($accent, 0.4); .exp-single-field__label { color: $text; } }
+}
+
+.exp-single-field__label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: $muted;
+  transition: color $ease, font-weight $ease;
+}
+
+.exp-single-field__input {
+  width: 100%;
+  padding: 0.25rem 0;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+  &::placeholder { color: rgba($muted, 0.6); }
+}
+
+.exp-single-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  .exp-single-field__input { flex: 1; }
+}
+
+.exp-single-field__toggle {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  font-family: inherit;
+  letter-spacing: 0.06em;
+  color: $muted;
+  background: transparent;
+  border: 1px solid $border;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color $ease, border-color $ease;
+  &:hover { color: $accent; border-color: $accent; }
+}
+
+.exp-single-btn {
+  margin-top: 0.5rem;
+  padding: 0.8rem 1.2rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  font-family: inherit;
+  letter-spacing: 0.06em;
+  color: $bg;
+  background: $accent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background $ease, opacity $ease;
+  &:hover:not(:disabled) { background: lighten($accent, 8%); }
+  &:disabled { cursor: not-allowed; opacity: 0.6; }
+  &.is-loading { pointer-events: none; }
+}
+
+@media (max-width: $bp) {
+  .login-exp-single { padding: $space; }
+  .exp-single-card { padding: $space; }
+}
