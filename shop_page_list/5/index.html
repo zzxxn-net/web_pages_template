@@ -1,0 +1,37 @@
+<!-- mvp -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — 네오 브루탈리즘</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="shop-page-5" x-data="shopPage5()">
+    <div class="shop-page-5__container">
+      <h1 class="shop-page-5__title">Shop</h1>
+      <div class="shop-page-5__tabs" role="tablist">
+        <button type="button" class="shop-page-5__tab" :class="{ 'shop-page-5__tab--active': tabIndex === 0 }" @click="setTab(0)" role="tab" :aria-selected="tabIndex === 0">A</button>
+        <button type="button" class="shop-page-5__tab" :class="{ 'shop-page-5__tab--active': tabIndex === 1 }" @click="setTab(1)" role="tab" :aria-selected="tabIndex === 1">B</button>
+      </div>
+      <div class="shop-page-5__grid" id="shop-grid-5">
+        <template x-for="p in products" :key="p.id">
+          <article class="product-card-5" :data-product-id="p.id">
+            <img class="product-card-5__image" :src="p.img" :alt="p.name" width="180" height="180">
+            <div class="product-card-5__body">
+              <h2 class="product-card-5__name" x-text="p.name"></h2>
+              <p class="product-card-5__price" x-text="p.price"></p>
+              <button type="button" class="btn-5" @click="addToCart(p.id)">장바구니</button>
+            </div>
+          </article>
+        </template>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>
