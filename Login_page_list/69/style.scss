@@ -1,0 +1,179 @@
+// Design 69: Neo Brutalism · Progressive Form · Input Reactive
+$bg: #f5f3ef;
+$card: #fff;
+$border: #1a1a1a;
+$text: #1a1a1a;
+$muted: #555;
+$accent: #1a1a1a;
+$radius: 0;
+$space: 1rem;
+$space-lg: 1.25rem;
+$space-xl: 1.75rem;
+$ease: 0.2s ease;
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: system-ui, "Noto Sans KR", sans-serif;
+  font-weight: 600;
+  line-height: 1.4;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-brutal-prog {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+  overflow: auto;
+}
+
+.login-brutal-prog__wrap {
+  width: 100%;
+  max-width: 400px;
+  padding: $space-xl;
+  background: $card;
+  border: 3px solid $border;
+  box-shadow: 6px 6px 0 $border;
+}
+
+.brutal-prog-steps {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: $space-lg;
+}
+.brutal-prog-step {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: $muted;
+  border: 2px solid $border;
+  background: $card;
+  transition: color $ease, background $ease;
+  &.is-current { color: $card; background: $border; }
+  &.is-done { color: $card; background: $border; }
+}
+.brutal-prog-bar {
+  flex: 1;
+  max-width: 40px;
+  height: 3px;
+  background: $muted;
+  transition: background $ease;
+  &.is-done { background: $border; }
+}
+
+.brutal-prog__head { margin-bottom: $space-lg; text-align: center; }
+.brutal-prog__title { margin: 0 0 0.25rem; font-size: clamp(1.35rem, 3vw, 1.6rem); font-weight: 800; letter-spacing: 0.02em; color: $text; }
+.brutal-prog__desc { margin: 0; font-size: 0.8125rem; font-weight: 600; color: $muted; }
+.brutal-prog__form { display: flex; flex-direction: column; gap: $space-lg; }
+
+.brutal-prog-panel {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+  &.is-hidden { display: none; }
+}
+
+.brutal-prog-field {
+  padding: 0.75rem 1rem;
+  border: 2px solid $border;
+  background: $card;
+  transition: border-color $ease, box-shadow $ease;
+  &.has-focus {
+    border-color: $border;
+    box-shadow: 0 0 0 2px $bg, 0 0 0 4px $border;
+    .brutal-prog-field__label { color: $text; font-weight: 800; }
+  }
+  &.has-value:not(.has-focus) { border-color: $muted; .brutal-prog-field__label { color: $text; } }
+}
+
+.brutal-prog-field__label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: $muted;
+  transition: color $ease, font-weight $ease;
+}
+
+.brutal-prog-field__input {
+  width: 100%;
+  padding: 0.25rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+  &::placeholder { color: rgba($muted, 0.8); }
+}
+
+.brutal-prog-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  .brutal-prog-field__input { flex: 1; }
+}
+
+.brutal-prog-field__toggle {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: $muted;
+  background: $card;
+  border: 2px solid $border;
+  cursor: pointer;
+  transition: color $ease, background $ease;
+  &:hover { color: $text; background: $bg; }
+}
+
+.brutal-prog-btn {
+  padding: 0.8rem 1.3rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  border: 2px solid $border;
+  cursor: pointer;
+  transition: background $ease, color $ease, transform $ease;
+}
+.brutal-prog-btn--next {
+  color: $card;
+  background: $border;
+  &:hover:not(:disabled) { background: $text; }
+  &:disabled { opacity: 0.5; cursor: not-allowed; background: $muted; border-color: $muted; }
+}
+.brutal-prog-btn--back {
+  color: $text;
+  background: $card;
+  &:hover { background: $bg; }
+}
+.brutal-prog-btn--submit {
+  color: $card;
+  background: $border;
+  &:hover:not(:disabled) { background: $text; }
+  &:disabled { cursor: not-allowed; opacity: 0.7; }
+  &.is-loading { pointer-events: none; }
+}
+
+.brutal-prog-actions { display: flex; gap: $space; margin-top: 0.2rem; }
+
+@media (max-width: $bp) {
+  .login-brutal-prog { padding: $space; }
+  .login-brutal-prog__wrap { padding: $space-lg; }
+}
