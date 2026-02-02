@@ -1,0 +1,26 @@
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body { margin: 0; min-height: 100vh; min-height: 100dvh; font-family: "Inter", "Noto Sans KR", Georgia, serif; font-weight: 500; line-height: 1.5; color: #f0ebe3; background: #1a1625; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+.login-fantasy-micro { width: 100%; min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding: 2rem; }
+.login-fantasy-micro__box { width: 100%; max-width: 380px; background: #252030; border: 1px solid rgba(212, 175, 55, 0.22); border-radius: 14px; padding: 2rem; box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(212, 175, 55, 0.06); }
+.login-fantasy-micro__head { margin-bottom: 2rem; text-align: center; }
+.login-fantasy-micro__title { margin: 0 0 0.4rem; font-size: clamp(1.35rem, 3.5vw, 1.5rem); font-weight: 700; letter-spacing: -0.02em; color: #f0ebe3; text-shadow: 0 0 24px rgba(212, 175, 55, 0.2); }
+.login-fantasy-micro__desc { margin: 0; font-size: 0.875rem; color: #9a8f7e; }
+.login-fantasy-micro__form { display: flex; flex-direction: column; gap: 1.5rem; }
+.fantasy-micro-field { padding: 1rem 1.5rem; border: 1px solid rgba(212, 175, 55, 0.22); border-radius: 10px; background: rgba(0, 0, 0, 0.2); transition: border-color 0.28s, box-shadow 0.28s, transform 0.28s; }
+.fantasy-micro-field.is-focused { border-color: rgba(212, 175, 55, 0.5); box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.15), 0 0 20px rgba(212, 175, 55, 0.2); }
+.fantasy-micro-field__label { display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; color: #9a8f7e; margin-bottom: 0.35rem; }
+.fantasy-micro-field__input { width: 100%; font: inherit; font-size: 1rem; color: #f0ebe3; background: transparent; border: none; padding: 0.35rem 0; outline: none; }
+.fantasy-micro-field__input::placeholder { color: #9a8f7e; opacity: 0.8; }
+.fantasy-micro-field__row { display: flex; align-items: center; gap: 1rem; }
+.fantasy-micro-field__row .fantasy-micro-field__input { flex: 1; min-width: 0; }
+.fantasy-micro-field__toggle { font: inherit; font-size: 0.8125rem; font-weight: 600; color: #9a8f7e; background: transparent; border: 1px solid rgba(212, 175, 55, 0.22); border-radius: 8px; padding: 0.35rem 0.65rem; cursor: pointer; flex-shrink: 0; transition: color 0.28s, border-color 0.28s, transform 0.28s, box-shadow 0.28s; }
+.fantasy-micro-field__toggle:hover { color: #d4af37; border-color: rgba(212, 175, 55, 0.5); transform: scale(1.03); box-shadow: 0 0 12px rgba(212, 175, 55, 0.2); }
+.fantasy-micro-field__toggle:focus-visible { outline: 2px solid #d4af37; outline-offset: 2px; }
+.fantasy-micro-btn { margin-top: 0.5rem; font: inherit; font-size: 1rem; font-weight: 600; color: #1a1625; background: #d4af37; border: none; border-radius: 10px; padding: 1.5rem 2rem; cursor: pointer; transition: transform 0.28s, box-shadow 0.28s, opacity 0.28s; box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2); }
+.fantasy-micro-btn:hover:not(:disabled) { transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 28px rgba(212, 175, 55, 0.2), 0 0 24px rgba(212, 175, 55, 0.25); }
+.fantasy-micro-btn:focus-visible { outline: 2px solid #d4af37; outline-offset: 2px; }
+.fantasy-micro-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+.fantasy-micro-btn.is-loading { pointer-events: none; }
+@media (max-width: 480px) { .login-fantasy-micro { padding: 1rem; } .login-fantasy-micro__box { padding: 1.5rem; } }
+[x-cloak] { display: none !important; }
