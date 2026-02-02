@@ -1,0 +1,211 @@
+/* Login Page — Design 5: Emotional Tech · Micro-interaction · Scroll-free fixed */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #2d2a3a;
+  background: #f8f6fc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  overflow: auto;
+}
+
+.login-emotional {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow: auto;
+}
+
+.login-emotional__bg {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(160deg, #f0ecf9 0%, #e8f4fc 50%, #f5f0fa 100%);
+  pointer-events: none;
+}
+
+.login-emotional__card {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  box-shadow: 0 20px 50px -15px rgba(139, 124, 240, 0.12);
+  backdrop-filter: blur(12px);
+}
+
+.login-emotional__head {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-emotional__title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 600;
+  color: #2d2a3a;
+  letter-spacing: -0.02em;
+}
+
+.login-emotional__desc {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: #6b6578;
+}
+
+.login-emotional__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.micro-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.micro-field.is-focused {
+  transform: scale(1.01);
+}
+
+.micro-field__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b6578;
+  transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.micro-field.is-focused .micro-field__label {
+  color: #8b7cf0;
+}
+
+.micro-field__input {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #2d2a3a;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(139, 124, 240, 0.25);
+  border-radius: 12px;
+  transition: border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.15s ease;
+}
+
+.micro-field__input::placeholder {
+  color: #6b6578;
+  opacity: 0.7;
+}
+
+.micro-field__input:focus {
+  outline: none;
+  border-color: #8b7cf0;
+  box-shadow: 0 0 0 3px rgba(139, 124, 240, 0.35);
+}
+
+.micro-field__input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.micro-field__wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.micro-field__wrap .micro-field__input {
+  padding-inline-end: 4rem;
+}
+
+.micro-field__toggle {
+  position: absolute;
+  right: 1rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #6b6578;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1), background 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.15s ease;
+}
+
+.micro-field__toggle:hover {
+  color: #8b7cf0;
+  background: rgba(139, 124, 240, 0.08);
+}
+
+.micro-field__toggle:active {
+  transform: scale(0.97);
+}
+
+.micro-field__icon {
+  display: inline-block;
+}
+
+.login-emotional__actions {
+  margin-top: 0.5rem;
+}
+
+.micro-btn {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #fff;
+  background: #8b7cf0;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s ease, box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.micro-btn:hover:not(:disabled) {
+  background: #7c6cf0;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px -6px rgba(139, 124, 240, 0.4);
+}
+
+.micro-btn:active:not(:disabled) {
+  transform: translateY(0) scale(0.99);
+}
+
+.micro-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+@media (max-width: 480px) {
+  .login-emotional__card {
+    padding: 2rem 1.5rem;
+  }
+}
