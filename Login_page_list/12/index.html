@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="로그인 — 감성 테크 · 비대칭 레이아웃 시안">
+  <title>Login — Emotional Asymmetric</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/login.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+  <main class="login-emotional-asym" role="main" aria-label="로그인">
+    <aside class="login-emotional-asym__visual" aria-hidden="true">
+      <div class="login-emotional-asym__gradient"></div>
+      <p class="login-emotional-asym__tagline">Welcome back</p>
+    </aside>
+    <section class="login-emotional-asym__form-section">
+      <div class="login-emotional-asym__panel" x-data="emotionalAsymLogin()">
+        <h1 class="login-emotional-asym__title">로그인</h1>
+        <p class="login-emotional-asym__desc">다시 만나요</p>
+
+        <form class="login-emotional-asym__form" action="#" method="post" autocomplete="on" @submit.prevent="handleSubmit" hx-post="#" hx-swap="none" hx-trigger="submit">
+          <div class="emotion-field">
+            <label for="email" class="emotion-field__label">이메일</label>
+            <input id="email" type="email" name="email" class="emotion-field__input" placeholder="you@example.com" autocomplete="email" required x-model="email">
+          </div>
+          <div class="emotion-field">
+            <label for="password" class="emotion-field__label">비밀번호</label>
+            <div class="emotion-field__wrap">
+              <input id="password" :type="showPassword ? 'text' : 'password'" name="password" class="emotion-field__input" placeholder="••••••••" autocomplete="current-password" required x-model="password">
+              <button type="button" class="emotion-field__toggle" aria-label="비밀번호 표시" @click="showPassword = !showPassword">보기</button>
+            </div>
+          </div>
+          <button type="submit" class="emotion-btn" :disabled="loading">
+            <span x-show="!loading">로그인</span>
+            <span x-show="loading" x-cloak>잠시만요…</span>
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
