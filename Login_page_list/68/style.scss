@@ -1,0 +1,151 @@
+// Design 68: Dark Archive · Micro Interaction · Input Reactive
+$bg: #0a0908;
+$surface: rgba(18, 16, 14, 0.96);
+$border: rgba(160, 145, 120, 0.2);
+$text: #e2ddd4;
+$muted: #7a7268;
+$accent: #c4a574;
+$accent-soft: rgba(196, 165, 116, 0.2);
+$radius: 8px;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", Georgia, serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-dark-micro {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+  overflow: auto;
+}
+
+.login-dark-micro__bg {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse 90% 70% at 50% 40%, rgba(24, 22, 18, 0.98) 0%, $bg 100%);
+  pointer-events: none;
+}
+
+.login-dark-micro__card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 380px;
+  padding: $space-xl;
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $radius;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.dark-micro__head { margin-bottom: $space-lg; text-align: center; }
+.dark-micro__title {
+  margin: 0 0 0.3rem;
+  font-size: clamp(1.3rem, 3vw, 1.5rem);
+  font-weight: 600;
+  color: $text;
+}
+.dark-micro__desc { margin: 0; font-size: 0.8125rem; color: $muted; }
+.dark-micro__form { display: flex; flex-direction: column; gap: $space-lg; }
+
+// Micro: hover border, focus ring + scale, value state; input-reactive
+.dark-micro-field {
+  padding: 0.7rem $space-lg;
+  border: 1px solid $border;
+  border-radius: 6px;
+  background: rgba(10, 9, 8, 0.5);
+  transition: border-color $ease, box-shadow $ease, background $ease;
+  &:hover { border-color: rgba($accent, 0.3); }
+  &.has-focus {
+    border-color: $accent;
+    box-shadow: 0 0 0 2px $accent-soft;
+    background: rgba(10, 9, 8, 0.7);
+    .dark-micro-field__label { color: $accent; font-weight: 600; }
+  }
+  &.has-value:not(.has-focus) { border-color: rgba($accent, 0.4); .dark-micro-field__label { color: $text; } }
+}
+
+.dark-micro-field__label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: $muted;
+  transition: color $ease, font-weight $ease;
+}
+
+.dark-micro-field__input {
+  width: 100%;
+  padding: 0.3rem 0;
+  font-size: 1rem;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+  &::placeholder { color: rgba($muted, 0.75); }
+}
+
+.dark-micro-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  .dark-micro-field__input { flex: 1; }
+}
+
+.dark-micro-field__toggle {
+  padding: 0.3rem 0.55rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $muted;
+  background: transparent;
+  border: 1px solid $border;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color $ease, border-color $ease, transform $ease;
+  &:hover { color: $accent; border-color: $accent; transform: scale(1.02); }
+  &:active { transform: scale(0.98); }
+}
+
+.dark-micro-btn {
+  margin-top: 0.2rem;
+  padding: 0.85rem 1.4rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: $bg;
+  background: $accent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background $ease, transform $ease, box-shadow $ease;
+  &:hover:not(:disabled) { background: lighten($accent, 6%); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(196, 165, 116, 0.35); }
+  &:active:not(:disabled) { transform: translateY(0) scale(0.99); }
+  &:disabled { cursor: not-allowed; opacity: 0.65; }
+  &.is-loading { pointer-events: none; }
+}
+
+@media (max-width: $bp) {
+  .login-dark-micro { padding: $space; }
+  .login-dark-micro__card { padding: $space-lg; }
+}
