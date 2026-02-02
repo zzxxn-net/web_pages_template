@@ -1,0 +1,79 @@
+<!-- mvp -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — 네오 브루탈리즘 · 단계형</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="shop-page-33" x-data="shopPage33()">
+    <div class="shop-page-33__viewport">
+      <div class="shop-page-33__container">
+        <h1 class="shop-page-33__title">SHOP</h1>
+        <div class="shop-page-33__steps" role="tablist" aria-label="단계">
+          <span class="shop-page-33__step" :class="{ 'shop-page-33__step--active': step >= 1 }" aria-hidden="true">1</span>
+          <span class="shop-page-33__step" :class="{ 'shop-page-33__step--active': step >= 2 }" aria-hidden="true">2</span>
+        </div>
+        <div class="shop-page-33__content">
+          <template x-if="step === 1">
+            <div class="shop-page-33__panel" id="panel-33-1">
+              <p class="shop-page-33__lead">상품을 고르세요.</p>
+              <div class="shop-page-33__grid" id="shop-grid-33">
+                <article class="card-33" data-product="1">
+                  <img class="card-33__image" src="https://placehold.co/120x120/fff/0a0a0a?text=1" alt="Product 1" width="120" height="120">
+                  <div class="card-33__body">
+                    <h2 class="card-33__name">Product 1</h2>
+                    <p class="card-33__price">₩29,000</p>
+                    <button type="button" class="btn-33" @click="addToCart(1); goStep(2)">담기</button>
+                  </div>
+                </article>
+                <article class="card-33" data-product="2">
+                  <img class="card-33__image" src="https://placehold.co/120x120/fff/0a0a0a?text=2" alt="Product 2" width="120" height="120">
+                  <div class="card-33__body">
+                    <h2 class="card-33__name">Product 2</h2>
+                    <p class="card-33__price">₩39,000</p>
+                    <button type="button" class="btn-33" @click="addToCart(2); goStep(2)">담기</button>
+                  </div>
+                </article>
+                <article class="card-33" data-product="3">
+                  <img class="card-33__image" src="https://placehold.co/120x120/fff/0a0a0a?text=3" alt="Product 3" width="120" height="120">
+                  <div class="card-33__body">
+                    <h2 class="card-33__name">Product 3</h2>
+                    <p class="card-33__price">₩49,000</p>
+                    <button type="button" class="btn-33" @click="addToCart(3); goStep(2)">담기</button>
+                  </div>
+                </article>
+                <article class="card-33" data-product="4">
+                  <img class="card-33__image" src="https://placehold.co/120x120/fff/0a0a0a?text=4" alt="Product 4" width="120" height="120">
+                  <div class="card-33__body">
+                    <h2 class="card-33__name">Product 4</h2>
+                    <p class="card-33__price">₩19,000</p>
+                    <button type="button" class="btn-33" @click="addToCart(4); goStep(2)">담기</button>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </template>
+          <template x-if="step === 2">
+            <div class="shop-page-33__panel" id="panel-33-2">
+              <p class="shop-page-33__lead">담은 상품 · <span x-text="cart.length"></span>개</p>
+              <div class="shop-page-33__cart" x-show="cart.length">
+                <template x-for="id in cart" :key="id">
+                  <div class="cart-33__item" x-text="'Product ' + id"></div>
+                </template>
+              </div>
+              <button type="button" class="btn-33 btn-33--back" @click="goStep(1)">다시 고르기</button>
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>
