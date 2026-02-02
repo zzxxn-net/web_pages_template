@@ -1,6 +1,6 @@
 /**
- * 시안 131: 현대 판타지 + 풀스크린 몰입형 + 입력 반응형 애니메이션
- * Alpine.js + GSAP (main.ts 컴파일 결과)
+ * MVP: 시안 131 - Alpine 데이터(signupForm131) + GSAP 진입 애니메이션
+ * UX: 폼 필드 유효성·포커스 이동·제출 처리, 로드 시 inner/header/form/fields 순차 등장
  */
 (function () {
   'use strict';
