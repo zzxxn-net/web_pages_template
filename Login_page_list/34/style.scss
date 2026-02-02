@@ -1,0 +1,138 @@
+// Design 34: Experimental Interface · Micro-interaction centered · Scroll-free fixed flow
+$bg: #0c0b0f;
+$surface: #141218;
+$border: rgba(255, 100, 180, 0.15);
+$text: #f0e6f4;
+$muted: #8a7d94;
+$accent: #ff64b4;
+$line: #ff64b4;
+$radius: 8px;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+  overflow: hidden;
+}
+
+.login-exp-micro {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+  overflow: hidden;
+}
+.login-exp-micro__inner { width: 100%; max-width: 360px; }
+
+.exp-micro-card {
+  width: 100%;
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: $space-xl;
+  transform: rotate(-0.5deg);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+.exp-micro-card__title {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.4rem, 3.2vw, 1.6rem);
+  font-weight: 700;
+  color: $text;
+  letter-spacing: -0.02em;
+}
+.exp-micro-card__desc { margin: 0 0 $space-lg; font-size: 0.8125rem; color: $muted; }
+
+.exp-micro-form { display: flex; flex-direction: column; gap: 0; }
+.exp-micro-field {
+  margin-bottom: $space-lg;
+  position: relative;
+}
+.exp-micro-field__label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: $muted;
+  margin-bottom: 0.35rem;
+}
+.exp-micro-field__input {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  color: $text;
+  background: transparent;
+  border: none;
+  padding: 0.4rem 0;
+  outline: none;
+}
+.exp-micro-field__input::placeholder { color: $muted; opacity: 0.6; }
+.exp-micro-field__line {
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: $line;
+  border-radius: 1px;
+  transition: width $ease;
+}
+.exp-micro-field:focus-within .exp-micro-field__line { width: 100%; }
+.exp-micro-field__row { display: flex; align-items: center; gap: 0.5rem; }
+.exp-micro-field__row .exp-micro-field__input { flex: 1; min-width: 0; }
+.exp-micro-field__eye {
+  font: inherit;
+  font-size: 0.75rem;
+  color: $muted;
+  background: rgba(255, 100, 180, 0.08);
+  border: 1px solid $border;
+  border-radius: 6px;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  transition: color $ease, transform $ease, border-color $ease;
+}
+.exp-micro-field__eye:hover { color: $accent; border-color: rgba(255, 100, 180, 0.35); transform: scale(1.05); }
+.exp-micro-field__eye:focus-visible { outline: 2px solid $accent; outline-offset: 2px; }
+
+.exp-micro-btn {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $bg;
+  background: $accent;
+  border: none;
+  border-radius: $radius;
+  padding: $space $space-xl;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: transform $ease, box-shadow $ease;
+  box-shadow: 0 4px 16px rgba(255, 100, 180, 0.35);
+}
+.exp-micro-btn:hover:not(:disabled) { transform: scale(1.02); box-shadow: 0 6px 20px rgba(255, 100, 180, 0.4); }
+.exp-micro-btn:active:not(:disabled) { transform: scale(0.98); }
+.exp-micro-btn.is-loading { opacity: 0.9; pointer-events: none; }
+.exp-micro-btn:disabled { cursor: not-allowed; }
+
+@media (max-width: $bp) {
+  .login-exp-micro { padding: $space-lg; }
+  .exp-micro-card { padding: $space-lg; }
+}
