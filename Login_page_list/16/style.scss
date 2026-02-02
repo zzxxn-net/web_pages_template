@@ -1,0 +1,55 @@
+// Design 16: Dark Archive · Single-focus · GSAP smooth transition
+$color-bg: #0f0e0c;
+$color-surface: #1a1816;
+$color-border: rgba(180, 170, 155, 0.15);
+$color-text: #e0dcd6;
+$color-muted: #7a756e;
+$color-accent: #a89880;
+$color-active: rgba(168, 152, 128, 0.2);
+$radius: 10px;
+$radius-sm: 8px;
+$space-md: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$space-2xl: 3rem;
+$ease: 0.28s ease;
+$bp: 480px;
+
+*,*::before,*::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; min-height: 100vh; min-height: 100dvh;
+  font-family: "Inter", Georgia, serif; font-weight: 500; line-height: 1.5;
+  color: $color-text; background: $color-bg;
+  display: flex; align-items: center; justify-content: center; padding: $space-md;
+}
+.login-archive-focus {
+  width: 100%; min-height: 100%; display: flex; align-items: center; justify-content: center; padding: $space-xl;
+}
+.login-archive-focus__inner {
+  width: 100%; max-width: 360px; margin: 0 auto;
+  background: $color-surface; border: 1px solid $color-border; border-radius: $radius;
+  padding: $space-2xl $space-xl; box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+}
+.login-archive-focus__head { margin-bottom: $space-xl; }
+.login-archive-focus__title { margin: 0 0 0.25rem; font-size: clamp(1.5rem, 3.5vw, 1.75rem); font-weight: 600; letter-spacing: -0.02em; color: $color-text; }
+.login-archive-focus__desc { margin: 0; font-size: 0.875rem; color: $color-muted; }
+.login-archive-focus__form { display: flex; flex-direction: column; gap: $space-lg; }
+.archive-field {
+  transition: opacity $ease, background $ease, border-color $ease, transform $ease;
+  border-radius: $radius-sm; border: 1px solid $color-border; background: rgba(0,0,0,0.2); padding: $space-md; opacity: 0.85;
+  &.is-active { opacity: 1; background: $color-active; border-color: rgba(168,152,128,0.35); }
+}
+.archive-field__label { display: block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: $color-muted; margin-bottom: 0.35rem; }
+.archive-field__input { width: 100%; font: inherit; font-size: 1rem; color: $color-text; background: transparent; border: none; padding: 0.25rem 0; outline: none; }
+.archive-field__input::placeholder { color: $color-muted; }
+.archive-field__wrap { display: flex; align-items: center; gap: $space-md; }
+.archive-field__wrap .archive-field__input { flex: 1; min-width: 0; }
+.archive-field__toggle { font: inherit; font-size: 0.8125rem; color: $color-muted; background: none; border: 1px solid $color-border; border-radius: 6px; padding: 0.25rem 0.5rem; cursor: pointer; transition: color $ease, border-color $ease; }
+.archive-field__toggle:hover { color: $color-accent; border-color: $color-accent; }
+.archive-field__toggle:focus-visible { outline: 2px solid $color-accent; outline-offset: 2px; }
+.archive-btn { margin-top: $space-md; font: inherit; font-size: 1rem; font-weight: 600; color: $color-bg; background: $color-accent; border: none; border-radius: $radius-sm; padding: $space-md $space-xl; cursor: pointer; transition: opacity $ease, transform $ease; }
+.archive-btn:hover:not(:disabled) { opacity: 0.95; transform: translateY(-1px); }
+.archive-btn:focus-visible { outline: 2px solid $color-accent; outline-offset: 2px; }
+.archive-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+@media (max-width: $bp) { .login-archive-focus { padding: $space-md; } .login-archive-focus__inner { padding: $space-xl $space-lg; } }
