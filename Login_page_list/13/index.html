@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="로그인 — 네오 브루탈리즘 · 풀스크린 몰입형 · 포커스 이동 중심 UX 시안">
+  <title>Login — Neo Brutal Fullscreen Focus</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/login.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+  <main class="login-brutal-full" role="main" aria-label="로그인">
+    <div class="login-brutal-full__inner" x-data="brutalFullLogin()">
+      <header class="login-brutal-full__head">
+        <h1 class="login-brutal-full__title">LOGIN</h1>
+        <p class="login-brutal-full__desc" x-text="focusStep === 0 ? '이메일부터 입력하세요' : focusStep === 1 ? '비밀번호를 입력하세요' : '로그인할 준비가 되었습니다'">이메일부터 입력하세요</p>
+      </header>
+
+      <form class="login-brutal-full__form" action="#" method="post" autocomplete="on" @submit.prevent="handleSubmit" hx-post="#" hx-swap="none" hx-trigger="submit">
+        <div class="brutal-field" :class="{ 'is-focused': focusStep === 1 }">
+          <label for="email" class="brutal-field__label">이메일</label>
+          <input
+            id="email"
+            type="email"
+            name="email"
+            class="brutal-field__input"
+            placeholder="you@example.com"
+            autocomplete="email"
+            required
+            x-model="email"
+            @focus="onFocus(1)"
+            @blur="onBlur(1)"
+            @keydown.enter.prevent="focusPassword()"
+          >
+        </div>
+
+        <div class="brutal-field" :class="{ 'is-focused': focusStep === 2 }">
+          <label for="password" class="brutal-field__label">비밀번호</label>
+          <div class="brutal-field__wrap">
+            <input
+              id="password"
+              :type="showPassword ? 'text' : 'password'"
+              name="password"
+              class="brutal-field__input"
+              placeholder="••••••••"
+              autocomplete="current-password"
+              required
+              x-model="password"
+              @focus="onFocus(2)"
+              @blur="onBlur(2)"
+              @keydown.enter.prevent="submitIfReady()"
+            >
+            <button type="button" class="brutal-field__toggle" aria-label="비밀번호 표시" @click="showPassword = !showPassword">
+              <span x-text="showPassword ? '숨기기' : '보기'">보기</span>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="brutal-btn" :disabled="loading" :class="{ 'is-ready': email.trim() && password.length > 0 }">
+          <span x-show="!loading">로그인</span>
+          <span x-show="loading" x-cloak>확인 중…</span>
+        </button>
+      </form>
+
+      <div class="login-brutal-full__focus-hint" aria-hidden="true">
+        <span class="focus-hint__dot" :class="{ 'is-active': focusStep >= 1 }"></span>
+        <span class="focus-hint__dot" :class="{ 'is-active': focusStep >= 2 }"></span>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
