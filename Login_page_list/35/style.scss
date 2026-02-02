@@ -1,0 +1,162 @@
+// Design 35: Neo Brutalism · Asymmetric layout · Scroll-free fixed flow
+$bg: #f5f5f0;
+$surface: #ffffff;
+$border: #1a1a1a;
+$text: #1a1a1a;
+$muted: #4a4a4a;
+$accent: #1a1a1a;
+$radius: 0;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.2s ease;
+$bp: 640px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", sans-serif;
+  font-weight: 700;
+  line-height: 1.4;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+  overflow: hidden;
+}
+
+.login-brutal-asym {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+  overflow: hidden;
+}
+.login-brutal-asym__inner { width: 100%; max-width: 800px; }
+
+.brutal-asym-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 0;
+  width: 100%;
+  min-height: 320px;
+  border: 3px solid $border;
+  background: $surface;
+  box-shadow: 8px 8px 0 $border;
+  @media (max-width: $bp) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+}
+
+.brutal-asym-brand {
+  padding: $space-xl;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: $bg;
+  border-right: 3px solid $border;
+  @media (max-width: $bp) {
+    border-right: none;
+    border-bottom: 3px solid $border;
+    padding: $space-lg;
+  }
+}
+.brutal-asym-brand__title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: $text;
+}
+.brutal-asym-brand__desc {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: $muted;
+}
+
+.brutal-asym-form-wrap {
+  padding: $space-xl;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media (max-width: $bp) { padding: $space-lg; }
+}
+.brutal-asym-form { width: 100%; max-width: 320px; }
+.brutal-asym-field {
+  margin-bottom: $space-lg;
+  border: 2px solid $border;
+  padding: $space $space-lg;
+  background: $surface;
+  transition: box-shadow $ease;
+}
+.brutal-asym-field:focus-within { box-shadow: 4px 4px 0 $border; }
+.brutal-asym-field__label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: $muted;
+  margin-bottom: 0.35rem;
+}
+.brutal-asym-field__input {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $text;
+  background: transparent;
+  border: none;
+  padding: 0.35rem 0;
+  outline: none;
+}
+.brutal-asym-field__input::placeholder { color: $muted; opacity: 0.7; }
+.brutal-asym-field__row { display: flex; align-items: center; gap: 0.5rem; }
+.brutal-asym-field__row .brutal-asym-field__input { flex: 1; min-width: 0; }
+.brutal-asym-field__toggle {
+  font: inherit;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: $text;
+  background: $bg;
+  border: 2px solid $border;
+  padding: 0.35rem 0.6rem;
+  cursor: pointer;
+  transition: box-shadow $ease, transform $ease;
+}
+.brutal-asym-field__toggle:hover { box-shadow: 3px 3px 0 $border; transform: translate(-1px, -1px); }
+.brutal-asym-field__toggle:focus-visible { outline: 2px solid $border; outline-offset: 2px; }
+
+.brutal-asym-btn {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: $surface;
+  background: $border;
+  border: 3px solid $border;
+  padding: $space $space-xl;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: box-shadow $ease, transform $ease;
+  box-shadow: 5px 5px 0 $border;
+}
+.brutal-asym-btn:hover:not(:disabled) { transform: translate(2px, 2px); box-shadow: 3px 3px 0 $border; }
+.brutal-asym-btn:active:not(:disabled) { transform: translate(4px, 4px); box-shadow: 1px 1px 0 $border; }
+.brutal-asym-btn.is-loading { opacity: 0.8; pointer-events: none; }
+.brutal-asym-btn:disabled { cursor: not-allowed; }
+
+@media (max-width: $bp) {
+  .login-brutal-asym { padding: $space-lg; }
+}
