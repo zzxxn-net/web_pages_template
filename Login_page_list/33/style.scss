@@ -1,0 +1,141 @@
+// Design 33: Cyber Minimal · Single-focus input flow · State change emphasis
+$bg: #0e1116;
+$surface: #161b22;
+$border: rgba(56, 139, 192, 0.2);
+$text: #e6edf3;
+$muted: #7d8590;
+$accent: #58a6ff;
+$glow: rgba(88, 166, 255, 0.2);
+$radius: 10px;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-cyber-single {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+}
+.login-cyber-single__wrap { width: 100%; max-width: 400px; }
+
+.cyber-single-card {
+  width: 100%;
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: $space-xl;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+.cyber-single-card__head { margin-bottom: $space-xl; text-align: center; }
+.cyber-single-card__title {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.35rem, 3vw, 1.5rem);
+  font-weight: 700;
+  color: $text;
+}
+.cyber-single-card__desc { margin: 0; font-size: 0.8125rem; color: $muted; }
+
+.cyber-single-card__form { display: flex; flex-direction: column; gap: 0; }
+.cyber-single-field {
+  padding: $space $space-lg;
+  border: 1px solid $border;
+  border-radius: $radius;
+  background: rgba(22, 27, 34, 0.6);
+  margin-bottom: $space;
+  transition: opacity $ease, transform $ease, border-color $ease, box-shadow $ease;
+}
+.cyber-single-field.is-active {
+  border-color: $accent;
+  box-shadow: 0 0 0 2px $glow;
+  background: rgba(22, 27, 34, 0.9);
+  opacity: 1;
+  transform: scale(1);
+}
+.cyber-single-field.is-dimmed {
+  opacity: 0.5;
+  transform: scale(0.98);
+}
+.cyber-single-field__label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: $muted;
+  margin-bottom: 0.35rem;
+}
+.cyber-single-field.is-active .cyber-single-field__label { color: $accent; }
+.cyber-single-field__input {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  color: $text;
+  background: transparent;
+  border: none;
+  padding: 0.35rem 0;
+  outline: none;
+}
+.cyber-single-field__input::placeholder { color: $muted; opacity: 0.7; }
+.cyber-single-field__wrap { display: flex; align-items: center; gap: 0.5rem; }
+.cyber-single-field__wrap .cyber-single-field__input { flex: 1; min-width: 0; }
+.cyber-single-field__toggle {
+  font: inherit;
+  font-size: 0.75rem;
+  color: $muted;
+  background: rgba(88, 166, 255, 0.08);
+  border: 1px solid $border;
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  transition: color $ease, border-color $ease;
+}
+.cyber-single-field__toggle:hover { color: $accent; border-color: rgba(88, 166, 255, 0.4); }
+.cyber-single-field__toggle:focus-visible { outline: 2px solid $accent; outline-offset: 2px; }
+
+.cyber-single-btn {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $bg;
+  background: $accent;
+  border: none;
+  border-radius: $radius;
+  padding: $space $space-xl;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: opacity $ease, transform $ease, box-shadow $ease;
+  box-shadow: 0 2px 8px rgba(88, 166, 255, 0.25);
+}
+.cyber-single-btn:focus-visible { outline: 2px solid $text; outline-offset: 2px; }
+.cyber-single-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(88, 166, 255, 0.35); }
+.cyber-single-btn.is-loading { opacity: 0.9; pointer-events: none; }
+.cyber-single-btn:disabled { cursor: not-allowed; }
+
+@media (max-width: $bp) {
+  .login-cyber-single { padding: $space-lg; }
+  .cyber-single-card { padding: $space-lg; }
+}
