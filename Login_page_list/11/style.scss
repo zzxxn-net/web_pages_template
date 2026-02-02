@@ -1,0 +1,229 @@
+// =============================================================================
+// Login Page — Design 11: Modern Fantasy · Full-screen immersive · Scroll-free
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Variables (현대 판타지: mystical, soft glow)
+// -----------------------------------------------------------------------------
+$color-bg: #0c0b12;
+$color-text: #e6e4ef;
+$color-text-muted: #9a96a8;
+$color-accent: #a78bfa;
+$color-accent-dim: rgba(167, 139, 250, 0.25);
+$color-border: rgba(167, 139, 250, 0.2);
+$radius: 10px;
+$space-xs: 0.25rem;
+$space-sm: 0.5rem;
+$space-md: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$font-serif: "Georgia", "Times New Roman", serif;
+$font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+$transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$bp-mobile: 480px;
+
+// -----------------------------------------------------------------------------
+// Full-screen immersive + scroll-free (스크롤 없는 고정 플로우)
+// -----------------------------------------------------------------------------
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: $font-sans;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $color-text;
+  background: $color-bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.login-fantasy-full {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+  overflow: auto;
+}
+
+.login-fantasy-full__bg {
+  position: fixed;
+  inset: 0;
+  background: $color-bg;
+  pointer-events: none;
+}
+
+.login-fantasy-full__glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.4;
+  pointer-events: none;
+
+  &--1 {
+    width: 400px;
+    height: 400px;
+    background: rgba(139, 92, 246, 0.3);
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
+  &--2 {
+    width: 280px;
+    height: 280px;
+    background: rgba(99, 102, 241, 0.25);
+    bottom: 15%;
+    right: 15%;
+  }
+}
+
+.login-fantasy-full__center {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  z-index: 1;
+}
+
+.login-fantasy-full__title {
+  margin: 0 0 $space-sm;
+  font-family: $font-serif;
+  font-size: clamp(1.75rem, 4vw, 2rem);
+  font-weight: 600;
+  color: $color-accent;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+.login-fantasy-full__desc {
+  margin: 0 0 $space-xl;
+  font-size: 0.9375rem;
+  color: $color-text-muted;
+  text-align: center;
+}
+
+.login-fantasy-full__form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+
+.fantasy-field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+}
+
+.fantasy-field__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: $color-text-muted;
+}
+
+.fantasy-field__input {
+  width: 100%;
+  padding: $space-md $space-lg;
+  font-size: 1rem;
+  font-family: inherit;
+  color: $color-text;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  transition: border-color $transition, box-shadow $transition;
+
+  &::placeholder {
+    color: $color-text-muted;
+    opacity: 0.7;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent;
+    box-shadow: 0 0 0 3px $color-accent-dim;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.fantasy-field__wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .fantasy-field__input {
+    padding-inline-end: 4rem;
+  }
+}
+
+.fantasy-field__toggle {
+  position: absolute;
+  right: $space-md;
+  font-size: 0.8125rem;
+  color: $color-text-muted;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: $space-sm;
+  transition: color $transition;
+
+  &:hover {
+    color: $color-accent;
+  }
+}
+
+.fantasy-btn {
+  width: 100%;
+  margin-top: $space-sm;
+  padding: $space-md $space-lg;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: $color-bg;
+  background: $color-accent;
+  border: none;
+  border-radius: $radius;
+  cursor: pointer;
+  transition: background $transition, transform 0.15s ease;
+
+  &:hover:not(:disabled) {
+    background: lighten($color-accent, 8%);
+    transform: scale(1.01);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.99);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+@media (max-width: $bp-mobile) {
+  .login-fantasy-full {
+    padding: $space-lg;
+  }
+}
