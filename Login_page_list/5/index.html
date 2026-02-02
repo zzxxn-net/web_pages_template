@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="로그인 — 감성 테크 · 마이크로 인터랙션 중심 시안">
+  <title>Login — Emotional Tech</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/login.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+  <main class="login-emotional" role="main" aria-label="로그인">
+    <div class="login-emotional__bg" aria-hidden="true"></div>
+    <div class="login-emotional__card" x-data="emotionalLogin()">
+      <header class="login-emotional__head">
+        <h1 class="login-emotional__title">로그인</h1>
+        <p class="login-emotional__desc">계정으로 들어가기</p>
+      </header>
+
+      <form class="login-emotional__form" action="#" method="post" autocomplete="on" @submit.prevent="handleSubmit" hx-post="#" hx-swap="none" hx-trigger="submit">
+        <div class="micro-field" data-micro>
+          <label for="email" class="micro-field__label">이메일</label>
+          <input id="email" type="email" name="email" class="micro-field__input" placeholder="you@example.com" autocomplete="email" required x-model="email" @focus="microIn($event)" @blur="microOut($event)">
+        </div>
+        <div class="micro-field" data-micro>
+          <label for="password" class="micro-field__label">비밀번호</label>
+          <div class="micro-field__wrap">
+            <input id="password" :type="showPassword ? 'text' : 'password'" name="password" class="micro-field__input" placeholder="••••••••" autocomplete="current-password" required x-model="password" @focus="microIn($event)" @blur="microOut($event)">
+            <button type="button" class="micro-field__toggle" aria-label="비밀번호 표시" @click="showPassword = !showPassword" @mousedown.prevent>
+              <span class="micro-field__icon" x-show="!showPassword" x-transition>보기</span>
+              <span class="micro-field__icon" x-show="showPassword" x-transition x-cloak>숨기기</span>
+            </button>
+          </div>
+        </div>
+        <div class="login-emotional__actions">
+          <button type="submit" class="micro-btn micro-btn--primary" :disabled="loading">
+            <span x-show="!loading">로그인</span>
+            <span x-show="loading" x-cloak>잠시만요…</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
