@@ -1,0 +1,199 @@
+// mvp
+$bp-mobile: 480px;
+$bp-tablet: 768px;
+$bp-desktop: 1024px;
+$color-bg-start: #fdf2f8;
+$color-bg-end: #fce7f3;
+$color-surface: rgba(255, 255, 255, 0.9);
+$color-border: rgba(244, 114, 182, 0.35);
+$color-text: #831843;
+$color-muted: #9d174d;
+$color-accent: #db2777;
+$radius: 14px;
+$ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+.shop-page-24 {
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(165deg, $color-bg-start 0%, $color-bg-end 100%);
+  color: $color-text;
+}
+
+.shop-page-24__viewport {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem 1rem;
+  box-sizing: border-box;
+}
+
+.shop-page-24__container {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.shop-page-24__title {
+  text-align: center;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  color: $color-text;
+  letter-spacing: 0.02em;
+}
+
+.shop-page-24__steps {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.shop-page-24__step {
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid $color-border;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $color-muted;
+  transition: border-color 0.3s $ease, background 0.3s $ease, color 0.3s $ease;
+}
+
+.shop-page-24__step--active {
+  border-color: $color-accent;
+  background: $color-accent;
+  color: #fff;
+}
+
+.shop-page-24__content {
+  position: relative;
+  width: 100%;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.shop-page-24__panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.shop-page-24__lead {
+  color: $color-muted;
+  font-size: 0.95rem;
+  margin: 0 0 1.25rem;
+}
+
+.shop-page-24__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  justify-items: center;
+  width: 100%;
+}
+
+.card-24 {
+  width: 100%;
+  max-width: 160px;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  transition: box-shadow 0.25s $ease;
+}
+
+.card-24:hover {
+  box-shadow: 0 6px 20px rgba(219, 39, 119, 0.14);
+}
+
+.card-24__image {
+  width: 100%;
+  max-width: 120px;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+}
+
+.card-24__body {
+  text-align: center;
+  width: 100%;
+}
+
+.card-24__name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  color: $color-text;
+}
+
+.card-24__price {
+  font-size: 0.85rem;
+  color: $color-accent;
+  margin: 0 0 0.5rem;
+}
+
+.btn-24 {
+  padding: 0.55rem 1.1rem;
+  border-radius: $radius;
+  border: 1px solid $color-accent;
+  background: transparent;
+  color: $color-accent;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.25s $ease, color 0.25s $ease;
+}
+
+.btn-24:hover {
+  background: $color-accent;
+  color: #fff;
+}
+
+.btn-24--primary {
+  background: $color-accent;
+  color: #fff;
+}
+
+.btn-24--primary:hover {
+  background: darken($color-accent, 6%);
+}
+
+.btn-24--sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+}
+
+@media (min-width: $bp-tablet) {
+  .shop-page-24__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+  .card-24 {
+    max-width: 140px;
+  }
+}
