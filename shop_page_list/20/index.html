@@ -1,0 +1,86 @@
+<!-- mvp -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — 실험적 인터페이스</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="shop-page-20" x-data="shopPage20()">
+    <div class="shop-page-20__container">
+      <div class="shop-page-20__steps" role="tablist" aria-label="쇼핑 단계">
+        <span class="shop-page-20__step" :class="{ 'shop-page-20__step--active': step >= 1 }" aria-hidden="true">1</span>
+        <span class="shop-page-20__step" :class="{ 'shop-page-20__step--active': step >= 2 }" aria-hidden="true">2</span>
+        <span class="shop-page-20__step" :class="{ 'shop-page-20__step--active': step >= 3 }" aria-hidden="true">3</span>
+      </div>
+      <div class="shop-page-20__content">
+        <template x-if="step === 1">
+          <div class="shop-page-20__panel shop-page-20__panel--enter" id="panel-1">
+            <h1 class="shop-page-20__title">Shop</h1>
+            <p class="shop-page-20__lead">실험적 쇼핑 경험을 시작하세요.</p>
+            <button type="button" class="btn-20 btn-20--primary" @click="goStep(2)" id="focus-start">시작하기</button>
+          </div>
+        </template>
+        <template x-if="step === 2">
+          <div class="shop-page-20__panel shop-page-20__panel--products" id="panel-2">
+            <h2 class="shop-page-20__heading">상품</h2>
+            <div class="shop-page-20__grid" id="shop-grid-20">
+              <article class="card-20" data-product="1" tabindex="0">
+                <img class="card-20__image" src="https://placehold.co/200x200/1a1a2e/00ff88?text=1" alt="Product 1" width="200" height="200">
+                <div class="card-20__body">
+                  <h3 class="card-20__name">Product 1</h3>
+                  <p class="card-20__price">₩29,000</p>
+                  <button type="button" class="btn-20 btn-20--sm" @click="addToCart(1)">장바구니</button>
+                </div>
+              </article>
+              <article class="card-20" data-product="2" tabindex="0">
+                <img class="card-20__image" src="https://placehold.co/200x200/1a1a2e/00ff88?text=2" alt="Product 2" width="200" height="200">
+                <div class="card-20__body">
+                  <h3 class="card-20__name">Product 2</h3>
+                  <p class="card-20__price">₩39,000</p>
+                  <button type="button" class="btn-20 btn-20--sm" @click="addToCart(2)">장바구니</button>
+                </div>
+              </article>
+              <article class="card-20" data-product="3" tabindex="0">
+                <img class="card-20__image" src="https://placehold.co/200x200/1a1a2e/00ff88?text=3" alt="Product 3" width="200" height="200">
+                <div class="card-20__body">
+                  <h3 class="card-20__name">Product 3</h3>
+                  <p class="card-20__price">₩49,000</p>
+                  <button type="button" class="btn-20 btn-20--sm" @click="addToCart(3)">장바구니</button>
+                </div>
+              </article>
+              <article class="card-20" data-product="4" tabindex="0">
+                <img class="card-20__image" src="https://placehold.co/200x200/1a1a2e/00ff88?text=4" alt="Product 4" width="200" height="200">
+                <div class="card-20__body">
+                  <h3 class="card-20__name">Product 4</h3>
+                  <p class="card-20__price">₩19,000</p>
+                  <button type="button" class="btn-20 btn-20--sm" @click="addToCart(4)">장바구니</button>
+                </div>
+              </article>
+            </div>
+            <button type="button" class="btn-20" @click="goStep(3)">장바구니 보기</button>
+          </div>
+        </template>
+        <template x-if="step === 3">
+          <div class="shop-page-20__panel shop-page-20__panel--cart" id="panel-3">
+            <h2 class="shop-page-20__heading">장바구니</h2>
+            <div class="shop-page-20__cart-list" x-show="cart.length">
+              <template x-for="id in cart" :key="id">
+                <p class="shop-page-20__cart-item" x-text="'상품 ' + id"></p>
+              </template>
+            </div>
+            <p class="shop-page-20__empty" x-show="!cart.length">담긴 상품이 없습니다.</p>
+            <button type="button" class="btn-20" @click="goStep(2)">쇼핑 계속하기</button>
+          </div>
+        </template>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>
