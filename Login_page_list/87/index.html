@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="로그인, 실험적 인터페이스, 단계 분할형(Progressive Form), 상태 변화 강조">
+  <title>Login - Experimental Progressive Steps</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <script defer src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/login.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+  <!-- MVP: 가로·세로 중앙 정렬 루트, 실험적 인터페이스 배경 -->
+  <main class="exp-step-login" role="main" aria-label="로그인">
+    <div class="exp-step-login__bg" data-gsap-bg aria-hidden="true"></div>
+    <div class="exp-step-login__wrap" x-data="expStepLogin()" data-gsap-wrap>
+      <!-- MVP: 단계 분할형 — 단계 인디케이터(1/2), 상태 변화 강조용 -->
+      <header class="exp-step-header" data-gsap-header aria-label="로그인 단계">
+        <h1 class="exp-step-header__title">로그인</h1>
+        <div class="exp-step-header__indicator" aria-live="polite">
+          <span class="exp-step-header__step" :class="{ 'is-active': step >= 1 }">1</span>
+          <span class="exp-step-header__divider"></span>
+          <span class="exp-step-header__step" :class="{ 'is-active': step >= 2 }">2</span>
+        </div>
+        <p class="exp-step-header__desc" x-text="step === 1 ? '이메일을 입력하세요' : '비밀번호를 입력하세요'">이메일을 입력하세요</p>
+      </header>
+      <!-- MVP: 단계 분할형 — Step 1·2 폼 카드, 상태 변화 강조 -->
+      <div class="exp-step-card" data-gsap-card :class="{ 'is-loading': loading }">
+        <form class="exp-step-card__form" action="#" method="post" autocomplete="on" x-on:submit.prevent="handleSubmit($event)" hx-post="#" hx-swap="none" hx-trigger="submit">
+          <div class="exp-step-field" :class="{ 'has-focus': focusField === 'email', 'has-value': email.length > 0 }" data-gsap-field>
+            <label for="exp87-email" class="exp-step-field__label">이메일</label>
+            <input id="exp87-email" type="email" name="email" class="exp-step-field__input" placeholder="you@example.com" autocomplete="email" required x-model="email" x-on:focus="focusField = 'email'; step = 1" x-on:blur="focusField = ''" x-on:keydown.tab.prevent="goStep2()" tabindex="0">
+          </div>
+          <div class="exp-step-field exp-step-field--pw" :class="{ 'is-visible': step >= 2, 'has-focus': focusField === 'password', 'has-value': password.length > 0 }" data-gsap-field-pw>
+            <label for="exp87-pw" class="exp-step-field__label">비밀번호</label>
+            <div class="exp-step-field__row">
+              <input id="exp87-pw" x-bind:type="showPassword ? 'text' : 'password'" name="password" class="exp-step-field__input" placeholder="••••••••" autocomplete="current-password" required x-model="password" x-on:focus="focusField = 'password'; step = 2" x-on:blur="focusField = ''" tabindex="0">
+              <button type="button" class="exp-step-field__toggle" aria-label="비밀번호 표시" x-on:click="showPassword = !showPassword" tabindex="0"><span x-text="showPassword ? '숨기기' : '보기'">보기</span></button>
+            </div>
+          </div>
+          <button type="submit" class="exp-step-btn" :class="{ 'is-loading': loading }" :disabled="loading" tabindex="0">
+            <span x-show="!loading">로그인</span>
+            <span x-show="loading" x-cloak>확인 중...</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
