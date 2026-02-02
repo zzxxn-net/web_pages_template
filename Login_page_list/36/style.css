@@ -1,0 +1,40 @@
+*,*::before,*::after{box-sizing:border-box}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;min-height:100dvh;font-family:"Inter","Noto Sans KR",sans-serif;font-weight:500;line-height:1.5;color:#f0ebe3;background:#1a1625;display:flex;align-items:center;justify-content:center;padding:1rem}
+.login-fantasy-prog{width:100%;min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:2rem}
+.login-fantasy-prog__box{width:100%;max-width:380px;background:#252030;border:1px solid rgba(212,175,55,.25);border-radius:14px;padding:2rem;box-shadow:0 16px 48px rgba(0,0,0,.4),0 0 0 1px rgba(212,175,55,.08)}
+.fantasy-prog-steps{display:flex;align-items:center;justify-content:center;gap:.6rem;margin-bottom:2rem}
+.fantasy-prog-step{width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-size:.8125rem;font-weight:700;color:#9a8f7e;border:2px solid rgba(212,175,55,.25);border-radius:50%;transition:color .28s,border-color .28s,background .28s,transform .28s}
+.fantasy-prog-step.is-active{color:#d4af37;border-color:#d4af37;background:rgba(212,175,55,.12);transform:scale(1.05)}
+.fantasy-prog-step.is-done{color:#252030;border-color:#d4af37;background:#d4af37}
+.fantasy-prog-line{width:30px;height:2px;background:rgba(212,175,55,.25);border-radius:1px;transition:background .28s}
+.fantasy-prog-line.is-done{background:#d4af37}
+.login-fantasy-prog__head{margin-bottom:2rem;text-align:center}
+.login-fantasy-prog__title{margin:0 0 .4rem;font-size:clamp(1.35rem,3vw,1.5rem);font-weight:700;color:#f0ebe3}
+.login-fantasy-prog__desc{margin:0;font-size:.875rem;color:#9a8f7e}
+.login-fantasy-prog__form{position:relative;min-height:160px}
+.fantasy-prog-panel{transition:opacity .28s}
+.fantasy-prog-panel.is-hidden{position:absolute;left:0;right:0;top:0;opacity:0;pointer-events:none;visibility:hidden}
+.fantasy-prog-field{padding:1rem 1.5rem;border:1px solid rgba(212,175,55,.25);border-radius:12px;background:rgba(26,22,37,.5);margin-bottom:1.5rem;transition:border-color .28s,box-shadow .28s,transform .28s}
+.fantasy-prog-field:focus-within{border-color:#d4af37;box-shadow:0 0 0 2px rgba(212,175,55,.2);transform:scale(1.01)}
+.fantasy-prog-field__label{display:block;font-size:.75rem;font-weight:600;letter-spacing:.04em;color:#9a8f7e;margin-bottom:.4rem}
+.fantasy-prog-field__input{width:100%;font:inherit;font-size:1rem;color:#f0ebe3;background:transparent;border:none;padding:.4rem 0;outline:none}
+.fantasy-prog-field__input::placeholder{color:#9a8f7e;opacity:.7}
+.fantasy-prog-field__wrap{display:flex;align-items:center;gap:.5rem}
+.fantasy-prog-field__wrap .fantasy-prog-field__input{flex:1;min-width:0}
+.fantasy-prog-field__toggle{font:inherit;font-size:.8125rem;color:#9a8f7e;background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.25);border-radius:8px;padding:.25rem .5rem;cursor:pointer;transition:color .28s,border-color .28s,transform .28s}
+.fantasy-prog-field__toggle:hover{color:#d4af37;border-color:rgba(212,175,55,.4);transform:scale(1.03)}
+.fantasy-prog-btn{font:inherit;font-size:1rem;font-weight:600;border-radius:12px;padding:1rem 2rem;cursor:pointer;transition:opacity .28s,transform .28s,background .28s,box-shadow .28s}
+.fantasy-prog-btn--next{width:100%;color:#252030;background:#d4af37;border:none;box-shadow:0 4px 14px rgba(212,175,55,.2)}
+.fantasy-prog-btn--next:disabled{opacity:.5;cursor:not-allowed}
+.fantasy-prog-btn--next:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 20px rgba(212,175,55,.2)}
+.fantasy-prog-btn--back{color:#9a8f7e;background:rgba(26,22,37,.6);border:1px solid rgba(212,175,55,.25)}
+.fantasy-prog-btn--back:hover{color:#f0ebe3;border-color:#d4af37}
+.fantasy-prog-btn--primary{color:#252030;background:#d4af37;border:none;box-shadow:0 4px 14px rgba(212,175,55,.2)}
+.fantasy-prog-btn--primary.is-loading{opacity:.85;pointer-events:none}
+.fantasy-prog-btn--primary:disabled{cursor:not-allowed}
+.fantasy-prog-btn--primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 20px rgba(212,175,55,.2)}
+.fantasy-prog-actions{display:flex;gap:1rem;margin-top:1.5rem}
+.fantasy-prog-actions .fantasy-prog-btn--back{flex:0 0 auto}
+.fantasy-prog-actions .fantasy-prog-btn--primary{flex:1}
+@media (max-width:480px){.login-fantasy-prog{padding:1.5rem}.login-fantasy-prog__box{padding:1.5rem}}
