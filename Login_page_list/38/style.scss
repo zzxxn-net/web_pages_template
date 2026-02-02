@@ -1,0 +1,139 @@
+// Design 38: Sensible Tech · Fullscreen immersive · Input-reactive animation
+$bg-start: #f8f4ef;
+$bg-end: #ebe4d8;
+$text: #3d3629;
+$muted: #7a6e62;
+$accent: #a67c52;
+$glow: rgba(166, 124, 82, 0.18);
+$radius: 12px;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: $bg-start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-sense-full {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+  position: relative;
+}
+.login-sense-full__bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, $bg-start 0%, $bg-end 100%);
+  z-index: 0;
+}
+.login-sense-full__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+}
+
+.login-sense-full__head { margin-bottom: $space-xl; }
+.login-sense-full__title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 700;
+  color: $text;
+}
+.login-sense-full__desc { margin: 0; font-size: 0.875rem; color: $muted; }
+
+.login-sense-full__form { display: flex; flex-direction: column; gap: 0; text-align: left; }
+.sense-full-field {
+  margin-bottom: $space-lg;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+.sense-full-field__label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: $muted;
+  margin-bottom: 0.35rem;
+}
+.sense-full-field__input {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  color: $text;
+  background: transparent;
+  border: none;
+  padding: 0.5rem 0;
+  outline: none;
+}
+.sense-full-field__input::placeholder { color: $muted; opacity: 0.7; }
+.sense-full-field__underline {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: $accent;
+  border-radius: 1px;
+  transition: width $ease;
+}
+.sense-full-field:focus-within .sense-full-field__underline { width: 100%; }
+.sense-full-field__wrap { display: flex; align-items: center; gap: 0.5rem; }
+.sense-full-field__wrap .sense-full-field__input { flex: 1; min-width: 0; }
+.sense-full-field__toggle {
+  font: inherit;
+  font-size: 0.8125rem;
+  color: $muted;
+  background: rgba(166, 124, 82, 0.08);
+  border: 1px solid rgba(166, 124, 82, 0.2);
+  border-radius: 8px;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  transition: color $ease, border-color $ease;
+}
+.sense-full-field__toggle:hover { color: $accent; border-color: rgba(166, 124, 82, 0.4); }
+.sense-full-field__toggle:focus-visible { outline: 2px solid $accent; outline-offset: 2px; }
+
+.sense-full-btn {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: $accent;
+  border: none;
+  border-radius: $radius;
+  padding: $space $space-xl;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: transform $ease, box-shadow $ease;
+  box-shadow: 0 4px 16px $glow;
+}
+.sense-full-btn:focus-visible { outline: 2px solid $text; outline-offset: 2px; }
+.sense-full-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 20px $glow; }
+.sense-full-btn.is-loading { opacity: 0.9; pointer-events: none; }
+.sense-full-btn:disabled { cursor: not-allowed; }
+
+@media (max-width: $bp) {
+  .login-sense-full { padding: $space-lg; }
+}
