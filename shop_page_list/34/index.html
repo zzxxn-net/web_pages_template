@@ -1,0 +1,58 @@
+<!-- mvp -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — 다크 아카이브 · 단일 포커스</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="shop-page-34" x-data="shopPage34()">
+    <div class="shop-page-34__container">
+      <h1 class="shop-page-34__title">Shop</h1>
+      <p class="shop-page-34__lead">아카이브 · 한 가지에 집중</p>
+      <section class="focus-34" aria-live="polite">
+        <div class="focus-34__inner" :data-focus-id="focusId">
+          <template x-for="p in products" :key="p.id">
+            <article
+              class="focus-card-34"
+              :class="{ 'focus-card-34--active': focusId === p.id }"
+              :data-product="p.id"
+              x-show="focusId === p.id"
+              x-cloak
+            >
+              <img class="focus-card-34__image" :src="p.image" :alt="p.name" width="260" height="260">
+              <div class="focus-card-34__body">
+                <h2 class="focus-card-34__name" x-text="p.name"></h2>
+                <p class="focus-card-34__price" x-text="p.price"></p>
+                <button type="button" class="btn-34" @click="addToCart(p.id)">장바구니에 담기</button>
+              </div>
+            </article>
+          </template>
+        </div>
+      </section>
+      <div class="flow-list-34" role="list">
+        <template x-for="p in products" :key="'list-' + p.id">
+          <button
+            type="button"
+            class="flow-item-34"
+            :class="{ 'flow-item-34--active': focusId === p.id }"
+            :data-product="p.id"
+            @click="setFocus(p.id)"
+            role="listitem"
+          >
+            <img class="flow-item-34__thumb" :src="p.image" :alt="p.name" width="56" height="56">
+            <span class="flow-item-34__name" x-text="p.name"></span>
+            <span class="flow-item-34__price" x-text="p.price"></span>
+          </button>
+        </template>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>
