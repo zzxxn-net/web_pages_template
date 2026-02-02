@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="로그인 — 사이버 미니멀 · 풀스크린 몰입형 시안">
+  <title>Login — Cyber Fullscreen</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/login.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+  <main class="login-cyber-full" role="main" aria-label="로그인">
+    <div class="login-cyber-full__center" x-data="cyberFullLogin()">
+      <div class="login-cyber-full__status" aria-live="polite">
+        <span class="status-dot" :class="statusClass"></span>
+        <span class="status-text" x-text="statusText">대기</span>
+      </div>
+      <h1 class="login-cyber-full__title">Sign in</h1>
+
+      <form class="login-cyber-full__form" action="#" method="post" autocomplete="on" @submit.prevent="handleSubmit" hx-post="#" hx-swap="none" hx-trigger="submit">
+        <div class="cyber-field">
+          <label for="email" class="cyber-field__label">Email</label>
+          <input id="email" type="email" name="email" class="cyber-field__input" placeholder="you@example.com" autocomplete="email" required x-model="email" @focus="setStatus('focus')" @blur="setStatus('idle')">
+        </div>
+        <div class="cyber-field">
+          <label for="password" class="cyber-field__label">Password</label>
+          <div class="cyber-field__wrap">
+            <input id="password" :type="showPassword ? 'text' : 'password'" name="password" class="cyber-field__input" placeholder="••••••••" autocomplete="current-password" required x-model="password" @focus="setStatus('focus')" @blur="setStatus('idle')">
+            <button type="button" class="cyber-field__toggle" aria-label="비밀번호 표시" @click="showPassword = !showPassword">보기</button>
+          </div>
+        </div>
+        <button type="submit" class="cyber-btn" :disabled="loading" :class="{ 'is-loading': loading }">
+          <span x-show="!loading">로그인</span>
+          <span x-show="loading" x-cloak>확인 중…</span>
+        </button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
