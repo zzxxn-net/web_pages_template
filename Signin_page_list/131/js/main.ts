@@ -1,6 +1,6 @@
 /**
- * 시안 131: 현대 판타지 + 풀스크린 몰입형 + 입력 반응형 애니메이션
- * Alpine.js + GSAP 연동
+ * MVP: 시안 131 회원가입 로직 - Alpine.js + GSAP
+ * UX: 포커스 이동(Enter), 실시간 유효성 검사, 포커스/유효/에러 상태로 HTML 클래스 토글 → CSS 연출
  */
 declare global {
   interface Window {
