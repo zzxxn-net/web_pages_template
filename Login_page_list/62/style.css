@@ -1,0 +1,27 @@
+*,*::before,*::after{box-sizing:border-box}
+html{font-size:16px}
+body{margin:0;min-height:100vh;font-family:"Inter","Noto Sans KR",sans-serif;font-weight:700;color:#1a1a1a;background:#f0ede8;display:flex;align-items:center;justify-content:center;padding:1rem}
+.login-brutal-single{width:100%;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem}
+.login-brutal-single__wrap{width:100%;max-width:400px}
+.brutal-single-card{padding:2rem;background:#fff;border:3px solid #1a1a1a;border-radius:0;box-shadow:10px 10px 0 #1a1a1a}
+.brutal-single-card__head{margin-bottom:2rem;text-align:center}
+.brutal-single-card__title{margin:0 0 .4rem;font-size:clamp(1.4rem,3.2vw,1.65rem);font-weight:800;color:#1a1a1a}
+.brutal-single-card__desc{margin:0;font-size:.875rem;font-weight:600;color:#5a5a5a}
+.brutal-single-card__form{display:flex;flex-direction:column;gap:1.5rem}
+.brutal-single-field{padding:1rem 1.5rem;border:2px solid #1a1a1a;border-radius:0;background:#fff;transition:opacity .26s,transform .26s,box-shadow .26s}
+.brutal-single-field.is-active{box-shadow:5px 5px 0 #1a1a1a;opacity:1;transform:scale(1)}
+.brutal-single-field.is-active .brutal-single-field__label{color:#1a1a1a;font-weight:800}
+.brutal-single-field.is-dimmed{opacity:.55;transform:scale(.98)}
+.brutal-single-field:not(.is-active):not(.is-dimmed){opacity:.85}
+.brutal-single-field__label{display:block;margin-bottom:.35rem;font-size:.75rem;font-weight:700;color:#5a5a5a}
+.brutal-single-field__input{width:100%;padding:.4rem 0;font-size:1rem;font-weight:600;color:#1a1a1a;background:transparent;border:none;outline:none}
+.brutal-single-field__row{display:flex;align-items:center;gap:.5rem}
+.brutal-single-field__row .brutal-single-field__input{flex:1}
+.brutal-single-field__toggle{padding:.35rem .6rem;font-size:.75rem;font-weight:700;color:#1a1a1a;background:#fff;border:2px solid #1a1a1a;cursor:pointer}
+.brutal-single-field__toggle:hover{box-shadow:3px 3px 0 #1a1a1a}
+.brutal-single-field__toggle:active{transform:translate(1px,1px)}
+.brutal-single-btn{margin-top:.5rem;padding:.9rem 1.5rem;font-size:1rem;font-weight:800;color:#fff;background:#1a1a1a;border:2px solid #1a1a1a;cursor:pointer;transition:box-shadow .26s,transform .26s,opacity .26s}
+.brutal-single-btn:hover:not(:disabled){box-shadow:5px 5px 0 #0a0a0a}
+.brutal-single-btn:active:not(:disabled){transform:translate(2px,2px)}
+.brutal-single-btn:disabled{opacity:.6;cursor:not-allowed}
+.brutal-single-btn.is-loading{pointer-events:none}
