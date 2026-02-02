@@ -53,6 +53,7 @@ $s131-ease: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
 }
 
+// MVP: 내부 컨테이너 - 중앙 정렬·clamp 패딩으로 PC~모바일 일관된 여백
 .s131-inner {
   position: relative;
   z-index: 1;
