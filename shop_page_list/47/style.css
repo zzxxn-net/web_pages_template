@@ -1,0 +1,144 @@
+/* mvp */
+.shop-page-47 {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  background: #16213e;
+  color: #e8e8e8;
+}
+
+.shop-page-47__center {
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.shop-page-47__header {
+  text-align: center;
+}
+
+.shop-page-47__title {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+  letter-spacing: 0.08em;
+  color: #e8e8e8;
+}
+
+.shop-page-47__lead {
+  font-size: 0.75rem;
+  color: #a0a0a0;
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+
+.shop-page-47__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  justify-items: center;
+  width: 100%;
+}
+
+.card-47 {
+  width: 100%;
+  max-width: 190px;
+  background: #1a1a2e;
+  border: 1px solid #0f3460;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-47--tilt-left {
+  transform: rotate(-1.5deg);
+}
+
+.card-47--tilt-right {
+  transform: rotate(1.5deg);
+}
+
+.card-47__image {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+}
+
+.card-47__body {
+  text-align: center;
+  width: 100%;
+}
+
+.card-47__name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  color: #e8e8e8;
+}
+
+.card-47__price {
+  font-size: 0.85rem;
+  color: #a0a0a0;
+  margin: 0 0 0.5rem;
+}
+
+.btn-47 {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #ee6f57;
+  background: transparent;
+  color: #ee6f57;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s cubic-bezier(0.22, 1, 0.36, 1), transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-47:hover {
+  background: #ee6f57;
+  color: #1a1a2e;
+}
+
+.btn-47:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #16213e, 0 0 0 4px #ee6f57;
+}
+
+.shop-page-47__footer {
+  min-height: 1.5rem;
+}
+
+.shop-page-47__cart {
+  font-size: 0.8rem;
+  color: #a0a0a0;
+}
+
+@media (min-width: 768px) {
+  .shop-page-47__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .card-47 {
+    max-width: 200px;
+  }
+
+  .card-47__name {
+    font-size: 0.95rem;
+  }
+}
