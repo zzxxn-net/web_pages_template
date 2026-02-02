@@ -1,0 +1,151 @@
+// mvp
+$bp-mobile: 480px;
+$bp-tablet: 768px;
+$color-bg: linear-gradient(145deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%);
+$color-surface: rgba(255, 255, 255, 0.08);
+$color-border: rgba(199, 210, 254, 0.3);
+$color-text: #e0e7ff;
+$color-muted: #a5b4fc;
+$color-accent: #c4b5fd;
+$color-glow: rgba(196, 181, 253, 0.25);
+$radius: 14px;
+
+.shop-page-6 {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  background: $color-bg;
+  color: $color-text;
+}
+
+.shop-page-6__container {
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.shop-page-6__title {
+  text-align: center;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  color: $color-text;
+  letter-spacing: 0.03em;
+}
+
+/* 단일 포커스: 검색 입력이 첫 포커스 */
+.shop-page-6__search-wrap {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 1.5rem;
+}
+
+.shop-page-6__search {
+  width: 100%;
+  padding: 0.85rem 1.25rem;
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  background: $color-surface;
+  color: $color-text;
+  font-size: 1rem;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+
+  &::placeholder {
+    color: $color-muted;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent;
+    box-shadow: 0 0 0 3px $color-glow;
+  }
+}
+
+/* 상품 그리드: 선택 시 단일 포커스(강조) */
+.shop-page-6__grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+  width: 100%;
+
+  @media (min-width: $bp-tablet) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.product-card-6 {
+  width: 100%;
+  max-width: 200px;
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  background: $color-surface;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+
+  &--focused {
+    border-color: $color-accent;
+    box-shadow: 0 0 24px $color-glow;
+    transform: scale(1.03);
+  }
+
+  &:hover {
+    border-color: $color-muted;
+    box-shadow: 0 0 16px $color-glow;
+  }
+}
+
+.product-card-6__image {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  background: $color-border;
+}
+
+.product-card-6__body {
+  padding: 0.85rem;
+  width: 100%;
+  text-align: center;
+}
+
+.product-card-6__name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+  color: $color-text;
+}
+
+.product-card-6__price {
+  font-size: 1rem;
+  font-weight: 600;
+  color: $color-accent;
+  margin-bottom: 0.6rem;
+}
+
+.btn-6 {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: 1px solid $color-border;
+  background: $color-surface;
+  color: $color-text;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background 0.25s ease, border-color 0.25s ease;
+
+  &:hover {
+    background: rgba(196, 181, 253, 0.2);
+    border-color: $color-accent;
+  }
+}

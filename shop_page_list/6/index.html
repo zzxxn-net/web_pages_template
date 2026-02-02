@@ -1,0 +1,36 @@
+<!-- mvp -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — 현대 판타지</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="shop-page-6" x-data="shopPage6()">
+    <div class="shop-page-6__container">
+      <h1 class="shop-page-6__title">Shop</h1>
+      <div class="shop-page-6__search-wrap">
+        <input type="search" class="shop-page-6__search" placeholder="검색 (단일 포커스)" x-model="searchQuery" aria-label="상품 검색">
+      </div>
+      <div class="shop-page-6__grid" id="shop-grid-6">
+        <template x-for="p in products" :key="p.id">
+          <article class="product-card-6" :class="{ 'product-card-6--focused': focusedId === p.id }" :data-product-id="p.id" @click="setFocus(p.id)">
+            <img class="product-card-6__image" :src="p.img" :alt="p.name" width="200" height="200">
+            <div class="product-card-6__body">
+              <h2 class="product-card-6__name" x-text="p.name"></h2>
+              <p class="product-card-6__price" x-text="p.price"></p>
+              <button type="button" class="btn-6" @click.stop="addToCart(p.id)">장바구니</button>
+            </div>
+          </article>
+        </template>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>
