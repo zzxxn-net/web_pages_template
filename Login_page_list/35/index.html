@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="로그인 — 네오 브루탈리즘 · 비대칭 레이아웃 · 스크롤 없는 고정 플로우 시안">
+  <title>Login — Neo Brutalism Asymmetric Fixed</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/login.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+  <main class="login-brutal-asym" role="main" aria-label="로그인">
+    <div class="login-brutal-asym__inner" x-data="brutalAsymLogin()">
+      <div class="brutal-asym-layout">
+        <aside class="brutal-asym-brand" aria-label="브랜딩">
+          <h1 class="brutal-asym-brand__title">LOG IN</h1>
+          <p class="brutal-asym-brand__desc">Enter your credentials.</p>
+        </aside>
+        <section class="brutal-asym-form-wrap" aria-label="로그인 폼">
+          <form class="brutal-asym-form" action="#" method="post" autocomplete="on" x-on:submit.prevent="handleSubmit($event)" hx-post="#" hx-swap="none" hx-trigger="submit">
+            <div class="brutal-asym-field">
+              <label for="ba-email" class="brutal-asym-field__label">EMAIL</label>
+              <input id="ba-email" type="email" name="email" class="brutal-asym-field__input" placeholder="you@example.com" autocomplete="email" required x-model="email" tabindex="0">
+            </div>
+            <div class="brutal-asym-field">
+              <label for="ba-pw" class="brutal-asym-field__label">PASSWORD</label>
+              <div class="brutal-asym-field__row">
+                <input id="ba-pw" x-bind:type="showPassword ? 'text' : 'password'" name="password" class="brutal-asym-field__input" placeholder="••••••••" autocomplete="current-password" required x-model="password" tabindex="0">
+                <button type="button" class="brutal-asym-field__toggle" aria-label="비밀번호 표시" x-on:click="showPassword = !showPassword" tabindex="0"><span x-text="showPassword ? 'HIDE' : 'SHOW'">SHOW</span></button>
+              </div>
+            </div>
+            <button type="submit" class="brutal-asym-btn" :class="{ 'is-loading': loading }" :disabled="loading" tabindex="0">
+              <span x-show="!loading">LOG IN</span>
+              <span x-show="loading" x-cloak>…</span>
+            </button>
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
