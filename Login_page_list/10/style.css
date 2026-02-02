@@ -1,0 +1,188 @@
+/* Login Page — Design 10: Futuristic Clean · Single focus · Input-reactive */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #0f172a;
+  background: #f0f4f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.login-future-focus {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  padding: 2rem;
+}
+
+.login-future-focus__center {
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-future-focus__title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+  text-align: center;
+}
+
+.login-future-focus__desc {
+  margin: 0 0 2rem;
+  font-size: 0.9375rem;
+  color: #64748b;
+  text-align: center;
+}
+
+.login-future-focus__form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.focus-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.focus-field.is-active {
+  transform: scale(1.02);
+  opacity: 1;
+}
+
+.focus-field:not(.is-active) {
+  opacity: 0.88;
+}
+
+.focus-field__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #64748b;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.focus-field.is-active .focus-field__label {
+  color: #0ea5e9;
+}
+
+.focus-field__input {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #0f172a;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.focus-field__input::placeholder {
+  color: #64748b;
+  opacity: 0.8;
+}
+
+.focus-field__input:focus {
+  outline: none;
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+}
+
+.focus-field__input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.focus-field.is-active .focus-field__input {
+  padding: 1.5rem 2rem;
+  border-color: #0ea5e9;
+}
+
+.focus-field__wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.focus-field__wrap .focus-field__input {
+  padding-inline-end: 4rem;
+}
+
+.focus-field__toggle {
+  position: absolute;
+  right: 1rem;
+  font-size: 0.8125rem;
+  color: #64748b;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.focus-field__toggle:hover {
+  color: #0ea5e9;
+}
+
+.focus-btn {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: inherit;
+  color: #fff;
+  background: #0ea5e9;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.15s ease;
+}
+
+.focus-btn:hover:not(:disabled) {
+  background: #0284c7;
+  transform: scale(1.01);
+}
+
+.focus-btn:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.focus-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+@media (max-width: 480px) {
+  .login-future-focus {
+    padding: 1.5rem;
+  }
+}
