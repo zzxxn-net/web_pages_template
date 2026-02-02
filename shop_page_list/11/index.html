@@ -1,0 +1,42 @@
+<!-- mvp -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — 실험적 풀스크린</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="shop-page-11" x-data="shopPage11()">
+    <div class="shop-page-11__fullscreen">
+      <template x-for="(p, i) in products" :key="p.id">
+        <section class="shop-page-11__slide" :class="{ 'shop-page-11__slide--active': current === i }" :data-index="i" :aria-hidden="current !== i">
+          <div class="shop-page-11__slide-bg"></div>
+          <div class="shop-page-11__slide-content">
+            <img class="shop-page-11__slide-image" :src="p.img" :alt="p.name" width="360" height="360">
+            <div class="shop-page-11__slide-body">
+              <h2 class="shop-page-11__slide-name" x-text="p.name"></h2>
+              <p class="shop-page-11__slide-price" x-text="p.price"></p>
+              <button type="button" class="btn-11" @click="addToCart(p.id)">장바구니</button>
+            </div>
+          </div>
+        </section>
+      </template>
+    </div>
+    <nav class="shop-page-11__nav" aria-label="상품 탐색">
+      <button type="button" class="shop-page-11__nav-btn shop-page-11__nav-btn--prev" @click="prev()" :disabled="current <= 0" aria-label="이전 상품">‹</button>
+      <div class="shop-page-11__nav-dots" role="tablist">
+        <template x-for="(p, i) in products" :key="p.id">
+          <button type="button" class="shop-page-11__nav-dot" :class="{ 'shop-page-11__nav-dot--active': current === i }" :aria-pressed="current === i" :aria-label="'상품 ' + (i+1)" @click="goTo(i)"></button>
+        </template>
+      </div>
+      <button type="button" class="shop-page-11__nav-btn shop-page-11__nav-btn--next" @click="next()" :disabled="current >= products.length - 1" aria-label="다음 상품">›</button>
+    </nav>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>
