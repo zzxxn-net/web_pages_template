@@ -52,6 +52,7 @@
         delete this.errors.passwordConfirm;
       },
 
+      // MVP: 제출 시 전체 유효성 검사 후 에러 있으면 멈춤, 없으면 submitting으로 제출 처리
       handleSubmit: function () {
         this.validateEmail();
         this.validateName();
