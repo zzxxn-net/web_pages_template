@@ -1,0 +1,165 @@
+// Design 47: Future Clean · Asymmetric · Input-reactive
+$bg: #f8fafc;
+$surface: #ffffff;
+$border: #e2e8f0;
+$text: #0f172a;
+$muted: #64748b;
+$accent: #3b82f6;
+$focus: rgba(59, 130, 246, 0.15);
+$radius: 12px;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 640px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-future-asym {
+  width: 100%;
+  max-width: 880px;
+  min-height: 100%;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+}
+.login-future-asym__grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  align-items: stretch;
+  border-radius: $radius;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
+  background: $surface;
+  border: 1px solid $border;
+}
+@media (max-width: $bp) {
+  .login-future-asym__grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+}
+
+.future-asym-brand {
+  padding: $space-xl;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: $bg;
+  border-right: 1px solid $border;
+}
+@media (max-width: $bp) {
+  .future-asym-brand {
+    border-right: none;
+    border-bottom: 1px solid $border;
+    padding: $space-lg;
+  }
+}
+.future-asym-brand__title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.5rem, 3.5vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: $text;
+}
+.future-asym-brand__desc {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: $muted;
+}
+
+.future-asym-form-wrap {
+  padding: $space-xl;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: $bp) { .future-asym-form-wrap { padding: $space-lg; } }
+.future-asym-panel { width: 100%; max-width: 340px; }
+.future-asym-form { display: flex; flex-direction: column; gap: $space-lg; }
+
+.future-asym-field {
+  padding: $space $space-lg;
+  border: 1px solid $border;
+  border-radius: 10px;
+  background: $surface;
+  transition: border-color $ease, box-shadow $ease, transform $ease;
+}
+.future-asym-field:focus-within {
+  border-color: $accent;
+  box-shadow: 0 0 0 3px $focus;
+}
+.future-asym-field__label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: $muted;
+  margin-bottom: 0.4rem;
+}
+.future-asym-field__input {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  color: $text;
+  background: transparent;
+  border: none;
+  padding: 0.35rem 0;
+  outline: none;
+}
+.future-asym-field__input::placeholder { color: $muted; }
+.future-asym-field__row { display: flex; align-items: center; gap: $space; }
+.future-asym-field__row .future-asym-field__input { flex: 1; min-width: 0; }
+.future-asym-field__toggle {
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: $accent;
+  background: none;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  transition: opacity $ease;
+  flex-shrink: 0;
+}
+.future-asym-field__toggle:hover { opacity: 0.85; }
+.future-asym-field__toggle:focus-visible { outline: 2px solid $accent; outline-offset: 2px; }
+
+.future-asym-btn {
+  margin-top: 0.5rem;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $surface;
+  background: $accent;
+  border: none;
+  border-radius: 10px;
+  padding: $space-lg $space-xl;
+  cursor: pointer;
+  transition: opacity $ease, background $ease;
+}
+.future-asym-btn:hover:not(:disabled) { background: #2563eb; }
+.future-asym-btn:focus-visible { outline: 2px solid $accent; outline-offset: 2px; }
+.future-asym-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+.future-asym-btn.is-loading { pointer-events: none; }
+
+@media (max-width: $bp) { .login-future-asym { padding: $space; } }
+
+[x-cloak] { display: none !important; }
