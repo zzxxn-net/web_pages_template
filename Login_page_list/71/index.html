@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="로그인 — 미래적 클린 · 풀스크린 몰입형 · GSAP 기반 부드러운 전환 시안">
+  <title>Login — Futuristic Clean Fullscreen GSAP</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/login.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+  <main class="login-future-full" role="main" aria-label="로그인">
+    <div class="login-future-full__bg"></div>
+    <div class="login-future-full__card" x-data="futureFullGSAPLogin()" data-gsap-card>
+      <header class="future-full__head">
+        <h1 class="future-full__title">로그인</h1>
+        <p class="future-full__desc">이메일과 비밀번호를 입력하세요</p>
+      </header>
+      <form class="future-full__form" action="#" method="post" autocomplete="on" x-on:submit.prevent="handleSubmit($event)" hx-post="#" hx-swap="none" hx-trigger="submit">
+        <div class="future-full-field" :class="{ 'has-focus': focusField === 'email', 'has-value': email.length > 0 }" data-gsap-field>
+          <label for="ff71-email" class="future-full-field__label">이메일</label>
+          <input id="ff71-email" type="email" name="email" class="future-full-field__input" placeholder="you@example.com" autocomplete="email" required x-model="email" x-on:focus="focusField = 'email'" x-on:blur="focusField = ''" tabindex="0">
+        </div>
+        <div class="future-full-field" :class="{ 'has-focus': focusField === 'password', 'has-value': password.length > 0 }" data-gsap-field>
+          <label for="ff71-pw" class="future-full-field__label">비밀번호</label>
+          <div class="future-full-field__row">
+            <input id="ff71-pw" x-bind:type="showPassword ? 'text' : 'password'" name="password" class="future-full-field__input" placeholder="••••••••" autocomplete="current-password" required x-model="password" x-on:focus="focusField = 'password'" x-on:blur="focusField = ''" tabindex="0">
+            <button type="button" class="future-full-field__toggle" aria-label="비밀번호 표시" x-on:click="showPassword = !showPassword" tabindex="0"><span x-text="showPassword ? '숨기기' : '보기'">보기</span></button>
+          </div>
+        </div>
+        <button type="submit" class="future-full-btn" :class="{ 'is-loading': loading }" :disabled="loading" tabindex="0">
+          <span x-show="!loading">로그인</span>
+          <span x-show="loading" x-cloak>확인 중…</span>
+        </button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
