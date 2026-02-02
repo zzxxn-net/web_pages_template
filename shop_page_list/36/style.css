@@ -1,0 +1,100 @@
+/* mvp */
+/* mvp */
+.shop-page-36 {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  background: #fefce8;
+  color: #78350f;
+}
+.shop-page-36__wrap {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.shop-page-36__title {
+  text-align: center;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  letter-spacing: 0.04em;
+  color: #78350f;
+}
+.shop-page-36__lead {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #a16207;
+  margin: 0 0 1.5rem;
+}
+.shop-page-36__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  justify-items: center;
+  width: 100%;
+}
+.card-36 {
+  width: 100%;
+  max-width: 200px;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  will-change: transform;
+}
+.card-36__img-wrap {
+  width: 100%;
+  margin-bottom: 0.75rem;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.card-36__image {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+}
+.card-36__body { text-align: center; width: 100%; }
+.card-36__name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 0.3rem;
+  color: #78350f;
+}
+.card-36__price { font-size: 0.9rem; color: #a16207; margin: 0 0 0.6rem; }
+.btn-36 {
+  padding: 0.5rem 1rem;
+  border-radius: 14px;
+  border: 1px solid #b45309;
+  background: rgba(180, 83, 9, 0.08);
+  color: #b45309;
+  font-size: 0.875rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  will-change: transform;
+}
+.btn-36__icon { display: inline-block; }
+.btn-36:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #fefce8, 0 0 0 4px #b45309;
+}
+@media (min-width: 768px) {
+  .shop-page-36__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+}
