@@ -1,0 +1,144 @@
+// Design 62: Neo Brutalism · Single focus input flow · GSAP smooth transitions
+$bg: #f0ede8;
+$card: #ffffff;
+$border: #1a1a1a;
+$text: #1a1a1a;
+$muted: #5a5a5a;
+$radius: 0;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", sans-serif;
+  font-weight: 700;
+  line-height: 1.4;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-brutal-single {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+}
+
+.login-brutal-single__wrap { width: 100%; max-width: 400px; }
+
+.brutal-single-card {
+  padding: $space-xl;
+  background: $card;
+  border: 3px solid $border;
+  border-radius: $radius;
+  box-shadow: 10px 10px 0 $border;
+}
+
+.brutal-single-card__head { margin-bottom: $space-xl; text-align: center; }
+.brutal-single-card__title {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.4rem, 3.2vw, 1.65rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: $text;
+}
+.brutal-single-card__desc { margin: 0; font-size: 0.875rem; font-weight: 600; color: $muted; }
+.brutal-single-card__form { display: flex; flex-direction: column; gap: $space-lg; }
+
+.brutal-single-field {
+  padding: $space $space-lg;
+  border: 2px solid $border;
+  border-radius: $radius;
+  background: $card;
+  transition: opacity $ease, transform $ease, box-shadow $ease, border-color $ease;
+  &.is-active {
+    border-color: $border;
+    box-shadow: 5px 5px 0 $border;
+    opacity: 1;
+    transform: scale(1);
+    .brutal-single-field__label { color: $text; font-weight: 800; }
+  }
+  &.is-dimmed {
+    opacity: 0.55;
+    transform: scale(0.98);
+    .brutal-single-field__label { color: $muted; }
+  }
+  &:not(.is-active):not(.is-dimmed) {
+    opacity: 0.85;
+    .brutal-single-field__label { color: $muted; }
+  }
+}
+
+.brutal-single-field__label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: $muted;
+  transition: color $ease, font-weight $ease;
+}
+
+.brutal-single-field__input {
+  width: 100%;
+  padding: 0.4rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+  &::placeholder { color: lighten($muted, 15%); }
+}
+
+.brutal-single-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  .brutal-single-field__input { flex: 1; }
+}
+
+.brutal-single-field__toggle {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: $text;
+  background: $card;
+  border: 2px solid $border;
+  border-radius: $radius;
+  cursor: pointer;
+  transition: box-shadow $ease, transform $ease;
+  &:hover { box-shadow: 3px 3px 0 $border; }
+  &:active { transform: translate(1px, 1px); box-shadow: 2px 2px 0 $border; }
+}
+
+.brutal-single-btn {
+  margin-top: 0.5rem;
+  padding: 0.9rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 800;
+  color: $card;
+  background: $border;
+  border: 2px solid $border;
+  border-radius: $radius;
+  cursor: pointer;
+  transition: box-shadow $ease, transform $ease, opacity $ease;
+  &:hover:not(:disabled) { box-shadow: 5px 5px 0 darken($border, 5%); }
+  &:active:not(:disabled) { transform: translate(2px, 2px); box-shadow: 3px 3px 0 $border; }
+  &:disabled { opacity: 0.6; cursor: not-allowed; }
+  &.is-loading { pointer-events: none; }
+}
