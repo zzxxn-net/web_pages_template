@@ -1,0 +1,266 @@
+// =============================================================================
+// Login Page — Design 8: Dark Archive · Asymmetric · Scroll-free fixed flow
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Variables (다크 아카이브: warm dark, sepia)
+// -----------------------------------------------------------------------------
+$color-bg: #0f0c08;
+$color-strip: #1a1510;
+$color-surface: #161310;
+$color-border: rgba(196, 165, 116, 0.2);
+$color-text: #e8e2d9;
+$color-text-muted: #9a8f82;
+$color-accent: #c4a574;
+$color-accent-hover: #d4b584;
+$radius: 6px;
+$space-xs: 0.25rem;
+$space-sm: 0.5rem;
+$space-md: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$space-2xl: 3rem;
+$font-serif: "Georgia", "Times New Roman", serif;
+$font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+$transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$bp-mobile: 768px;
+$bp-asymmetric: 900px;
+
+// -----------------------------------------------------------------------------
+// Base & center layout (스크롤 없는 고정 플로우)
+// -----------------------------------------------------------------------------
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: $font-sans;
+  font-weight: 400;
+  line-height: 1.5;
+  color: $color-text;
+  background: $color-bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.login-archive {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  overflow: auto;
+}
+
+// -----------------------------------------------------------------------------
+// Asymmetric layout (좁은 좌측 스트립 + 우측 폼)
+// -----------------------------------------------------------------------------
+.login-archive__layout {
+  width: 100%;
+  max-width: 920px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: $bp-asymmetric) {
+    flex-direction: row;
+    min-height: 520px;
+    max-height: 90vh;
+    border: 1px solid $color-border;
+    overflow: hidden;
+  }
+}
+
+.login-archive__strip {
+  width: 100%;
+  min-height: 72px;
+  background: $color-strip;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-lg;
+  border-bottom: 1px solid $color-border;
+
+  @media (min-width: $bp-asymmetric) {
+    width: 28%;
+    min-height: auto;
+    border-bottom: none;
+    border-right: 1px solid $color-border;
+    padding: $space-xl;
+  }
+}
+
+.login-archive__strip-text {
+  font-family: $font-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: $color-accent;
+  text-transform: uppercase;
+
+  @media (min-width: $bp-asymmetric) {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-size: 0.8125rem;
+    letter-spacing: 0.2em;
+  }
+}
+
+.login-archive__form-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-2xl $space-xl;
+  background: $color-bg;
+
+  @media (min-width: $bp-asymmetric) {
+    width: 72%;
+    background: $color-surface;
+  }
+}
+
+.login-archive__card {
+  width: 100%;
+  max-width: 380px;
+}
+
+.login-archive__title {
+  margin: 0 0 $space-sm;
+  font-family: $font-serif;
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 600;
+  color: $color-text;
+  letter-spacing: 0.02em;
+}
+
+.login-archive__desc {
+  margin: 0 0 $space-xl;
+  font-size: 0.9375rem;
+  color: $color-text-muted;
+}
+
+.login-archive__form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+
+.archive-field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+}
+
+.archive-field__label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: $color-text-muted;
+}
+
+.archive-field__input {
+  width: 100%;
+  padding: $space-md $space-lg;
+  font-size: 1rem;
+  font-family: inherit;
+  color: $color-text;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  transition: border-color $transition;
+
+  &::placeholder {
+    color: $color-text-muted;
+    opacity: 0.7;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.archive-field__wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .archive-field__input {
+    padding-inline-end: 4rem;
+  }
+}
+
+.archive-field__toggle {
+  position: absolute;
+  right: $space-md;
+  font-size: 0.8125rem;
+  color: $color-text-muted;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: $space-sm;
+  transition: color $transition;
+
+  &:hover {
+    color: $color-accent;
+  }
+}
+
+.archive-btn {
+  width: 100%;
+  margin-top: $space-sm;
+  padding: $space-md $space-lg;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: inherit;
+  color: $color-bg;
+  background: $color-accent;
+  border: none;
+  border-radius: $radius;
+  cursor: pointer;
+  transition: background $transition, transform 0.15s ease;
+
+  &:hover:not(:disabled) {
+    background: $color-accent-hover;
+    transform: scale(1.01);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.99);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+@media (max-width: $bp-mobile) {
+  .login-archive__form-section {
+    padding: $space-xl $space-lg;
+  }
+}
