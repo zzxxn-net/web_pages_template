@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="로그인 — 감성 테크 · 풀스크린 몰입형 · GSAP 부드러운 전환 시안">
+  <title>Login — Emotional Fullscreen</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/login.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+  <main class="login-emotion-full" role="main" aria-label="로그인">
+    <div class="login-emotion-full__bg" aria-hidden="true"></div>
+    <div class="login-emotion-full__inner" x-data="emotionFullLogin()">
+      <header class="login-emotion-full__head">
+        <h1 class="login-emotion-full__title">다시 만나요</h1>
+        <p class="login-emotion-full__desc">이메일과 비밀번호를 입력해 주세요</p>
+      </header>
+      <form class="login-emotion-full__form" action="#" method="post" autocomplete="on" @submit.prevent="handleSubmit" hx-post="#" hx-swap="none" hx-trigger="submit">
+        <div class="emotion-full-field">
+          <label for="email" class="emotion-full-field__label">이메일</label>
+          <input id="email" type="email" name="email" class="emotion-full-field__input" placeholder="you@example.com" autocomplete="email" required x-model="email">
+        </div>
+        <div class="emotion-full-field">
+          <label for="password" class="emotion-full-field__label">비밀번호</label>
+          <div class="emotion-full-field__wrap">
+            <input id="password" :type="showPassword ? 'text' : 'password'" name="password" class="emotion-full-field__input" placeholder="••••••••" autocomplete="current-password" required x-model="password">
+            <button type="button" class="emotion-full-field__toggle" aria-label="비밀번호 표시" @click="showPassword = !showPassword"><span x-text="showPassword ? '숨기기' : '보기'">보기</span></button>
+          </div>
+        </div>
+        <button type="submit" class="emotion-full-btn" :disabled="loading">
+          <span x-show="!loading">로그인</span>
+          <span x-show="loading" x-cloak>잠시만요…</span>
+        </button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
