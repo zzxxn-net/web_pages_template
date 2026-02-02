@@ -1,0 +1,202 @@
+// Design 57: Dark Archive · Asymmetric layout · GSAP smooth transitions
+$bg: #0a0908;
+$bg-warm: #12100e;
+$surface: rgba(20, 18, 16, 0.96);
+$border: rgba(180, 165, 145, 0.18);
+$text: #e8e2da;
+$muted: #7a7268;
+$accent: #c4a574;
+$accent-soft: rgba(196, 165, 116, 0.15);
+$radius: 6px;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 768px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", Georgia, serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.login-dark-asym {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  @media (min-width: $bp) {
+    flex-direction: row;
+    align-items: stretch;
+  }
+}
+
+.login-dark-asym__visual {
+  flex: 0 0 auto;
+  min-height: 28vh;
+  padding: $space-xl;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(165deg, $bg-warm 0%, $bg 50%);
+  border-bottom: 1px solid $border;
+  @media (min-width: $bp) {
+    flex: 1 1 58%;
+    min-height: auto;
+    border-bottom: none;
+    border-right: 1px solid $border;
+  }
+}
+
+.dark-asym-visual__inner {
+  max-width: 420px;
+  text-align: center;
+  @media (min-width: $bp) { text-align: left; }
+}
+
+.dark-asym-visual__label {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: $muted;
+  text-transform: uppercase;
+}
+
+.dark-asym-visual__title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.35rem, 3vw, 1.65rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: $text;
+}
+
+.dark-asym-visual__desc {
+  margin: 0;
+  font-size: 0.875rem;
+  color: $muted;
+  line-height: 1.5;
+}
+
+.login-dark-asym__form-wrap {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+  @media (min-width: $bp) {
+    flex: 0 0 42%;
+    padding: $space-xl $space-xl * 1.5;
+  }
+}
+
+.login-dark-asym__form-box {
+  width: 100%;
+  max-width: 380px;
+  padding: $space-xl;
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $radius;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.login-dark-asym__head { margin-bottom: $space-lg; }
+.login-dark-asym__title {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.35rem, 2.5vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: $text;
+}
+.login-dark-asym__desc { margin: 0; font-size: 0.8125rem; color: $muted; }
+.login-dark-asym__form { display: flex; flex-direction: column; gap: $space-lg; }
+
+.dark-asym-field {
+  padding: $space $space-lg;
+  border: 1px solid $border;
+  border-radius: $radius;
+  background: rgba(10, 9, 8, 0.4);
+  transition: border-color $ease, box-shadow $ease, background $ease;
+  &.has-focus,
+  &.has-value {
+    border-color: rgba($accent, 0.4);
+    background: rgba(10, 9, 8, 0.6);
+    .dark-asym-field__label { color: $accent; }
+  }
+  &.has-focus { box-shadow: 0 0 0 3px $accent-soft; }
+}
+
+.dark-asym-field__label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: $muted;
+  transition: color $ease;
+}
+
+.dark-asym-field__input {
+  width: 100%;
+  padding: 0.35rem 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+  &::placeholder { color: rgba($muted, 0.8); }
+}
+
+.dark-asym-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  .dark-asym-field__input { flex: 1; }
+}
+
+.dark-asym-field__toggle {
+  padding: 0.3rem 0.55rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $muted;
+  background: transparent;
+  border: 1px solid $border;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color $ease, border-color $ease;
+  &:hover { color: $accent; border-color: rgba($accent, 0.4); }
+}
+
+.dark-asym-btn {
+  margin-top: 0.25rem;
+  padding: 0.85rem 1.4rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: $bg;
+  background: $accent;
+  border: none;
+  border-radius: $radius;
+  cursor: pointer;
+  transition: background $ease, opacity $ease, transform $ease;
+  &:hover:not(:disabled) { background: lighten($accent, 6%); }
+  &:active:not(:disabled) { transform: scale(0.98); }
+  &:disabled { opacity: 0.7; cursor: not-allowed; }
+  &.is-loading { pointer-events: none; }
+}
+
+@media (max-width: $bp - 1px) {
+  .login-dark-asym__form-wrap { align-items: flex-start; padding-top: $space-xl * 1.25; }
+}
