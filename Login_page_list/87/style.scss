@@ -1,0 +1,261 @@
+// Design 87: 실험적 인터페이스, 단계 분할형(Progressive Form), 상태 변화 강조
+// MVP: 시안 전용 변수 — 실험적 톤(다크 그라데이션·글래스·보라 악센트)
+$bg-start: #1a0a2e;
+$bg-end: #16213e;
+$glass: rgba(255, 255, 255, 0.06);
+$glass-border: rgba(255, 255, 255, 0.1);
+$text: #e8e4f0;
+$muted: #9c8fb5;
+$accent: #a78bfa;
+$accent-soft: rgba(167, 139, 250, 0.2);
+$radius: 14px;
+$space: 1rem;
+$space-lg: 1.25rem;
+$ease: 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+// MVP: 전역 — 실험적 인터페이스 배경, 중앙 정렬
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Outfit", sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  color: $text;
+  background: $bg-start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+// MVP: 실험적 인터페이스 — 풀 배경 그라데이션
+.exp-step-login {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-lg;
+  overflow: auto;
+}
+
+.exp-step-login__bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, $bg-start 0%, $bg-end 100%);
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 30%, rgba($accent, 0.08) 0%, transparent 55%);
+    pointer-events: none;
+  }
+}
+
+.exp-step-login__wrap {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+// MVP: 단계 분할형 — 헤더 + 단계 인디케이터(1/2), 상태 변화 강조
+.exp-step-header {
+  padding: $space-lg;
+  background: $glass;
+  border: 1px solid $glass-border;
+  border-radius: $radius;
+  backdrop-filter: blur(12px);
+  text-align: center;
+}
+
+.exp-step-header__title {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.3rem, 3vw, 1.55rem);
+  font-weight: 600;
+  color: $text;
+  letter-spacing: -0.02em;
+}
+
+// MVP: 상태 변화 강조 — 단계 인디케이터(1·2) is-active 시 뚜렷하게
+.exp-step-header__indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.exp-step-header__step {
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: $muted;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid $glass-border;
+  border-radius: 50%;
+  transition: color $ease, background $ease, border-color $ease, box-shadow $ease;
+}
+.exp-step-header__step.is-active {
+  color: $accent;
+  background: $accent-soft;
+  border-color: $accent;
+  box-shadow: 0 0 0 2px $accent-soft;
+}
+
+.exp-step-header__divider {
+  width: 1.25rem;
+  height: 1px;
+  background: $glass-border;
+}
+
+.exp-step-header__desc {
+  margin: 0;
+  font-size: 0.875rem;
+  color: $muted;
+  font-weight: 500;
+}
+
+// MVP: 단계 분할형 — 폼 카드, Step 2 필드 is-visible 시 노출
+.exp-step-card {
+  padding: $space-lg;
+  background: $glass;
+  border: 1px solid $glass-border;
+  border-radius: $radius;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+  transition: box-shadow $ease, opacity $ease;
+}
+.exp-step-card.is-loading {
+  opacity: 0.9;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+.exp-step-card__form {
+  display: flex;
+  flex-direction: column;
+  gap: $space;
+}
+
+// MVP: 상태 변화 강조 — has-focus·has-value 시 테두리·라벨·포커스 링
+.exp-step-field {
+  padding: 0.75rem 1rem;
+  border: 1px solid $glass-border;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.15);
+  transition: border-color $ease, box-shadow $ease, opacity $ease, max-height $ease;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.exp-step-field--pw {
+  opacity: 0;
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin: 0;
+  overflow: hidden;
+  border-width: 0;
+}
+.exp-step-field--pw.is-visible {
+  opacity: 1;
+  max-height: 120px;
+  padding: 0.75rem 1rem;
+  margin: 0;
+  border-width: 1px;
+}
+.exp-step-field:focus-within {
+  border-color: $accent;
+  box-shadow: 0 0 0 3px $accent-soft;
+  outline-color: $accent;
+}
+.exp-step-field.has-focus {
+  border-color: $accent;
+  box-shadow: 0 0 0 3px $accent-soft;
+  outline-color: $accent;
+}
+.exp-step-field.has-value:not(.has-focus) {
+  border-color: rgba($accent, 0.5);
+}
+
+.exp-step-field__label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: $muted;
+  transition: color $ease;
+}
+.exp-step-field.has-focus .exp-step-field__label,
+.exp-step-field:focus-within .exp-step-field__label {
+  color: $accent;
+}
+
+.exp-step-field__input {
+  width: 100%;
+  padding: 0.25rem 0;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.exp-step-field__input::placeholder { color: rgba($muted, 0.6); }
+.exp-step-field__input:focus { outline: none; }
+
+.exp-step-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.exp-step-field__row .exp-step-field__input { flex: 1; }
+
+.exp-step-field__toggle {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: $muted;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid $glass-border;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: color $ease, border-color $ease;
+}
+.exp-step-field__toggle:hover { color: $accent; border-color: $accent; }
+.exp-step-field__toggle:focus-visible { outline: 2px solid $accent; outline-offset: 2px; }
+
+// MVP: 제출 버튼 — 로딩 시 상태 변화 강조
+.exp-step-btn {
+  margin-top: 0.25rem;
+  padding: 0.85rem 1.2rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #1a0a2e;
+  background: $accent;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background $ease, transform $ease, opacity $ease;
+}
+.exp-step-btn:hover:not(:disabled) { background: lighten($accent, 6%); transform: translateY(-1px); }
+.exp-step-btn:focus-visible { outline: 2px solid $accent; outline-offset: 2px; }
+.exp-step-btn:disabled { cursor: not-allowed; opacity: 0.7; }
+.exp-step-btn.is-loading { pointer-events: none; opacity: 0.88; }
+
+@media (max-width: $bp) {
+  .exp-step-login { padding: $space; }
+  .exp-step-header,
+  .exp-step-card { padding: $space; }
+}
