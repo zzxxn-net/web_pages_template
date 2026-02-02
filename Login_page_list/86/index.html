@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="로그인, 미래적 클린, 비대칭 레이아웃, GSAP 부드러운 전환">
+  <title>Login - Future Clean Asymmetric</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <script defer src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/login.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+  <!-- MVP: 가로·세로 중앙 정렬 루트, 비대칭 그리드 컨테이너 -->
+  <main class="clean-login" role="main" aria-label="로그인">
+    <div class="clean-login__wrap" x-data="cleanAsymLogin()" data-gsap-wrap>
+      <!-- MVP: 비대칭 레이아웃 — 왼쪽 aside(타이틀·부제) -->
+      <aside class="clean-aside" data-gsap-aside aria-label="로그인 안내">
+        <h1 class="clean-aside__title">로그인</h1>
+        <p class="clean-aside__desc">이메일과 비밀번호를 입력하세요.</p>
+      </aside>
+      <!-- MVP: 비대칭 레이아웃 — 오른쪽 폼 카드, GSAP 전환 타깃 -->
+      <div class="clean-card" data-gsap-card :class="{ 'is-loading': loading }">
+        <form class="clean-card__form" action="#" method="post" autocomplete="on" x-on:submit.prevent="handleSubmit($event)" hx-post="#" hx-swap="none" hx-trigger="submit">
+          <div class="clean-field" :class="{ 'has-focus': focusField === 'email', 'has-value': email.length > 0 }" data-gsap-field>
+            <label for="clean86-email" class="clean-field__label">이메일</label>
+            <input id="clean86-email" type="email" name="email" class="clean-field__input" placeholder="you@example.com" autocomplete="email" required x-model="email" x-on:focus="focusField = 'email'" x-on:blur="focusField = ''" tabindex="0">
+          </div>
+          <div class="clean-field" :class="{ 'has-focus': focusField === 'password', 'has-value': password.length > 0 }" data-gsap-field>
+            <label for="clean86-pw" class="clean-field__label">비밀번호</label>
+            <div class="clean-field__row">
+              <input id="clean86-pw" x-bind:type="showPassword ? 'text' : 'password'" name="password" class="clean-field__input" placeholder="••••••••" autocomplete="current-password" required x-model="password" x-on:focus="focusField = 'password'" x-on:blur="focusField = ''" tabindex="0">
+              <button type="button" class="clean-field__toggle" aria-label="비밀번호 표시" x-on:click="showPassword = !showPassword" tabindex="0"><span x-text="showPassword ? '숨기기' : '보기'">보기</span></button>
+            </div>
+          </div>
+          <button type="submit" class="clean-btn" :class="{ 'is-loading': loading }" :disabled="loading" tabindex="0">
+            <span x-show="!loading">로그인</span>
+            <span x-show="loading" x-cloak>확인 중...</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
