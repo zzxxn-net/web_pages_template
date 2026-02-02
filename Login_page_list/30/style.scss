@@ -1,0 +1,140 @@
+// Design 30: Modern Fantasy · Fullscreen · GSAP smooth transitions
+$bg: #1a1612;
+$surface: #252019;
+$border: rgba(212, 180, 120, 0.2);
+$text: #e8e0d4;
+$muted: #9a8f7a;
+$accent: #c9a227;
+$glow: rgba(201, 162, 39, 0.2);
+$radius: 14px;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.28s ease;
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", Georgia, serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-fantasy-full-gsap {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+  position: relative;
+}
+.fantasy-full-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 50% at 50% 30%, rgba(201, 162, 39, 0.08), transparent 55%);
+  pointer-events: none;
+}
+.fantasy-full-center {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 380px;
+  padding: $space-xl;
+}
+.fantasy-full-title {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 700;
+  color: $text;
+  text-align: center;
+  text-shadow: 0 0 24px $glow;
+}
+.fantasy-full-desc {
+  margin: 0 0 $space-xl;
+  font-size: 0.875rem;
+  color: $muted;
+  text-align: center;
+}
+.fantasy-full-form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+.fantasy-full-field {
+  padding: $space $space-lg;
+  border: 1px solid $border;
+  border-radius: 10px;
+  background: $surface;
+  transition: border-color $ease, box-shadow $ease;
+}
+.fantasy-full-field:focus-within {
+  border-color: $accent;
+  box-shadow: 0 0 0 2px rgba(201, 162, 39, 0.2);
+}
+.fantasy-full-field__label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: $muted;
+  margin-bottom: 0.35rem;
+}
+.fantasy-full-field__input {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  color: $text;
+  background: transparent;
+  border: none;
+  padding: 0.4rem 0;
+  outline: none;
+}
+.fantasy-full-field__input::placeholder { color: $muted; opacity: 0.75; }
+.fantasy-full-field__wrap { display: flex; align-items: center; gap: 0.5rem; }
+.fantasy-full-field__wrap .fantasy-full-field__input { flex: 1; min-width: 0; }
+.fantasy-full-field__toggle {
+  font: inherit;
+  font-size: 0.8125rem;
+  color: $muted;
+  background: none;
+  border: 1px solid $border;
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  transition: color $ease, border-color $ease;
+}
+.fantasy-full-field__toggle:hover { color: $accent; border-color: $accent; }
+.fantasy-full-btn {
+  margin-top: 0.25rem;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $bg;
+  background: $accent;
+  border: none;
+  border-radius: 10px;
+  padding: $space $space-xl;
+  cursor: pointer;
+  transition: transform $ease, box-shadow $ease;
+  box-shadow: 0 4px 16px $glow;
+}
+.fantasy-full-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 20px $glow; }
+.fantasy-full-btn:disabled { cursor: not-allowed; opacity: 0.7; }
+
+@media (max-width: $bp) {
+  .login-fantasy-full-gsap { padding: $space-lg; }
+  .fantasy-full-center { padding: $space-lg; }
+}
