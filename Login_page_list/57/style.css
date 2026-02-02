@@ -1,0 +1,36 @@
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; }
+body { margin: 0; min-height: 100vh; font-family: "Inter", "Noto Sans KR", sans-serif; color: #e8e2da; background: #0a0908; display: flex; align-items: center; justify-content: center; }
+.login-dark-asym { display: flex; flex-direction: column; width: 100%; min-height: 100vh; }
+@media (min-width: 768px) { .login-dark-asym { flex-direction: row; align-items: stretch; } }
+.login-dark-asym__visual { flex: 0 0 auto; min-height: 28vh; padding: 2rem; display: flex; align-items: center; justify-content: center; background: linear-gradient(165deg, #12100e 0%, #0a0908 50%); border-bottom: 1px solid rgba(180,165,145,0.18); }
+@media (min-width: 768px) { .login-dark-asym__visual { flex: 1 1 58%; min-height: auto; border-bottom: none; border-right: 1px solid rgba(180,165,145,0.18); } }
+.dark-asym-visual__inner { max-width: 420px; text-align: center; }
+@media (min-width: 768px) { .dark-asym-visual__inner { text-align: left; } }
+.dark-asym-visual__label { margin: 0 0 0.5rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; color: #7a7268; text-transform: uppercase; }
+.dark-asym-visual__title { margin: 0 0 0.5rem; font-size: clamp(1.35rem,3vw,1.65rem); font-weight: 600; color: #e8e2da; }
+.dark-asym-visual__desc { margin: 0; font-size: 0.875rem; color: #7a7268; }
+.login-dark-asym__form-wrap { flex: 1 1 auto; display: flex; align-items: center; justify-content: center; padding: 2rem; }
+@media (min-width: 768px) { .login-dark-asym__form-wrap { flex: 0 0 42%; padding: 2rem 3rem; } }
+.login-dark-asym__form-box { width: 100%; max-width: 380px; padding: 2rem; background: rgba(20,18,16,0.96); border: 1px solid rgba(180,165,145,0.18); border-radius: 6px; box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+.login-dark-asym__head { margin-bottom: 1.5rem; }
+.login-dark-asym__title { margin: 0 0 0.35rem; font-size: clamp(1.35rem,2.5vw,1.5rem); font-weight: 600; color: #e8e2da; }
+.login-dark-asym__desc { margin: 0; font-size: 0.8125rem; color: #7a7268; }
+.login-dark-asym__form { display: flex; flex-direction: column; gap: 1.5rem; }
+.dark-asym-field { padding: 1rem 1.5rem; border: 1px solid rgba(180,165,145,0.18); border-radius: 6px; background: rgba(10,9,8,0.4); transition: border-color 0.32s ease, box-shadow 0.32s ease, background 0.32s ease; }
+.dark-asym-field.has-focus, .dark-asym-field.has-value { border-color: rgba(196,165,116,0.4); background: rgba(10,9,8,0.6); }
+.dark-asym-field.has-focus .dark-asym-field__label, .dark-asym-field.has-value .dark-asym-field__label { color: #c4a574; }
+.dark-asym-field.has-focus { box-shadow: 0 0 0 3px rgba(196,165,116,0.15); }
+.dark-asym-field__label { display: block; margin-bottom: 0.35rem; font-size: 0.75rem; font-weight: 600; color: #7a7268; transition: color 0.32s ease; }
+.dark-asym-field__input { width: 100%; padding: 0.35rem 0; font-size: 1rem; font-weight: 500; color: #e8e2da; background: transparent; border: none; outline: none; }
+.dark-asym-field__input::placeholder { color: rgba(122,114,104,0.8); }
+.dark-asym-field__row { display: flex; align-items: center; gap: 0.5rem; }
+.dark-asym-field__row .dark-asym-field__input { flex: 1; }
+.dark-asym-field__toggle { padding: 0.3rem 0.55rem; font-size: 0.75rem; font-weight: 600; color: #7a7268; background: transparent; border: 1px solid rgba(180,165,145,0.18); border-radius: 4px; cursor: pointer; transition: color 0.32s ease, border-color 0.32s ease; }
+.dark-asym-field__toggle:hover { color: #c4a574; border-color: rgba(196,165,116,0.4); }
+.dark-asym-btn { margin-top: 0.25rem; padding: 0.85rem 1.4rem; font-size: 0.9375rem; font-weight: 600; color: #0a0908; background: #c4a574; border: none; border-radius: 6px; cursor: pointer; transition: background 0.32s ease, opacity 0.32s ease, transform 0.32s ease; }
+.dark-asym-btn:hover:not(:disabled) { background: #cfb080; }
+.dark-asym-btn:active:not(:disabled) { transform: scale(0.98); }
+.dark-asym-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+.dark-asym-btn.is-loading { pointer-events: none; }
+@media (max-width: 767px) { .login-dark-asym__form-wrap { align-items: flex-start; padding-top: 2.5rem; } }
