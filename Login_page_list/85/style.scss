@@ -1,0 +1,201 @@
+// Design 85: 감성 테크, 카드 분리형 레이아웃, 스크롤 없는 고정 플로우
+// MVP: 시안 전용 변수 — 감성 테크 톤(따뜻한 그라데이션·파스텔 악센트)
+$bg: linear-gradient(160deg, #f8f4f0 0%, #efe8f2 50%, #f2edf5 100%);
+$header-card: rgba(255, 252, 250, 0.92);
+$form-card: rgba(255, 255, 255, 0.88);
+$border: rgba(180, 165, 175, 0.28);
+$text: #2d2832;
+$muted: #6b6270;
+$accent: #9b7bb5;
+$accent-soft: rgba(155, 123, 181, 0.18);
+$radius: 14px;
+$space: 1rem;
+$space-lg: 1.25rem;
+$ease: 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+// MVP: 전역 — 스크롤 없는 고정 플로우, PC에서 overflow hidden
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  overflow: hidden;
+}
+@media (max-width: $bp) {
+  body { overflow: auto; }
+}
+
+// MVP: 스크롤 없는 고정 플로우 — 한 뷰포트 내 중앙만 사용
+.emotech-login {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-lg;
+  overflow: auto;
+}
+
+.emotech-login__wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+// MVP: 카드 분리형 — 헤더 전용 카드
+.emotech-header {
+  padding: $space-lg;
+  background: $header-card;
+  border: 1px solid $border;
+  border-radius: $radius;
+  box-shadow: 0 8px 24px rgba(45, 40, 50, 0.06);
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+.emotech-header__title {
+  margin: 0 0 0.3rem;
+  font-size: clamp(1.3rem, 3vw, 1.55rem);
+  font-weight: 600;
+  color: $text;
+  letter-spacing: -0.02em;
+}
+.emotech-header__desc {
+  margin: 0;
+  font-size: 0.875rem;
+  color: $muted;
+  font-weight: 500;
+}
+
+// MVP: 카드 분리형 — 폼 전용 카드
+.emotech-card {
+  padding: $space-lg;
+  background: $form-card;
+  border: 1px solid $border;
+  border-radius: $radius;
+  box-shadow: 0 12px 32px rgba(45, 40, 50, 0.08);
+  transition: box-shadow $ease, opacity $ease;
+  backdrop-filter: blur(10px);
+}
+.emotech-card.is-loading {
+  opacity: 0.9;
+  box-shadow: 0 8px 20px rgba(45, 40, 50, 0.06);
+}
+
+.emotech-card__form {
+  display: flex;
+  flex-direction: column;
+  gap: $space;
+}
+
+// MVP: 감성 테크 필드 — 포커스·값에 따른 부드러운 전환
+.emotech-field {
+  padding: 0.75rem 1rem;
+  border: 1px solid $border;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.6);
+  transition: border-color $ease, box-shadow $ease;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.emotech-field:focus-within {
+  border-color: $accent;
+  box-shadow: 0 0 0 3px $accent-soft;
+  outline-color: $accent;
+  background: rgba(255, 255, 255, 0.9);
+}
+.emotech-field.has-focus {
+  border-color: $accent;
+  box-shadow: 0 0 0 3px $accent-soft;
+  outline-color: $accent;
+  background: rgba(255, 255, 255, 0.9);
+}
+.emotech-field.has-value:not(.has-focus) {
+  border-color: rgba($accent, 0.45);
+}
+
+.emotech-field__label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: $muted;
+  transition: color $ease;
+}
+.emotech-field.has-focus .emotech-field__label,
+.emotech-field:focus-within .emotech-field__label {
+  color: $accent;
+}
+
+.emotech-field__input {
+  width: 100%;
+  padding: 0.25rem 0;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.emotech-field__input::placeholder { color: rgba($muted, 0.7); }
+.emotech-field__input:focus { outline: none; }
+
+.emotech-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.emotech-field__row .emotech-field__input { flex: 1; }
+
+.emotech-field__toggle {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: $muted;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid $border;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: color $ease, border-color $ease, background $ease;
+}
+.emotech-field__toggle:hover { color: $accent; border-color: $accent; background: rgba($accent, 0.08); }
+.emotech-field__toggle:focus-visible { outline: 2px solid $accent; outline-offset: 2px; }
+
+// MVP: 제출 버튼 — 감성 테크 악센트
+.emotech-btn {
+  margin-top: 0.25rem;
+  padding: 0.85rem 1.2rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #fff;
+  background: $accent;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background $ease, transform $ease, box-shadow $ease;
+}
+.emotech-btn:hover:not(:disabled) { background: darken($accent, 6%); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(155, 123, 181, 0.35); }
+.emotech-btn:focus-visible { outline: 2px solid $accent; outline-offset: 2px; }
+.emotech-btn:disabled { cursor: not-allowed; opacity: 0.7; }
+.emotech-btn.is-loading { pointer-events: none; opacity: 0.88; }
+
+@media (max-width: $bp) {
+  .emotech-login { padding: $space; }
+  .emotech-header,
+  .emotech-card { padding: $space; }
+}
