@@ -1,0 +1,114 @@
+// mvp
+$bp-mobile: 480px;
+$bp-tablet: 768px;
+$bp-desktop: 1024px;
+$color-bg-start: #fffbeb;
+$color-bg-end: #ecfdf5;
+$color-surface: rgba(255, 255, 255, 0.92);
+$color-border: rgba(180, 83, 9, 0.22);
+$color-text: #78350f;
+$color-muted: #92400e;
+$color-accent: #b45309;
+$radius: 14px;
+$ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+.shop-page-19 {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  background: linear-gradient(165deg, $color-bg-start 0%, $color-bg-end 100%);
+  color: $color-text;
+}
+
+.shop-page-19__container {
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.shop-page-19__title {
+  text-align: center;
+  font-size: clamp(1.3rem, 3.2vw, 1.55rem);
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  color: $color-text;
+  letter-spacing: 0.02em;
+}
+
+.shop-page-19__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  justify-items: center;
+}
+
+.card-19 {
+  width: 100%;
+  max-width: 200px;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  transition: box-shadow 0.3s $ease;
+}
+
+.card-19:hover {
+  box-shadow: 0 6px 20px rgba(180, 83, 9, 0.14);
+}
+
+.card-19__image {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 0.7rem;
+}
+
+.card-19__body {
+  text-align: center;
+  width: 100%;
+}
+
+.card-19__name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 0.35rem;
+  color: $color-text;
+}
+
+.card-19__price {
+  font-size: 0.9rem;
+  color: $color-accent;
+  margin: 0 0 0.7rem;
+}
+
+.btn-19 {
+  padding: 0.55rem 1.1rem;
+  border-radius: $radius;
+  border: 1px solid $color-accent;
+  background: $color-accent;
+  color: #fff;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.25s $ease, transform 0.25s $ease;
+}
+
+.btn-19:hover {
+  background: darken($color-accent, 5%);
+}
+
+@media (min-width: $bp-tablet) {
+  .shop-page-19__grid {
+    gap: 1.25rem;
+  }
+}
