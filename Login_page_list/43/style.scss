@@ -1,0 +1,185 @@
+// Design 43: Emotional Tech · Card split · GSAP smooth
+$bg-start: #fef6f2;
+$bg-end: #f5e8f0;
+$brand-bg: linear-gradient(145deg, #e8c4d4 0%, #d4b8e8 100%);
+$surface: #ffffff;
+$border: rgba(180, 140, 180, 0.25);
+$text: #2d2438;
+$muted: #7a6a8a;
+$accent: #a078b0;
+$radius: 16px;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 520px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: linear-gradient(165deg, $bg-start 0%, $bg-end 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-emotion-card {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+}
+.login-emotion-card__wrap {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+@media (min-width: $bp) {
+  .login-emotion-card__wrap {
+    flex-direction: row;
+    max-width: 720px;
+    align-items: stretch;
+  }
+}
+
+.emotion-brand-card {
+  flex: 0 0 auto;
+  padding: $space-xl;
+  border-radius: $radius;
+  background: $brand-bg;
+  color: $text;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 8px 32px rgba(160, 120, 176, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+.emotion-brand-card__title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.5rem, 3.5vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: $text;
+}
+.emotion-brand-card__desc {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: rgba(45, 36, 56, 0.75);
+}
+
+.emotion-form-card {
+  flex: 1;
+  min-width: 0;
+  padding: $space-xl;
+  background: $surface;
+  border-radius: $radius;
+  border: 1px solid $border;
+  box-shadow: 0 12px 40px rgba(45, 36, 56, 0.08);
+}
+.emotion-form-card__head { margin-bottom: $space-xl; }
+.emotion-form-card__title {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.25rem, 3vw, 1.375rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: $text;
+}
+.emotion-form-card__desc {
+  margin: 0;
+  font-size: 0.875rem;
+  color: $muted;
+}
+.emotion-form-card__form { display: flex; flex-direction: column; gap: $space-lg; }
+
+.emotion-field {
+  padding: $space $space-lg;
+  border: 1px solid $border;
+  border-radius: 10px;
+  background: rgba(250, 248, 252, 0.6);
+  transition: border-color $ease, box-shadow $ease;
+}
+.emotion-field:focus-within {
+  border-color: rgba($accent, 0.45);
+  box-shadow: 0 0 0 3px rgba($accent, 0.12);
+}
+.emotion-field__label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: $muted;
+  margin-bottom: 0.4rem;
+}
+.emotion-field__input {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  color: $text;
+  background: transparent;
+  border: none;
+  padding: 0.25rem 0;
+  outline: none;
+}
+.emotion-field__input::placeholder { color: $muted; }
+.emotion-field__row { display: flex; align-items: center; gap: $space; }
+.emotion-field__row .emotion-field__input { flex: 1; min-width: 0; }
+.emotion-field__toggle {
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: $accent;
+  background: transparent;
+  border: 1px solid rgba($accent, 0.4);
+  border-radius: 8px;
+  padding: 0.35rem 0.65rem;
+  cursor: pointer;
+  transition: color $ease, border-color $ease, background $ease;
+  flex-shrink: 0;
+}
+.emotion-field__toggle:hover {
+  color: #8a6098;
+  border-color: $accent;
+  background: rgba($accent, 0.08);
+}
+.emotion-field__toggle:focus-visible { outline: 2px solid $accent; outline-offset: 2px; }
+
+.emotion-btn {
+  margin-top: 0.5rem;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $surface;
+  background: linear-gradient(135deg, $accent 0%, #8a6098 100%);
+  border: none;
+  border-radius: 10px;
+  padding: $space-lg $space-xl;
+  cursor: pointer;
+  transition: opacity $ease, transform $ease, box-shadow $ease;
+}
+.emotion-btn:hover:not(:disabled) {
+  opacity: 0.95;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba($accent, 0.35);
+}
+.emotion-btn:focus-visible { outline: 2px solid $accent; outline-offset: 2px; }
+.emotion-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+.emotion-btn.is-loading { pointer-events: none; }
+
+@media (max-width: $bp) {
+  .login-emotion-card { padding: $space; }
+  .emotion-brand-card, .emotion-form-card { padding: $space-lg; }
+}
+
+[x-cloak] { display: none !important; }
