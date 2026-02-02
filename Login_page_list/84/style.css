@@ -1,0 +1,38 @@
+/* Design 84: 다크 아카이브, 풀스크린 몰입형, 상태 변화 강조 - MVP 시안 전용 */
+*,*::before,*::after{box-sizing:border-box}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;min-height:100dvh;font-family:"Crimson Pro",Georgia,serif;font-weight:400;line-height:1.5;color:#e8e2d8;background:#0f0e0c;display:flex;align-items:center;justify-content:center;padding:0;overflow:hidden}
+@media (max-width:480px){body{overflow:auto}}
+.archive-login{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:1.25rem;overflow:auto}
+.archive-login__bg{position:absolute;inset:0;background:linear-gradient(165deg,#0f0e0c 0%,#141210 50%,#121110 100%)}
+.archive-login__bg::after{content:"";position:absolute;inset:0;background-image:radial-gradient(ellipse 80% 50% at 50% 50%,rgba(196,163,90,.04) 0%,transparent 60%);pointer-events:none}
+.archive-login__wrap{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;width:100%;max-width:420px}
+.archive-card{width:100%;padding:1.25rem;background:rgba(26,24,20,.92);border:1px solid rgba(180,165,140,.25);border-radius:6px;box-shadow:0 24px 48px rgba(0,0,0,.4);transition:box-shadow .3s,opacity .3s;backdrop-filter:blur(8px)}
+.archive-card.is-loading{opacity:.88;box-shadow:0 16px 32px rgba(0,0,0,.35)}
+.archive-card__head{margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:1px solid rgba(180,165,140,.25);text-align:center}
+.archive-card__title{margin:0 0 .25rem;font-size:clamp(1.35rem,3vw,1.6rem);font-weight:600;color:#e8e2d8;letter-spacing:.02em}
+.archive-card__desc{margin:0;font-size:.875rem;color:#9a8f7e;font-style:italic}
+.archive-card__form{display:flex;flex-direction:column;gap:1rem}
+.archive-field{position:relative;padding:.75rem 1rem;border:1px solid rgba(180,165,140,.25);border-radius:6px;background:rgba(15,14,12,.5);transition:border-color .3s,box-shadow .3s,background .3s;outline:2px solid transparent;outline-offset:2px}
+.archive-field:focus-within{border-color:#c4a35a;box-shadow:0 0 0 3px rgba(196,163,90,.2);outline-color:#c4a35a;background:rgba(15,14,12,.7)}
+.archive-field.has-focus{border-color:#c4a35a;box-shadow:0 0 0 3px rgba(196,163,90,.2);outline-color:#c4a35a;background:rgba(15,14,12,.7)}
+.archive-field.has-value:not(.has-focus){border-color:rgba(196,163,90,.5);background:rgba(15,14,12,.55)}
+.archive-field__label{display:block;margin-bottom:.35rem;font-size:.8125rem;font-weight:600;color:#9a8f7e;transition:color .3s}
+.archive-field.has-focus .archive-field__label,.archive-field:focus-within .archive-field__label{color:#c4a35a}
+.archive-field.has-value .archive-field__label{color:rgba(232,226,216,.95)}
+.archive-field__state{position:absolute;top:50%;right:1rem;transform:translateY(-50%);font-size:.875rem;color:#7a9e6a;opacity:0;transition:opacity .3s}
+.archive-field.has-value .archive-field__state,.archive-field:focus-within .archive-field__state{opacity:1}
+.archive-field__row+.archive-field__state{right:3.5rem}
+.archive-field__input{width:100%;padding:.2rem 0;padding-right:1.5rem;font-size:.9375rem;font-family:inherit;color:#e8e2d8;background:transparent;border:none;outline:none}
+.archive-field__input::placeholder{color:rgba(154,143,126,.6)}
+.archive-field__row{display:flex;align-items:center;gap:.5rem}
+.archive-field__row .archive-field__input{flex:1;padding-right:0}
+.archive-field__toggle{padding:.35rem .6rem;font-size:.75rem;font-weight:600;font-family:inherit;color:#9a8f7e;background:rgba(0,0,0,.2);border:1px solid rgba(180,165,140,.25);border-radius:4px;cursor:pointer;transition:color .3s,border-color .3s}
+.archive-field__toggle:hover{color:#c4a35a;border-color:#c4a35a}
+.archive-field__toggle:focus-visible{outline:2px solid #c4a35a;outline-offset:2px}
+.archive-btn{margin-top:.25rem;padding:.85rem 1.2rem;font-size:.9375rem;font-weight:600;font-family:inherit;color:#0f0e0c;background:#c4a35a;border:none;border-radius:6px;cursor:pointer;transition:background .3s,transform .3s,opacity .3s}
+.archive-btn:hover:not(:disabled){background:#d4b36a;transform:translateY(-1px)}
+.archive-btn:focus-visible{outline:2px solid #c4a35a;outline-offset:2px}
+.archive-btn:disabled{cursor:not-allowed;opacity:.7}
+.archive-btn.is-loading{pointer-events:none;opacity:.85}
+@media (max-width:480px){.archive-login{padding:1rem}.archive-card{padding:1rem}}
