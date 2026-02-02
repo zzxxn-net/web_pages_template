@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="로그인 — 다크 아카이브 · 단계 분할형 · 상태 변화 강조 시안">
+  <title>Login — Dark Archive Progressive</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/login.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+  <main class="login-archive-prog" role="main" aria-label="로그인">
+    <div class="login-archive-prog__box" x-data="archiveProgLogin()">
+      <div class="archive-steps" aria-hidden="true">
+        <span class="archive-step" :class="{ 'is-active': step === 1, 'is-done': step > 1 }">1</span>
+        <span class="archive-step__line" :class="{ 'is-done': step > 1 }"></span>
+        <span class="archive-step" :class="{ 'is-active': step === 2 }">2</span>
+      </div>
+      <header class="login-archive-prog__head">
+        <h1 class="login-archive-prog__title">Archive</h1>
+        <p class="login-archive-prog__desc" x-text="step === 1 ? '이메일을 입력하세요' : '비밀번호를 입력하세요'">이메일을 입력하세요</p>
+      </header>
+      <form class="login-archive-prog__form" action="#" method="post" autocomplete="on" @submit.prevent="handleSubmit" hx-post="#" hx-swap="none" hx-trigger="submit">
+        <div class="archive-panel" data-step="1" :class="{ 'is-hidden': step !== 1 }">
+          <div class="archive-field">
+            <label for="email" class="archive-field__label">이메일</label>
+            <input id="email" type="email" name="email" class="archive-field__input" placeholder="you@archive.example" autocomplete="email" required x-model="email" @keydown.enter.prevent="goStep2()">
+          </div>
+          <button type="button" class="archive-btn archive-btn--next" @click="goStep2" :disabled="!email.trim()">다음</button>
+        </div>
+        <div class="archive-panel" data-step="2" :class="{ 'is-hidden': step !== 2 }">
+          <div class="archive-field">
+            <label for="password" class="archive-field__label">비밀번호</label>
+            <div class="archive-field__wrap">
+              <input id="password" :type="showPassword ? 'text' : 'password'" name="password" class="archive-field__input" placeholder="••••••••" autocomplete="current-password" required x-model="password">
+              <button type="button" class="archive-field__toggle" aria-label="비밀번호 표시" @click="showPassword = !showPassword"><span x-text="showPassword ? '숨기기' : '보기'">보기</span></button>
+            </div>
+          </div>
+          <div class="archive-panel__actions">
+            <button type="button" class="archive-btn archive-btn--back" @click="goStep1">이전</button>
+            <button type="submit" class="archive-btn archive-btn--primary" :disabled="loading" :class="{ 'is-loading': loading }"><span x-show="!loading">로그인</span><span x-show="loading" x-cloak>확인 중…</span></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
