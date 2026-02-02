@@ -1,0 +1,49 @@
+// Design 15: Modern Fantasy · Card-separated · State change emphasis
+$color-bg: #1a1814;
+$color-surface: #252119;
+$color-card: #2c281f;
+$color-border: rgba(212, 180, 120, 0.2);
+$color-text: #e8e0d4;
+$color-text-muted: #9a8f7a;
+$color-accent: #c9a227;
+$color-glow: rgba(201, 162, 39, 0.25);
+$color-focus: rgba(201, 162, 39, 0.4);
+$radius: 16px;
+$radius-sm: 10px;
+$space-md: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$space-2xl: 3rem;
+$transition: 0.28s ease;
+$bp-mobile: 480px;
+
+*,*::before,*::after{box-sizing:border-box;}
+html{font-size:16px;-webkit-text-size-adjust:100%;}
+body{margin:0;min-height:100vh;min-height:100dvh;font-family:"Inter",Georgia,serif;font-weight:500;line-height:1.5;color:$color-text;background:$color-bg;display:flex;align-items:center;justify-content:center;padding:$space-md;}
+.login-fantasy{width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:$space-xl;min-height:100%;padding:$space-xl;}
+.login-fantasy__brand{text-align:center;padding:$space-lg $space-xl;background:$color-surface;border:1px solid $color-border;border-radius:$radius;width:100%;max-width:320px;}
+.login-fantasy__logo{display:block;font-size:2rem;color:$color-accent;margin-bottom:0.5rem;text-shadow:0 0 20px $color-glow;}
+.login-fantasy__tagline{margin:0;font-size:0.9375rem;color:$color-text-muted;}
+.login-fantasy__card{width:100%;max-width:320px;background:$color-card;border:1px solid $color-border;border-radius:$radius;padding:$space-2xl $space-xl;box-shadow:0 8px 32px rgba(0,0,0,0.35);}
+.login-fantasy__head{text-align:center;margin-bottom:$space-xl;}
+.login-fantasy__title{margin:0 0 0.5rem;font-size:clamp(1.375rem,3.5vw,1.625rem);font-weight:700;color:$color-text;}
+.login-fantasy__desc{margin:0;font-size:0.875rem;color:$color-text-muted;}
+.login-fantasy__form{display:flex;flex-direction:column;gap:$space-lg;}
+.fantasy-field{transition:border-color $transition,box-shadow $transition,background $transition;border-radius:$radius-sm;border:1px solid $color-border;background:rgba(0,0,0,0.15);padding:0.5rem $space-md;}
+.fantasy-field.is-filled{border-color:rgba(201,162,39,0.35);box-shadow:0 0 0 1px rgba(201,162,39,0.15);}
+.fantasy-field.is-focused{border-color:$color-accent;box-shadow:0 0 0 2px $color-focus;background:rgba(201,162,39,0.06);}
+.fantasy-field__label{display:block;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:$color-text-muted;margin-bottom:0.25rem;}
+.fantasy-field__input{width:100%;font:inherit;font-size:1rem;color:$color-text;background:transparent;border:none;padding:0.5rem 0;outline:none;}
+.fantasy-field__input::placeholder{color:$color-text-muted;opacity:0.8;}
+.fantasy-field__wrap{display:flex;align-items:center;gap:0.5rem;}
+.fantasy-field__wrap .fantasy-field__input{flex:1;min-width:0;}
+.fantasy-field__toggle{font:inherit;font-size:0.8125rem;color:$color-text-muted;background:none;border:1px solid $color-border;border-radius:6px;padding:0.25rem 0.5rem;cursor:pointer;transition:color $transition,border-color $transition;}
+.fantasy-field__toggle:hover{color:$color-accent;border-color:$color-accent;}
+.fantasy-field__toggle:focus-visible{outline:2px solid $color-accent;outline-offset:2px;}
+.fantasy-btn{margin-top:0.5rem;font:inherit;font-size:1rem;font-weight:600;color:$color-bg;background:$color-accent;border:none;border-radius:$radius-sm;padding:$space-md $space-xl;cursor:pointer;transition:transform $transition,box-shadow $transition,opacity $transition;box-shadow:0 4px 16px $color-glow;}
+.fantasy-btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 6px 20px $color-glow;}
+.fantasy-btn:focus-visible{outline:2px solid $color-accent;outline-offset:2px;}
+.fantasy-btn:disabled{cursor:not-allowed;}
+.fantasy-btn.is-loading{opacity:0.85;pointer-events:none;}
+.fantasy-btn__text{display:inline-block;}
+@media (max-width:$bp-mobile){.login-fantasy{padding:$space-md;gap:$space-lg;}.login-fantasy__card{padding:$space-xl $space-lg;}}
