@@ -1,0 +1,93 @@
+<!-- mvp -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — 네오 브루탈리즘 · 단일 포커스 · 포커스 이동 중심</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="shop-page-46" x-data="shopPage46()">
+    <div class="shop-page-46__center">
+      <header class="shop-page-46__header">
+        <h1 class="shop-page-46__title">SHOP</h1>
+        <p class="shop-page-46__lead">네오 브루탈리즘 · 단일 포커스 · 포커스 이동 중심 UX</p>
+      </header>
+      <div class="shop-page-46__focus-flow" id="shop-focus-46" role="list">
+        <article
+          class="card-46"
+          data-product="1"
+          tabindex="0"
+          role="listitem"
+          :class="{ 'card-46--focused': focusedId === 1 }"
+          @focus="setFocused(1)"
+          @click="setFocused(1)"
+        >
+          <img class="card-46__image" src="https://placehold.co/160x160/fff/000?text=1" alt="Product 1" width="160" height="160">
+          <div class="card-46__body">
+            <h2 class="card-46__name">Product 1</h2>
+            <p class="card-46__price">₩29,000</p>
+            <button type="button" class="btn-46" @click.stop="addToCart(1)">장바구니</button>
+          </div>
+        </article>
+        <article
+          class="card-46"
+          data-product="2"
+          tabindex="0"
+          role="listitem"
+          :class="{ 'card-46--focused': focusedId === 2 }"
+          @focus="setFocused(2)"
+          @click="setFocused(2)"
+        >
+          <img class="card-46__image" src="https://placehold.co/160x160/fff/000?text=2" alt="Product 2" width="160" height="160">
+          <div class="card-46__body">
+            <h2 class="card-46__name">Product 2</h2>
+            <p class="card-46__price">₩39,000</p>
+            <button type="button" class="btn-46" @click.stop="addToCart(2)">장바구니</button>
+          </div>
+        </article>
+        <article
+          class="card-46"
+          data-product="3"
+          tabindex="0"
+          role="listitem"
+          :class="{ 'card-46--focused': focusedId === 3 }"
+          @focus="setFocused(3)"
+          @click="setFocused(3)"
+        >
+          <img class="card-46__image" src="https://placehold.co/160x160/fff/000?text=3" alt="Product 3" width="160" height="160">
+          <div class="card-46__body">
+            <h2 class="card-46__name">Product 3</h2>
+            <p class="card-46__price">₩49,000</p>
+            <button type="button" class="btn-46" @click.stop="addToCart(3)">장바구니</button>
+          </div>
+        </article>
+        <article
+          class="card-46"
+          data-product="4"
+          tabindex="0"
+          role="listitem"
+          :class="{ 'card-46--focused': focusedId === 4 }"
+          @focus="setFocused(4)"
+          @click="setFocused(4)"
+        >
+          <img class="card-46__image" src="https://placehold.co/160x160/fff/000?text=4" alt="Product 4" width="160" height="160">
+          <div class="card-46__body">
+            <h2 class="card-46__name">Product 4</h2>
+            <p class="card-46__price">₩19,000</p>
+            <button type="button" class="btn-46" @click.stop="addToCart(4)">장바구니</button>
+          </div>
+        </article>
+      </div>
+      <footer class="shop-page-46__footer">
+        <span class="shop-page-46__cart" x-show="cart.length > 0">장바구니 <span x-text="cart.length"></span>개</span>
+      </footer>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>
