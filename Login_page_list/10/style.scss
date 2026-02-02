@@ -1,0 +1,218 @@
+// =============================================================================
+// Login Page — Design 10: Futuristic Clean · Single focus · Input-reactive
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Variables (미래적 클린: light, blue accent)
+// -----------------------------------------------------------------------------
+$color-bg: #f0f4f8;
+$color-surface: #ffffff;
+$color-border: #e2e8f0;
+$color-text: #0f172a;
+$color-text-muted: #64748b;
+$color-accent: #0ea5e9;
+$color-accent-dim: rgba(14, 165, 233, 0.2);
+$radius: 12px;
+$radius-sm: 8px;
+$space-xs: 0.25rem;
+$space-sm: 0.5rem;
+$space-md: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+$transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$bp-mobile: 480px;
+
+// -----------------------------------------------------------------------------
+// Base & center layout
+// -----------------------------------------------------------------------------
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: $font-sans;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $color-text;
+  background: $color-bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-md;
+}
+
+.login-future-focus {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  padding: $space-xl;
+}
+
+.login-future-focus__center {
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-future-focus__title {
+  margin: 0 0 $space-sm;
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: $color-text;
+  text-align: center;
+}
+
+.login-future-focus__desc {
+  margin: 0 0 $space-xl;
+  font-size: 0.9375rem;
+  color: $color-text-muted;
+  text-align: center;
+}
+
+.login-future-focus__form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xl;
+}
+
+// -----------------------------------------------------------------------------
+// Single focus input flow + input-reactive
+// -----------------------------------------------------------------------------
+.focus-field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+  transition: transform $transition, opacity $transition;
+
+  &.is-active {
+    transform: scale(1.02);
+    opacity: 1;
+  }
+
+  &:not(.is-active) {
+    opacity: 0.88;
+  }
+}
+
+.focus-field__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: $color-text-muted;
+  transition: color $transition, transform $transition;
+}
+
+.focus-field.is-active .focus-field__label {
+  color: $color-accent;
+}
+
+.focus-field__input {
+  width: 100%;
+  padding: $space-md $space-lg;
+  font-size: 1rem;
+  font-family: inherit;
+  color: $color-text;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-sm;
+  transition: border-color $transition, box-shadow $transition, padding $transition;
+
+  &::placeholder {
+    color: $color-text-muted;
+    opacity: 0.8;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent;
+    box-shadow: 0 0 0 3px $color-accent-dim;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.focus-field.is-active .focus-field__input {
+  padding: $space-lg $space-xl;
+  border-color: $color-accent;
+}
+
+.focus-field__wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .focus-field__input {
+    padding-inline-end: 4rem;
+  }
+}
+
+.focus-field__toggle {
+  position: absolute;
+  right: $space-md;
+  font-size: 0.8125rem;
+  color: $color-text-muted;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: $space-sm;
+  transition: color $transition;
+
+  &:hover {
+    color: $color-accent;
+  }
+}
+
+.focus-btn {
+  width: 100%;
+  margin-top: $space-sm;
+  padding: $space-md $space-lg;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: inherit;
+  color: #fff;
+  background: $color-accent;
+  border: none;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: background $transition, transform 0.15s ease;
+
+  &:hover:not(:disabled) {
+    background: darken($color-accent, 8%);
+    transform: scale(1.01);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.99);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+@media (max-width: $bp-mobile) {
+  .login-future-focus {
+    padding: $space-lg;
+  }
+}
