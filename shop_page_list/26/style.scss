@@ -1,0 +1,203 @@
+// mvp
+$bp-mobile: 480px;
+$bp-tablet: 768px;
+$bp-desktop: 1024px;
+$color-bg: #0a0e14;
+$color-surface: #131920;
+$color-border: #1e2633;
+$color-text: #e6edf3;
+$color-muted: #8b949e;
+$color-accent: #22d3ee;
+$color-success: #34d399;
+$radius: 10px;
+$ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+.shop-page-26 {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  background: $color-bg;
+  color: $color-text;
+}
+
+.shop-page-26__container {
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.shop-page-26__title {
+  text-align: center;
+  font-size: clamp(1.2rem, 3vw, 1.45rem);
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  color: $color-text;
+  letter-spacing: 0.02em;
+}
+
+.shop-page-26__steps {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.shop-page-26__step {
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid $color-border;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $color-muted;
+  transition: border-color 0.3s $ease, background 0.3s $ease, color 0.3s $ease;
+}
+
+.shop-page-26__step--active {
+  border-color: $color-accent;
+  background: $color-accent;
+  color: $color-bg;
+}
+
+.shop-page-26__content {
+  position: relative;
+  width: 100%;
+  min-height: 220px;
+}
+
+.shop-page-26__panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.shop-page-26__lead {
+  color: $color-muted;
+  font-size: 0.9rem;
+  margin: 0 0 1.25rem;
+}
+
+.shop-page-26__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  width: 100%;
+  justify-items: center;
+}
+
+.card-26 {
+  width: 100%;
+  max-width: 170px;
+  background: $color-surface;
+  border: 2px solid $color-border;
+  border-radius: $radius;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: border-color 0.3s $ease, box-shadow 0.3s $ease;
+}
+
+.card-26:hover {
+  border-color: $color-muted;
+}
+
+.card-26--focused {
+  border-color: $color-accent;
+  box-shadow: 0 0 0 2px rgba($color-accent, 0.3);
+}
+
+.card-26--in-cart {
+  border-color: $color-success;
+  box-shadow: 0 0 0 2px rgba($color-success, 0.25);
+}
+
+.card-26__image {
+  width: 100%;
+  max-width: 120px;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.card-26__body {
+  text-align: center;
+  width: 100%;
+}
+
+.card-26__name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  color: $color-text;
+}
+
+.card-26__price {
+  font-size: 0.85rem;
+  color: $color-accent;
+  margin: 0 0 0.5rem;
+}
+
+.btn-26 {
+  padding: 0.5rem 1rem;
+  border-radius: $radius;
+  border: 1px solid $color-accent;
+  background: transparent;
+  color: $color-accent;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.25s $ease, color 0.25s $ease, border-color 0.25s $ease;
+}
+
+.btn-26:hover {
+  background: $color-accent;
+  color: $color-bg;
+}
+
+.btn-26--primary {
+  background: $color-accent;
+  color: $color-bg;
+}
+
+.btn-26--primary:hover {
+  background: lighten($color-accent, 8%);
+  color: $color-bg;
+}
+
+.btn-26--sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+}
+
+.btn-26--added {
+  background: $color-success;
+  border-color: $color-success;
+  color: $color-bg;
+}
+
+.btn-26--added:hover {
+  background: lighten($color-success, 6%);
+}
+
+@media (min-width: $bp-tablet) {
+  .shop-page-26__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+  .card-26 {
+    max-width: 140px;
+  }
+}
