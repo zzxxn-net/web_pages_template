@@ -1,0 +1,28 @@
+/* Design 22: Futuristic Clean · Card-separated · Scroll-free fixed */
+*,*::before,*::after{box-sizing:border-box;}
+html{font-size:16px;-webkit-text-size-adjust:100%;}
+body{margin:0;min-height:100vh;min-height:100dvh;font-family:"Inter",-apple-system,sans-serif;font-weight:500;line-height:1.5;color:#0f172a;background:#f0f4f8;display:flex;align-items:center;justify-content:center;padding:1rem;overflow:auto;}
+.login-future-card{width:100%;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;padding:2rem;overflow:hidden;}
+.login-future-card__brand{text-align:center;padding:1.25rem 1.5rem;background:#fff;border:1px solid #e2e8f0;border-radius:14px;width:100%;max-width:280px;box-shadow:0 2px 8px rgba(0,0,0,0.04);}
+.login-future-card__logo{display:block;font-size:1.5rem;color:#2563eb;margin-bottom:0.25rem;}
+.login-future-card__tagline{margin:0;font-size:0.875rem;font-weight:600;color:#64748b;}
+.login-future-card__form-card{width:100%;max-width:340px;background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:2rem 1.5rem;box-shadow:0 4px 16px rgba(0,0,0,0.06);}
+.login-future-card__head{margin-bottom:1.5rem;}
+.login-future-card__title{margin:0 0 0.25rem;font-size:clamp(1.375rem,3vw,1.5rem);font-weight:700;letter-spacing:-0.02em;color:#0f172a;}
+.login-future-card__desc{margin:0;font-size:0.875rem;color:#64748b;}
+.login-future-card__form{display:flex;flex-direction:column;gap:1.25rem;}
+.future-card-field{margin-bottom:1.25rem;}
+.future-card-field__label{display:block;font-size:0.8125rem;font-weight:600;color:#64748b;margin-bottom:0.35rem;}
+.future-card-field__input{width:100%;font:inherit;font-size:1rem;color:#0f172a;background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:1rem;outline:none;transition:border-color 0.25s ease;}
+.future-card-field__input::placeholder{color:#64748b;}
+.future-card-field__input:focus{border-color:#2563eb;}
+.future-card-field__wrap{display:flex;align-items:center;gap:1rem;}
+.future-card-field__wrap .future-card-field__input{flex:1;min-width:0;}
+.future-card-field__toggle{font:inherit;font-size:0.8125rem;color:#64748b;background:none;border:1px solid #e2e8f0;border-radius:6px;padding:0.25rem 0.5rem;cursor:pointer;transition:color 0.25s ease,border-color 0.25s ease;}
+.future-card-field__toggle:hover{color:#2563eb;border-color:#2563eb;}
+.future-card-field__toggle:focus-visible{outline:2px solid #2563eb;outline-offset:2px;}
+.future-card-btn{margin-top:1rem;font:inherit;font-size:1rem;font-weight:600;color:#fff;background:#2563eb;border:none;border-radius:10px;padding:1rem 1.5rem;cursor:pointer;transition:opacity 0.25s ease,transform 0.25s ease;}
+.future-card-btn:hover:not(:disabled){opacity:0.95;transform:translateY(-1px);}
+.future-card-btn:focus-visible{outline:2px solid #2563eb;outline-offset:2px;}
+.future-card-btn:disabled{opacity:0.7;cursor:not-allowed;}
+@media (max-width:480px){.login-future-card{padding:1rem;gap:1.25rem;}.login-future-card__form-card{padding:1.5rem 1.25rem;}}
