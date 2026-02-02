@@ -1,0 +1,256 @@
+// =============================================================================
+// Login Page — Design 12: Emotional Tech · Asymmetric · GSAP smooth transition
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Variables (감성 테크: soft, warm)
+// -----------------------------------------------------------------------------
+$color-bg: #f5f3fa;
+$color-visual: linear-gradient(165deg, #e8e4f5 0%, #e0f0f8 50%, #f0e8f5 100%);
+$color-surface: #ffffff;
+$color-border: rgba(139, 124, 240, 0.2);
+$color-text: #2d2a3a;
+$color-text-muted: #6b6578;
+$color-accent: #8b7cf0;
+$color-accent-hover: #7c6cf0;
+$color-focus: rgba(139, 124, 240, 0.25);
+$radius: 16px;
+$radius-sm: 10px;
+$space-xs: 0.25rem;
+$space-sm: 0.5rem;
+$space-md: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$space-2xl: 3rem;
+$font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+$transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$bp-mobile: 768px;
+$bp-asymmetric: 880px;
+
+// -----------------------------------------------------------------------------
+// Base & asymmetric layout
+// -----------------------------------------------------------------------------
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: $font-sans;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $color-text;
+  background: $color-bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.login-emotional-asym {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  @media (min-width: $bp-asymmetric) {
+    flex-direction: row;
+    max-width: 960px;
+    margin: 0 auto;
+    min-height: 540px;
+    border-radius: $radius;
+    overflow: hidden;
+    box-shadow: 0 24px 56px -16px rgba(139, 124, 240, 0.2);
+  }
+}
+
+.login-emotional-asym__visual {
+  width: 100%;
+  min-height: 160px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+  background: $color-visual;
+
+  @media (min-width: $bp-asymmetric) {
+    width: 40%;
+    min-height: auto;
+    padding: $space-2xl;
+  }
+}
+
+.login-emotional-asym__gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(139, 124, 240, 0.08) 0%, rgba(99, 102, 241, 0.06) 100%);
+  pointer-events: none;
+}
+
+.login-emotional-asym__tagline {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-weight: 600;
+  color: rgba(45, 42, 58, 0.7);
+  letter-spacing: 0.02em;
+}
+
+.login-emotional-asym__form-section {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-2xl $space-xl;
+  background: $color-surface;
+
+  @media (min-width: $bp-asymmetric) {
+    width: 60%;
+    padding: $space-2xl $space-xl;
+  }
+}
+
+.login-emotional-asym__panel {
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-emotional-asym__title {
+  margin: 0 0 $space-sm;
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 600;
+  color: $color-text;
+  letter-spacing: -0.02em;
+}
+
+.login-emotional-asym__desc {
+  margin: 0 0 $space-xl;
+  font-size: 0.9375rem;
+  color: $color-text-muted;
+}
+
+.login-emotional-asym__form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+
+.emotion-field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+}
+
+.emotion-field__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: $color-text-muted;
+}
+
+.emotion-field__input {
+  width: 100%;
+  padding: $space-md $space-lg;
+  font-size: 1rem;
+  font-family: inherit;
+  color: $color-text;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid $color-border;
+  border-radius: $radius-sm;
+  transition: border-color $transition, box-shadow $transition;
+
+  &::placeholder {
+    color: $color-text-muted;
+    opacity: 0.75;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent;
+    box-shadow: 0 0 0 3px $color-focus;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.emotion-field__wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .emotion-field__input {
+    padding-inline-end: 4rem;
+  }
+}
+
+.emotion-field__toggle {
+  position: absolute;
+  right: $space-md;
+  font-size: 0.8125rem;
+  color: $color-text-muted;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: $space-sm;
+  transition: color $transition;
+
+  &:hover {
+    color: $color-accent;
+  }
+}
+
+.emotion-btn {
+  width: 100%;
+  margin-top: $space-sm;
+  padding: $space-md $space-lg;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #fff;
+  background: $color-accent;
+  border: none;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: background $transition, transform 0.15s ease;
+
+  &:hover:not(:disabled) {
+    background: $color-accent-hover;
+    transform: scale(1.01);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.99);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+@media (max-width: $bp-mobile) {
+  .login-emotional-asym__form-section {
+    padding: $space-xl $space-lg;
+  }
+}
