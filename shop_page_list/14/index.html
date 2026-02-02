@@ -1,0 +1,55 @@
+<!-- mvp -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — 네오 브루탈리즘</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="shop-page-14" x-data="shopPage14()">
+    <div class="shop-page-14__container">
+      <h1 class="shop-page-14__title">Shop</h1>
+      <div class="shop-page-14__grid" id="shop-grid-14">
+        <article class="card-14" data-product="1" tabindex="0">
+          <img class="card-14__image" src="https://placehold.co/220x220/fff/0a0a0a?text=1" alt="Product 1" width="220" height="220">
+          <div class="card-14__body">
+            <h2 class="card-14__name">Product 1</h2>
+            <p class="card-14__price">₩29,000</p>
+            <button type="button" class="btn-14" @click="addToCart(1)">장바구니</button>
+          </div>
+        </article>
+        <article class="card-14" data-product="2" tabindex="0">
+          <img class="card-14__image" src="https://placehold.co/220x220/fff/0a0a0a?text=2" alt="Product 2" width="220" height="220">
+          <div class="card-14__body">
+            <h2 class="card-14__name">Product 2</h2>
+            <p class="card-14__price">₩39,000</p>
+            <button type="button" class="btn-14" @click="addToCart(2)">장바구니</button>
+          </div>
+        </article>
+        <article class="card-14" data-product="3" tabindex="0">
+          <img class="card-14__image" src="https://placehold.co/220x220/fff/0a0a0a?text=3" alt="Product 3" width="220" height="220">
+          <div class="card-14__body">
+            <h2 class="card-14__name">Product 3</h2>
+            <p class="card-14__price">₩49,000</p>
+            <button type="button" class="btn-14" @click="addToCart(3)">장바구니</button>
+          </div>
+        </article>
+        <article class="card-14" data-product="4" tabindex="0">
+          <img class="card-14__image" src="https://placehold.co/220x220/fff/0a0a0a?text=4" alt="Product 4" width="220" height="220">
+          <div class="card-14__body">
+            <h2 class="card-14__name">Product 4</h2>
+            <p class="card-14__price">₩19,000</p>
+            <button type="button" class="btn-14" @click="addToCart(4)">장바구니</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

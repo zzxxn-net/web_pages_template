@@ -1,0 +1,122 @@
+/* mvp */
+.shop-page-14 {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  background: #fafafa;
+  color: #0a0a0a;
+}
+
+.shop-page-14__container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.shop-page-14__title {
+  text-align: center;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  color: #0a0a0a;
+  letter-spacing: -0.02em;
+}
+
+.shop-page-14__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  justify-items: center;
+}
+
+@media (min-width: 768px) {
+  .shop-page-14__grid {
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .shop-page-14__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.card-14 {
+  width: 100%;
+  max-width: 260px;
+  background: #fff;
+  border: 3px solid #0a0a0a;
+  border-radius: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.card-14:focus {
+  outline: none;
+}
+
+.card-14:focus-visible {
+  box-shadow: 0 0 0 4px rgba(10, 10, 10, 0.3);
+}
+
+.card-14__image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-bottom: 3px solid #0a0a0a;
+}
+
+.card-14__body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.card-14__name {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 0.35rem;
+  color: #0a0a0a;
+}
+
+.card-14__price {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  color: #0a0a0a;
+}
+
+.btn-14 {
+  padding: 0.6rem 1.2rem;
+  border: 3px solid #0a0a0a;
+  border-radius: 0;
+  background: #fff;
+  color: #0a0a0a;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn-14:hover {
+  background: #0a0a0a;
+  color: #fff;
+}
+
+.btn-14:focus {
+  outline: none;
+}
+
+.btn-14:focus-visible {
+  outline: 2px solid #0a0a0a;
+  outline-offset: 2px;
+}
