@@ -1,0 +1,134 @@
+// mvp
+$bp-tablet: 768px;
+$color-bg: #f1f5f9;
+$color-surface: #ffffff;
+$color-border: #e2e8f0;
+$color-text: #0f172a;
+$color-muted: #64748b;
+$color-accent: #3b82f6;
+$radius: 12px;
+$ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+.shop-page-35 {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  background: $color-bg;
+  color: $color-text;
+}
+
+.shop-page-35__full {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.shop-page-35__title {
+  text-align: center;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  letter-spacing: 0.02em;
+  color: $color-text;
+}
+
+.shop-page-35__lead {
+  text-align: center;
+  font-size: 0.85rem;
+  color: $color-muted;
+  margin: 0 0 1.5rem;
+}
+
+.shop-page-35__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  justify-items: center;
+  width: 100%;
+}
+
+.card-35 {
+  width: 100%;
+  max-width: 200px;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  transition: border-color 0.25s $ease, box-shadow 0.25s $ease;
+  box-sizing: border-box;
+}
+
+.card-35:hover {
+  border-color: darken($color-border, 10%);
+}
+
+.card-35:focus-within {
+  border-color: $color-accent;
+  box-shadow: 0 0 0 2px rgba($color-accent, 0.15);
+}
+
+.card-35__image {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 0.75rem;
+}
+
+.card-35__body {
+  text-align: center;
+  width: 100%;
+}
+
+.card-35__name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 0.3rem;
+  color: $color-text;
+}
+
+.card-35__price {
+  font-size: 0.9rem;
+  color: $color-muted;
+  margin: 0 0 0.6rem;
+}
+
+.btn-35 {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: 1px solid $color-accent;
+  background: transparent;
+  color: $color-accent;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.25s $ease, color 0.25s $ease, border-color 0.25s $ease;
+}
+
+.btn-35:hover {
+  background: rgba($color-accent, 0.08);
+  border-color: darken($color-accent, 6%);
+  color: darken($color-accent, 8%);
+}
+
+.btn-35:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px $color-bg, 0 0 0 4px $color-accent;
+}
+
+@media (min-width: $bp-tablet) {
+  .shop-page-35__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+}
