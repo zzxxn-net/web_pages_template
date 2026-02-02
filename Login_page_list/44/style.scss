@@ -1,0 +1,213 @@
+// Design 44: Cyber Minimal · Progressive Form · Scroll-free fixed flow
+$bg: #eef1f5;
+$card: #ffffff;
+$border: #e2e8f0;
+$text: #2d3748;
+$muted: #718096;
+$accent: #3182ce;
+$radius: 12px;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; overflow: hidden; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+  overflow: hidden;
+}
+
+.login-cyber-prog {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+  overflow: hidden;
+}
+.login-cyber-prog__box {
+  width: 100%;
+  max-width: 380px;
+  background: $card;
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: $space-xl;
+  box-shadow: 0 4px 24px rgba(45, 55, 72, 0.06);
+}
+
+.cyber-prog-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: $space-xl;
+}
+.cyber-prog-dot {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: $muted;
+  border: 1px solid $border;
+  border-radius: 50%;
+  transition: color $ease, border-color $ease, background $ease;
+}
+.cyber-prog-dot.is-active {
+  color: $accent;
+  border-color: $accent;
+  background: rgba($accent, 0.08);
+}
+.cyber-prog-dot.is-done {
+  color: $card;
+  border-color: $accent;
+  background: $accent;
+}
+.cyber-prog-line {
+  width: 24px;
+  height: 2px;
+  background: $border;
+  transition: background $ease;
+}
+.cyber-prog-line.is-done { background: $accent; }
+
+.login-cyber-prog__head { margin-bottom: $space-lg; text-align: center; }
+.login-cyber-prog__title {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.25rem, 3vw, 1.375rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: $text;
+}
+.login-cyber-prog__desc {
+  margin: 0;
+  font-size: 0.875rem;
+  color: $muted;
+}
+.login-cyber-prog__form { position: relative; min-height: 140px; }
+
+.cyber-prog-panel {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+  transition: opacity $ease;
+}
+.cyber-prog-panel.is-hidden {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.cyber-prog-field {
+  padding: $space $space-lg;
+  border: 1px solid $border;
+  border-radius: 8px;
+  background: $card;
+  transition: border-color $ease, box-shadow $ease;
+}
+.cyber-prog-field:focus-within {
+  border-color: $accent;
+  box-shadow: 0 0 0 2px rgba($accent, 0.15);
+}
+.cyber-prog-field__label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: $muted;
+  margin-bottom: 0.4rem;
+}
+.cyber-prog-field__input {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  color: $text;
+  background: transparent;
+  border: none;
+  padding: 0.25rem 0;
+  outline: none;
+}
+.cyber-prog-field__input::placeholder { color: $muted; }
+.cyber-prog-field__row { display: flex; align-items: center; gap: $space; }
+.cyber-prog-field__row .cyber-prog-field__input { flex: 1; min-width: 0; }
+.cyber-prog-field__toggle {
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: $accent;
+  background: none;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: opacity $ease;
+}
+.cyber-prog-field__toggle:hover { opacity: 0.85; }
+.cyber-prog-field__toggle:focus-visible { outline: 2px solid $accent; outline-offset: 2px; }
+
+.cyber-prog-btn {
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: $space $space-xl;
+  border-radius: 8px;
+  border: 1px solid $border;
+  cursor: pointer;
+  transition: border-color $ease, background $ease, color $ease;
+}
+.cyber-prog-btn--next {
+  color: $card;
+  background: $accent;
+  border-color: $accent;
+}
+.cyber-prog-btn--next:hover:not(:disabled) { background: #2b6cb0; border-color: #2b6cb0; }
+.cyber-prog-btn--next:disabled { opacity: 0.5; cursor: not-allowed; }
+.cyber-prog-btn--back {
+  color: $muted;
+  background: $card;
+}
+.cyber-prog-btn--back:hover { border-color: $muted; color: $text; }
+.cyber-prog-btn--primary {
+  color: $card;
+  background: $accent;
+  border-color: $accent;
+}
+.cyber-prog-btn--primary:hover:not(:disabled) { background: #2b6cb0; border-color: #2b6cb0; }
+.cyber-prog-btn--primary:disabled { opacity: 0.7; cursor: not-allowed; }
+.cyber-prog-btn--primary.is-loading { pointer-events: none; }
+.cyber-prog-btn:focus-visible { outline: 2px solid $accent; outline-offset: 2px; }
+
+.cyber-prog-actions {
+  display: flex;
+  gap: $space;
+  margin-top: 0.5rem;
+}
+.cyber-prog-actions .cyber-prog-btn--back { flex: 0 0 auto; }
+.cyber-prog-actions .cyber-prog-btn--primary { flex: 1; min-width: 0; }
+
+@media (max-width: $bp) {
+  .login-cyber-prog { padding: $space; }
+  .login-cyber-prog__box { padding: $space-lg; }
+}
+
+[x-cloak] { display: none !important; }
