@@ -1,0 +1,193 @@
+// Design 81: Experimental Interface, Micro Interaction Centric, Scroll-free Fixed Flow
+$bg-start: #1a0a2e;
+$bg-end: #16213e;
+$glass: rgba(255, 255, 255, 0.08);
+$glass-border: rgba(255, 255, 255, 0.12);
+$text: #e8e4f0;
+$muted: #a0a0b8;
+$accent: #7c3aed;
+$accent-glow: rgba(124, 58, 237, 0.35);
+$radius: 20px;
+$space: 1rem;
+$space-lg: 1.25rem;
+$ease: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "DM Sans", "Inter", system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  color: $text;
+  background: linear-gradient(135deg, $bg-start 0%, $bg-end 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+  overflow: hidden;
+}
+
+.exp-login {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-lg;
+  overflow: auto;
+}
+
+.exp-login__bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, $bg-start 0%, $bg-end 100%);
+  pointer-events: none;
+}
+
+.exp-login__wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+}
+
+.exp-card {
+  padding: $space-lg;
+  background: $glass;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid $glass-border;
+  border-radius: $radius;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
+  transition: transform $ease, box-shadow $ease;
+  &:hover {
+    box-shadow: 0 20px 56px rgba(0, 0, 0, 0.3);
+  }
+  &.is-loading {
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.exp-card__title {
+  margin: 0 0 0.25rem;
+  font-size: clamp(1.35rem, 3.2vw, 1.6rem);
+  font-weight: 600;
+  color: $text;
+}
+.exp-card__desc {
+  margin: 0 0 $space;
+  font-size: 0.875rem;
+  color: $muted;
+}
+.exp-card__form {
+  display: flex;
+  flex-direction: column;
+  gap: $space;
+}
+
+.exp-field {
+  padding: 0.8rem 1rem;
+  border: 1px solid $glass-border;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  transition: border-color $ease, box-shadow $ease, transform $ease, background $ease;
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+  &.has-focus {
+    border-color: $accent;
+    box-shadow: 0 0 0 3px $accent-glow;
+    background: rgba(255, 255, 255, 0.06);
+    transform: scale(1.01);
+  }
+  &.has-value:not(.has-focus) {
+    border-color: rgba($accent, 0.5);
+  }
+}
+
+.exp-field__label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $muted;
+  transition: color $ease, transform $ease;
+}
+.exp-field.has-focus .exp-field__label {
+  color: $accent;
+}
+
+.exp-field__input {
+  width: 100%;
+  padding: 0.2rem 0;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.exp-field__input::placeholder { color: rgba($muted, 0.7); }
+
+.exp-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.exp-field__row .exp-field__input { flex: 1; }
+
+.exp-field__toggle {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: $muted;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid $glass-border;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: color $ease, background $ease, transform $ease;
+  &:hover {
+    color: $accent;
+    background: rgba($accent, 0.15);
+    transform: scale(1.05);
+  }
+  &:active { transform: scale(0.98); }
+}
+
+.exp-btn {
+  margin-top: 0.5rem;
+  padding: 0.85rem 1.2rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #fff;
+  background: $accent;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background $ease, transform $ease, box-shadow $ease;
+  box-shadow: 0 4px 14px $accent-glow;
+  &:hover:not(:disabled) {
+    background: lighten($accent, 6%);
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba($accent, 0.45);
+  }
+  &:active:not(:disabled) { transform: scale(0.98); }
+  &:disabled { cursor: not-allowed; opacity: 0.7; }
+  &.is-loading {
+    pointer-events: none;
+    transform: scale(0.98);
+    box-shadow: 0 2px 10px rgba($accent, 0.25);
+  }
+}
+
+@media (max-width: $bp) {
+  .exp-login { padding: $space; }
+  .exp-card { padding: $space; }
+  body { overflow: auto; }
+}
