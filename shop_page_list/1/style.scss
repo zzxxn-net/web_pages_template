@@ -1,0 +1,136 @@
+// mvp
+@use "sass:math";
+
+$bp-mobile: 480px;
+$bp-tablet: 768px;
+$bp-desktop: 1024px;
+$color-bg: #0a0e14;
+$color-surface: #131920;
+$color-border: #1e2633;
+$color-text: #e6edf3;
+$color-muted: #8b949e;
+$color-accent: #58a6ff;
+$radius: 12px;
+$card-gap: 1.5rem;
+
+.shop-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  background: $color-bg;
+  color: $color-text;
+}
+
+.shop-page__container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.shop-page__title {
+  text-align: center;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: $color-text;
+}
+
+.shop-page__grid {
+  display: grid;
+  gap: $card-gap;
+  grid-template-columns: 1fr;
+  justify-items: center;
+
+  @media (min-width: $bp-tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: $bp-desktop) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.product-card {
+  width: 100%;
+  max-width: 280px;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: border-color 0.2s ease, transform 0.25s ease;
+
+  &:hover {
+    border-color: $color-accent;
+    transform: translateY(-2px);
+  }
+}
+
+.product-card__image {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  background: $color-border;
+}
+
+.product-card__body {
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-card__name {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: $color-text;
+}
+
+.product-card__price {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: $color-accent;
+  margin-bottom: 0.75rem;
+}
+
+.product-card__actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid $color-border;
+  background: $color-surface;
+  color: $color-text;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background 0.2s, border-color 0.2s;
+
+  &:hover {
+    background: $color-border;
+    border-color: $color-muted;
+  }
+
+  &--primary {
+    background: $color-accent;
+    border-color: $color-accent;
+    color: $color-bg;
+
+    &:hover {
+      filter: brightness(1.1);
+    }
+  }
+}
