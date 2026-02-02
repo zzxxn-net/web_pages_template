@@ -1,0 +1,169 @@
+/* Design 82: Modern Fantasy, Card Separated Layout, Focus Movement Centric UX */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Cormorant Garamond", "Georgia", serif;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #e8e0d8;
+  background: #1c1624;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.fantasy-login {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  overflow: auto;
+}
+
+.fantasy-login__wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 420px;
+}
+
+.fantasy-header {
+  padding: 1.25rem;
+  background: rgba(44, 36, 52, 0.9);
+  border: 1px solid rgba(212, 180, 140, 0.2);
+  border-radius: 16px;
+  text-align: center;
+}
+
+.fantasy-header__title {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.5rem, 3.5vw, 1.75rem);
+  font-weight: 600;
+  color: #e8e0d8;
+  letter-spacing: 0.02em;
+}
+.fantasy-header__desc {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: #a89888;
+}
+
+.fantasy-form-card {
+  padding: 1.25rem;
+  background: rgba(52, 42, 62, 0.92);
+  border: 1px solid rgba(212, 180, 140, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fantasy-form-card.is-loading {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.fantasy-form-card__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.fantasy-field {
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(212, 180, 140, 0.2);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.15);
+  transition: border-color 0.3s, box-shadow 0.3s, outline-offset 0.3s;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.fantasy-field:focus-within {
+  border-color: #c9a86c;
+  box-shadow: 0 0 0 3px rgba(201, 168, 108, 0.2);
+  outline-color: #c9a86c;
+}
+.fantasy-field.has-focus {
+  border-color: #c9a86c;
+  box-shadow: 0 0 0 3px rgba(201, 168, 108, 0.2);
+  outline-color: #c9a86c;
+}
+.fantasy-field.has-value:not(.has-focus) {
+  border-color: rgba(201, 168, 108, 0.4);
+}
+
+.fantasy-field__label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #a89888;
+  transition: color 0.3s;
+}
+.fantasy-field.has-focus .fantasy-field__label,
+.fantasy-field:focus-within .fantasy-field__label {
+  color: #c9a86c;
+}
+
+.fantasy-field__input {
+  width: 100%;
+  padding: 0.2rem 0;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  color: #e8e0d8;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.fantasy-field__input::placeholder { color: rgba(168, 152, 136, 0.7); }
+.fantasy-field__input:focus { outline: none; }
+
+.fantasy-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.fantasy-field__row .fantasy-field__input { flex: 1; }
+
+.fantasy-field__toggle {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #a89888;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(212, 180, 140, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: color 0.3s, border-color 0.3s;
+}
+.fantasy-field__toggle:hover { color: #c9a86c; border-color: #c9a86c; }
+.fantasy-field__toggle:focus-visible { outline: 2px solid #c9a86c; outline-offset: 2px; }
+
+.fantasy-btn {
+  margin-top: 0.25rem;
+  padding: 0.85rem 1.2rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #1c1624;
+  background: #c9a86c;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+.fantasy-btn:hover:not(:disabled) { background: #d4b87c; transform: translateY(-1px); }
+.fantasy-btn:focus-visible { outline: 2px solid #c9a86c; outline-offset: 2px; }
+.fantasy-btn:disabled { cursor: not-allowed; opacity: 0.7; }
+.fantasy-btn.is-loading { pointer-events: none; opacity: 0.85; }
+
+@media (max-width: 480px) {
+  .fantasy-login { padding: 1rem; }
+  .fantasy-header,
+  .fantasy-form-card { padding: 1rem; }
+}
