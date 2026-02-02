@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="로그인 — 미래적 클린 · 비대칭 레이아웃 시안">
+  <title>Login — Futuristic Clean</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/login.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+  <main class="login-asymmetric" role="main" aria-label="로그인">
+    <aside class="login-asymmetric__visual" aria-hidden="true">
+      <div class="login-visual__gradient"></div>
+      <div class="login-visual__shape" data-shape></div>
+      <div class="login-visual__label">Welcome</div>
+    </aside>
+    <section class="login-asymmetric__form-wrap">
+      <div class="login-form-panel" x-data="loginPanel()">
+        <header class="login-form-panel__head">
+          <h1 class="login-form-panel__title">Sign in</h1>
+          <p class="login-form-panel__desc">이메일과 비밀번호를 입력하세요</p>
+        </header>
+
+        <form class="login-form-panel__form" action="#" method="post" autocomplete="on" @submit.prevent="handleSubmit" hx-post="#" hx-swap="none" hx-trigger="submit">
+          <div class="input-row" data-focus-group>
+            <label for="email" class="input-row__label">이메일</label>
+            <input id="email" type="email" name="email" class="input-row__input" placeholder="you@example.com" autocomplete="email" required x-model="email" tabindex="0" @focus="onFocus($event)" @blur="onBlur">
+          </div>
+          <div class="input-row" data-focus-group>
+            <label for="password" class="input-row__label">비밀번호</label>
+            <div class="input-row__wrap">
+              <input id="password" :type="showPassword ? 'text' : 'password'" name="password" class="input-row__input" placeholder="••••••••" autocomplete="current-password" required x-model="password" tabindex="0" @focus="onFocus($event)" @blur="onBlur">
+              <button type="button" class="input-row__toggle" aria-label="비밀번호 표시" tabindex="0" @click="showPassword = !showPassword">보기</button>
+            </div>
+          </div>
+          <div class="form-panel__actions">
+            <button type="submit" class="btn-primary" :disabled="loading" :aria-busy="loading" tabindex="0">
+              <span x-show="!loading">로그인</span>
+              <span x-show="loading" x-cloak>처리 중…</span>
+            </button>
+          </div>
+        </form>
+
+        <footer class="login-form-panel__foot">
+          <a href="#" class="link">비밀번호 찾기</a>
+          <a href="#" class="link">회원가입</a>
+        </footer>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
