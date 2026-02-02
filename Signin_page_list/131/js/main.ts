@@ -90,6 +90,7 @@ function signupForm131(): Record<string, unknown> {
       delete e.passwordConfirm;
     },
 
+    // MVP: 제출 시 전체 유효성 검사 후 에러 있으면 멈춤, 없으면 submitting 상태로 제출 처리
     handleSubmit(): void {
       const t = this as Record<string, unknown>;
       (t.validateEmail as () => void)();
