@@ -1,0 +1,181 @@
+/* mvp */
+.shop-page-45 {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  background: #fdf8f5;
+  color: #5c4033;
+}
+
+.shop-page-45__center {
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.shop-page-45__header {
+  text-align: center;
+  position: relative;
+}
+
+.shop-page-45__title {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  letter-spacing: 0.02em;
+  color: #5c4033;
+}
+
+.shop-page-45__lead {
+  font-size: 0.75rem;
+  color: #8b7355;
+  margin: 0 0 0.5rem;
+}
+
+.shop-page-45__badge {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(107, 142, 107, 0.15);
+  color: #6b8e6b;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1), transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.shop-page-45__badge-count {
+  font-weight: 700;
+}
+
+.shop-page-45__asymmetric {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
+  gap: 1rem;
+  justify-items: center;
+}
+
+.shop-page-45__row {
+  width: 100%;
+  max-width: 580px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  justify-items: center;
+}
+
+.card-45 {
+  background: #ffffff;
+  border: 1px solid #e8d5c4;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-45--hero {
+  width: 100%;
+  max-width: 280px;
+}
+
+.card-45--small {
+  width: 100%;
+  max-width: 160px;
+}
+
+.card-45__image {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 0.75rem;
+}
+
+.card-45__body {
+  text-align: center;
+  width: 100%;
+}
+
+.card-45__name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  color: #5c4033;
+}
+
+.card-45--small .card-45__name {
+  font-size: 0.85rem;
+}
+
+.card-45__price {
+  font-size: 0.9rem;
+  color: #8b7355;
+  margin: 0 0 0.5rem;
+}
+
+.card-45--small .card-45__price {
+  font-size: 0.8rem;
+}
+
+.btn-45 {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #c4a574;
+  background: rgba(196, 165, 116, 0.08);
+  color: #c4a574;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.25s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s cubic-bezier(0.22, 1, 0.36, 1), color 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-45:hover {
+  background: rgba(196, 165, 116, 0.18);
+  border-color: #b8955f;
+}
+
+.btn-45--added {
+  background: rgba(107, 142, 107, 0.12);
+  border-color: #6b8e6b;
+  color: #6b8e6b;
+}
+
+.btn-45--sm {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+}
+
+.btn-45:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #fdf8f5, 0 0 0 4px #c4a574;
+}
+
+@media (min-width: 768px) {
+  .shop-page-45__asymmetric {
+    gap: 1.25rem;
+  }
+
+  .shop-page-45__row {
+    gap: 1rem;
+  }
+
+  .card-45--hero {
+    max-width: 300px;
+  }
+
+  .card-45--small {
+    max-width: 170px;
+  }
+}
