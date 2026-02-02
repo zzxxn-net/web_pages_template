@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="로그인 — 현대 판타지 · 비대칭 레이아웃 · 상태 변화 강조 시안">
+  <title>Login — Modern Fantasy Asymmetric</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/login.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+  <main class="login-fantasy-asym" role="main" aria-label="로그인">
+    <aside class="login-fantasy-asym__visual" aria-hidden="true">
+      <div class="fantasy-visual__bg"></div>
+      <div class="fantasy-visual__shape" data-shape></div>
+      <div class="fantasy-visual__brand">
+        <span class="fantasy-visual__logo">◆</span>
+        <p class="fantasy-visual__tagline">Realm</p>
+      </div>
+    </aside>
+    <section class="login-fantasy-asym__form-section">
+      <div class="fantasy-form-panel" x-data="fantasyAsymLogin()">
+        <header class="fantasy-form-panel__head">
+          <h1 class="fantasy-form-panel__title">로그인</h1>
+          <p class="fantasy-form-panel__desc">이메일과 비밀번호를 입력하세요</p>
+        </header>
+        <form class="fantasy-form-panel__form" action="#" method="post" autocomplete="on" @submit.prevent="handleSubmit" hx-post="#" hx-swap="none" hx-trigger="submit">
+          <div class="fantasy-row" :class="{ 'is-filled': email.length, 'is-focused': focusEmail, 'is-error': errorEmail }">
+            <label for="fantasy-email" class="fantasy-row__label">이메일</label>
+            <input id="fantasy-email" type="email" name="email" class="fantasy-row__input" placeholder="you@example.com" autocomplete="email" required x-model="email" @focus="focusEmail = true" @blur="focusEmail = false">
+            <span class="fantasy-row__state" x-show="email.length" x-cloak aria-hidden="true">●</span>
+          </div>
+          <div class="fantasy-row" :class="{ 'is-filled': password.length, 'is-focused': focusPassword, 'is-error': errorPassword }">
+            <label for="fantasy-pw" class="fantasy-row__label">비밀번호</label>
+            <div class="fantasy-row__wrap">
+              <input id="fantasy-pw" :type="showPassword ? 'text' : 'password'" name="password" class="fantasy-row__input" placeholder="••••••••" autocomplete="current-password" required x-model="password" @focus="focusPassword = true" @blur="focusPassword = false">
+              <button type="button" class="fantasy-row__toggle" aria-label="비밀번호 표시" @click="showPassword = !showPassword"><span x-text="showPassword ? '숨기기' : '보기'">보기</span></button>
+            </div>
+            <span class="fantasy-row__state" x-show="password.length" x-cloak aria-hidden="true">●</span>
+          </div>
+          <button type="submit" class="fantasy-form-btn" :class="{ 'is-loading': loading }" :disabled="loading" :aria-busy="loading">
+            <span class="fantasy-form-btn__text" x-show="!loading">로그인</span>
+            <span class="fantasy-form-btn__loading" x-show="loading" x-cloak>확인 중…</span>
+          </button>
+        </form>
+        <footer class="fantasy-form-panel__foot">
+          <a href="#" class="fantasy-form-panel__link">비밀번호 찾기</a>
+          <a href="#" class="fantasy-form-panel__link">회원가입</a>
+        </footer>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
