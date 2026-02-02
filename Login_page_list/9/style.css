@@ -1,0 +1,215 @@
+/* Login Page — Design 9: Cyber Minimal · Full-screen immersive · State change */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #e0e4e8;
+  background: #08090c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.login-cyber-full {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow: auto;
+}
+
+.login-cyber-full__center {
+  width: 100%;
+  max-width: 380px;
+  position: relative;
+}
+
+.login-cyber-full__status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: #6a7078;
+  text-transform: uppercase;
+  transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #6a7078;
+  transition: background 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.status-dot.is-idle {
+  background: #6a7078;
+}
+
+.status-dot.is-focus {
+  background: #00d4aa;
+  box-shadow: 0 0 8px rgba(0, 212, 170, 0.2);
+}
+
+.status-dot.is-loading {
+  background: #00d4aa;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.status-text {
+  transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.login-cyber-full__status .status-dot.is-focus ~ .status-text,
+.login-cyber-full__status .status-dot.is-loading ~ .status-text {
+  color: #00d4aa;
+}
+
+.login-cyber-full__title {
+  margin: 0 0 2rem;
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #e0e4e8;
+  text-align: center;
+}
+
+.login-cyber-full__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.cyber-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.cyber-field__label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #6a7078;
+}
+
+.cyber-field__input {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #e0e4e8;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  transition: border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cyber-field__input::placeholder {
+  color: #6a7078;
+  opacity: 0.7;
+}
+
+.cyber-field__input:focus {
+  outline: none;
+  border-color: #00d4aa;
+  box-shadow: 0 0 0 2px rgba(0, 212, 170, 0.2);
+}
+
+.cyber-field__input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cyber-field__wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cyber-field__wrap .cyber-field__input {
+  padding-inline-end: 4rem;
+}
+
+.cyber-field__toggle {
+  position: absolute;
+  right: 1rem;
+  font-size: 0.8125rem;
+  color: #6a7078;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cyber-field__toggle:hover {
+  color: #00d4aa;
+}
+
+.cyber-btn {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: inherit;
+  color: #08090c;
+  background: #00d4aa;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.15s ease;
+}
+
+.cyber-btn:hover:not(:disabled) {
+  background: #0ee4ba;
+  transform: scale(1.01);
+}
+
+.cyber-btn:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.cyber-btn:disabled {
+  cursor: not-allowed;
+}
+
+.cyber-btn.is-loading {
+  opacity: 0.9;
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+@media (max-width: 480px) {
+  .login-cyber-full {
+    padding: 1.5rem;
+  }
+}
