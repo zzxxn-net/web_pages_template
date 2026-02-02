@@ -1,0 +1,27 @@
+// Design 18: Emotional Tech · Fullscreen · GSAP smooth
+$bg-start:#1e1b2e;$bg-end:#2d2640;$surface:rgba(255,255,255,0.08);$bor:rgba(255,255,255,0.12);$txt:#f0eef4;$muted:#a89bb8;$acc:#c9b8e8;$radius:14px;$sm:10px;$md:1rem;$lg:1.5rem;$xl:2rem;$2xl:3rem;$ease:0.28s ease;$bp:480px;
+*,*::before,*::after{box-sizing:border-box;}
+html{font-size:16px;-webkit-text-size-adjust:100%;}
+body{margin:0;min-height:100vh;min-height:100dvh;font-family:"Inter",-apple-system,sans-serif;font-weight:500;line-height:1.5;color:$txt;background:$bg-start;display:flex;align-items:center;justify-content:center;padding:$md;}
+.login-emotion-full{width:100%;min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:$xl;position:relative;}
+.login-emotion-full__bg{position:absolute;inset:0;background:linear-gradient(160deg,$bg-start 0%,$bg-end 100%);pointer-events:none;}
+.login-emotion-full__inner{width:100%;max-width:380px;margin:0 auto;position:relative;z-index:1;}
+.login-emotion-full__head{margin-bottom:$xl;text-align:center;}
+.login-emotion-full__title{margin:0 0 0.35rem;font-size:clamp(1.5rem,3.5vw,1.875rem);font-weight:700;letter-spacing:-0.02em;color:$txt;}
+.login-emotion-full__desc{margin:0;font-size:0.9375rem;color:$muted;}
+.login-emotion-full__form{display:flex;flex-direction:column;gap:$lg;}
+.emotion-full-field{background:$surface;border:1px solid $bor;border-radius:$sm;padding:$md;transition:border-color $ease,box-shadow $ease;}
+.emotion-full-field:focus-within{border-color:rgba(201,184,232,0.5);box-shadow:0 0 0 2px rgba(201,184,232,0.15);}
+.emotion-full-field__label{display:block;font-size:0.8125rem;font-weight:600;color:$muted;margin-bottom:0.35rem;}
+.emotion-full-field__input{width:100%;font:inherit;font-size:1rem;color:$txt;background:transparent;border:none;padding:0.25rem 0;outline:none;}
+.emotion-full-field__input::placeholder{color:$muted;}
+.emotion-full-field__wrap{display:flex;align-items:center;gap:$md;}
+.emotion-full-field__wrap .emotion-full-field__input{flex:1;min-width:0;}
+.emotion-full-field__toggle{font:inherit;font-size:0.8125rem;color:$muted;background:none;border:1px solid $bor;border-radius:6px;padding:0.25rem 0.5rem;cursor:pointer;transition:color $ease,border-color $ease;}
+.emotion-full-field__toggle:hover{color:$acc;border-color:$acc;}
+.emotion-full-field__toggle:focus-visible{outline:2px solid $acc;outline-offset:2px;}
+.emotion-full-btn{margin-top:$md;font:inherit;font-size:1rem;font-weight:600;color:$bg-start;background:$acc;border:none;border-radius:$sm;padding:$md $xl;cursor:pointer;transition:opacity $ease,transform $ease;}
+.emotion-full-btn:hover:not(:disabled){opacity:0.95;transform:translateY(-1px);}
+.emotion-full-btn:focus-visible{outline:2px solid $acc;outline-offset:2px;}
+.emotion-full-btn:disabled{opacity:0.7;cursor:not-allowed;}
+@media (max-width:$bp){.login-emotion-full{padding:$md;}}
