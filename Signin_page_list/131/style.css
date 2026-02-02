@@ -1,4 +1,4 @@
-/* 시안 131: 현대 판타지 + 풀스크린 몰입형 + 입력 반응형 애니메이션 */
+/* MVP: 시안 131 - 현대 판타지 풀스크린 몰입형, 입력 반응형(포커스 scale·유효/에러 border·shake) */
 .signup-fixed {
   min-height: 100vh;
   min-height: 100dvh;
