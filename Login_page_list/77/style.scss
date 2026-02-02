@@ -1,0 +1,160 @@
+// Design 77: Futuristic Clean · Progressive Form · Input Reactive Animation
+$bg: #f0f4f8;
+$card: #ffffff;
+$border: rgba(100, 120, 140, 0.2);
+$text: #1e293b;
+$muted: #64748b;
+$accent: #3b82f6;
+$accent-soft: rgba(59, 130, 246, 0.15);
+$radius: 10px;
+$space: 1rem;
+$space-lg: 1.25rem;
+$ease: 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-future-prog {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-lg;
+  overflow: auto;
+}
+
+.login-future-prog__wrap { width: 100%; max-width: 400px; }
+
+.future-prog-card {
+  padding: $space-lg;
+  background: $card;
+  border: 1px solid $border;
+  border-radius: $radius;
+  box-shadow: 0 8px 32px rgba(30, 41, 59, 0.08);
+}
+
+.future-prog-card__title {
+  margin: 0 0 0.25rem;
+  font-size: clamp(1.3rem, 3vw, 1.5rem);
+  font-weight: 600;
+  color: $text;
+}
+.future-prog-card__step { margin: 0 0 $space; font-size: 0.8125rem; color: $muted; }
+.future-prog-card__form { display: flex; flex-direction: column; gap: $space; }
+
+.future-prog-step {
+  display: none;
+  flex-direction: column;
+  gap: $space;
+  &.is-active { display: flex; }
+}
+
+.future-prog-field {
+  padding: 0.7rem 1rem;
+  border: 1px solid $border;
+  border-radius: 8px;
+  background: rgba($bg, 0.6);
+  transition: border-color $ease, box-shadow $ease, transform $ease;
+  &.has-focus {
+    border-color: $accent;
+    box-shadow: 0 0 0 2px $accent-soft;
+    .future-prog-field__label { color: $accent; font-weight: 600; }
+  }
+  &.has-value:not(.has-focus) { border-color: rgba($accent, 0.4); .future-prog-field__label { color: $text; } }
+}
+
+.future-prog-field__label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $muted;
+  transition: color $ease, font-weight $ease;
+}
+
+.future-prog-field__input {
+  width: 100%;
+  padding: 0.2rem 0;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+  &::placeholder { color: rgba($muted, 0.6); }
+}
+
+.future-prog-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  .future-prog-field__input { flex: 1; }
+}
+
+.future-prog-field__toggle {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: $muted;
+  background: transparent;
+  border: 1px solid $border;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color $ease, border-color $ease;
+  &:hover { color: $accent; border-color: $accent; }
+}
+
+.future-prog-next, .future-prog-back {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #fff;
+  background: $accent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background $ease, opacity $ease;
+  &:hover:not(:disabled) { background: darken($accent, 6%); }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
+.future-prog-back { background: $muted; color: #fff; &:hover { background: darken($muted, 8%); } }
+
+.future-prog-btn {
+  margin-top: 0.25rem;
+  padding: 0.85rem 1.2rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #fff;
+  background: $accent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background $ease, opacity $ease;
+  &:hover:not(:disabled) { background: darken($accent, 6%); }
+  &:disabled { cursor: not-allowed; opacity: 0.6; }
+  &.is-loading { pointer-events: none; }
+}
+
+@media (max-width: $bp) {
+  .login-future-prog { padding: $space; }
+  .future-prog-card { padding: $space; }
+}
