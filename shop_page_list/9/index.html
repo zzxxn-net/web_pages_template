@@ -1,0 +1,42 @@
+<!-- mvp -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — 사이버 미니멀</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="shop-page-9" x-data="shopPage9()">
+    <div class="shop-page-9__container">
+      <h1 class="shop-page-9__title">Shop</h1>
+      <div class="shop-page-9__wrap" id="shop-wrap-9">
+        <section class="shop-page-9__main">
+          <article class="product-hero-9" :key="selected.id" tabindex="0">
+            <img class="product-hero-9__image" :src="selected.img" :alt="selected.name" width="520" height="325">
+            <div class="product-hero-9__body">
+              <h2 class="product-hero-9__name" x-text="selected.name"></h2>
+              <p class="product-hero-9__price" x-text="selected.price"></p>
+              <button type="button" class="btn-9 btn-9--primary" @click="addToCart(selected.id)">장바구니</button>
+            </div>
+          </article>
+        </section>
+        <aside class="shop-page-9__side">
+          <template x-for="p in products" :key="p.id">
+            <button type="button" class="product-row-9" :class="{ 'product-row-9--active': selectedId === p.id }" @click="setFocus(p.id)" :aria-pressed="selectedId === p.id">
+              <img class="product-row-9__thumb" :src="p.img" :alt="p.name" width="64" height="64">
+              <span class="product-row-9__name" x-text="p.name"></span>
+              <span class="product-row-9__price" x-text="p.price"></span>
+            </button>
+          </template>
+        </aside>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>
