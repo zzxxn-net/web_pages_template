@@ -25,7 +25,7 @@
 ## 사용 의도 및 구조
 
 - **MVP 회원가입:** 이메일, 이름, 비밀번호, 비밀번호 확인 + 유효성 검사 + 제출. HTMX + Alpine.js + TypeScript + SASS + GSAP.
-- **파일:** index.html, style.scss → style.css, js/main.ts → main.js, README.md.
+- **파일:** index.html(마크업), style.scss→style.css(풀스크린·입력 반응형 스타일), js/main.ts→main.js(Alpine·GSAP), README.md(폴더 개요).
 
 ## 반응형
 
