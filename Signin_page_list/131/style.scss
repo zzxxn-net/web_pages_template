@@ -1,4 +1,7 @@
-// 시안 131: 현대 판타지 + 풀스크린 몰입형 + 입력 반응형 애니메이션
+// =============================================================================
+// MVP: 시안 131 - 현대 판타지 + 풀스크린 몰입형 + 입력 반응형 애니메이션
+// UX: 웜 베이지 그라데이션 배경, 반투명 블러 카드, 포커스 시 scale·border·라벨 색 전환
+// =============================================================================
 $s131-serif: 'Cinzel', serif;
 $s131-sans: 'Noto Sans KR', system-ui, sans-serif;
 $s131-bg: linear-gradient(160deg, #f5efe6 0%, #e8dfd4 50%, #ddd4c8 100%);
@@ -16,6 +19,7 @@ $s131-error-soft: rgba(160, 64, 64, 0.12);
 $s131-radius: 12px;
 $s131-ease: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 
+// MVP: 뷰포트 전체 중앙 정렬(100dvh), 스크롤 시에도 폼이 화면 중앙에 오도록
 .signup-fixed {
   min-height: 100vh;
   min-height: 100dvh;
@@ -104,6 +108,7 @@ $s131-ease: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   gap: 1.1rem;
 }
 
+// MVP: 입력 필드 래퍼 - 포커스 시 살짝 확대(scale 1.01), 유효/에러 시 border·배경·shake로 상태 피드백
 .s131-field {
   position: relative;
   transition: transform $s131-ease;
