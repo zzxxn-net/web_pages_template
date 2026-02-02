@@ -1,0 +1,114 @@
+/* mvp */
+.shop-page-23 {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  background: #f0f9ff;
+  color: #0c4a6e;
+}
+
+.shop-page-23__container {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.shop-page-23__title {
+  text-align: center;
+  font-size: clamp(1.3rem, 3.2vw, 1.55rem);
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  color: #0c4a6e;
+  letter-spacing: 0.02em;
+}
+
+.shop-page-23__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  justify-items: center;
+}
+
+.card-23 {
+  width: 100%;
+  max-width: 200px;
+  background: #ffffff;
+  border: 1px solid #e0f2fe;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(2, 132, 199, 0.06);
+  transition: border-color 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-23:hover {
+  border-color: rgba(2, 132, 199, 0.4);
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.12);
+}
+
+.card-23:focus-within {
+  border-color: #0284c7;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+}
+
+.card-23__image {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+}
+
+.card-23__body {
+  text-align: center;
+  width: 100%;
+}
+
+.card-23__name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 0.3rem;
+  color: #0c4a6e;
+}
+
+.card-23__price {
+  font-size: 0.9rem;
+  color: #0284c7;
+  margin: 0 0 0.6rem;
+}
+
+.btn-23 {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #0284c7;
+  background: #0284c7;
+  color: #fff;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.25s cubic-bezier(0.22, 1, 0.36, 1), transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-23:hover {
+  background: #0369a1;
+}
+
+.btn-23:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #f0f9ff, 0 0 0 4px #0284c7;
+}
+
+@media (min-width: 768px) {
+  .shop-page-23__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+}
