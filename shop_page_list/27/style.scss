@@ -1,0 +1,133 @@
+// mvp
+$bp-mobile: 480px;
+$bp-tablet: 768px;
+$bp-desktop: 1024px;
+$color-bg: #0c0a09;
+$color-surface: #1c1917;
+$color-border: #292524;
+$color-text: #e7e5e4;
+$color-muted: #78716c;
+$color-accent: #a8a29e;
+$radius: 8px;
+$ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+.shop-page-27 {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  background: $color-bg;
+  color: $color-text;
+}
+
+.shop-page-27__container {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.shop-page-27__title {
+  text-align: center;
+  font-size: clamp(1.3rem, 3.2vw, 1.55rem);
+  font-weight: 600;
+  margin: 0 0 0.35rem;
+  color: $color-text;
+  letter-spacing: 0.03em;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.shop-page-27__lead {
+  text-align: center;
+  font-size: 0.9rem;
+  color: $color-muted;
+  margin: 0 0 1.25rem;
+}
+
+.shop-page-27__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  justify-items: center;
+}
+
+.card-27 {
+  width: 100%;
+  max-width: 200px;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  transition: border-color 0.25s $ease, box-shadow 0.25s $ease;
+}
+
+.card-27:hover {
+  border-color: $color-muted;
+}
+
+.card-27:focus-within {
+  border-color: $color-accent;
+  box-shadow: 0 0 0 2px rgba($color-accent, 0.2);
+}
+
+.card-27__image {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 0.7rem;
+}
+
+.card-27__body {
+  text-align: center;
+  width: 100%;
+}
+
+.card-27__name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 0.3rem;
+  color: $color-text;
+}
+
+.card-27__price {
+  font-size: 0.9rem;
+  color: $color-accent;
+  margin: 0 0 0.6rem;
+}
+
+.btn-27 {
+  padding: 0.5rem 1rem;
+  border-radius: $radius;
+  border: 1px solid $color-muted;
+  background: transparent;
+  color: $color-muted;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: border-color 0.25s $ease, color 0.25s $ease;
+}
+
+.btn-27:hover {
+  border-color: $color-text;
+  color: $color-text;
+}
+
+.btn-27:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px $color-bg, 0 0 0 4px $color-accent;
+}
+
+@media (min-width: $bp-tablet) {
+  .shop-page-27__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+}
