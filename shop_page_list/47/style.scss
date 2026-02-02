@@ -1,0 +1,154 @@
+// mvp
+$bp-tablet: 768px;
+$color-bg: #16213e;
+$color-surface: #1a1a2e;
+$color-border: #0f3460;
+$color-text: #e8e8e8;
+$color-muted: #a0a0a0;
+$color-accent: #ee6f57;
+$radius: 12px;
+$ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+.shop-page-47 {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  background: $color-bg;
+  color: $color-text;
+}
+
+.shop-page-47__center {
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.shop-page-47__header {
+  text-align: center;
+}
+
+.shop-page-47__title {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+  letter-spacing: 0.08em;
+  color: $color-text;
+}
+
+.shop-page-47__lead {
+  font-size: 0.75rem;
+  color: $color-muted;
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+
+.shop-page-47__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  justify-items: center;
+  width: 100%;
+}
+
+.card-47 {
+  width: 100%;
+  max-width: 190px;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s $ease, box-shadow 0.3s $ease;
+}
+
+.card-47--tilt-left {
+  transform: rotate(-1.5deg);
+}
+
+.card-47--tilt-right {
+  transform: rotate(1.5deg);
+}
+
+.card-47__image {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+}
+
+.card-47__body {
+  text-align: center;
+  width: 100%;
+}
+
+.card-47__name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  color: $color-text;
+}
+
+.card-47__price {
+  font-size: 0.85rem;
+  color: $color-muted;
+  margin: 0 0 0.5rem;
+}
+
+.btn-47 {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid $color-accent;
+  background: transparent;
+  color: $color-accent;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s $ease, color 0.3s $ease, transform 0.3s $ease;
+}
+
+.btn-47:hover {
+  background: $color-accent;
+  color: $color-surface;
+}
+
+.btn-47:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px $color-bg, 0 0 0 4px $color-accent;
+}
+
+.shop-page-47__footer {
+  min-height: 1.5rem;
+}
+
+.shop-page-47__cart {
+  font-size: 0.8rem;
+  color: $color-muted;
+}
+
+@media (min-width: $bp-tablet) {
+  .shop-page-47__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .card-47 {
+    max-width: 200px;
+  }
+
+  .card-47__name {
+    font-size: 0.95rem;
+  }
+}
