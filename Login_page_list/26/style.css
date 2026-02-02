@@ -1,0 +1,25 @@
+/* Design 26 */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; }
+body { margin: 0; min-height: 100vh; font-family: Inter, sans-serif; color: #2c2824; background: #f8f6f3; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+.login-sense-single { width: 100%; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; }
+.login-sense-single__bg { position: fixed; inset: 0; background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(196,165,116,0.12), transparent 60%); pointer-events: none; }
+.login-sense-single__wrap { position: relative; width: 100%; max-width: 380px; }
+.sense-single-card { background: #fff; border: 1px solid rgba(140,120,100,0.2); border-radius: 14px; padding: 2rem; box-shadow: 0 8px 32px rgba(0,0,0,0.06); }
+.sense-single-card__head { margin-bottom: 2rem; text-align: center; }
+.sense-single-card__title { margin: 0 0 0.4rem; font-size: clamp(1.35rem, 3vw, 1.5rem); font-weight: 700; color: #2c2824; }
+.sense-single-card__desc { margin: 0; font-size: 0.875rem; color: #7a7268; }
+.sense-single-card__form { display: flex; flex-direction: column; gap: 1.5rem; }
+.sense-single-field { padding: 1rem 1.5rem; border: 1px solid rgba(140,120,100,0.2); border-radius: 10px; background: #f8f6f3; opacity: 0.9; transition: border-color 0.28s ease, box-shadow 0.28s ease, opacity 0.28s ease, transform 0.28s ease; }
+.sense-single-field.is-active { border-color: #c4a574; box-shadow: 0 0 0 2px rgba(196,165,116,0.2); opacity: 1; }
+.sense-single-field__label { display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em; color: #7a7268; margin-bottom: 0.35rem; }
+.sense-single-field__input { width: 100%; font: inherit; font-size: 1rem; color: #2c2824; background: transparent; border: none; padding: 0.4rem 0; outline: none; }
+.sense-single-field__input::placeholder { color: #7a7268; opacity: 0.7; }
+.sense-single-field__wrap { display: flex; align-items: center; gap: 0.5rem; }
+.sense-single-field__wrap .sense-single-field__input { flex: 1; min-width: 0; }
+.sense-single-field__toggle { font: inherit; font-size: 0.8125rem; color: #7a7268; background: none; border: 1px solid rgba(140,120,100,0.2); border-radius: 6px; padding: 0.25rem 0.5rem; cursor: pointer; }
+.sense-single-field__toggle:hover { color: #c4a574; border-color: #c4a574; }
+.sense-single-btn { margin-top: 0.5rem; font: inherit; font-size: 1rem; font-weight: 600; color: #fff; background: #c4a574; border: none; border-radius: 10px; padding: 1rem 2rem; cursor: pointer; transition: transform 0.28s ease, box-shadow 0.28s ease; box-shadow: 0 4px 14px rgba(196,165,116,0.2); }
+.sense-single-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(196,165,116,0.2); }
+.sense-single-btn:disabled { cursor: not-allowed; opacity: 0.7; }
+@media (max-width: 480px) { .login-sense-single { padding: 1.5rem; } .sense-single-card { padding: 1.5rem; } }
