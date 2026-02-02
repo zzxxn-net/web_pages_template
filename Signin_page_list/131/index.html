@@ -16,12 +16,15 @@
 <body>
   <!-- MVP: 풀스크린 중앙 정렬 컨테이너, Alpine 상태(signupForm131) + GSAP 초기 애니메이션 훅 -->
   <main class="s131 signup-fixed" x-data="signupForm131()" x-init="initAnim()">
+    <!-- MVP: 고정 배경 레이어 - 웜 베이지 그라데이션으로 풀스크린 몰입감 -->
     <div class="s131-bg" aria-hidden="true"></div>
     <div class="s131-inner" x-ref="inner">
+      <!-- MVP: 헤더 - Cinzel 타이틀·설명으로 현대 판타지 톤, GSAP 진입 시 위쪽에서 등장 -->
       <header class="s131-header">
         <h1 class="s131-title">회원가입</h1>
         <p class="s131-desc">정보를 입력해 주세요</p>
       </header>
+      <!-- MVP: 폼 래퍼 - max-width 380px 반응형, 블러 카드로 입력 영역만 강조 -->
       <section class="s131-form-wrap" aria-label="회원가입 폼" x-ref="formWrap">
         <form class="s131-form" method="post" action="#" hx-post="#" hx-swap="none" @submit.prevent="handleSubmit" aria-label="회원가입 폼">
           <div class="s131-fields">
@@ -54,6 +57,7 @@
               <span class="s131-error" x-show="errors.passwordConfirm" x-cloak x-text="errors.passwordConfirm"></span>
             </div>
           </div>
+          <!-- MVP: 제출 버튼 - 포커스 시 골드 악센트·hover 시 살짝 떠오르는 시각 피드백 -->
           <div class="s131-actions">
             <button type="submit" class="s131-btn" :disabled="submitting" :class="{ 's131-btn--busy': submitting }" :aria-busy="submitting"><span x-text="submitting ? '처리 중...' : '가입하기'"></span></button>
           </div>
