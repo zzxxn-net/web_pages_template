@@ -1,0 +1,24 @@
+*,*::before,*::after{box-sizing:border-box}
+html{font-size:16px}
+body{margin:0;min-height:100vh;font-family:"Inter","Noto Sans KR",sans-serif;color:#0f172a;background:#f1f5f9;display:flex;align-items:center;justify-content:center;padding:1rem}
+.login-future-micro{width:100%;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem}
+.login-future-micro__card{width:100%;max-width:400px;padding:2rem;background:#fff;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 4px 24px rgba(15,23,42,.06)}
+.login-future-micro__head{margin-bottom:2rem;text-align:center}
+.login-future-micro__title{margin:0 0 .4rem;font-size:clamp(1.35rem,3.2vw,1.5rem);font-weight:600;color:#0f172a}
+.login-future-micro__desc{margin:0;font-size:.875rem;color:#64748b}
+.login-future-micro__form{display:flex;flex-direction:column;gap:1.5rem}
+.future-micro-field{padding:1rem 1.5rem;border:1px solid #e2e8f0;border-radius:8px;background:#fff;transition:border-color .22s,box-shadow .22s,transform .22s}
+.future-micro-field.has-focus{border-color:#0ea5e9;box-shadow:0 0 0 3px rgba(14,165,233,.2)}
+.future-micro-field.has-focus .future-micro-field__label{color:#0ea5e9;font-weight:600}
+.future-micro-field.has-value:not(.has-focus){border-color:#cbd5e1}
+.future-micro-field__label{display:block;margin-bottom:.35rem;font-size:.75rem;font-weight:500;color:#64748b}
+.future-micro-field__input{width:100%;padding:.35rem 0;font-size:1rem;color:#0f172a;background:transparent;border:none;outline:none}
+.future-micro-field__row{display:flex;align-items:center;gap:.5rem}
+.future-micro-field__row .future-micro-field__input{flex:1}
+.future-micro-field__toggle{padding:.35rem .6rem;font-size:.75rem;font-weight:600;color:#64748b;background:transparent;border:1px solid #e2e8f0;border-radius:6px;cursor:pointer}
+.future-micro-field__toggle:hover{color:#0ea5e9;border-color:#0ea5e9}
+.future-micro-btn{margin-top:.5rem;padding:.9rem 1.5rem;font-size:1rem;font-weight:600;color:#fff;background:#0ea5e9;border:none;border-radius:8px;cursor:pointer;transition:background .22s,transform .22s}
+.future-micro-btn:hover:not(:disabled){background:#0284c7}
+.future-micro-btn:active:not(:disabled){transform:scale(.98)}
+.future-micro-btn:disabled{opacity:.7;cursor:not-allowed}
+.future-micro-btn.is-loading{pointer-events:none}
