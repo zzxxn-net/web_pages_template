@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="로그인 — 미래적 클린 · 풀스크린 몰입형 · 입력 반응형 애니메이션 시안">
+  <title>Login — Futuristic Fullscreen Reactive</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/login.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+  <main class="login-future-full" role="main" aria-label="로그인">
+    <div class="login-future-full__inner" x-data="futureFullLogin()">
+      <header class="login-future-full__head">
+        <h1 class="login-future-full__title">Sign in</h1>
+        <p class="login-future-full__desc">이메일과 비밀번호를 입력하세요</p>
+      </header>
+      <form class="login-future-full__form" action="#" method="post" autocomplete="on" @submit.prevent="handleSubmit" hx-post="#" hx-swap="none" hx-trigger="submit">
+        <div class="future-field" data-future-field :class="{ 'has-value': email.length > 0, 'has-focus': emailFocus }">
+          <label for="email" class="future-field__label">이메일</label>
+          <input id="email" type="email" name="email" class="future-field__input" placeholder="you@example.com" autocomplete="email" required x-model="email" @focus="emailFocus = true" @blur="emailFocus = false">
+        </div>
+        <div class="future-field" data-future-field :class="{ 'has-value': password.length > 0, 'has-focus': passwordFocus }">
+          <label for="password" class="future-field__label">비밀번호</label>
+          <div class="future-field__wrap">
+            <input id="password" :type="showPassword ? 'text' : 'password'" name="password" class="future-field__input" placeholder="••••••••" autocomplete="current-password" required x-model="password" @focus="passwordFocus = true" @blur="passwordFocus = false">
+            <button type="button" class="future-field__toggle" aria-label="비밀번호 표시" @click="showPassword = !showPassword"><span x-text="showPassword ? '숨기기' : '보기'">보기</span></button>
+          </div>
+        </div>
+        <button type="submit" class="future-btn" :disabled="loading">
+          <span x-show="!loading">로그인</span>
+          <span x-show="loading" x-cloak>확인 중…</span>
+        </button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
