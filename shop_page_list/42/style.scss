@@ -1,0 +1,196 @@
+// mvp
+$bp-tablet: 768px;
+$color-bg: #f1f5f9;
+$color-surface: #ffffff;
+$color-border: #e2e8f0;
+$color-text: #0f172a;
+$color-muted: #64748b;
+$color-accent: #3b82f6;
+$radius: 12px;
+$ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+.shop-page-42 {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  background: $color-bg;
+  color: $color-text;
+}
+
+.shop-page-42__wrap {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.shop-page-42__title {
+  text-align: center;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  letter-spacing: 0.02em;
+  color: $color-text;
+}
+
+.shop-page-42__lead {
+  text-align: center;
+  font-size: 0.8rem;
+  color: $color-muted;
+  margin: 0 0 1.5rem;
+}
+
+.shop-page-42__asymmetric {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
+  gap: 1rem;
+  justify-items: center;
+}
+
+.shop-page-42__hero {
+  width: 100%;
+  max-width: 280px;
+}
+
+.card-42--hero {
+  width: 100%;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.shop-page-42__row {
+  width: 100%;
+  max-width: 520px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  justify-items: center;
+}
+
+.card-42--small {
+  width: 100%;
+  max-width: 140px;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.75rem;
+  box-sizing: border-box;
+}
+
+.card-42__image {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.card-42--hero .card-42__image {
+  margin-bottom: 0.75rem;
+}
+
+.card-42__body {
+  text-align: center;
+  width: 100%;
+}
+
+.card-42__name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  color: $color-text;
+}
+
+.card-42--small .card-42__name {
+  font-size: 0.85rem;
+}
+
+.card-42__price {
+  font-size: 0.9rem;
+  color: $color-muted;
+  margin: 0 0 0.5rem;
+}
+
+.card-42--small .card-42__price {
+  font-size: 0.8rem;
+  margin: 0 0 0.4rem;
+}
+
+.btn-42 {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid $color-accent;
+  background: transparent;
+  color: $color-accent;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.2s $ease, color 0.2s $ease;
+}
+
+.btn-42:hover {
+  background: rgba($color-accent, 0.08);
+}
+
+.btn-42--sm {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+}
+
+.btn-42:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px $color-bg, 0 0 0 4px $color-accent;
+}
+
+@media (min-width: $bp-tablet) {
+  .shop-page-42__asymmetric {
+    grid-template-columns: 1.2fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 1.25rem;
+    max-width: 520px;
+    align-items: start;
+  }
+  .shop-page-42__hero {
+    max-width: 100%;
+  }
+  .shop-page-42__row {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, auto);
+    max-width: 100%;
+    gap: 0.75rem;
+  }
+  .card-42--small {
+    max-width: 100%;
+    flex-direction: row;
+    text-align: left;
+    gap: 0.75rem;
+  }
+  .card-42--small .card-42__image {
+    width: 56px;
+    min-width: 56px;
+    aspect-ratio: 1;
+    margin-bottom: 0;
+  }
+  .card-42--small .card-42__body {
+    text-align: left;
+    flex: 1;
+  }
+}
