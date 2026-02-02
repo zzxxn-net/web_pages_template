@@ -1,0 +1,75 @@
+<!-- mvp -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — 현대 판타지 · 비대칭 · 상태 변화 강조</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="shop-page-45" x-data="shopPage45()">
+    <div class="shop-page-45__center">
+      <header class="shop-page-45__header">
+        <h1 class="shop-page-45__title">SHOP</h1>
+        <p class="shop-page-45__lead">현대 판타지 · 비대칭 · 상태 변화 강조</p>
+        <div class="shop-page-45__badge" x-show="cart.length > 0" x-transition>
+          <span class="shop-page-45__badge-count" x-text="cart.length"></span>개 담김
+        </div>
+      </header>
+      <div class="shop-page-45__asymmetric" id="shop-asymmetric-45">
+        <article class="card-45 card-45--hero" data-product="1">
+          <img class="card-45__image" src="https://placehold.co/280x280/fae8e0/d4a574?text=1" alt="Product 1" width="280" height="280">
+          <div class="card-45__body">
+            <h2 class="card-45__name">Product 1</h2>
+            <p class="card-45__price">₩29,000</p>
+            <button type="button" class="btn-45" @click="addToCart(1)" :class="{ 'btn-45--added': isInCart(1) }" :aria-pressed="isInCart(1)">
+              <span x-show="!isInCart(1)">장바구니</span>
+              <span x-show="isInCart(1)" x-transition>담김 ✓</span>
+            </button>
+          </div>
+        </article>
+        <div class="shop-page-45__row">
+          <article class="card-45 card-45--small" data-product="2">
+            <img class="card-45__image" src="https://placehold.co/140x140/fae8e0/d4a574?text=2" alt="Product 2" width="140" height="140">
+            <div class="card-45__body">
+              <h2 class="card-45__name">Product 2</h2>
+              <p class="card-45__price">₩39,000</p>
+              <button type="button" class="btn-45 btn-45--sm" @click="addToCart(2)" :class="{ 'btn-45--added': isInCart(2) }" :aria-pressed="isInCart(2)">
+                <span x-show="!isInCart(2)">장바구니</span>
+                <span x-show="isInCart(2)" x-transition>✓</span>
+              </button>
+            </div>
+          </article>
+          <article class="card-45 card-45--small" data-product="3">
+            <img class="card-45__image" src="https://placehold.co/140x140/fae8e0/d4a574?text=3" alt="Product 3" width="140" height="140">
+            <div class="card-45__body">
+              <h2 class="card-45__name">Product 3</h2>
+              <p class="card-45__price">₩49,000</p>
+              <button type="button" class="btn-45 btn-45--sm" @click="addToCart(3)" :class="{ 'btn-45--added': isInCart(3) }" :aria-pressed="isInCart(3)">
+                <span x-show="!isInCart(3)">장바구니</span>
+                <span x-show="isInCart(3)" x-transition>✓</span>
+              </button>
+            </div>
+          </article>
+          <article class="card-45 card-45--small" data-product="4">
+            <img class="card-45__image" src="https://placehold.co/140x140/fae8e0/d4a574?text=4" alt="Product 4" width="140" height="140">
+            <div class="card-45__body">
+              <h2 class="card-45__name">Product 4</h2>
+              <p class="card-45__price">₩19,000</p>
+              <button type="button" class="btn-45 btn-45--sm" @click="addToCart(4)" :class="{ 'btn-45--added': isInCart(4) }" :aria-pressed="isInCart(4)">
+                <span x-show="!isInCart(4)">장바구니</span>
+                <span x-show="isInCart(4)" x-transition>✓</span>
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>
