@@ -1,0 +1,141 @@
+/* Design 66: Sensible Tech · Fullscreen · State Change Emphasis */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", -apple-system, sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #2c2420;
+  background: linear-gradient(165deg, #fef7f0 0%, #f5e6dc 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.login-sense-full {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow: auto;
+}
+
+.login-sense-full__bg {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(165deg, #fef7f0 0%, #f5e6dc 50%, #f0e2d8 100%);
+  pointer-events: none;
+}
+
+.login-sense-full__card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  background: rgba(255, 252, 249, 0.92);
+  border: 1px solid rgba(180, 150, 130, 0.25);
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(44, 36, 32, 0.08);
+  transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sense-full__head { margin-bottom: 1.5rem; text-align: center; }
+.sense-full__title {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.4rem, 3.2vw, 1.6rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #2c2420;
+}
+.sense-full__desc { margin: 0; font-size: 0.875rem; color: #7a6b62; }
+.sense-full__form { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.sense-full-field {
+  padding: 1rem 1.5rem;
+  border: 2px solid rgba(180, 150, 130, 0.25);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.6);
+  transition: border-color 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s, background 0.28s, transform 0.28s;
+}
+.sense-full-field.has-focus {
+  border-color: #c49a7a;
+  box-shadow: 0 0 0 3px rgba(184, 115, 74, 0.18);
+  background: rgba(255, 255, 255, 0.95);
+}
+.sense-full-field.has-focus .sense-full-field__label { color: #b8734a; font-weight: 600; }
+.sense-full-field.has-value:not(.has-focus) { border-color: rgba(184, 115, 74, 0.45); }
+.sense-full-field.has-value:not(.has-focus) .sense-full-field__label { color: #2c2420; }
+
+.sense-full-field__label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #7a6b62;
+  transition: color 0.28s, font-weight 0.28s;
+}
+
+.sense-full-field__input {
+  width: 100%;
+  padding: 0.35rem 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #2c2420;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.sense-full-field__input::placeholder { color: rgba(122, 107, 98, 0.7); }
+
+.sense-full-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sense-full-field__row .sense-full-field__input { flex: 1; }
+
+.sense-full-field__toggle {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #7a6b62;
+  background: transparent;
+  border: 1px solid rgba(180, 150, 130, 0.25);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.28s, border-color 0.28s, background 0.28s;
+}
+.sense-full-field__toggle:hover { color: #b8734a; border-color: #b8734a; background: rgba(184, 115, 74, 0.18); }
+
+.sense-full-btn {
+  margin-top: 0.25rem;
+  padding: 0.9rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #fff;
+  background: #b8734a;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.28s, transform 0.28s, box-shadow 0.28s;
+}
+.sense-full-btn:hover:not(:disabled) { background: #a8663f; box-shadow: 0 4px 14px rgba(184, 115, 74, 0.35); }
+.sense-full-btn:disabled { cursor: not-allowed; }
+.sense-full-btn.is-loading {
+  background: rgba(184, 115, 74, 0.12);
+  color: #b8734a;
+  pointer-events: none;
+}
+
+@media (max-width: 480px) {
+  .login-sense-full { padding: 1rem; }
+  .login-sense-full__card { padding: 1.5rem; }
+}
