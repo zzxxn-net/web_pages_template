@@ -1,0 +1,187 @@
+// Design 56: Cyber Minimal · Progressive Form · Focus-move UX
+$bg: #eef1f5;
+$card: #ffffff;
+$border: #e2e8f0;
+$text: #2d3748;
+$muted: #718096;
+$accent: #3182ce;
+$focus-ring: rgba(49, 130, 206, 0.2);
+$radius: 12px;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-cyb-prog-focus {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+}
+.login-cyb-prog-focus__box {
+  width: 100%;
+  max-width: 380px;
+  background: $card;
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: $space-xl;
+  box-shadow: 0 4px 24px rgba(45, 55, 72, 0.06);
+}
+
+.cyb-prog-focus-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: $space-xl;
+}
+.cyb-prog-focus-dot {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: $muted;
+  border: 1px solid $border;
+  border-radius: 50%;
+  transition: color $ease, border-color $ease, background $ease;
+}
+.cyb-prog-focus-dot.is-active {
+  color: $accent;
+  border-color: $accent;
+  background: rgba($accent, 0.08);
+}
+.cyb-prog-focus-dot.is-done {
+  color: $card;
+  border-color: $accent;
+  background: $accent;
+}
+.cyb-prog-focus-line {
+  width: 24px;
+  height: 2px;
+  background: $border;
+  transition: background $ease;
+}
+.cyb-prog-focus-line.is-done { background: $accent; }
+
+.login-cyb-prog-focus__head { margin-bottom: $space-lg; text-align: center; }
+.login-cyb-prog-focus__title {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.25rem, 3vw, 1.375rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: $text;
+}
+.login-cyb-prog-focus__desc { margin: 0; font-size: 0.875rem; color: $muted; }
+.login-cyb-prog-focus__form { position: relative; min-height: 140px; }
+
+.cyb-prog-focus-panel {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+  &.is-hidden { position: absolute; left: 0; right: 0; top: 0; pointer-events: none; visibility: hidden; }
+}
+.cyb-prog-focus-field {
+  padding: $space $space-lg;
+  border: 1px solid $border;
+  border-radius: 8px;
+  background: $card;
+  transition: border-color $ease, box-shadow $ease;
+  &.has-focus {
+    border-color: $accent;
+    box-shadow: 0 0 0 3px $focus-ring;
+    .cyb-prog-focus-field__label { color: $accent; font-weight: 600; }
+  }
+}
+.cyb-prog-focus-field__label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: $muted;
+  transition: color $ease, font-weight $ease;
+}
+.cyb-prog-focus-field__input {
+  width: 100%;
+  padding: 0.4rem 0;
+  font-size: 1rem;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+  &::placeholder { color: lighten($muted, 12%); }
+}
+.cyb-prog-focus-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  .cyb-prog-focus-field__input { flex: 1; }
+}
+.cyb-prog-focus-field__toggle {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.8125rem;
+  color: $accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background $ease, color $ease;
+  &:hover { background: rgba($accent, 0.08); }
+}
+
+.cyb-prog-focus-btn {
+  padding: 0.8rem 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: $text;
+  background: transparent;
+  border: 1px solid $border;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color $ease, background $ease, color $ease;
+  &:hover:not(:disabled) { border-color: $accent; background: rgba($accent, 0.08); color: $accent; }
+  &:disabled { cursor: not-allowed; opacity: 0.5; }
+}
+.cyb-prog-focus-btn--next { align-self: flex-end; }
+.cyb-prog-focus-btn--primary {
+  color: $card;
+  background: $accent;
+  border-color: $accent;
+  &:hover:not(:disabled) { background: darken($accent, 6%); border-color: darken($accent, 6%); }
+}
+.cyb-prog-focus-btn--back { align-self: flex-start; }
+.cyb-prog-focus-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: $space;
+  margin-top: 0.5rem;
+}
+.cyb-prog-focus-btn.is-loading { opacity: 0.85; }
+
+@media (max-width: $bp) {
+  .login-cyb-prog-focus { padding: $space; }
+  .login-cyb-prog-focus__box { padding: $space-lg; }
+}
