@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="로그인 — 미래적 클린 · 단일 포커스 입력 흐름 시안">
+  <title>Login — Futuristic Single Focus</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/login.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+  <main class="login-future-focus" role="main" aria-label="로그인">
+    <div class="login-future-focus__center" x-data="futureFocusLogin()">
+      <h1 class="login-future-focus__title">Sign in</h1>
+      <p class="login-future-focus__desc">한 번에 하나씩 입력하세요</p>
+
+      <form class="login-future-focus__form" action="#" method="post" autocomplete="on" @submit.prevent="handleSubmit" hx-post="#" hx-swap="none" hx-trigger="submit">
+        <div class="focus-field" data-focus-field>
+          <label for="email" class="focus-field__label">이메일</label>
+          <input id="email" type="email" name="email" class="focus-field__input" placeholder="you@example.com" autocomplete="email" required x-model="email" @focus="setActive($event)" @blur="clearActive">
+        </div>
+        <div class="focus-field" data-focus-field>
+          <label for="password" class="focus-field__label">비밀번호</label>
+          <div class="focus-field__wrap">
+            <input id="password" :type="showPassword ? 'text' : 'password'" name="password" class="focus-field__input" placeholder="••••••••" autocomplete="current-password" required x-model="password" @focus="setActive($event)" @blur="clearActive">
+            <button type="button" class="focus-field__toggle" aria-label="비밀번호 표시" @click="showPassword = !showPassword">보기</button>
+          </div>
+        </div>
+        <button type="submit" class="focus-btn" :disabled="loading">
+          <span x-show="!loading">로그인</span>
+          <span x-show="loading" x-cloak>확인 중…</span>
+        </button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
