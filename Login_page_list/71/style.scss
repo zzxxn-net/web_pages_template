@@ -1,0 +1,148 @@
+// Design 71: Futuristic Clean · Fullscreen · GSAP Smooth Transition
+$bg: #f4f6f9;
+$card: #fff;
+$border: rgba(60, 75, 100, 0.14);
+$text: #1c2329;
+$muted: #5c6b7a;
+$accent: #0ea5e9;
+$accent-soft: rgba(14, 165, 233, 0.14);
+$radius: 12px;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", system-ui, sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-future-full {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+  overflow: auto;
+}
+
+.login-future-full__bg {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, #f8fafc 0%, $bg 50%, #eef2f6 100%);
+  pointer-events: none;
+}
+
+.login-future-full__card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  padding: $space-xl;
+  background: $card;
+  border: 1px solid $border;
+  border-radius: $radius;
+  box-shadow: 0 24px 56px rgba(28, 35, 41, 0.06);
+}
+
+.future-full__head { margin-bottom: $space-lg; text-align: center; }
+.future-full__title {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.4rem, 3vw, 1.6rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: $text;
+}
+.future-full__desc { margin: 0; font-size: 0.875rem; color: $muted; }
+.future-full__form { display: flex; flex-direction: column; gap: $space-lg; }
+
+.future-full-field {
+  padding: 0.75rem $space-lg;
+  border: 1px solid $border;
+  border-radius: 8px;
+  background: rgba(248, 250, 252, 0.8);
+  transition: border-color $ease, box-shadow $ease, background $ease;
+  &.has-focus {
+    border-color: $accent;
+    box-shadow: 0 0 0 2px $accent-soft;
+    background: $card;
+    .future-full-field__label { color: $accent; font-weight: 600; }
+  }
+  &.has-value:not(.has-focus) { border-color: rgba($accent, 0.35); .future-full-field__label { color: $text; } }
+}
+
+.future-full-field__label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: $muted;
+  transition: color $ease, font-weight $ease;
+}
+
+.future-full-field__input {
+  width: 100%;
+  padding: 0.35rem 0;
+  font-size: 1rem;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+  &::placeholder { color: rgba($muted, 0.75); }
+}
+
+.future-full-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  .future-full-field__input { flex: 1; }
+}
+
+.future-full-field__toggle {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $muted;
+  background: transparent;
+  border: 1px solid $border;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color $ease, border-color $ease;
+  &:hover { color: $accent; border-color: $accent; }
+}
+
+.future-full-btn {
+  margin-top: 0.25rem;
+  padding: 0.9rem 1.4rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #fff;
+  background: $accent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background $ease, transform $ease;
+  &:hover:not(:disabled) { background: darken($accent, 6%); transform: translateY(-1px); }
+  &:disabled { cursor: not-allowed; opacity: 0.65; }
+  &.is-loading { pointer-events: none; }
+}
+
+@media (max-width: $bp) {
+  .login-future-full { padding: $space; }
+  .login-future-full__card { padding: $space-lg; }
+}
