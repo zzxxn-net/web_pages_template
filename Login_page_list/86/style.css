@@ -1,0 +1,33 @@
+/* Design 86: 미래적 클린, 비대칭 레이아웃, GSAP 부드러운 전환 - MVP 시안 전용 */
+*,*::before,*::after{box-sizing:border-box}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;min-height:100dvh;font-family:"DM Sans",sans-serif;font-weight:400;line-height:1.5;color:#1a2332;background:#f0f4f6;display:flex;align-items:center;justify-content:center;padding:1rem}
+.clean-login{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:1.25rem;overflow:auto}
+.clean-login__wrap{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto;gap:2rem;align-items:center;width:100%;max-width:680px}
+@media (max-width:640px){.clean-login__wrap{grid-template-columns:1fr;gap:1.5rem}}
+.clean-aside{padding:1.25rem 0}
+@media (max-width:640px){.clean-aside{padding:0;text-align:center}}
+.clean-aside__title{margin:0 0 .4rem;font-size:clamp(1.4rem,3.5vw,1.75rem);font-weight:600;color:#1a2332;letter-spacing:-.02em}
+.clean-aside__desc{margin:0;font-size:.9375rem;color:#5c6b7a;font-weight:500}
+.clean-card{width:100%;max-width:380px;padding:1.25rem;background:#fff;border:1px solid rgba(28,45,62,.12);border-radius:12px;box-shadow:0 12px 32px rgba(26,35,50,.06);transition:box-shadow .32s,opacity .32s}
+.clean-card.is-loading{opacity:.92;box-shadow:0 8px 24px rgba(26,35,50,.05)}
+.clean-card__form{display:flex;flex-direction:column;gap:1rem}
+.clean-field{padding:.75rem 1rem;border:1px solid rgba(28,45,62,.12);border-radius:10px;background:rgba(240,244,246,.5);transition:border-color .32s,box-shadow .32s;outline:2px solid transparent;outline-offset:2px}
+.clean-field:focus-within{border-color:#0d9488;box-shadow:0 0 0 3px rgba(13,148,136,.12);outline-color:#0d9488;background:#fff}
+.clean-field.has-focus{border-color:#0d9488;box-shadow:0 0 0 3px rgba(13,148,136,.12);outline-color:#0d9488;background:#fff}
+.clean-field.has-value:not(.has-focus){border-color:rgba(13,148,136,.4)}
+.clean-field__label{display:block;margin-bottom:.35rem;font-size:.8125rem;font-weight:600;color:#5c6b7a;transition:color .32s}
+.clean-field.has-focus .clean-field__label,.clean-field:focus-within .clean-field__label{color:#0d9488}
+.clean-field__input{width:100%;padding:.25rem 0;font-size:.9375rem;font-family:inherit;color:#1a2332;background:transparent;border:none;outline:none}
+.clean-field__input::placeholder{color:rgba(92,107,122,.65)}
+.clean-field__row{display:flex;align-items:center;gap:.5rem}
+.clean-field__row .clean-field__input{flex:1}
+.clean-field__toggle{padding:.35rem .6rem;font-size:.75rem;font-weight:600;font-family:inherit;color:#5c6b7a;background:rgba(255,255,255,.8);border:1px solid rgba(28,45,62,.12);border-radius:8px;cursor:pointer;transition:color .32s,border-color .32s}
+.clean-field__toggle:hover{color:#0d9488;border-color:#0d9488}
+.clean-field__toggle:focus-visible{outline:2px solid #0d9488;outline-offset:2px}
+.clean-btn{margin-top:.25rem;padding:.85rem 1.2rem;font-size:.9375rem;font-weight:600;font-family:inherit;color:#fff;background:#0d9488;border:none;border-radius:10px;cursor:pointer;transition:background .32s,transform .32s}
+.clean-btn:hover:not(:disabled){background:#0b8278;transform:translateY(-1px)}
+.clean-btn:focus-visible{outline:2px solid #0d9488;outline-offset:2px}
+.clean-btn:disabled{cursor:not-allowed;opacity:.7}
+.clean-btn.is-loading{pointer-events:none;opacity:.88}
+@media (max-width:640px){.clean-login{padding:1rem}.clean-card{max-width:none;padding:1rem}}
