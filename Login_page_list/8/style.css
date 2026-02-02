@@ -1,0 +1,241 @@
+/* Login Page — Design 8: Dark Archive · Asymmetric · Scroll-free fixed flow */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #e8e2d9;
+  background: #0f0c08;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.login-archive {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  overflow: auto;
+}
+
+.login-archive__layout {
+  width: 100%;
+  max-width: 920px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 900px) {
+  .login-archive__layout {
+    flex-direction: row;
+    min-height: 520px;
+    max-height: 90vh;
+    border: 1px solid rgba(196, 165, 116, 0.2);
+    overflow: hidden;
+  }
+}
+
+.login-archive__strip {
+  width: 100%;
+  min-height: 72px;
+  background: #1a1510;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(196, 165, 116, 0.2);
+}
+
+@media (min-width: 900px) {
+  .login-archive__strip {
+    width: 28%;
+    min-height: auto;
+    border-bottom: none;
+    border-right: 1px solid rgba(196, 165, 116, 0.2);
+    padding: 2rem;
+  }
+}
+
+.login-archive__strip-text {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: #c4a574;
+  text-transform: uppercase;
+}
+
+@media (min-width: 900px) {
+  .login-archive__strip-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-size: 0.8125rem;
+    letter-spacing: 0.2em;
+  }
+}
+
+.login-archive__form-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  background: #0f0c08;
+}
+
+@media (min-width: 900px) {
+  .login-archive__form-section {
+    width: 72%;
+    background: #161310;
+  }
+}
+
+.login-archive__card {
+  width: 100%;
+  max-width: 380px;
+}
+
+.login-archive__title {
+  margin: 0 0 0.5rem;
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 600;
+  color: #e8e2d9;
+  letter-spacing: 0.02em;
+}
+
+.login-archive__desc {
+  margin: 0 0 2rem;
+  font-size: 0.9375rem;
+  color: #9a8f82;
+}
+
+.login-archive__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.archive-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.archive-field__label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #9a8f82;
+}
+
+.archive-field__input {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #e8e2d9;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(196, 165, 116, 0.2);
+  border-radius: 6px;
+  transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.archive-field__input::placeholder {
+  color: #9a8f82;
+  opacity: 0.7;
+}
+
+.archive-field__input:focus {
+  outline: none;
+  border-color: #c4a574;
+}
+
+.archive-field__input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.archive-field__wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.archive-field__wrap .archive-field__input {
+  padding-inline-end: 4rem;
+}
+
+.archive-field__toggle {
+  position: absolute;
+  right: 1rem;
+  font-size: 0.8125rem;
+  color: #9a8f82;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.archive-field__toggle:hover {
+  color: #c4a574;
+}
+
+.archive-btn {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: inherit;
+  color: #0f0c08;
+  background: #c4a574;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.15s ease;
+}
+
+.archive-btn:hover:not(:disabled) {
+  background: #d4b584;
+  transform: scale(1.01);
+}
+
+.archive-btn:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.archive-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .login-archive__form-section {
+    padding: 2rem 1.5rem;
+  }
+}
