@@ -1,0 +1,38 @@
+<!-- mvp -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — 실험적 인터페이스</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="shop-page-7" x-data="shopPage7()">
+    <div class="shop-page-7__container">
+      <h1 class="shop-page-7__title">Shop</h1>
+      <div class="shop-page-7__grid" id="shop-grid-7">
+        <template x-for="p in products" :key="p.id">
+          <article class="product-card-7" :class="{ 'product-card-7--added': addedIds.has(p.id) }" :data-product-id="p.id">
+            <img class="product-card-7__image" :src="p.img" :alt="p.name" width="220" height="220">
+            <div class="product-card-7__body">
+              <h2 class="product-card-7__name" x-text="p.name"></h2>
+              <p class="product-card-7__price" x-text="p.price"></p>
+              <div class="product-card-7__actions">
+                <button type="button" class="btn-7 btn-7--cart" @click="addToCart(p.id)">
+                  <span x-text="addedIds.has(p.id) ? '담김' : '장바구니'"></span>
+                </button>
+                <button type="button" class="btn-7" @click="toggleLike(p.id)" :aria-pressed="likes.has(p.id)" x-text="likes.has(p.id) ? '♥' : '♡'"></button>
+              </div>
+            </div>
+          </article>
+        </template>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>
