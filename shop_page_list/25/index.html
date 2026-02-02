@@ -1,0 +1,57 @@
+<!-- mvp -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — 현대 판타지</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="shop-page-25" x-data="shopPage25()">
+    <div class="shop-page-25__viewport">
+      <div class="shop-page-25__container">
+        <h1 class="shop-page-25__title">Shop</h1>
+        <div class="shop-page-25__grid" id="shop-grid-25">
+          <article class="card-25" :class="{ 'card-25--focused': focusedId === 1, 'card-25--in-cart': inCart(1) }" data-product="1" @click="setFocus(1)">
+            <img class="card-25__image" src="https://placehold.co/180x180/fef3c7/d97706?text=1" alt="Product 1" width="180" height="180">
+            <div class="card-25__body">
+              <h2 class="card-25__name">Product 1</h2>
+              <p class="card-25__price">₩29,000</p>
+              <button type="button" class="btn-25" :class="{ 'btn-25--added': inCart(1) }" @click.stop="addToCart(1)" x-text="inCart(1) ? '담김' : '장바구니'"></button>
+            </div>
+          </article>
+          <article class="card-25" :class="{ 'card-25--focused': focusedId === 2, 'card-25--in-cart': inCart(2) }" data-product="2" @click="setFocus(2)">
+            <img class="card-25__image" src="https://placehold.co/180x180/fef3c7/d97706?text=2" alt="Product 2" width="180" height="180">
+            <div class="card-25__body">
+              <h2 class="card-25__name">Product 2</h2>
+              <p class="card-25__price">₩39,000</p>
+              <button type="button" class="btn-25" :class="{ 'btn-25--added': inCart(2) }" @click.stop="addToCart(2)" x-text="inCart(2) ? '담김' : '장바구니'"></button>
+            </div>
+          </article>
+          <article class="card-25" :class="{ 'card-25--focused': focusedId === 3, 'card-25--in-cart': inCart(3) }" data-product="3" @click="setFocus(3)">
+            <img class="card-25__image" src="https://placehold.co/180x180/fef3c7/d97706?text=3" alt="Product 3" width="180" height="180">
+            <div class="card-25__body">
+              <h2 class="card-25__name">Product 3</h2>
+              <p class="card-25__price">₩49,000</p>
+              <button type="button" class="btn-25" :class="{ 'btn-25--added': inCart(3) }" @click.stop="addToCart(3)" x-text="inCart(3) ? '담김' : '장바구니'"></button>
+            </div>
+          </article>
+          <article class="card-25" :class="{ 'card-25--focused': focusedId === 4, 'card-25--in-cart': inCart(4) }" data-product="4" @click="setFocus(4)">
+            <img class="card-25__image" src="https://placehold.co/180x180/fef3c7/d97706?text=4" alt="Product 4" width="180" height="180">
+            <div class="card-25__body">
+              <h2 class="card-25__name">Product 4</h2>
+              <p class="card-25__price">₩19,000</p>
+              <button type="button" class="btn-25" :class="{ 'btn-25--added': inCart(4) }" @click.stop="addToCart(4)" x-text="inCart(4) ? '담김' : '장바구니'"></button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>
