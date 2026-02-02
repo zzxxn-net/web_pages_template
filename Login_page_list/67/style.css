@@ -1,0 +1,155 @@
+/* Design 67: Cyber Minimal · Card Split · No-Scroll Fixed Flow */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", system-ui, sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #1a1d24;
+  background: #f0f2f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.login-cyber-split {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.login-cyber-split__wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  max-width: 720px;
+  width: 100%;
+  max-height: min(420px, 85dvh);
+  border-radius: 10px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  background: #fff;
+  overflow: hidden;
+}
+@media (max-width: 640px) {
+  .login-cyber-split__wrap {
+    flex-direction: column;
+    max-height: min(520px, 90dvh);
+  }
+}
+
+.cyber-split-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.25rem 1.5rem;
+  min-width: 0;
+}
+.cyber-split-card--brand {
+  background: linear-gradient(160deg, #e8ecf2 0%, #dde2e9 100%);
+  border-right: 1px solid rgba(80, 95, 115, 0.18);
+}
+@media (max-width: 640px) {
+  .cyber-split-card--brand { border-right: none; border-bottom: 1px solid rgba(80, 95, 115, 0.18); }
+}
+.cyber-split-card--form { padding: 1.25rem 1.5rem; }
+
+.cyber-split-card__badge {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #5c6573;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.cyber-split-card__title {
+  margin: 0 0 0.25rem;
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-weight: 600;
+  color: #1a1d24;
+}
+.cyber-split-card__desc { margin: 0; font-size: 0.8125rem; color: #5c6573; }
+
+.cyber-split-form { display: flex; flex-direction: column; gap: 1.25rem; }
+.cyber-split-field {
+  padding: 0.6rem 0.85rem;
+  border: 1px solid rgba(80, 95, 115, 0.18);
+  border-radius: 6px;
+  background: #fff;
+  transition: border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cyber-split-field.has-focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.12);
+}
+.cyber-split-field.has-focus .cyber-split-field__label { color: #2563eb; }
+.cyber-split-field.has-value:not(.has-focus) { border-color: rgba(37, 99, 235, 0.35); }
+
+.cyber-split-field__label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #5c6573;
+  transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cyber-split-field__input {
+  width: 100%;
+  padding: 0.2rem 0;
+  font-size: 0.9375rem;
+  color: #1a1d24;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.cyber-split-field__input::placeholder { color: rgba(92, 101, 115, 0.7); }
+.cyber-split-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.cyber-split-field__row .cyber-split-field__input { flex: 1; }
+.cyber-split-field__toggle {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #5c6573;
+  background: transparent;
+  border: 1px solid rgba(80, 95, 115, 0.18);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.25s, border-color 0.25s;
+}
+.cyber-split-field__toggle:hover { color: #2563eb; border-color: #2563eb; }
+
+.cyber-split-btn {
+  margin-top: 0.15rem;
+  padding: 0.7rem 1.2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  background: #2563eb;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.25s, opacity 0.25s;
+}
+.cyber-split-btn:hover:not(:disabled) { background: #1d4ed8; }
+.cyber-split-btn:disabled { cursor: not-allowed; opacity: 0.7; }
+.cyber-split-btn.is-loading { pointer-events: none; }
+
+@media (max-width: 640px) {
+  .cyber-split-card { padding: 1rem 1.25rem; }
+  .cyber-split-card--form { padding: 1.25rem; }
+}
