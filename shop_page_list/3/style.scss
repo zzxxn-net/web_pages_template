@@ -1,0 +1,208 @@
+// mvp
+$bp-mobile: 480px;
+$bp-tablet: 768px;
+$bp-desktop: 1024px;
+$color-bg: #f8fafc;
+$color-surface: #ffffff;
+$color-border: #e2e8f0;
+$color-text: #0f172a;
+$color-muted: #64748b;
+$color-accent: #0ea5e9;
+$color-focus: #0ea5e9;
+$radius: 10px;
+$shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+
+.shop-page-3 {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  background: $color-bg;
+  color: $color-text;
+}
+
+.shop-page-3__container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.shop-page-3__title {
+  text-align: center;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: $color-text;
+}
+
+/* 단계 분할형: 스텝 인디케이터 + 콘텐츠 */
+.shop-page-3__steps {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.shop-page-3__step-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: $color-border;
+  transition: background 0.25s ease, transform 0.2s ease;
+
+  &--active {
+    background: $color-accent;
+    transform: scale(1.2);
+  }
+}
+
+.shop-page-3__content {
+  background: $color-surface;
+  border-radius: $radius;
+  box-shadow: $shadow;
+  border: 1px solid $color-border;
+  padding: 2rem;
+}
+
+/* 1단계: 카테고리 선택 (포커스 이동 중심) */
+.shop-page-3__categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.shop-page-3__category {
+  padding: 0.75rem 1.25rem;
+  border-radius: $radius;
+  border: 2px solid $color-border;
+  background: $color-surface;
+  color: $color-text;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    border-color: $color-muted;
+    background: $color-bg;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    border-color: $color-focus;
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.25);
+  }
+
+  &--selected {
+    border-color: $color-accent;
+    background: rgba(14, 165, 233, 0.08);
+  }
+}
+
+.shop-page-3__next {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-3 {
+  padding: 0.65rem 1.5rem;
+  border-radius: $radius;
+  border: 2px solid $color-accent;
+  background: $color-accent;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: filter 0.2s, box-shadow 0.2s;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.35);
+  }
+}
+
+/* 2단계: 상품 그리드 */
+.shop-page-3__grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  justify-items: center;
+}
+
+.product-card-3 {
+  width: 100%;
+  max-width: 200px;
+  background: $color-bg;
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  &:focus-within {
+    border-color: $color-focus;
+    box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
+  }
+}
+
+.product-card-3__image {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  background: $color-border;
+}
+
+.product-card-3__body {
+  padding: 0.75rem;
+  width: 100%;
+  text-align: center;
+}
+
+.product-card-3__name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.35rem;
+  color: $color-text;
+}
+
+.product-card-3__price {
+  font-size: 1rem;
+  font-weight: 600;
+  color: $color-accent;
+  margin-bottom: 0.5rem;
+}
+
+.product-card-3__actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.product-card-3 .btn-3 {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.85rem;
+  border: 1px solid $color-border;
+  background: $color-surface;
+  color: $color-text;
+
+  &:hover {
+    border-color: $color-muted;
+    background: $color-bg;
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.3);
+  }
+}
