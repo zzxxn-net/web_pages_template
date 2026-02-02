@@ -1,0 +1,20 @@
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100dvh; font-family: "Inter", "Noto Sans KR", sans-serif; font-weight: 700; color: #1a1a1a; background: #f2f0e8; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+.login-brutal-full { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; padding: 2rem; overflow: auto; }
+.login-brutal-full__inner { width: 100%; max-width: 400px; padding: 2rem; background: #fff; border: 3px solid #1a1a1a; box-shadow: 12px 12px 0 #1a1a1a; }
+.login-brutal-full__head { margin-bottom: 2rem; text-align: center; }
+.login-brutal-full__title { margin: 0 0 0.4rem; font-size: clamp(1.5rem, 3.5vw, 1.75rem); font-weight: 800; color: #1a1a1a; }
+.login-brutal-full__desc { margin: 0; font-size: 0.875rem; font-weight: 600; color: #5a5a5a; }
+.login-brutal-full__form { display: flex; flex-direction: column; gap: 1.5rem; }
+.brutal-full-field { padding: 1rem 1.5rem; border: 2px solid #1a1a1a; background: #fff; transition: box-shadow 0.26s, transform 0.26s; }
+.brutal-full-field.has-focus .brutal-full-field__label, .brutal-full-field.has-value .brutal-full-field__label { color: #1a1a1a; font-weight: 800; }
+.brutal-full-field.has-focus, .brutal-full-field.has-value { box-shadow: 4px 4px 0 #1a1a1a; }
+.brutal-full-field.has-focus { box-shadow: 6px 6px 0 #1a1a1a; }
+.brutal-full-field__label { display: block; margin-bottom: 0.35rem; font-size: 0.75rem; font-weight: 700; color: #5a5a5a; }
+.brutal-full-field__input { width: 100%; padding: 0.4rem 0; font-size: 1rem; font-weight: 600; color: #1a1a1a; background: transparent; border: none; outline: none; }
+.brutal-full-field__row { display: flex; align-items: center; gap: 0.5rem; }
+.brutal-full-field__row .brutal-full-field__input { flex: 1; }
+.brutal-full-field__toggle { padding: 0.35rem 0.6rem; font-size: 0.75rem; font-weight: 700; color: #1a1a1a; background: #fff; border: 2px solid #1a1a1a; cursor: pointer; }
+.brutal-full-btn { margin-top: 0.5rem; padding: 0.9rem 1.5rem; font-size: 1rem; font-weight: 800; color: #fff; background: #1a1a1a; border: 3px solid #1a1a1a; cursor: pointer; box-shadow: 6px 6px 0 #1a1a1a; }
+.brutal-full-btn:disabled { cursor: not-allowed; opacity: 0.7; }
+@media (max-width: 480px) { .login-brutal-full { padding: 1rem; } .login-brutal-full__inner { padding: 1.5rem; box-shadow: 8px 8px 0 #1a1a1a; } }
