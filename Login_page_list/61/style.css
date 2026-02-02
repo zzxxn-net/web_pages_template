@@ -1,0 +1,24 @@
+*,*::before,*::after{box-sizing:border-box}
+html{font-size:16px;overflow:hidden}
+body{margin:0;min-height:100vh;font-family:"Inter","Noto Sans KR",sans-serif;color:#e4e8ec;background:#0c0e10;display:flex;align-items:center;justify-content:center;padding:0;overflow:hidden}
+.login-cyber-full{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:2rem;overflow:hidden;background:radial-gradient(ellipse 90% 80% at 50% 50%,#14171a 0%,#0c0e10 100%)}
+.login-cyber-full__inner{width:100%;max-width:380px;padding:2rem;background:rgba(20,23,26,.94);border:1px solid rgba(100,120,140,.2);border-radius:8px;box-shadow:0 24px 64px rgba(0,0,0,.5)}
+.login-cyber-full__head{margin-bottom:2rem;text-align:center}
+.login-cyber-full__title{margin:0 0 .35rem;font-size:clamp(1.3rem,3vw,1.5rem);font-weight:600;color:#e4e8ec}
+.login-cyber-full__desc{margin:0;font-size:.8125rem;color:#7a8490}
+.login-cyber-full__form{display:flex;flex-direction:column;gap:1.5rem}
+.cyber-full-field{padding:1rem 1.5rem;border:1px solid rgba(100,120,140,.2);border-radius:6px;background:rgba(12,14,16,.5);transition:border .24s,box-shadow .24s}
+.cyber-full-field.has-focus{border-color:#4a9eff;box-shadow:0 0 0 2px rgba(74,158,255,.18);background:rgba(12,14,16,.7)}
+.cyber-full-field.has-focus .cyber-full-field__label{color:#4a9eff;font-weight:600}
+.cyber-full-field.has-value:not(.has-focus){border-color:rgba(74,158,255,.35)}
+.cyber-full-field__label{display:block;margin-bottom:.3rem;font-size:.75rem;font-weight:500;color:#7a8490}
+.cyber-full-field__input{width:100%;padding:.3rem 0;font-size:1rem;color:#e4e8ec;background:transparent;border:none;outline:none}
+.cyber-full-field__row{display:flex;align-items:center;gap:.5rem}
+.cyber-full-field__row .cyber-full-field__input{flex:1}
+.cyber-full-field__toggle{padding:.3rem .55rem;font-size:.75rem;font-weight:600;color:#7a8490;background:transparent;border:1px solid rgba(100,120,140,.2);border-radius:4px;cursor:pointer}
+.cyber-full-field__toggle:hover{color:#4a9eff;border-color:#4a9eff}
+.cyber-full-btn{margin-top:.25rem;padding:.85rem 1.4rem;font-size:.9375rem;font-weight:600;color:#0c0e10;background:#4a9eff;border:none;border-radius:6px;cursor:pointer;transition:background .24s,transform .24s}
+.cyber-full-btn:hover:not(:disabled){background:#5aa8ff}
+.cyber-full-btn:active:not(:disabled){transform:scale(.98)}
+.cyber-full-btn:disabled{opacity:.7;cursor:not-allowed}
+.cyber-full-btn.is-loading{pointer-events:none}
