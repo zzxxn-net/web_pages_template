@@ -1,0 +1,164 @@
+// Design 67: Cyber Minimal · Card Split · No-Scroll Fixed Flow
+$bg: #f0f2f5;
+$card-bg: #fff;
+$border: rgba(80, 95, 115, 0.18);
+$text: #1a1d24;
+$muted: #5c6573;
+$accent: #2563eb;
+$accent-soft: rgba(37, 99, 235, 0.12);
+$radius: 10px;
+$space: 1rem;
+$space-lg: 1.25rem;
+$space-xl: 1.5rem;
+$ease: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 640px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", system-ui, sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+  overflow: hidden;
+}
+
+.login-cyber-split {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+  overflow: hidden;
+}
+
+.login-cyber-split__wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  max-width: 720px;
+  width: 100%;
+  max-height: min(420px, 85dvh);
+  border-radius: $radius;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  background: $card-bg;
+  overflow: hidden;
+  @media (max-width: $bp) {
+    flex-direction: column;
+    max-height: min(520px, 90dvh);
+  }
+}
+
+.cyber-split-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: $space-lg $space-xl;
+  min-width: 0;
+  &--brand {
+    background: linear-gradient(160deg, #e8ecf2 0%, #dde2e9 100%);
+    border-right: 1px solid $border;
+    @media (max-width: $bp) { border-right: none; border-bottom: 1px solid $border; }
+  }
+  &--form { padding: $space-lg $space-xl; }
+}
+
+.cyber-split-card__badge {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: $muted;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.cyber-split-card__title {
+  margin: 0 0 0.25rem;
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-weight: 600;
+  color: $text;
+}
+.cyber-split-card__desc { margin: 0; font-size: 0.8125rem; color: $muted; }
+
+.cyber-split-form { display: flex; flex-direction: column; gap: $space-lg; }
+.cyber-split-field {
+  padding: 0.6rem 0.85rem;
+  border: 1px solid $border;
+  border-radius: 6px;
+  background: $card-bg;
+  transition: border-color $ease, box-shadow $ease;
+  &.has-focus {
+    border-color: $accent;
+    box-shadow: 0 0 0 2px $accent-soft;
+    .cyber-split-field__label { color: $accent; }
+  }
+  &.has-value:not(.has-focus) { border-color: rgba($accent, 0.35); }
+}
+.cyber-split-field__label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: $muted;
+  transition: color $ease;
+}
+.cyber-split-field__input {
+  width: 100%;
+  padding: 0.2rem 0;
+  font-size: 0.9375rem;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+  &::placeholder { color: rgba($muted, 0.7); }
+}
+.cyber-split-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  .cyber-split-field__input { flex: 1; }
+}
+.cyber-split-field__toggle {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: $muted;
+  background: transparent;
+  border: 1px solid $border;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color $ease, border-color $ease;
+  &:hover { color: $accent; border-color: $accent; }
+}
+
+.cyber-split-btn {
+  margin-top: 0.15rem;
+  padding: 0.7rem 1.2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  background: $accent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background $ease, opacity $ease;
+  &:hover:not(:disabled) { background: darken($accent, 8%); }
+  &:disabled { cursor: not-allowed; opacity: 0.7; }
+  &.is-loading { pointer-events: none; }
+}
+
+@media (max-width: $bp) {
+  .cyber-split-card { padding: $space $space-lg; }
+  .cyber-split-card--form { padding: $space-lg; }
+}
