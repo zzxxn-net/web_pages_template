@@ -1,0 +1,97 @@
+/* mvp */
+.shop-page-37 {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  background: #fdf2f8;
+  color: #831843;
+}
+.shop-page-37__wrap {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.shop-page-37__title {
+  text-align: center;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  letter-spacing: 0.02em;
+  color: #831843;
+}
+.shop-page-37__lead {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #9d174d;
+  margin: 0 0 1.5rem;
+}
+.shop-page-37__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  justify-items: center;
+  width: 100%;
+}
+.card-37 {
+  width: 100%;
+  max-width: 200px;
+  background: #fce7f3;
+  border: 2px solid #fbcfe8;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: border-color 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  outline: none;
+}
+.card-37--focused {
+  border-color: #be185d;
+  box-shadow: 0 0 0 3px rgba(190, 24, 93, 0.2);
+}
+.card-37__image {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 0.75rem;
+}
+.card-37__body { text-align: center; width: 100%; }
+.card-37__name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 0.3rem;
+  color: #831843;
+}
+.card-37__price { font-size: 0.9rem; color: #9d174d; margin: 0 0 0.6rem; }
+.btn-37 {
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  border: 1px solid #be185d;
+  background: rgba(190, 24, 93, 0.1);
+  color: #be185d;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.btn-37:hover { background: rgba(190, 24, 93, 0.18); }
+.btn-37:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #fdf2f8, 0 0 0 4px #be185d;
+}
+@media (min-width: 768px) {
+  .shop-page-37__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+}
