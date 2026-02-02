@@ -1,0 +1,61 @@
+<!-- mvp -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — 실험적 인터페이스 · 카드 분리형 · GSAP 부드러운 전환</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="shop-page-47" x-data="shopPage47()">
+    <div class="shop-page-47__center">
+      <header class="shop-page-47__header">
+        <h1 class="shop-page-47__title">SHOP</h1>
+        <p class="shop-page-47__lead">실험적 인터페이스 · 카드 분리형 · GSAP 부드러운 전환</p>
+      </header>
+      <div class="shop-page-47__grid" id="shop-grid-47">
+        <article class="card-47 card-47--tilt-left" data-product="1">
+          <img class="card-47__image" src="https://placehold.co/190x190/1a1a2e/ee6f57?text=1" alt="Product 1" width="190" height="190">
+          <div class="card-47__body">
+            <h2 class="card-47__name">Product 1</h2>
+            <p class="card-47__price">₩29,000</p>
+            <button type="button" class="btn-47" @click="addToCart(1)">장바구니</button>
+          </div>
+        </article>
+        <article class="card-47 card-47--tilt-right" data-product="2">
+          <img class="card-47__image" src="https://placehold.co/190x190/1a1a2e/ee6f57?text=2" alt="Product 2" width="190" height="190">
+          <div class="card-47__body">
+            <h2 class="card-47__name">Product 2</h2>
+            <p class="card-47__price">₩39,000</p>
+            <button type="button" class="btn-47" @click="addToCart(2)">장바구니</button>
+          </div>
+        </article>
+        <article class="card-47 card-47--tilt-left" data-product="3">
+          <img class="card-47__image" src="https://placehold.co/190x190/1a1a2e/ee6f57?text=3" alt="Product 3" width="190" height="190">
+          <div class="card-47__body">
+            <h2 class="card-47__name">Product 3</h2>
+            <p class="card-47__price">₩49,000</p>
+            <button type="button" class="btn-47" @click="addToCart(3)">장바구니</button>
+          </div>
+        </article>
+        <article class="card-47 card-47--tilt-right" data-product="4">
+          <img class="card-47__image" src="https://placehold.co/190x190/1a1a2e/ee6f57?text=4" alt="Product 4" width="190" height="190">
+          <div class="card-47__body">
+            <h2 class="card-47__name">Product 4</h2>
+            <p class="card-47__price">₩19,000</p>
+            <button type="button" class="btn-47" @click="addToCart(4)">장바구니</button>
+          </div>
+        </article>
+      </div>
+      <footer class="shop-page-47__footer">
+        <span class="shop-page-47__cart" x-show="cart.length > 0">장바구니 <span x-text="cart.length"></span>개</span>
+      </footer>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>
