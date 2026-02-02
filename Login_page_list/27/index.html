@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="로그인 — 사이버 미니멀 · 비대칭 레이아웃 · GSAP 기반 부드러운 전환 시안">
+  <title>Login — Cyber Minimal Asymmetric</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/login.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+  <main class="login-cyber-asym" role="main" aria-label="로그인">
+    <section class="login-cyber-asym__form-area">
+      <div class="cyber-asym-panel" x-data="cyberAsymLogin()">
+        <h1 class="cyber-asym-panel__title">Sign in</h1>
+        <p class="cyber-asym-panel__desc">이메일과 비밀번호를 입력하세요</p>
+        <form class="cyber-asym-panel__form" action="#" method="post" autocomplete="on" @submit.prevent="handleSubmit" hx-post="#" hx-swap="none" hx-trigger="submit">
+          <div class="cyber-asym-field">
+            <label for="cyber-email" class="cyber-asym-field__label">이메일</label>
+            <input id="cyber-email" type="email" name="email" class="cyber-asym-field__input" placeholder="you@example.com" autocomplete="email" required x-model="email">
+          </div>
+          <div class="cyber-asym-field">
+            <label for="cyber-pw" class="cyber-asym-field__label">비밀번호</label>
+            <div class="cyber-asym-field__wrap">
+              <input id="cyber-pw" :type="showPassword ? 'text' : 'password'" name="password" class="cyber-asym-field__input" placeholder="••••••••" autocomplete="current-password" required x-model="password">
+              <button type="button" class="cyber-asym-field__toggle" aria-label="비밀번호 표시" @click="showPassword = !showPassword"><span x-text="showPassword ? '숨기기' : '보기'">보기</span></button>
+            </div>
+          </div>
+          <button type="submit" class="cyber-asym-btn" :disabled="loading">
+            <span x-show="!loading">로그인</span>
+            <span x-show="loading" x-cloak>확인 중…</span>
+          </button>
+        </form>
+      </div>
+    </section>
+    <aside class="login-cyber-asym__side" aria-hidden="true">
+      <div class="cyber-asym-side__line" data-gsap-line></div>
+      <p class="cyber-asym-side__text">Access</p>
+    </aside>
+  </main>
+</body>
+</html>
