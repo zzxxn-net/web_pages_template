@@ -1,0 +1,137 @@
+// Design 54: Neo Brutalism · Fullscreen immersive · Input-reactive animation
+$bg: #f2f0e8;
+$card: #ffffff;
+$border: #1a1a1a;
+$text: #1a1a1a;
+$muted: #5a5a5a;
+$radius: 0;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", sans-serif;
+  font-weight: 700;
+  line-height: 1.4;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-brutal-full {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+  overflow: auto;
+}
+.login-brutal-full__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  padding: $space-xl;
+  background: $card;
+  border: 3px solid $border;
+  box-shadow: 12px 12px 0 $border;
+}
+
+.login-brutal-full__head { margin-bottom: $space-xl; text-align: center; }
+.login-brutal-full__title {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.5rem, 3.5vw, 1.75rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: $text;
+}
+.login-brutal-full__desc { margin: 0; font-size: 0.875rem; font-weight: 600; color: $muted; }
+.login-brutal-full__form { display: flex; flex-direction: column; gap: $space-lg; }
+
+.brutal-full-field {
+  padding: $space $space-lg;
+  border: 2px solid $border;
+  background: $card;
+  transition: border-color $ease, box-shadow $ease, transform $ease;
+  &.has-focus,
+  &.has-value {
+    border-color: $border;
+    box-shadow: 4px 4px 0 $border;
+    .brutal-full-field__label { color: $text; font-weight: 800; }
+  }
+  &.has-focus { box-shadow: 6px 6px 0 $border; }
+}
+.brutal-full-field__label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: $muted;
+  transition: color $ease, font-weight $ease;
+}
+.brutal-full-field__input {
+  width: 100%;
+  padding: 0.4rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+  &::placeholder { color: lighten($muted, 15%); }
+}
+.brutal-full-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  .brutal-full-field__input { flex: 1; }
+}
+.brutal-full-field__toggle {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: $text;
+  background: $card;
+  border: 2px solid $border;
+  cursor: pointer;
+  transition: box-shadow $ease, transform $ease;
+  &:hover { box-shadow: 3px 3px 0 $border; }
+  &:active { transform: translate(1px, 1px); box-shadow: 2px 2px 0 $border; }
+}
+
+.brutal-full-btn {
+  margin-top: 0.5rem;
+  padding: 0.9rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 800;
+  color: $card;
+  background: $border;
+  border: 3px solid $border;
+  cursor: pointer;
+  transition: transform $ease, box-shadow $ease;
+  box-shadow: 6px 6px 0 $border;
+  &:hover:not(:disabled) {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0 $border;
+  }
+  &:active:not(:disabled) { transform: translate(2px, 2px); box-shadow: 4px 4px 0 $border; }
+  &:disabled { cursor: not-allowed; opacity: 0.7; }
+  &.is-loading { opacity: 0.9; }
+}
+
+@media (max-width: $bp) {
+  .login-brutal-full { padding: $space; }
+  .login-brutal-full__inner { padding: $space-lg; box-shadow: 8px 8px 0 $border; }
+}
