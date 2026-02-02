@@ -1,0 +1,148 @@
+// Design 45: Modern Fantasy · Micro-interaction · GSAP smooth transitions
+$bg: #1a1625;
+$card: #252030;
+$border: rgba(212, 175, 55, 0.22);
+$text: #f0ebe3;
+$muted: #9a8f7e;
+$accent: #d4af37;
+$glow: rgba(212, 175, 55, 0.2);
+$radius: 14px;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", Georgia, serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-fantasy-micro {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+}
+.login-fantasy-micro__box {
+  width: 100%;
+  max-width: 380px;
+  background: $card;
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: $space-xl;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(212, 175, 55, 0.06);
+}
+
+.login-fantasy-micro__head { margin-bottom: $space-xl; text-align: center; }
+.login-fantasy-micro__title {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.35rem, 3.5vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: $text;
+  text-shadow: 0 0 24px $glow;
+}
+.login-fantasy-micro__desc {
+  margin: 0;
+  font-size: 0.875rem;
+  color: $muted;
+}
+.login-fantasy-micro__form { display: flex; flex-direction: column; gap: $space-lg; }
+
+.fantasy-micro-field {
+  padding: $space $space-lg;
+  border: 1px solid $border;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  transition: border-color $ease, box-shadow $ease, transform $ease;
+}
+.fantasy-micro-field.is-focused {
+  border-color: rgba($accent, 0.5);
+  box-shadow: 0 0 0 2px rgba($accent, 0.15), 0 0 20px $glow;
+}
+.fantasy-micro-field__label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: $muted;
+  margin-bottom: 0.35rem;
+}
+.fantasy-micro-field__input {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  color: $text;
+  background: transparent;
+  border: none;
+  padding: 0.35rem 0;
+  outline: none;
+}
+.fantasy-micro-field__input::placeholder { color: $muted; opacity: 0.8; }
+.fantasy-micro-field__row { display: flex; align-items: center; gap: $space; }
+.fantasy-micro-field__row .fantasy-micro-field__input { flex: 1; min-width: 0; }
+.fantasy-micro-field__toggle {
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: $muted;
+  background: transparent;
+  border: 1px solid $border;
+  border-radius: 8px;
+  padding: 0.35rem 0.65rem;
+  cursor: pointer;
+  transition: color $ease, border-color $ease, transform $ease, box-shadow $ease;
+  flex-shrink: 0;
+}
+.fantasy-micro-field__toggle:hover {
+  color: $accent;
+  border-color: rgba($accent, 0.5);
+  transform: scale(1.03);
+  box-shadow: 0 0 12px $glow;
+}
+.fantasy-micro-field__toggle:focus-visible { outline: 2px solid $accent; outline-offset: 2px; }
+
+.fantasy-micro-btn {
+  margin-top: 0.5rem;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $bg;
+  background: $accent;
+  border: none;
+  border-radius: 10px;
+  padding: $space-lg $space-xl;
+  cursor: pointer;
+  transition: transform $ease, box-shadow $ease, opacity $ease;
+  box-shadow: 0 4px 20px $glow;
+}
+.fantasy-micro-btn:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 28px $glow, 0 0 24px rgba($accent, 0.25);
+}
+.fantasy-micro-btn:focus-visible { outline: 2px solid $accent; outline-offset: 2px; }
+.fantasy-micro-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+.fantasy-micro-btn.is-loading { pointer-events: none; }
+
+@media (max-width: $bp) {
+  .login-fantasy-micro { padding: $space; }
+  .login-fantasy-micro__box { padding: $space-lg; }
+}
+
+[x-cloak] { display: none !important; }
