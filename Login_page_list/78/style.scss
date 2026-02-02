@@ -1,0 +1,148 @@
+// Design 78: Cyber Minimal · Single Focus Input Flow · GSAP Smooth Transition
+$bg: #0d0d0f;
+$surface: #161618;
+$border: rgba(255, 255, 255, 0.06);
+$text: #e4e4e7;
+$muted: #71717a;
+$accent: #22d3ee;
+$accent-soft: rgba(34, 211, 238, 0.12);
+$radius: 8px;
+$space: 1rem;
+$space-lg: 1.25rem;
+$ease: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "JetBrains Mono", "SF Mono", "Consolas", monospace;
+  font-weight: 400;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.cyber-login {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-lg;
+  overflow: auto;
+}
+
+.cyber-login__wrap { width: 100%; max-width: 380px; }
+
+.cyber-card {
+  padding: $space-lg;
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $radius;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.02);
+}
+
+.cyber-card__title {
+  margin: 0 0 0.25rem;
+  font-size: clamp(1.25rem, 2.8vw, 1.4375rem);
+  font-weight: 600;
+  color: $text;
+  letter-spacing: -0.02em;
+}
+.cyber-card__desc {
+  margin: 0 0 $space;
+  font-size: 0.8125rem;
+  color: $muted;
+}
+.cyber-card__form {
+  display: flex;
+  flex-direction: column;
+  gap: $space;
+}
+
+.cyber-field {
+  padding: 0.65rem 0;
+  border-bottom: 1px solid $border;
+  transition: border-color $ease, box-shadow $ease, opacity $ease;
+  &.has-focus {
+    border-color: $accent;
+    box-shadow: 0 1px 0 0 $accent;
+    .cyber-field__label { color: $accent; }
+  }
+  &.has-value:not(.has-focus) { border-color: rgba($accent, 0.35); .cyber-field__label { color: $text; } }
+}
+
+.cyber-field__label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $muted;
+  transition: color $ease;
+}
+
+.cyber-field__input {
+  width: 100%;
+  padding: 0.2rem 0;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+  &::placeholder { color: rgba($muted, 0.7); }
+}
+
+.cyber-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  .cyber-field__input { flex: 1; }
+}
+
+.cyber-field__toggle {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: $muted;
+  background: transparent;
+  border: 1px solid $border;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color $ease, border-color $ease;
+  &:hover { color: $accent; border-color: rgba($accent, 0.5); }
+}
+
+.cyber-btn {
+  margin-top: 0.5rem;
+  padding: 0.8rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: inherit;
+  color: $bg;
+  background: $accent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background $ease, opacity $ease, transform $ease;
+  &:hover:not(:disabled) { background: lighten($accent, 6%); }
+  &:disabled { cursor: not-allowed; opacity: 0.6; }
+  &.is-loading { pointer-events: none; }
+}
+
+@media (max-width: $bp) {
+  .cyber-login { padding: $space; }
+  .cyber-card { padding: $space; }
+}
