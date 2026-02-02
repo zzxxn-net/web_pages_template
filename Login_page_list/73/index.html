@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="로그인 — 사이버 미니멀 · 비대칭 레이아웃 · 상태 변화 강조 시안">
+  <title>Login — Cyber Minimal Asymmetric State</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/login.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+  <main class="login-cyber-asym" role="main" aria-label="로그인">
+    <div class="login-cyber-asym__grid" aria-hidden="true"></div>
+    <div class="login-cyber-asym__wrap" x-data="cyberAsymStateLogin()" data-gsap-wrap>
+      <aside class="cyber-asym__brand" data-gsap-brand>
+        <span class="cyber-asym__tag">// access</span>
+        <h1 class="cyber-asym__title">SIGN IN</h1>
+        <p class="cyber-asym__lead">상태 변화가 강조되는 비대칭 로그인</p>
+      </aside>
+      <section class="cyber-asym__card" data-gsap-card>
+        <form class="cyber-asym__form" action="#" method="post" autocomplete="on" x-on:submit.prevent="handleSubmit($event)" hx-post="#" hx-swap="none" hx-trigger="submit">
+          <div class="cyber-asym-field" :class="{ 'has-focus': focusField === 'email', 'has-value': email.length > 0, 'has-error': errorField === 'email' }" data-gsap-field data-state-email>
+            <label for="ca73-email" class="cyber-asym-field__label">EMAIL</label>
+            <input id="ca73-email" type="email" name="email" class="cyber-asym-field__input" placeholder="user@domain.io" autocomplete="email" required x-model="email" x-on:focus="setFocus('email')" x-on:blur="clearFocus()" tabindex="0">
+          </div>
+          <div class="cyber-asym-field" :class="{ 'has-focus': focusField === 'password', 'has-value': password.length > 0, 'has-error': errorField === 'password' }" data-gsap-field data-state-password>
+            <label for="ca73-pw" class="cyber-asym-field__label">PASSWORD</label>
+            <div class="cyber-asym-field__row">
+              <input id="ca73-pw" x-bind:type="showPassword ? 'text' : 'password'" name="password" class="cyber-asym-field__input" placeholder="••••••••" autocomplete="current-password" required x-model="password" x-on:focus="setFocus('password')" x-on:blur="clearFocus()" tabindex="0">
+              <button type="button" class="cyber-asym-field__toggle" aria-label="비밀번호 표시" x-on:click="showPassword = !showPassword" tabindex="0"><span x-text="showPassword ? 'HIDE' : 'SHOW'">SHOW</span></button>
+            </div>
+          </div>
+          <button type="submit" class="cyber-asym-btn" :class="{ 'is-loading': loading, 'is-success': success }" :disabled="loading" tabindex="0">
+            <span class="cyber-asym-btn__text" x-show="!loading && !success">SIGN IN</span>
+            <span class="cyber-asym-btn__text" x-show="loading" x-cloak>CHECKING…</span>
+            <span class="cyber-asym-btn__text" x-show="success && !loading" x-cloak>OK</span>
+          </button>
+        </form>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
