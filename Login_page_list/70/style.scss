@@ -1,0 +1,181 @@
+// Design 70: Modern Fantasy · Asymmetric · Input Reactive
+$bg: #f8f4ee;
+$side-bg: linear-gradient(180deg, #2d2420 0%, #1e1814 100%);
+$card: rgba(255, 252, 248, 0.96);
+$border: rgba(120, 95, 75, 0.28);
+$text: #2a2420;
+$muted: #6b5d52;
+$accent: #8b6914;
+$accent-soft: rgba(139, 105, 20, 0.2);
+$radius: 10px;
+$space: 1rem;
+$space-lg: 1.25rem;
+$space-xl: 1.75rem;
+$ease: 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 560px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", Georgia, serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-fantasy-asym {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+  overflow: auto;
+}
+
+.login-fantasy-asym__wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%;
+  max-width: 680px;
+  min-height: 340px;
+  border-radius: $radius;
+  overflow: hidden;
+  box-shadow: 0 16px 48px rgba(42, 36, 32, 0.12);
+  background: $card;
+  border: 1px solid $border;
+  @media (max-width: $bp) {
+    flex-direction: column;
+    max-width: 400px;
+  }
+}
+
+.fantasy-asym-side {
+  width: 38%;
+  min-width: 180px;
+  padding: $space-xl;
+  background: $side-bg;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #e8e2d8;
+  @media (max-width: $bp) {
+    width: 100%;
+    min-width: 0;
+    padding: $space-lg;
+    text-align: center;
+  }
+}
+.fantasy-asym-side__badge {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(232, 226, 216, 0.7);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.fantasy-asym-side__title {
+  margin: 0 0 0.25rem;
+  font-size: clamp(1.2rem, 2.2vw, 1.45rem);
+  font-weight: 600;
+  color: #e8e2d8;
+  letter-spacing: -0.02em;
+}
+.fantasy-asym-side__desc { margin: 0; font-size: 0.8125rem; color: rgba(232, 226, 216, 0.75); }
+
+.fantasy-asym-form-area {
+  flex: 1;
+  padding: $space-xl;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  @media (max-width: $bp) { padding: $space-lg; }
+}
+
+.fantasy-asym-form { display: flex; flex-direction: column; gap: $space-lg; }
+
+.fantasy-asym-field {
+  padding: 0.7rem $space-lg;
+  border: 1px solid $border;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.6);
+  transition: border-color $ease, box-shadow $ease, background $ease;
+  &.has-focus {
+    border-color: $accent;
+    box-shadow: 0 0 0 2px $accent-soft;
+    background: rgba(255, 255, 255, 0.95);
+    .fantasy-asym-field__label { color: $accent; font-weight: 600; }
+  }
+  &.has-value:not(.has-focus) { border-color: rgba($accent, 0.4); .fantasy-asym-field__label { color: $text; } }
+}
+
+.fantasy-asym-field__label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: $muted;
+  transition: color $ease, font-weight $ease;
+}
+
+.fantasy-asym-field__input {
+  width: 100%;
+  padding: 0.3rem 0;
+  font-size: 1rem;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+  &::placeholder { color: rgba($muted, 0.75); }
+}
+
+.fantasy-asym-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  .fantasy-asym-field__input { flex: 1; }
+}
+
+.fantasy-asym-field__toggle {
+  padding: 0.3rem 0.55rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $muted;
+  background: transparent;
+  border: 1px solid $border;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color $ease, border-color $ease;
+  &:hover { color: $accent; border-color: $accent; }
+}
+
+.fantasy-asym-btn {
+  margin-top: 0.2rem;
+  padding: 0.85rem 1.3rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #fff;
+  background: $accent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background $ease, transform $ease;
+  &:hover:not(:disabled) { background: darken($accent, 8%); transform: translateY(-1px); }
+  &:disabled { cursor: not-allowed; opacity: 0.65; }
+  &.is-loading { pointer-events: none; }
+}
+
+@media (max-width: $bp) {
+  .login-fantasy-asym { padding: $space; }
+}
