@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="로그인 — 사이버 미니멀 · 단계 분할형 · 입력 반응형 애니메이션 시안">
+  <title>Login — Cyber Progressive Reactive</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/login.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+  <main class="login-cyber-prog" role="main" aria-label="로그인">
+    <div class="login-cyber-prog__box" x-data="cyberProgLogin()">
+      <div class="cyber-steps" aria-hidden="true">
+        <span class="cyber-step" :class="{ 'is-active': step === 1, 'is-done': step > 1 }">1</span>
+        <span class="cyber-step__line" :class="{ 'is-done': step > 1 }"></span>
+        <span class="cyber-step" :class="{ 'is-active': step === 2 }">2</span>
+      </div>
+      <header class="login-cyber-prog__head">
+        <h1 class="login-cyber-prog__title">Sign in</h1>
+        <p class="login-cyber-prog__desc" x-text="step === 1 ? '이메일을 입력하세요' : '비밀번호를 입력하세요'">이메일을 입력하세요</p>
+      </header>
+      <form class="login-cyber-prog__form" action="#" method="post" autocomplete="on" @submit.prevent="handleSubmit" hx-post="#" hx-swap="none" hx-trigger="submit">
+        <div class="cyber-panel" data-step="1" :class="{ 'is-hidden': step !== 1 }">
+          <div class="cyber-field" data-cyber-field :class="{ 'has-focus': emailFocus }">
+            <label for="email" class="cyber-field__label">이메일</label>
+            <input id="email" type="email" name="email" class="cyber-field__input" placeholder="you@example.com" autocomplete="email" required x-model="email" @focus="emailFocus = true" @blur="emailFocus = false" @keydown.enter.prevent="goStep2()">
+          </div>
+          <button type="button" class="cyber-btn cyber-btn--next" @click="goStep2" :disabled="!email.trim()">다음</button>
+        </div>
+        <div class="cyber-panel" data-step="2" :class="{ 'is-hidden': step !== 2 }">
+          <div class="cyber-field" data-cyber-field :class="{ 'has-focus': passwordFocus }">
+            <label for="password" class="cyber-field__label">비밀번호</label>
+            <div class="cyber-field__wrap">
+              <input id="password" :type="showPassword ? 'text' : 'password'" name="password" class="cyber-field__input" placeholder="••••••••" autocomplete="current-password" required x-model="password" @focus="passwordFocus = true" @blur="passwordFocus = false">
+              <button type="button" class="cyber-field__toggle" aria-label="비밀번호 표시" @click="showPassword = !showPassword"><span x-text="showPassword ? '숨기기' : '보기'">보기</span></button>
+            </div>
+          </div>
+          <div class="cyber-panel__actions">
+            <button type="button" class="cyber-btn cyber-btn--back" @click="goStep1">이전</button>
+            <button type="submit" class="cyber-btn cyber-btn--primary" :disabled="loading"><span x-show="!loading">로그인</span><span x-show="loading" x-cloak>확인 중…</span></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
