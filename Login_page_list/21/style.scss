@@ -1,0 +1,39 @@
+// Design 21: Dark Archive · Progressive · State change
+$bg:#0f0e0c;$surf:#1a1816;$bor:rgba(180,170,155,0.15);$txt:#e0dcd6;$muted:#7a756e;$acc:#a89880;$active:rgba(168,152,128,0.2);$r:10px;$sm:8px;$md:1rem;$lg:1.5rem;$xl:2rem;$2xl:3rem;$ease:0.28s ease;$bp:480px;
+*,*::before,*::after{box-sizing:border-box;}
+html{font-size:16px;-webkit-text-size-adjust:100%;}
+body{margin:0;min-height:100vh;min-height:100dvh;font-family:"Inter",Georgia,serif;font-weight:500;line-height:1.5;color:$txt;background:$bg;display:flex;align-items:center;justify-content:center;padding:$md;}
+.login-archive-prog{width:100%;min-height:100%;display:flex;align-items:center;justify-content:center;padding:$xl;}
+.login-archive-prog__box{width:100%;max-width:360px;margin:0 auto;background:$surf;border:1px solid $bor;border-radius:$r;padding:$2xl $xl;box-shadow:0 16px 48px rgba(0,0,0,0.4);}
+.archive-steps{display:flex;align-items:center;gap:$md;margin-bottom:$xl;}
+.archive-step{width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;font-size:0.875rem;font-weight:700;border:1px solid $bor;border-radius:50%;background:$surf;color:$muted;transition:background $ease,color $ease,border-color $ease;}
+.archive-step.is-active{background:$active;border-color:$acc;color:$acc;}
+.archive-step.is-done{background:$active;color:$acc;border-color:$acc;}
+.archive-step__line{width:1.5rem;height:2px;background:$bor;transition:background $ease;}
+.archive-step__line.is-done{background:$acc;}
+.login-archive-prog__head{margin-bottom:$xl;}
+.login-archive-prog__title{margin:0 0 0.25rem;font-size:clamp(1.5rem,3.5vw,1.75rem);font-weight:600;letter-spacing:-0.02em;color:$txt;}
+.login-archive-prog__desc{margin:0;font-size:0.875rem;color:$muted;}
+.login-archive-prog__form{position:relative;min-height:200px;}
+.archive-panel{transition:opacity 0.2s ease;}
+.archive-panel.is-hidden{position:absolute;left:0;right:0;top:0;pointer-events:none;visibility:hidden;}
+.archive-field{margin-bottom:$lg;}
+.archive-field__label{display:block;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:$muted;margin-bottom:0.35rem;}
+.archive-field__input{width:100%;font:inherit;font-size:1rem;color:$txt;background:rgba(0,0,0,0.2);border:1px solid $bor;border-radius:$sm;padding:$md;outline:none;transition:border-color $ease;}
+.archive-field__input::placeholder{color:$muted;}
+.archive-field__input:focus{border-color:$acc;}
+.archive-field__wrap{display:flex;align-items:center;gap:$md;}
+.archive-field__wrap .archive-field__input{flex:1;min-width:0;}
+.archive-field__toggle{font:inherit;font-size:0.8125rem;color:$muted;background:none;border:1px solid $bor;border-radius:6px;padding:0.25rem 0.5rem;cursor:pointer;transition:color $ease,border-color $ease;}
+.archive-field__toggle:hover{color:$acc;border-color:$acc;}
+.archive-field__toggle:focus-visible{outline:2px solid $acc;outline-offset:2px;}
+.archive-btn{font:inherit;font-size:0.9375rem;font-weight:600;padding:$md $xl;border-radius:$sm;cursor:pointer;transition:opacity $ease,transform $ease;border:none;}
+.archive-btn:focus-visible{outline:2px solid $acc;outline-offset:2px;}
+.archive-btn:disabled{opacity:0.5;cursor:not-allowed;}
+.archive-btn.is-loading{opacity:0.8;pointer-events:none;}
+.archive-btn--next{width:100%;color:$bg;background:$acc;}
+.archive-btn--back{color:$muted;background:transparent;border:1px solid $bor;}
+.archive-btn--back:hover:not(:disabled){color:$txt;border-color:$muted;}
+.archive-btn--primary{color:$bg;background:$acc;flex:1;}
+.archive-panel__actions{display:flex;gap:$md;margin-top:$lg;}
+@media (max-width:$bp){.login-archive-prog{padding:$md;}.login-archive-prog__box{padding:$xl $lg;}}
