@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 18 · 카드 분리형</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="signup-emotion signup-cards" x-data="signupForm()">
+    <div class="emotion-wrap">
+      <div class="emotion-card emotion-card--header" x-ref="cardHeader">
+        <h1 class="emotion-title">회원가입</h1>
+        <p class="emotion-desc">함께 시작해요. 간단히 입력하고 가입을 완료해 주세요.</p>
+      </div>
+
+      <div class="emotion-card emotion-card--form" x-ref="cardForm">
+        <form
+          class="emotion-form"
+          method="post"
+          action="#"
+          hx-post="#"
+          hx-swap="none"
+          @submit.prevent="handleSubmit"
+        >
+          <div class="emotion-field" :class="{ 'emotion-field--focused': focusedField === $refs.fieldEmail }" x-ref="fieldEmail">
+            <label for="email" class="emotion-label">이메일</label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              class="emotion-input"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+              x-model="email"
+              x-ref="inputEmail"
+              @focus="onInputFocus($refs.fieldEmail)"
+              @blur="clearFocus(); validateEmail()"
+              :aria-invalid="errors.email ? 'true' : 'false'"
+            />
+            <span class="emotion-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+          </div>
+          <div class="emotion-field" :class="{ 'emotion-field--focused': focusedField === $refs.fieldName }" x-ref="fieldName">
+            <label for="name" class="emotion-label">이름</label>
+            <input
+              id="name"
+              type="text"
+              name="name"
+              class="emotion-input"
+              placeholder="홍길동"
+              autocomplete="name"
+              required
+              x-model="name"
+              x-ref="inputName"
+              @focus="onInputFocus($refs.fieldName)"
+              @blur="clearFocus(); validateName()"
+              :aria-invalid="errors.name ? 'true' : 'false'"
+            />
+            <span class="emotion-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+          </div>
+          <div class="emotion-field" :class="{ 'emotion-field--focused': focusedField === $refs.fieldPassword }" x-ref="fieldPassword">
+            <label for="password" class="emotion-label">비밀번호</label>
+            <div class="emotion-pw-wrap">
+              <input
+                id="password"
+                :type="showPassword ? 'text' : 'password'"
+                name="password"
+                class="emotion-input"
+                placeholder="8자 이상"
+                autocomplete="new-password"
+                required
+                minlength="8"
+                x-model="password"
+                x-ref="inputPassword"
+                @focus="onInputFocus($refs.fieldPassword)"
+                @blur="clearFocus(); validatePassword()"
+                :aria-invalid="errors.password ? 'true' : 'false'"
+              />
+              <button
+                type="button"
+                class="emotion-pw-btn"
+                :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'"
+                @click="showPassword = !showPassword"
+              >
+                <span x-text="showPassword ? '숨기기' : '보기'"></span>
+              </button>
+            </div>
+            <span class="emotion-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+          </div>
+          <div class="emotion-field" :class="{ 'emotion-field--focused': focusedField === $refs.fieldPasswordConfirm }" x-ref="fieldPasswordConfirm">
+            <label for="passwordConfirm" class="emotion-label">비밀번호 확인</label>
+            <input
+              id="passwordConfirm"
+              :type="showPassword ? 'text' : 'password'"
+              name="passwordConfirm"
+              class="emotion-input"
+              placeholder="비밀번호 재입력"
+              autocomplete="new-password"
+              required
+              x-model="passwordConfirm"
+              x-ref="inputPasswordConfirm"
+              @focus="onInputFocus($refs.fieldPasswordConfirm)"
+              @blur="clearFocus(); validatePasswordConfirm()"
+              :aria-invalid="errors.passwordConfirm ? 'true' : 'false'"
+            />
+            <span class="emotion-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+          </div>
+          <div class="emotion-actions">
+            <button type="submit" class="emotion-btn" :disabled="submitting" x-ref="submitBtn">
+              <span x-show="!submitting">가입하기</span>
+              <span x-show="submitting" x-cloak>처리 중...</span>
+            </button>
+          </div>
+        </form>
+        <footer class="emotion-footer">
+          <a href="#" class="emotion-link">이미 계정이 있으신가요? 로그인</a>
+        </footer>
+      </div>
+    </div>
+  </main>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

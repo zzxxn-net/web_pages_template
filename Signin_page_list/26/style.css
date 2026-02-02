@@ -1,0 +1,285 @@
+/* 회원가입 시안 26 - 단계 분할형 + 다크 아카이브, GSAP 기반 부드러운 전환 */
+.signup-arch-step.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: #0c0a09;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+.archstep-wrap {
+  width: 100%;
+  max-width: 420px;
+  margin: auto;
+}
+
+.archstep-card {
+  background: #141210;
+  border: 1px solid #2c2824;
+  border-radius: 8px;
+  padding: 1.75rem 1.5rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 480px) {
+  .archstep-card {
+    padding: 1.5rem 1.25rem;
+    border-radius: 6px;
+  }
+}
+
+.archstep-header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.archstep-title {
+  margin: 0 0 0.3rem;
+  font-size: 1.375rem;
+  font-weight: 600;
+  font-family: "IBM Plex Mono", "SF Mono", Consolas, monospace;
+  color: #e6e2dc;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 480px) {
+  .archstep-title {
+    font-size: 1.25rem;
+  }
+}
+
+.archstep-desc {
+  margin: 0 0 1rem;
+  font-size: 0.8125rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #8a847c;
+}
+
+.archstep-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.archstep-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: "IBM Plex Mono", "SF Mono", Consolas, monospace;
+  color: #8a847c;
+  background: transparent;
+  border: 1px solid #2c2824;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.archstep-dot--active {
+  color: #e6e2dc;
+  background: rgba(125, 107, 90, 0.2);
+  border-color: #7d6b5a;
+}
+
+.archstep-line {
+  width: 28px;
+  height: 1px;
+  background: #2c2824;
+  transition: background 0.2s ease;
+}
+
+.archstep-line--filled {
+  background: #7d6b5a;
+}
+
+.archstep-form {
+  position: relative;
+  min-height: 200px;
+}
+
+.archstep-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.archstep-panel-title {
+  margin: 0 0 0.2rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: "IBM Plex Mono", "SF Mono", Consolas, monospace;
+  color: #8a847c;
+  letter-spacing: 0.01em;
+}
+
+.archstep-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.archstep-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-family: "IBM Plex Mono", "SF Mono", Consolas, monospace;
+  color: #8a847c;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.archstep-input {
+  width: 100%;
+  padding: 0.65rem 0.875rem;
+  font-size: 0.9375rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #e6e2dc;
+  background: #0c0a09;
+  border: 1px solid #2c2824;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.archstep-input::placeholder {
+  color: #8a847c;
+  opacity: 0.7;
+}
+
+.archstep-input:focus {
+  border-color: #7d6b5a;
+  box-shadow: 0 0 0 2px rgba(125, 107, 90, 0.2);
+}
+
+.archstep-input[aria-invalid="true"] {
+  border-color: #b85450;
+  box-shadow: 0 0 0 2px rgba(184, 84, 80, 0.15);
+}
+
+.archstep-pw-wrap {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border: 1px solid #2c2824;
+  border-radius: 6px;
+  background: #0c0a09;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.archstep-pw-wrap:focus-within {
+  border-color: #7d6b5a;
+  box-shadow: 0 0 0 2px rgba(125, 107, 90, 0.2);
+}
+
+.archstep-pw-wrap .archstep-input {
+  border: none;
+  box-shadow: none;
+  flex: 1;
+  min-width: 0;
+}
+
+.archstep-pw-wrap .archstep-input:focus {
+  box-shadow: none;
+}
+
+.archstep-pw-btn {
+  padding: 0 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-family: "IBM Plex Mono", "SF Mono", Consolas, monospace;
+  color: #7d6b5a;
+  background: transparent;
+  border: none;
+  border-left: 1px solid #2c2824;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.archstep-pw-btn:hover {
+  color: #e6e2dc;
+  background: rgba(125, 107, 90, 0.2);
+}
+
+.archstep-error {
+  font-size: 0.6875rem;
+  font-family: "IBM Plex Mono", "SF Mono", Consolas, monospace;
+  color: #b85450;
+  min-height: 1.125rem;
+}
+
+.archstep-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.625rem;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+}
+
+.archstep-btn {
+  padding: 0.6rem 1.125rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: "IBM Plex Mono", "SF Mono", Consolas, monospace;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+
+.archstep-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.archstep-btn--primary {
+  color: #e6e2dc;
+  background: #7d6b5a;
+}
+
+.archstep-btn--primary:hover:not(:disabled) {
+  background: #8a7868;
+}
+
+.archstep-btn--secondary {
+  color: #8a847c;
+  background: transparent;
+  border: 1px solid #2c2824;
+}
+
+.archstep-btn--secondary:hover:not(:disabled) {
+  color: #e6e2dc;
+  border-color: #7d6b5a;
+  background: rgba(125, 107, 90, 0.2);
+}
+
+.archstep-footer {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid #2c2824;
+  text-align: center;
+}
+
+.archstep-link {
+  font-size: 0.8125rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #7d6b5a;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.archstep-link:hover {
+  color: #e6e2dc;
+  text-decoration: underline;
+}
+
+[x-cloak] {
+  display: none !important;
+}

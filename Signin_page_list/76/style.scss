@@ -1,0 +1,261 @@
+// 시안 76: 감성 테크 + 단일 포커스 입력 흐름 + 상태 변화 강조
+$s76-font: 'Noto Sans KR', 'Outfit', system-ui, sans-serif;
+$s76-bg-start: #faf8fc;
+$s76-bg-end: #f0ebf5;
+$s76-surface: #ffffff;
+$s76-border: #e5dfea;
+$s76-border-focus: #b8a9c9;
+$s76-text: #2d2835;
+$s76-text-soft: #6b6374;
+$s76-accent: #8b7aa8;
+$s76-accent-soft: rgba(139, 122, 168, 0.18);
+$s76-valid: #5b9a6e;
+$s76-valid-soft: rgba(91, 154, 110, 0.15);
+$s76-error: #c75c5c;
+$s76-error-soft: rgba(199, 92, 92, 0.12);
+$s76-radius: 12px;
+$s76-transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s76 {
+  font-family: $s76-font;
+  color: $s76-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 3vw, 2rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s76-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(160deg, $s76-bg-start 0%, $s76-bg-end 100%);
+}
+
+.s76-viewport {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.s76-header {
+  text-align: center;
+  margin-bottom: 0.25rem;
+}
+
+.s76-title {
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 700;
+  color: $s76-text;
+  margin: 0 0 0.35rem;
+  letter-spacing: -0.02em;
+}
+
+.s76-desc {
+  font-size: 0.875rem;
+  color: $s76-text-soft;
+  margin: 0;
+  font-weight: 400;
+}
+
+.s76-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.s76-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  transition: opacity $s76-transition, transform $s76-transition;
+
+  &--active {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  &--active .s76-label {
+    color: $s76-accent;
+  }
+
+  &--active .s76-input-wrap {
+    border-color: $s76-border-focus;
+    box-shadow: 0 0 0 3px $s76-accent-soft;
+  }
+
+  &--dim {
+    opacity: 0.45;
+    transform: scale(0.995);
+  }
+
+  &--valid .s76-input-wrap {
+    border-color: $s76-valid;
+    box-shadow: 0 0 0 2px $s76-valid-soft;
+  }
+
+  &--valid .s76-label {
+    color: $s76-valid;
+  }
+
+  &--invalid .s76-input-wrap {
+    border-color: $s76-error;
+    box-shadow: 0 0 0 2px $s76-error-soft;
+  }
+
+  &--invalid .s76-label {
+    color: $s76-error;
+  }
+}
+
+.s76-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: $s76-text-soft;
+  transition: color $s76-transition;
+}
+
+.s76-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: $s76-surface;
+  border: 1px solid $s76-border;
+  border-radius: $s76-radius;
+  padding: 0 1rem;
+  transition: border-color $s76-transition, box-shadow $s76-transition;
+}
+
+.s76-input {
+  flex: 1;
+  width: 100%;
+  padding: 0.75rem 0;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: $s76-text;
+  background: transparent;
+  border: none;
+  outline: none;
+
+  &::placeholder {
+    color: $s76-text-soft;
+    opacity: 0.7;
+  }
+}
+
+.s76-pw-wrap .s76-input {
+  padding-right: 4rem;
+}
+
+.s76-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  font-family: inherit;
+  font-weight: 500;
+  color: $s76-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background $s76-transition, color $s76-transition;
+
+  &:hover {
+    background: $s76-accent-soft;
+    color: darken($s76-accent, 8%);
+  }
+}
+
+.s76-status {
+  position: absolute;
+  right: 1rem;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 50%;
+  background: $s76-valid;
+  flex-shrink: 0;
+
+  &--valid::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 4px;
+    height: 8px;
+    margin-left: -3px;
+    margin-top: -5px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+}
+
+.s76-pw-wrap .s76-status--valid {
+  right: 3.5rem;
+}
+
+.s76-error {
+  font-size: 0.75rem;
+  color: $s76-error;
+  margin-top: 0.2rem;
+  display: block;
+}
+
+.s76-actions {
+  margin-top: 0.5rem;
+}
+
+.s76-submit {
+  width: 100%;
+  padding: 0.9rem 1.25rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, $s76-accent 0%, darken($s76-accent, 6%) 100%);
+  border: none;
+  border-radius: $s76-radius;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(139, 122, 168, 0.35);
+  transition: opacity $s76-transition, transform $s76-transition, box-shadow $s76-transition;
+
+  &:hover:not(:disabled) {
+    opacity: 0.95;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 122, 168, 0.4);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.s76-submit-text {
+  display: block;
+}
+
+[x-cloak] {
+  display: none !important;
+}

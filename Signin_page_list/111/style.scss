@@ -1,0 +1,224 @@
+// 시안 111: 현대 판타지 + 풀스크린 몰입형 + 입력 반응형 애니메이션
+$s111-serif: 'Cormorant Garamond', Georgia, serif;
+$s111-sans: 'Source Sans 3', system-ui, sans-serif;
+$s111-bg: linear-gradient(180deg, #fdf8f4 0%, #f5ede6 100%);
+$s111-text: #2c2825;
+$s111-muted: #6b6560;
+$s111-accent: #b8860b;
+$s111-accent-soft: rgba(184, 134, 11, 0.15);
+$s111-valid: #2d6a4f;
+$s111-valid-soft: rgba(45, 106, 79, 0.08);
+$s111-error: #c41e3a;
+$s111-error-soft: rgba(196, 30, 58, 0.08);
+$s111-radius: 12px;
+$s111-ease: 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s111 {
+  font-family: $s111-sans;
+  color: $s111-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s111-inner {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 5vw, 2.5rem);
+  background: $s111-bg;
+  box-sizing: border-box;
+}
+
+.s111-header {
+  text-align: center;
+  margin-bottom: clamp(1.5rem, 4vw, 2rem);
+}
+
+.s111-title {
+  font-family: $s111-serif;
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  font-weight: 600;
+  font-style: italic;
+  color: $s111-text;
+  margin: 0;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+}
+
+.s111-tagline {
+  font-size: clamp(0.8rem, 2vw, 0.875rem);
+  font-weight: 400;
+  color: $s111-muted;
+  margin: 0.4rem 0 0;
+  line-height: 1.5;
+}
+
+.s111-form-wrap {
+  width: 100%;
+  max-width: 400px;
+}
+
+.s111-form {
+  width: 100%;
+}
+
+.s111-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.s111-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: transform $s111-ease;
+
+  &:focus-within .s111-input {
+    border-color: $s111-accent;
+    box-shadow: 0 0 0 3px $s111-accent-soft;
+    transform: scale(1.008);
+  }
+
+  &--valid .s111-input {
+    border-color: $s111-valid;
+    background: $s111-valid-soft;
+  }
+  &--valid .s111-label {
+    color: $s111-valid;
+  }
+
+  &--invalid .s111-input {
+    border-color: $s111-error;
+    background: $s111-error-soft;
+    animation: s111-pulse 0.4s ease;
+  }
+  &--invalid .s111-label {
+    color: $s111-error;
+  }
+}
+
+@keyframes s111-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.92; }
+}
+
+.s111-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: $s111-muted;
+  transition: color $s111-ease;
+}
+
+.s111-input {
+  width: 100%;
+  padding: 0.7rem 0.875rem;
+  padding-right: 3rem;
+  font-family: $s111-sans;
+  font-size: 0.9375rem;
+  color: $s111-text;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(107, 101, 96, 0.25);
+  border-radius: $s111-radius;
+  outline: none;
+  transition: border-color $s111-ease, box-shadow $s111-ease, background $s111-ease, transform $s111-ease;
+
+  &::placeholder {
+    color: $s111-muted;
+    opacity: 0.8;
+  }
+  &:focus {
+    border-color: $s111-accent;
+    box-shadow: 0 0 0 3px $s111-accent-soft;
+  }
+}
+
+.s111-pw-wrap {
+  position: relative;
+  .s111-input {
+    padding-right: 3rem;
+  }
+}
+
+.s111-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.25rem 0.4rem;
+  font-size: 0.7rem;
+  font-family: $s111-sans;
+  font-weight: 500;
+  color: $s111-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background $s111-ease;
+
+  &:hover {
+    background: $s111-accent-soft;
+  }
+}
+
+.s111-error {
+  font-size: 0.75rem;
+  color: $s111-error;
+  display: block;
+}
+
+.s111-actions {
+  margin-top: 1.5rem;
+}
+
+.s111-btn {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-family: $s111-sans;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #fff;
+  background: $s111-accent;
+  border: none;
+  border-radius: $s111-radius;
+  cursor: pointer;
+  transition: opacity $s111-ease, transform 0.18s ease;
+
+  &:hover:not(:disabled) {
+    opacity: 0.92;
+    transform: scale(1.01);
+  }
+  &:active:not(:disabled) {
+    transform: scale(0.99);
+  }
+  &:disabled,
+  &--busy {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

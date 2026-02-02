@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 93 - 사이버 미니멀 단일 포커스 상태 변화 강조</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s93 signup-fixed" x-data="signupForm93()" x-init="initAnim()">
+    <div class="s93-bg" aria-hidden="true"></div>
+    <div class="s93-layout" x-ref="layout">
+      <header class="s93-header" aria-label="페이지 제목">
+        <h1 class="s93-title">Sign up</h1>
+        <p class="s93-tagline" x-text="stepLabel"></p>
+      </header>
+      <form class="s93-form" method="post" action="#" hx-post="#" hx-swap="none" @submit.prevent="handleSubmit" aria-label="회원가입 폼">
+        <div class="s93-focus-flow">
+          <div class="s93-step" :class="{ 's93-step--active': step === 1 }" x-show="step === 1" x-transition>
+            <div class="s93-field" :class="{ 's93-field--invalid': errors.email }">
+              <label for="s93-email" class="s93-label">이메일</label>
+              <input id="s93-email" type="email" name="email" class="s93-input" placeholder="you@example.com" autocomplete="email" required x-model="email" @blur="validateEmail()" :aria-invalid="errors.email ? 'true' : 'false'" x-ref="inputEmail" />
+              <span class="s93-error" x-show="errors.email" x-cloak x-text="errors.email"></span>
+            </div>
+            <div class="s93-actions">
+              <button type="button" class="s93-btn s93-btn--primary" @click="goNext()">다음</button>
+            </div>
+          </div>
+          <div class="s93-step" :class="{ 's93-step--active': step === 2 }" x-show="step === 2" x-transition>
+            <div class="s93-field" :class="{ 's93-field--invalid': errors.name }">
+              <label for="s93-name" class="s93-label">이름</label>
+              <input id="s93-name" type="text" name="name" class="s93-input" placeholder="홍길동" autocomplete="name" required x-model="name" @blur="validateName()" :aria-invalid="errors.name ? 'true' : 'false'" x-ref="inputName" />
+              <span class="s93-error" x-show="errors.name" x-cloak x-text="errors.name"></span>
+            </div>
+            <div class="s93-actions">
+              <button type="button" class="s93-btn s93-btn--outline" @click="goPrev()">이전</button>
+              <button type="button" class="s93-btn s93-btn--primary" @click="goNext()">다음</button>
+            </div>
+          </div>
+          <div class="s93-step" :class="{ 's93-step--active': step === 3 }" x-show="step === 3" x-transition>
+            <div class="s93-field" :class="{ 's93-field--invalid': errors.password }">
+              <label for="s93-password" class="s93-label">비밀번호</label>
+              <div class="s93-pw-wrap">
+                <input id="s93-password" :type="showPassword ? 'text' : 'password'" name="password" class="s93-input" placeholder="8자 이상" autocomplete="new-password" required minlength="8" x-model="password" @blur="validatePassword()" :aria-invalid="errors.password ? 'true' : 'false'" x-ref="inputPassword" />
+                <button type="button" class="s93-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword"><span x-text="showPassword ? '숨기기' : '보기'"></span></button>
+              </div>
+              <span class="s93-error" x-show="errors.password" x-cloak x-text="errors.password"></span>
+            </div>
+            <div class="s93-actions">
+              <button type="button" class="s93-btn s93-btn--outline" @click="goPrev()">이전</button>
+              <button type="button" class="s93-btn s93-btn--primary" @click="goNext()">다음</button>
+            </div>
+          </div>
+          <div class="s93-step" :class="{ 's93-step--active': step === 4 }" x-show="step === 4" x-transition>
+            <div class="s93-field" :class="{ 's93-field--invalid': errors.passwordConfirm }">
+              <label for="s93-passwordConfirm" class="s93-label">비밀번호 확인</label>
+              <input id="s93-passwordConfirm" :type="showPassword ? 'text' : 'password'" name="password_confirm" class="s93-input" placeholder="다시 입력" autocomplete="new-password" required minlength="8" x-model="passwordConfirm" @blur="validatePasswordConfirm()" :aria-invalid="errors.passwordConfirm ? 'true' : 'false'" />
+              <span class="s93-error" x-show="errors.passwordConfirm" x-cloak x-text="errors.passwordConfirm"></span>
+            </div>
+            <div class="s93-actions">
+              <button type="button" class="s93-btn s93-btn--outline" @click="goPrev()">이전</button>
+              <button type="submit" class="s93-btn s93-btn--primary" :disabled="submitting" :aria-busy="submitting"><span x-text="submitting ? '처리 중…' : '가입하기'"></span></button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

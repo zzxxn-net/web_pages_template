@@ -1,0 +1,238 @@
+/* 시안 53: 다크 아카이브 + 단일 포커스 입력 흐름 + 상태 변화 강조 */
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s53 {
+  font-family: "IBM Plex Mono", monospace;
+  color: #e8e8e8;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s53-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: #0f0f0f;
+}
+
+.s53-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>');
+}
+
+.s53-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+}
+
+.s53-card {
+  background: #181818;
+  border: 1px solid #2a2a2a;
+  border-radius: 6px;
+  padding: 1.75rem 1.5rem;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+}
+
+.s53-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.s53-title {
+  font-family: "IBM Plex Serif", serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #e8e8e8;
+  margin-bottom: 0.25rem;
+}
+
+.s53-desc {
+  font-size: 0.8125rem;
+  color: #888;
+}
+
+.s53-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.s53-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: #1f1f1f;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+}
+
+.s53-field--focused {
+  border-color: #c9a227;
+  box-shadow: 0 0 0 2px rgba(201, 162, 39, 0.2);
+  background: #222222;
+}
+
+.s53-field--valid {
+  border-color: rgba(45, 138, 94, 0.4);
+}
+
+.s53-field--valid .s53-state--ok {
+  opacity: 1;
+  color: #2d8a5e;
+}
+
+.s53-field--invalid {
+  border-color: rgba(194, 74, 74, 0.5);
+  box-shadow: 0 0 0 1px rgba(194, 74, 74, 0.15);
+}
+
+.s53-field--invalid .s53-state--err {
+  opacity: 1;
+  color: #c24a4a;
+}
+
+.s53-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.s53-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.s53-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.5rem 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.9375rem;
+  color: #e8e8e8;
+  background: transparent;
+  border: none;
+  outline: none;
+  transition: color 0.22s ease;
+}
+
+.s53-input::placeholder {
+  color: #888;
+  opacity: 0.7;
+}
+
+.s53-pw-wrap {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.s53-pw-wrap .s53-input {
+  padding-right: 3.5rem;
+}
+
+.s53-pw-btn {
+  position: absolute;
+  right: 0;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.6875rem;
+  font-family: inherit;
+  color: #c9a227;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.22s ease;
+}
+
+.s53-pw-btn:hover {
+  background: rgba(201, 162, 39, 0.1);
+}
+
+.s53-state {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
+.s53-state--ok {
+  color: #2d8a5e;
+}
+
+.s53-state--err {
+  color: #c24a4a;
+}
+
+.s53-error {
+  font-size: 0.75rem;
+  color: #c24a4a;
+}
+
+.s53-actions {
+  margin-top: 0.5rem;
+}
+
+.s53-submit {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #0f0f0f;
+  background: #c9a227;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: opacity 0.22s ease, background 0.22s ease;
+}
+
+.s53-submit:hover:not(:disabled) {
+  background: #d4ad2e;
+}
+
+.s53-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.s53-submit-text {
+  display: block;
+}
+
+[x-cloak] {
+  display: none !important;
+}

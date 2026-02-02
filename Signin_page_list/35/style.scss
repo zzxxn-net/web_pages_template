@@ -1,0 +1,226 @@
+// ============================================
+// 회원가입 시안 35 - 네오 브루탈리즘 + 풀스크린 몰입형
+// 상태 변화 강조
+// ============================================
+
+$font-head: "Archivo Black", sans-serif;
+$font: "Archivo", -apple-system, BlinkMacSystemFont, sans-serif;
+$bg: #f5f5f0;
+$inner-bg: #ffffff;
+$border: #1a1a1a;
+$border-width: 3px;
+$primary: #1a1a1a;
+$text: #1a1a1a;
+$text-muted: #444;
+$valid: #16a34a;
+$valid-bg: rgba(22, 163, 74, 0.08);
+$error: #dc2626;
+$error-bg: rgba(220, 38, 38, 0.08);
+$focus-bg: rgba(0, 0, 0, 0.03);
+$radius: 0;
+$break: 480px;
+$max-inner: 420px;
+
+// 풀스크린 몰입형: 뷰포트 전체
+.signup-brutal-full.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-sizing: border-box;
+  background: $bg;
+  border: $border-width solid $border;
+}
+
+.bful-inner {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  max-width: $max-inner;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  background: $inner-bg;
+  border-left: $border-width solid $border;
+  border-right: $border-width solid $border;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+
+  @media (max-width: $break) {
+    min-height: auto;
+    padding: 1.5rem 1rem;
+    border-left: none;
+    border-right: none;
+    border-top: $border-width solid $border;
+  }
+}
+
+.bful-header {
+  margin-bottom: 0.25rem;
+}
+
+.bful-title {
+  margin: 0 0 0.35rem;
+  font-size: 1.75rem;
+  font-weight: 400;
+  font-family: $font-head;
+  color: $text;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.bful-desc {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-family: $font;
+  color: $text-muted;
+}
+
+.bful-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+// 네오 브루탈리즘: 굵은 테두리, 0 radius
+.bful-field {
+  padding: 0.75rem 1rem;
+  border: $border-width solid $border;
+  border-radius: $radius;
+  background: $inner-bg;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &--focused {
+    background: $focus-bg;
+    box-shadow: inset 0 0 0 1px $border;
+  }
+
+  &--valid {
+    border-color: $valid;
+    background: $valid-bg;
+    .bful-state--valid { opacity: 1; }
+  }
+
+  &--invalid {
+    border-color: $error;
+    background: $error-bg;
+    .bful-state--invalid { opacity: 1; }
+  }
+}
+
+.bful-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: $font;
+  color: $text;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.bful-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.bful-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  font-family: $font;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+
+  &::placeholder {
+    color: $text-muted;
+    opacity: 0.7;
+  }
+}
+
+.bful-pw-btn {
+  padding: 0.35rem 0.5rem;
+  border: $border-width solid $border;
+  border-radius: $radius;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: $font;
+  color: $text;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    background: $primary;
+    color: $inner-bg;
+  }
+}
+
+// 상태 변화 강조: ✓ / !
+.bful-state {
+  font-size: 1rem;
+  font-weight: 700;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+
+  &--valid {
+    color: $valid;
+  }
+
+  &--invalid {
+    color: $error;
+  }
+}
+
+.bful-error {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.8125rem;
+  font-family: $font;
+  color: $error;
+  font-weight: 500;
+}
+
+.bful-submit {
+  margin-top: 0.5rem;
+}
+
+.bful-btn {
+  width: 100%;
+  padding: 0.9rem 1.25rem;
+  border: $border-width solid $border;
+  border-radius: $radius;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: $font;
+  color: $inner-bg;
+  background: $primary;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover:not(:disabled) {
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 $border;
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

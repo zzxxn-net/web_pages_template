@@ -1,0 +1,295 @@
+// ============================================
+// 회원가입 시안 47 - 실험적 인터페이스 + 마이크로 인터랙션 중심
+// GSAP 기반 부드러운 전환
+// ============================================
+
+$font: "Syne", -apple-system, BlinkMacSystemFont, sans-serif;
+$bg: #0f0f12;
+$card-bg: rgba(255, 255, 255, 0.04);
+$card-border: rgba(255, 255, 255, 0.08);
+$primary: #a78bfa;
+$primary-soft: rgba(167, 139, 250, 0.15);
+$text: #fafafa;
+$text-muted: #a1a1aa;
+$error: #f87171;
+$error-soft: rgba(248, 113, 113, 0.12);
+$line-color: rgba(167, 139, 250, 0.25);
+$radius: 10px;
+$break: 480px;
+$max-width: 380px;
+
+.signup-eim.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  background: $bg;
+  position: relative;
+}
+
+.eim-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: $bg;
+}
+
+.eim-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient($line-color 1px, transparent 1px),
+    linear-gradient(90deg, $line-color 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.5;
+}
+
+.eim-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.2;
+  pointer-events: none;
+
+  &--1 {
+    width: 280px;
+    height: 280px;
+    background: $primary;
+    top: -80px;
+    right: -60px;
+  }
+
+  &--2 {
+    width: 200px;
+    height: 200px;
+    background: #818cf8;
+    bottom: -40px;
+    left: -40px;
+  }
+}
+
+.eim-inner {
+  position: relative;
+  width: 100%;
+  max-width: $max-width;
+  margin: auto;
+}
+
+.eim-card {
+  padding: 1.75rem 1.5rem;
+  background: $card-bg;
+  border: 1px solid $card-border;
+  border-radius: $radius;
+  backdrop-filter: blur(12px);
+
+  @media (max-width: $break) {
+    padding: 1.5rem 1.25rem;
+  }
+}
+
+.eim-header {
+  margin-bottom: 1.5rem;
+}
+
+.eim-title {
+  margin: 0 0 0.35rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  font-family: $font;
+  color: $text;
+  letter-spacing: -0.03em;
+}
+
+.eim-desc {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-family: $font;
+  color: $text-muted;
+}
+
+.eim-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+// 마이크로 인터랙션: 라벨 underline on focus, input border·scale
+.eim-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  &.eim-field--focused .eim-label-line {
+    width: 100%;
+  }
+
+  &.eim-field--focused .eim-input,
+  &.eim-field--focused .eim-pw-wrap {
+    border-color: $primary;
+    box-shadow: 0 0 0 2px $primary-soft;
+  }
+
+  &.eim-field--invalid .eim-input,
+  &.eim-field--invalid .eim-pw-wrap {
+    border-color: $error;
+    box-shadow: 0 0 0 2px $error-soft;
+  }
+}
+
+.eim-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.eim-label-text {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-family: $font;
+  color: $text-muted;
+  transition: color 0.25s ease;
+}
+
+.eim-field--focused .eim-label-text {
+  color: $primary;
+}
+
+.eim-label-line {
+  flex: 1;
+  max-width: 40px;
+  height: 2px;
+  background: $primary;
+  border-radius: 1px;
+  width: 0;
+  transition: width 0.3s ease;
+}
+
+.eim-input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  font-size: 0.9375rem;
+  font-family: $font;
+  color: $text;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid $card-border;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+
+  &::placeholder {
+    color: $text-muted;
+    opacity: 0.7;
+  }
+
+  &:focus {
+    border-color: $primary;
+    box-shadow: 0 0 0 2px $primary-soft;
+    transform: scale(1.005);
+  }
+}
+
+.eim-pw-wrap {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid $card-border;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+
+  .eim-input {
+    border: none;
+    background: transparent;
+    flex: 1;
+    padding-right: 0.5rem;
+    transform: none;
+  }
+
+  &:focus-within {
+    border-color: $primary;
+    box-shadow: 0 0 0 2px $primary-soft;
+    transform: scale(1.005);
+  }
+}
+
+.eim-pw-btn {
+  flex-shrink: 0;
+  padding: 0 0.75rem;
+  border: none;
+  background: transparent;
+  font-size: 0.8125rem;
+  font-family: $font;
+  color: $text-muted;
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+.eim-error {
+  font-size: 0.8125rem;
+  font-family: $font;
+  color: $error;
+}
+
+.eim-actions {
+  margin-top: 0.5rem;
+}
+
+.eim-btn {
+  position: relative;
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid $primary;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: $font;
+  color: $primary;
+  background: $primary-soft;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background: rgba($primary, 0.25);
+    color: $text;
+    transform: translateY(-1px);
+  }
+
+  &:hover:not(:disabled) .eim-btn-line {
+    transform: scaleX(1);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.eim-btn-text {
+  position: relative;
+  z-index: 1;
+}
+
+.eim-btn-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: $primary;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+[x-cloak] {
+  display: none !important;
+}

@@ -1,0 +1,287 @@
+// ============================================
+// 회원가입 시안 44 - 감성 테크 + 단계 분할형(Progressive Form)
+// GSAP 기반 부드러운 전환
+// ============================================
+
+$font: "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+$bg: linear-gradient(165deg, #fef7ed 0%, #fdf4ff 40%, #f5f3ff 100%);
+$card-bg: rgba(255, 255, 255, 0.85);
+$card-border: rgba(167, 139, 250, 0.2);
+$primary: #7c3aed;
+$primary-soft: rgba(124, 58, 237, 0.12);
+$text: #1f2937;
+$text-muted: #6b7280;
+$done: #059669;
+$done-soft: rgba(5, 150, 105, 0.12);
+$error: #dc2626;
+$error-soft: rgba(220, 38, 38, 0.1);
+$radius: 14px;
+$break: 600px;
+$max-width: 440px;
+
+.signup-gtp.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  background: $bg;
+  position: relative;
+}
+
+.gtp-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: $bg;
+}
+
+.gtp-wrap {
+  position: relative;
+  width: 100%;
+  max-width: $max-width;
+  margin: auto;
+}
+
+.gtp-card {
+  padding: 1.75rem 1.5rem;
+  background: $card-bg;
+  border: 1px solid $card-border;
+  border-radius: $radius;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 16px 48px rgba(124, 58, 237, 0.08);
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  grid-template-rows: auto;
+  gap: 1.5rem;
+
+  @media (max-width: $break) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    padding: 1.5rem 1.25rem;
+  }
+}
+
+.gtp-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-right: 1rem;
+  border-right: 1px solid $card-border;
+
+  @media (max-width: $break) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-right: 0;
+    padding-bottom: 1rem;
+    border-right: none;
+    border-bottom: 1px solid $card-border;
+  }
+}
+
+.gtp-step-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 10px;
+  transition: background 0.28s ease, color 0.28s ease, border-color 0.28s ease;
+  border: 1px solid transparent;
+
+  &--on {
+    color: $primary;
+    background: $primary-soft;
+    border-color: rgba($primary, 0.2);
+  }
+
+  &--done {
+    color: $done;
+    background: $done-soft;
+    border-color: rgba($done, 0.2);
+  }
+}
+
+.gtp-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-family: $font;
+  color: $text-muted;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid $card-border;
+  transition: color 0.28s ease, background 0.28s ease, border-color 0.28s ease;
+}
+
+.gtp-step-item--on .gtp-step-num {
+  color: #fff;
+  background: $primary;
+  border-color: $primary;
+}
+
+.gtp-step-item--done .gtp-step-num {
+  color: #fff;
+  background: $done;
+  border-color: $done;
+}
+
+.gtp-step-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-family: $font;
+  color: inherit;
+  opacity: 0.95;
+}
+
+.gtp-form {
+  position: relative;
+  min-height: 220px;
+}
+
+.gtp-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &--invalid .gtp-input,
+  &--invalid .gtp-pw-wrap {
+    border-color: $error;
+    box-shadow: 0 0 0 2px $error-soft;
+  }
+}
+
+.gtp-prompt {
+  margin: 0 0 0.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: $font;
+  color: $text;
+  letter-spacing: -0.02em;
+}
+
+.gtp-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.gtp-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  font-family: $font;
+  color: $text;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid $card-border;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.28s ease, box-shadow 0.28s ease;
+
+  &::placeholder {
+    color: $text-muted;
+    opacity: 0.85;
+  }
+
+  &:focus {
+    border-color: $primary;
+    box-shadow: 0 0 0 3px $primary-soft;
+  }
+}
+
+.gtp-pw-wrap {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid $card-border;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  transition: border-color 0.28s ease, box-shadow 0.28s ease;
+
+  .gtp-input {
+    border: none;
+    background: transparent;
+    flex: 1;
+    padding-right: 0.5rem;
+  }
+
+  &:focus-within {
+    border-color: $primary;
+    box-shadow: 0 0 0 3px $primary-soft;
+  }
+}
+
+.gtp-pw-btn {
+  padding: 0 0.75rem;
+  border: none;
+  background: transparent;
+  font-size: 0.8125rem;
+  font-family: $font;
+  color: $text-muted;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+.gtp-error {
+  font-size: 0.8125rem;
+  font-family: $font;
+  color: $error;
+}
+
+.gtp-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+}
+
+.gtp-btn {
+  padding: 0.65rem 1.2rem;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: $font;
+  cursor: pointer;
+  transition: background 0.28s ease, color 0.28s ease, opacity 0.28s ease;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &--pri {
+    border: 1px solid $primary;
+    background: $primary-soft;
+    color: $primary;
+
+    &:hover:not(:disabled) {
+      background: rgba($primary, 0.2);
+    }
+  }
+
+  &--sec {
+    border: 1px solid $card-border;
+    background: transparent;
+    color: $text-muted;
+
+    &:hover:not(:disabled) {
+      color: $text;
+      background: rgba(255, 255, 255, 0.5);
+    }
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

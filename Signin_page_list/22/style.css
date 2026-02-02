@@ -1,0 +1,225 @@
+/* ============================================
+   회원가입 시안 22 - 카드 분리형 레이아웃 + 다크 아카이브
+   스크롤 없는 고정 플로우
+   ============================================ */
+
+.signup-dark-arch.signup-cards-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: #0f0d0b;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.arch-fixed {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: calc(100dvh - 32px);
+  overflow: hidden;
+}
+
+.arch-card {
+  width: 100%;
+  padding: 1.25rem 1.5rem;
+  background: #161310;
+  border: 1px solid #2a2520;
+  border-radius: 6px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.arch-card--head {
+  text-align: center;
+  padding: 1rem 1.5rem;
+}
+
+.arch-card--form {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 1.5rem 1rem;
+}
+
+@media (max-width: 480px) {
+  .arch-card {
+    padding: 1rem 1.25rem;
+  }
+
+  .arch-card--head {
+    padding: 0.875rem 1.25rem;
+  }
+
+  .arch-card--form {
+    padding: 1rem 1.25rem 0.875rem;
+  }
+}
+
+.arch-title {
+  margin: 0 0 0.375rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+  font-family: "Georgia", "Times New Roman", serif;
+  color: #e8e4dc;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 480px) {
+  .arch-title {
+    font-size: 1.2rem;
+  }
+}
+
+.arch-desc {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #9a948a;
+}
+
+.arch-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+  min-height: 0;
+}
+
+.arch-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  flex-shrink: 0;
+}
+
+.arch-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #9a948a;
+}
+
+.arch-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9375rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+  color: #e8e4dc;
+  background: #0f0d0b;
+  border: 1px solid #2a2520;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.arch-input::placeholder {
+  color: #6e6a62;
+}
+
+.arch-input:focus {
+  outline: none;
+  border-color: #8b7355;
+}
+
+.arch-input[aria-invalid="true"] {
+  border-color: #c45c5c;
+}
+
+.arch-pw-wrap {
+  display: flex;
+  border: 1px solid #2a2520;
+  border-radius: 4px;
+  background: #0f0d0b;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.arch-pw-wrap:focus-within {
+  border-color: #8b7355;
+}
+
+.arch-pw-wrap .arch-input {
+  border: none;
+  flex: 1;
+}
+
+.arch-pw-wrap .arch-pw-btn {
+  padding: 0 0.75rem;
+  font-size: 0.75rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #9a948a;
+  background: transparent;
+  border: none;
+  border-left: 1px solid #2a2520;
+  cursor: pointer;
+}
+
+.arch-pw-wrap .arch-pw-btn:hover {
+  color: #8b7355;
+}
+
+.arch-error {
+  font-size: 0.75rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #c45c5c;
+}
+
+.arch-actions {
+  margin-top: 0.25rem;
+  flex-shrink: 0;
+}
+
+.arch-btn {
+  width: 100%;
+  padding: 0.625rem 1rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #0f0d0b;
+  background: #8b7355;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.arch-btn:hover:not(:disabled) {
+  background: #a08060;
+}
+
+.arch-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.arch-footer {
+  margin-top: 1rem;
+  padding-top: 0.875rem;
+  border-top: 1px solid #2a2520;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.arch-link {
+  font-size: 0.8125rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #8b7355;
+  text-decoration: none;
+}
+
+.arch-link:hover {
+  text-decoration: underline;
+}
+
+[x-cloak] {
+  display: none !important;
+}

@@ -1,0 +1,229 @@
+// 시안 114: 네오 브루탈리즘 + 단일 포커스 입력 흐름 + 상태 변화 강조
+$s114-font: 'Space Grotesk', system-ui, sans-serif;
+$s114-bg: #f2f2f2;
+$s114-surface: #fff;
+$s114-text: #1a1a1a;
+$s114-muted: #5c5c5c;
+$s114-border: #1a1a1a;
+$s114-accent: #1a1a1a;
+$s114-valid: #1a7f37;
+$s114-valid-bg: rgba(26, 127, 55, 0.06);
+$s114-error: #c41e1e;
+$s114-error-bg: rgba(196, 30, 30, 0.06);
+$s114-border-width: 3px;
+$s114-ease: 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s114 {
+  font-family: $s114-font;
+  color: $s114-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  position: relative;
+  box-sizing: border-box;
+  background: $s114-bg;
+}
+
+.s114-inner {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.25rem, 5vw, 2rem);
+  box-sizing: border-box;
+}
+
+.s114-header {
+  text-align: center;
+  margin-bottom: clamp(1.25rem, 4vw, 1.75rem);
+}
+
+.s114-title {
+  font-size: clamp(1.5rem, 4.5vw, 2rem);
+  font-weight: 700;
+  color: $s114-text;
+  margin: 0;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.s114-tagline {
+  font-size: clamp(0.7rem, 1.8vw, 0.75rem);
+  font-weight: 600;
+  color: $s114-muted;
+  margin: 0.35rem 0 0;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+}
+
+.s114-form-wrap {
+  width: 100%;
+  max-width: 400px;
+}
+
+.s114-form {
+  width: 100%;
+}
+
+.s114-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.s114-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  position: relative;
+  border: $s114-border-width solid transparent;
+  background: $s114-surface;
+  padding: 0.5rem 0.75rem;
+  transition: border-color $s114-ease, background $s114-ease, box-shadow $s114-ease, opacity $s114-ease;
+
+  &:not(.s114-field--focused):not(.s114-field--invalid):not(.s114-field--valid) {
+    opacity: 0.85;
+  }
+
+  &.s114-field--focused {
+    border-color: $s114-border;
+    box-shadow: 0 0 0 1px $s114-border;
+    opacity: 1;
+  }
+
+  &.s114-field--valid {
+    border-color: $s114-valid;
+    background: $s114-valid-bg;
+    opacity: 1;
+    .s114-label { color: $s114-valid; }
+  }
+
+  &.s114-field--invalid {
+    border-color: $s114-error;
+    background: $s114-error-bg;
+    opacity: 1;
+    .s114-label { color: $s114-error; }
+  }
+}
+
+.s114-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: $s114-muted;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color $s114-ease;
+}
+
+.s114-input {
+  width: 100%;
+  padding: 0.6rem 2.5rem 0.6rem 0;
+  font-family: $s114-font;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: $s114-text;
+  background: transparent;
+  border: none;
+  outline: none;
+  &::placeholder {
+    color: $s114-muted;
+    opacity: 0.7;
+  }
+}
+
+.s114-status {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  font-weight: 700;
+  pointer-events: none;
+  &.s114-status--valid {
+    color: $s114-valid;
+  }
+}
+
+.s114-pw-wrap {
+  position: relative;
+  .s114-input { padding-right: 4rem; }
+}
+
+.s114-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.65rem;
+  font-family: $s114-font;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: $s114-border;
+  background: transparent;
+  border: $s114-border-width solid $s114-border;
+  cursor: pointer;
+  transition: background $s114-ease, color $s114-ease;
+  &:hover {
+    background: $s114-border;
+    color: $s114-surface;
+  }
+}
+
+.s114-error {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $s114-error;
+  display: block;
+}
+
+.s114-actions {
+  margin-top: 1.5rem;
+}
+
+.s114-btn {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font-family: $s114-font;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: $s114-surface;
+  background: $s114-border;
+  border: $s114-border-width solid $s114-border;
+  cursor: pointer;
+  transition: opacity $s114-ease, transform 0.2s ease;
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+  &:disabled,
+  &--busy {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

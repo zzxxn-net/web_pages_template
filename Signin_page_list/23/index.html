@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 23 · 사이버 미니멀 풀스크린</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="signup-cyber signup-full" x-data="signupForm()">
+    <div class="cyber-inner">
+      <header class="cyber-header">
+        <h1 class="cyber-title">회원가입</h1>
+        <p class="cyber-desc">필수 항목을 입력해 주세요.</p>
+      </header>
+
+      <form
+        class="cyber-form"
+        method="post"
+        action="#"
+        hx-post="#"
+        hx-swap="none"
+        @submit.prevent="handleSubmit"
+      >
+        <div
+          class="cyber-field"
+          :class="{ 'cyber-field--focused': focusedField === 'email', 'cyber-field--invalid': errors.email }"
+        >
+          <label for="email" class="cyber-label">이메일</label>
+          <input
+            id="email"
+            type="email"
+            name="email"
+            class="cyber-input"
+            placeholder="you@example.com"
+            autocomplete="email"
+            required
+            x-model="email"
+            @focus="focusedField = 'email'"
+            @blur="focusedField = null; validateEmail()"
+            :aria-invalid="errors.email ? 'true' : 'false'"
+          />
+          <span class="cyber-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+        </div>
+        <div
+          class="cyber-field"
+          :class="{ 'cyber-field--focused': focusedField === 'name', 'cyber-field--invalid': errors.name }"
+        >
+          <label for="name" class="cyber-label">이름</label>
+          <input
+            id="name"
+            type="text"
+            name="name"
+            class="cyber-input"
+            placeholder="홍길동"
+            autocomplete="name"
+            required
+            x-model="name"
+            @focus="focusedField = 'name'"
+            @blur="focusedField = null; validateName()"
+            :aria-invalid="errors.name ? 'true' : 'false'"
+          />
+          <span class="cyber-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+        </div>
+        <div
+          class="cyber-field"
+          :class="{ 'cyber-field--focused': focusedField === 'password', 'cyber-field--invalid': errors.password }"
+        >
+          <label for="password" class="cyber-label">비밀번호</label>
+          <div class="cyber-pw-wrap">
+            <input
+              id="password"
+              :type="showPassword ? 'text' : 'password'"
+              name="password"
+              class="cyber-input"
+              placeholder="8자 이상"
+              autocomplete="new-password"
+              required
+              minlength="8"
+              x-model="password"
+              @focus="focusedField = 'password'"
+              @blur="focusedField = null; validatePassword()"
+              :aria-invalid="errors.password ? 'true' : 'false'"
+            />
+            <button
+              type="button"
+              class="cyber-pw-btn"
+              :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'"
+              @click="showPassword = !showPassword"
+            >
+              <span x-text="showPassword ? '숨기기' : '보기'"></span>
+            </button>
+          </div>
+          <span class="cyber-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+        </div>
+        <div
+          class="cyber-field"
+          :class="{ 'cyber-field--focused': focusedField === 'passwordConfirm', 'cyber-field--invalid': errors.passwordConfirm }"
+        >
+          <label for="passwordConfirm" class="cyber-label">비밀번호 확인</label>
+          <input
+            id="passwordConfirm"
+            :type="showPassword ? 'text' : 'password'"
+            name="passwordConfirm"
+            class="cyber-input"
+            placeholder="비밀번호 재입력"
+            autocomplete="new-password"
+            required
+            x-model="passwordConfirm"
+            @focus="focusedField = 'passwordConfirm'"
+            @blur="focusedField = null; validatePasswordConfirm()"
+            :aria-invalid="errors.passwordConfirm ? 'true' : 'false'"
+          />
+          <span class="cyber-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+        </div>
+        <div class="cyber-actions">
+          <button type="submit" class="cyber-btn" :disabled="submitting">
+            <span x-show="!submitting">가입하기</span>
+            <span x-show="submitting" x-cloak>처리 중...</span>
+          </button>
+        </div>
+      </form>
+
+      <footer class="cyber-footer">
+        <a href="#" class="cyber-link">이미 계정이 있으신가요? 로그인</a>
+      </footer>
+    </div>
+  </main>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

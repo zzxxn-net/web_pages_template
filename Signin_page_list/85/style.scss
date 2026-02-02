@@ -1,0 +1,209 @@
+// 시안 85: 다크 아카이브 + 단일 포커스 입력 흐름 + 입력 반응형 애니메이션
+$s85-font: 'Crimson Pro', Georgia, serif;
+$s85-mono: 'Source Code Pro', monospace;
+$s85-bg: #1c1917;
+$s85-surface: #292524;
+$s85-border: #44403c;
+$s85-text: #e7e5e4;
+$s85-muted: #a8a29e;
+$s85-accent: #d6d3d1;
+$s85-error: #f87171;
+$s85-radius: 6px;
+$s85-ease: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s85 {
+  font-family: $s85-font;
+  color: $s85-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 2rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s85-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: $s85-bg;
+  pointer-events: none;
+}
+
+.s85-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  padding: clamp(1.25rem, 4vw, 1.75rem);
+  background: $s85-surface;
+  border: 1px solid $s85-border;
+  border-radius: $s85-radius;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+}
+
+.s85-header {
+  margin-bottom: 1.25rem;
+}
+
+.s85-title {
+  font-size: clamp(1.5rem, 3.5vw, 1.75rem);
+  font-weight: 600;
+  color: $s85-text;
+  margin: 0 0 0.2rem;
+  letter-spacing: -0.02em;
+}
+
+.s85-desc {
+  font-family: $s85-mono;
+  font-size: 0.75rem;
+  color: $s85-muted;
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+
+.s85-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+// 단일 포커스: 포커스된 필드만 강조, 나머지는 dim
+.s85-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  transition: opacity $s85-ease, transform $s85-ease;
+
+  &--dim {
+    opacity: 0.45;
+    transform: scale(0.98);
+    pointer-events: auto;
+  }
+
+  &--focused {
+    opacity: 1;
+    transform: scale(1);
+
+    .s85-label {
+      color: $s85-accent;
+      transform: translateY(0);
+    }
+    .s85-input {
+      border-color: $s85-accent;
+      box-shadow: 0 0 0 1px rgba(214, 211, 209, 0.3);
+    }
+  }
+
+  &--invalid .s85-input {
+    border-color: $s85-error;
+    box-shadow: 0 0 0 1px rgba(248, 113, 113, 0.25);
+  }
+}
+
+.s85-label {
+  font-family: $s85-mono;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: $s85-muted;
+  transition: color $s85-ease, transform $s85-ease;
+}
+
+.s85-input {
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  padding-right: 3.5rem;
+  font-family: $s85-mono;
+  font-size: 0.9rem;
+  color: $s85-text;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid $s85-border;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color $s85-ease, box-shadow $s85-ease, background $s85-ease;
+
+  &::placeholder {
+    color: $s85-muted;
+    opacity: 0.8;
+  }
+}
+
+.s85-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .s85-input {
+    padding-right: 3.5rem;
+  }
+}
+
+.s85-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.6875rem;
+  font-family: $s85-mono;
+  color: $s85-muted;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color $s85-ease, background $s85-ease;
+
+  &:hover {
+    color: $s85-accent;
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
+
+.s85-error {
+  font-family: $s85-mono;
+  font-size: 0.6875rem;
+  color: $s85-error;
+  display: block;
+}
+
+.s85-actions {
+  margin-top: 0.5rem;
+}
+
+.s85-btn {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: $s85-mono;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: $s85-bg;
+  background: $s85-accent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity $s85-ease, transform $s85-ease;
+
+  &:hover:not(:disabled) {
+    opacity: 0.92;
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

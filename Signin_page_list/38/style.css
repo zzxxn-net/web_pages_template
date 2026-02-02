@@ -1,0 +1,258 @@
+/* 회원가입 시안 38 - 감성 테크 + 비대칭 레이아웃, 포커스 이동 중심 UX */
+.signup-emotion-asym.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  grid-template-rows: 1fr;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #fef3f2 0%, #fce7f3 35%, #ede9fe 70%, #e0e7ff 100%);
+}
+
+@media (max-width: 768px) {
+  .signup-emotion-asym.signup-fixed {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+}
+
+.emasym-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: linear-gradient(160deg, #fdf2f8 0%, #f5f3ff 50%, #eef2ff 100%);
+  min-height: 0;
+  position: relative;
+  box-shadow: inset 0 0 60px rgba(139, 92, 246, 0.04);
+}
+
+@media (max-width: 768px) {
+  .emasym-visual {
+    min-height: 140px;
+    padding: 1.5rem;
+  }
+}
+
+.emasym-visual-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.emasym-visual-content {
+  position: relative;
+  text-align: center;
+  max-width: 280px;
+}
+
+.emasym-quote {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #1f2937;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+}
+
+.emasym-sub {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #6b7280;
+}
+
+.emasym-form-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  min-height: 0;
+  overflow: auto;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+}
+
+@media (max-width: 768px) {
+  .emasym-form-wrap {
+    padding: 1.5rem;
+    align-items: flex-start;
+  }
+}
+
+.emasym-form-inner {
+  width: 100%;
+  max-width: 360px;
+}
+
+.emasym-header {
+  margin-bottom: 1.5rem;
+}
+
+.emasym-title {
+  margin: 0 0 0.25rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #1f2937;
+  letter-spacing: -0.02em;
+}
+
+.emasym-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.emasym-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.5rem 0;
+  border-radius: 12px;
+  transition: background 0.2s ease;
+}
+
+.emasym-field--focused .emasym-input,
+.emasym-field--focused .emasym-pw-wrap {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+}
+
+.emasym-field--invalid .emasym-input,
+.emasym-field--invalid .emasym-pw-wrap {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.1);
+}
+
+.emasym-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #6b7280;
+}
+
+.emasym-input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  font-size: 0.9375rem;
+  font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #1f2937;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.emasym-input::placeholder {
+  color: #6b7280;
+  opacity: 0.8;
+}
+
+.emasym-input:focus {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+}
+
+.emasym-pw-wrap {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  background: #fff;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.emasym-pw-wrap .emasym-input {
+  border: none;
+  background: transparent;
+  flex: 1;
+}
+
+.emasym-pw-wrap:focus-within {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+}
+
+.emasym-pw-btn {
+  padding: 0 0.75rem;
+  border: none;
+  background: transparent;
+  font-size: 0.8125rem;
+  font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #6b7280;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.emasym-pw-btn:hover {
+  color: #8b5cf6;
+}
+
+.emasym-error {
+  font-size: 0.8125rem;
+  font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #dc2626;
+}
+
+.emasym-focus-btn {
+  margin-top: 0.25rem;
+  padding: 0.35rem 0;
+  border: none;
+  background: transparent;
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #8b5cf6;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: color 0.2s ease, transform 0.15s ease;
+}
+
+.emasym-focus-btn:hover {
+  color: #7c3aed;
+  transform: translateX(2px);
+}
+
+.emasym-field:last-of-type .emasym-focus-btn {
+  display: none;
+}
+
+.emasym-submit {
+  margin-top: 0.5rem;
+}
+
+.emasym-btn {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #fff;
+  background: #8b5cf6;
+  cursor: pointer;
+  box-shadow: 0 4px 24px rgba(139, 92, 246, 0.08);
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.emasym-btn:hover:not(:disabled) {
+  background: #7c3aed;
+  transform: translateY(-1px);
+}
+
+.emasym-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+[x-cloak] {
+  display: none !important;
+}

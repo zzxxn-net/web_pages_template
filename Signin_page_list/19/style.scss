@@ -1,0 +1,279 @@
+// ============================================
+// 회원가입 시안 19 - 단일 포커스 입력 흐름 + 현대 판타지
+// 포커스 이동 중심 UX
+// ============================================
+
+$font-serif: "Georgia", "Palatino", "Times New Roman", serif;
+$font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+$bg: linear-gradient(165deg, #1a1625 0%, #2d1f3d 40%, #1e1b2e 100%);
+$card-bg: rgba(255, 255, 255, 0.06);
+$card-border: rgba(192, 132, 252, 0.2);
+$glow: rgba(192, 132, 252, 0.15);
+$primary: #c084fc;
+$primary-hover: #d8b4fe;
+$text: #f5f3ff;
+$text-muted: #a78bfa;
+$error: #f87171;
+$radius: 14px;
+$max-width: 400px;
+$break: 480px;
+
+.signup-fantasy.signup-single-focus {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: $bg;
+  box-sizing: border-box;
+}
+
+.fantasy-wrap {
+  position: relative;
+  width: 100%;
+  max-width: $max-width;
+}
+
+.fantasy-glow {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, $glow 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.fantasy-card {
+  position: relative;
+  width: 100%;
+  padding: 2rem 1.75rem;
+  background: $card-bg;
+  border: 1px solid $card-border;
+  border-radius: $radius;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+  @media (max-width: $break) {
+    padding: 1.5rem 1.5rem;
+    border-radius: 12px;
+  }
+}
+
+.fantasy-form {
+  display: block;
+}
+
+.fantasy-step {
+  display: block;
+  min-height: 200px;
+}
+
+.fantasy-prompt {
+  margin: 0 0 1.25rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  font-family: $font-sans;
+  color: $text;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+
+  @media (max-width: $break) {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.fantasy-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.fantasy-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-family: $font-sans;
+  color: $text-muted;
+}
+
+.fantasy-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-family: $font-sans;
+  line-height: 1.5;
+  color: $text;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid $card-border;
+  border-radius: 10px;
+  box-sizing: border-box;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+  &::placeholder {
+    color: rgba(167, 139, 250, 0.5);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: rgba(192, 132, 252, 0.5);
+    box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.15);
+  }
+
+  &[aria-invalid="true"] {
+    border-color: rgba(248, 113, 113, 0.5);
+    box-shadow: 0 0 0 2px rgba(248, 113, 113, 0.2);
+  }
+}
+
+.fantasy-pw-wrap {
+  display: flex;
+  border: 1px solid $card-border;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+  &:focus-within {
+    border-color: rgba(192, 132, 252, 0.5);
+    box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.15);
+  }
+
+  .fantasy-input {
+    border: none;
+    flex: 1;
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .fantasy-pw-btn {
+    padding: 0 1rem;
+    font-size: 0.8125rem;
+    font-family: $font-sans;
+    color: $text-muted;
+    background: transparent;
+    border: none;
+    border-left: 1px solid $card-border;
+    cursor: pointer;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+.fantasy-error {
+  font-size: 0.8125rem;
+  font-family: $font-sans;
+  color: $error;
+}
+
+.fantasy-nav {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.fantasy-btn {
+  padding: 0.625rem 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  font-family: $font-sans;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+
+  &--prev {
+    color: $text-muted;
+    background: transparent;
+    border: 1px solid $card-border;
+
+    &:hover {
+      color: $text;
+      border-color: rgba(192, 132, 252, 0.4);
+    }
+  }
+
+  &--next {
+    color: #1a1625;
+    background: $primary;
+    border: none;
+
+    &:hover {
+      background: $primary-hover;
+      transform: translateY(-1px);
+    }
+  }
+
+  &--submit {
+    color: #1a1625;
+    background: $primary;
+    border: none;
+
+    &:hover:not(:disabled) {
+      background: $primary-hover;
+      transform: translateY(-1px);
+    }
+
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.fantasy-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid $card-border;
+}
+
+.fantasy-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(192, 132, 252, 0.25);
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease;
+
+  &:hover {
+    background: rgba(192, 132, 252, 0.5);
+  }
+
+  &--active {
+    background: $primary;
+    transform: scale(1.2);
+  }
+}
+
+.fantasy-footer {
+  margin-top: 1.25rem;
+  text-align: center;
+}
+
+.fantasy-link {
+  font-size: 0.875rem;
+  font-family: $font-sans;
+  color: $primary;
+  text-decoration: none;
+
+  &:hover {
+    color: $primary-hover;
+    text-decoration: underline;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

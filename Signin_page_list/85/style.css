@@ -1,0 +1,197 @@
+/* 시안 85: 다크 아카이브 + 단일 포커스 입력 흐름 + 입력 반응형 애니메이션 */
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s85 {
+  font-family: "Crimson Pro", Georgia, serif;
+  color: #e7e5e4;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 2rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s85-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #1c1917;
+  pointer-events: none;
+}
+
+.s85-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  padding: clamp(1.25rem, 4vw, 1.75rem);
+  background: #292524;
+  border: 1px solid #44403c;
+  border-radius: 6px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+}
+
+.s85-header {
+  margin-bottom: 1.25rem;
+}
+
+.s85-title {
+  font-size: clamp(1.5rem, 3.5vw, 1.75rem);
+  font-weight: 600;
+  color: #e7e5e4;
+  margin: 0 0 0.2rem;
+  letter-spacing: -0.02em;
+}
+
+.s85-desc {
+  font-family: "Source Code Pro", monospace;
+  font-size: 0.75rem;
+  color: #a8a29e;
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+
+.s85-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.s85-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  transition: opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1), transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s85-field--dim {
+  opacity: 0.45;
+  transform: scale(0.98);
+  pointer-events: auto;
+}
+
+.s85-field--focused {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.s85-field--focused .s85-label {
+  color: #d6d3d1;
+  transform: translateY(0);
+}
+
+.s85-field--focused .s85-input {
+  border-color: #d6d3d1;
+  box-shadow: 0 0 0 1px rgba(214, 211, 209, 0.3);
+}
+
+.s85-field--invalid .s85-input {
+  border-color: #f87171;
+  box-shadow: 0 0 0 1px rgba(248, 113, 113, 0.25);
+}
+
+.s85-label {
+  font-family: "Source Code Pro", monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #a8a29e;
+  transition: color 0.28s cubic-bezier(0.4, 0, 0.2, 1), transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s85-input {
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  padding-right: 3.5rem;
+  font-family: "Source Code Pro", monospace;
+  font-size: 0.9rem;
+  color: #e7e5e4;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid #44403c;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1), background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s85-input::placeholder {
+  color: #a8a29e;
+  opacity: 0.8;
+}
+
+.s85-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.s85-pw-wrap .s85-input {
+  padding-right: 3.5rem;
+}
+
+.s85-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.6875rem;
+  font-family: "Source Code Pro", monospace;
+  color: #a8a29e;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color 0.28s cubic-bezier(0.4, 0, 0.2, 1), background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s85-pw-btn:hover {
+  color: #d6d3d1;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.s85-error {
+  font-family: "Source Code Pro", monospace;
+  font-size: 0.6875rem;
+  color: #f87171;
+  display: block;
+}
+
+.s85-actions {
+  margin-top: 0.5rem;
+}
+
+.s85-btn {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: "Source Code Pro", monospace;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #1c1917;
+  background: #d6d3d1;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1), transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s85-btn:hover:not(:disabled) {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.s85-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+[x-cloak] {
+  display: none !important;
+}

@@ -1,0 +1,26 @@
+.signup-fixed { min-height: 100vh; min-height: 100dvh; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.s67 { font-family: "Literata", Georgia, serif; color: #f2ebe3; min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding: 1rem; position: relative; box-sizing: border-box; }
+.s67-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; background: #1a1612; }
+.s67-full { position: relative; z-index: 1; width: 100%; max-width: 360px; }
+.s67-header { text-align: center; margin-bottom: 1.1rem; }
+.s67-title { font-family: "Crimson Pro", serif; font-size: clamp(1.25rem, 3.8vw, 1.5rem); font-weight: 600; color: #f2ebe3; margin-bottom: 0.25rem; }
+.s67-desc { font-size: 0.8125rem; color: #a89a8a; }
+.s67-form { display: flex; flex-direction: column; gap: 0.7rem; }
+.s67-field { display: flex; flex-direction: column; gap: 0.3rem; }
+.s67-field--focused .s67-label { color: #c9a227; }
+.s67-field--focused .s67-input { border-color: #c9a227; box-shadow: 0 0 0 2px rgba(201, 162, 39, 0.18); }
+.s67-field--invalid .s67-input { border-color: #c45c5c; }
+.s67-label { font-size: 0.75rem; font-weight: 500; color: #a89a8a; transition: color 0.24s; }
+.s67-input { width: 100%; padding: 0.55rem 0.85rem; font-family: inherit; font-size: 0.9rem; color: #f2ebe3; background: #252019; border: 1px solid #3d352c; border-radius: 10px; outline: none; transition: border-color 0.24s, box-shadow 0.24s; }
+.s67-input::placeholder { color: #a89a8a; opacity: 0.7; }
+.s67-pw-wrap { position: relative; display: flex; align-items: center; }
+.s67-pw-wrap .s67-input { padding-right: 3.5rem; }
+.s67-pw-btn { position: absolute; right: 0.5rem; padding: 0.3rem 0.5rem; font-size: 0.7rem; font-family: inherit; color: #c9a227; background: transparent; border: none; cursor: pointer; border-radius: 6px; transition: background 0.24s; }
+.s67-pw-btn:hover { background: rgba(201, 162, 39, 0.18); }
+.s67-error { font-size: 0.7rem; color: #c45c5c; }
+.s67-actions { margin-top: 0.4rem; }
+.s67-submit { width: 100%; padding: 0.7rem 1rem; font-family: "Crimson Pro", serif; font-size: 0.9375rem; font-weight: 600; color: #1a1612; background: #c9a227; border: none; border-radius: 10px; cursor: pointer; transition: opacity 0.24s, transform 0.24s; }
+.s67-submit:hover:not(:disabled) { opacity: 0.95; transform: translateY(-1px); }
+.s67-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+.s67-submit-text { display: block; }
+[x-cloak] { display: none !important; }

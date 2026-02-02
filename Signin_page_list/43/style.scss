@@ -1,0 +1,311 @@
+// ============================================
+// 회원가입 시안 43 - 미래적 클린 + 단일 포커스 입력 흐름
+// 포커스 이동 중심 UX
+// ============================================
+
+$font: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+$bg: #f1f5f9;
+$bg-subtle: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+$card-bg: #ffffff;
+$border: #e2e8f0;
+$primary: #0284c7;
+$primary-soft: rgba(2, 132, 199, 0.1);
+$text: #0f172a;
+$text-muted: #64748b;
+$done: #059669;
+$done-soft: rgba(5, 150, 105, 0.1);
+$error: #dc2626;
+$error-soft: rgba(220, 38, 38, 0.08);
+$radius: 12px;
+$break: 480px;
+$max-width: 400px;
+
+.signup-fcf.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  background: $bg-subtle;
+}
+
+.fcf-wrap {
+  width: 100%;
+  max-width: $max-width;
+  margin: auto;
+}
+
+.fcf-card {
+  width: 100%;
+  padding: 1.5rem 1.5rem 1.75rem;
+  background: $card-bg;
+  border: 1px solid $border;
+  border-radius: $radius;
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06);
+
+  @media (max-width: $break) {
+    padding: 1.25rem 1.25rem 1.5rem;
+    border-radius: 10px;
+  }
+}
+
+.fcf-header {
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+.fcf-title {
+  margin: 0 0 0.25rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-family: $font;
+  color: $text;
+  letter-spacing: -0.02em;
+}
+
+.fcf-desc {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-family: $font;
+  color: $text-muted;
+}
+
+// 포커스 이동 중심: 클릭 가능한 진행 인디케이터, 현재 스텝 강조
+.fcf-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 0;
+}
+
+.fcf-progress-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-width: 2.25rem;
+  height: 2.25rem;
+  padding: 0 0.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-family: $font;
+  color: $text-muted;
+  background: transparent;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+
+  &:hover {
+    color: $text;
+    background: rgba(2, 132, 199, 0.06);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px $primary-soft;
+  }
+
+  &--on {
+    color: $primary;
+    background: $primary-soft;
+    font-weight: 600;
+  }
+
+  &--done {
+    color: $done;
+    background: $done-soft;
+  }
+}
+
+.fcf-progress-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: currentColor;
+  color: #fff;
+  opacity: 0.9;
+}
+
+.fcf-progress-item--on .fcf-progress-num,
+.fcf-progress-item--done .fcf-progress-num {
+  background: currentColor;
+  color: #fff;
+}
+
+.fcf-progress-label {
+  @media (max-width: 360px) {
+    display: none;
+  }
+}
+
+.fcf-progress-line {
+  width: 20px;
+  height: 2px;
+  background: $border;
+  border-radius: 1px;
+  transition: background 0.25s ease;
+
+  &--done {
+    background: $done;
+    opacity: 0.6;
+  }
+}
+
+.fcf-form {
+  position: relative;
+  min-height: 200px;
+}
+
+.fcf-step {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  &--invalid .fcf-input,
+  &--invalid .fcf-pw-wrap {
+    border-color: $error;
+    box-shadow: 0 0 0 2px $error-soft;
+  }
+}
+
+.fcf-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: $font;
+  color: $text;
+  letter-spacing: -0.01em;
+}
+
+.fcf-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  font-family: $font;
+  color: $text;
+  background: $card-bg;
+  border: 1px solid $border;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &::placeholder {
+    color: $text-muted;
+    opacity: 0.9;
+  }
+
+  &:focus {
+    border-color: $primary;
+    box-shadow: 0 0 0 3px $primary-soft;
+  }
+
+  &[aria-invalid="true"] {
+    border-color: $error;
+    box-shadow: 0 0 0 2px $error-soft;
+  }
+}
+
+.fcf-pw-wrap {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border: 1px solid $border;
+  border-radius: 8px;
+  background: $card-bg;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  .fcf-input {
+    border: none;
+    background: transparent;
+    flex: 1;
+    padding-right: 0.5rem;
+  }
+
+  &:focus-within {
+    border-color: $primary;
+    box-shadow: 0 0 0 3px $primary-soft;
+  }
+}
+
+.fcf-pw-btn {
+  flex-shrink: 0;
+  padding: 0 0.75rem;
+  border: none;
+  background: transparent;
+  font-size: 0.8125rem;
+  font-family: $font;
+  color: $text-muted;
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+.fcf-error {
+  font-size: 0.8125rem;
+  font-family: $font;
+  color: $error;
+}
+
+.fcf-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.fcf-btn {
+  padding: 0.65rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: $font;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+  outline: none;
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px $primary-soft;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &--pri {
+    border: 1px solid $primary;
+    background: $primary-soft;
+    color: $primary;
+
+    &:hover:not(:disabled) {
+      background: rgba($primary, 0.18);
+    }
+  }
+
+  &--sec {
+    border: 1px solid $border;
+    background: transparent;
+    color: $text-muted;
+
+    &:hover:not(:disabled) {
+      color: $text;
+      background: rgba(15, 23, 42, 0.04);
+    }
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

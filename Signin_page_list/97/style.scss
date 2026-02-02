@@ -1,0 +1,229 @@
+// 시안 97: 현대 판타지 + 풀스크린 몰입형 + 포커스 이동 중심 UX
+$s97-serif: 'Cormorant Garamond', Georgia, serif;
+$s97-sans: 'Outfit', system-ui, sans-serif;
+$s97-bg-start: #1a1625;
+$s97-bg-end: #2d2438;
+$s97-glow-1: rgba(212, 175, 55, 0.06);
+$s97-glow-2: rgba(139, 92, 246, 0.06);
+$s97-card: rgba(255, 255, 255, 0.04);
+$s97-border: rgba(212, 175, 55, 0.2);
+$s97-text: #f4f4f5;
+$s97-muted: #a1a1aa;
+$s97-accent: #d4af37;
+$s97-accent-soft: rgba(212, 175, 55, 0.15);
+$s97-error: #f87171;
+$s97-radius: 14px;
+$s97-ease: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s97 {
+  font-family: $s97-sans;
+  color: $s97-text;
+  box-sizing: border-box;
+}
+
+.s97--full {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  padding: clamp(0.75rem, 3vw, 1.25rem);
+}
+
+.s97-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(160deg, $s97-bg-start 0%, $s97-bg-end 100%);
+}
+
+.s97-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.85;
+  pointer-events: none;
+
+  &--1 {
+    width: min(45vw, 320px);
+    height: min(45vw, 320px);
+    background: $s97-glow-1;
+    top: -5%;
+    left: -8%;
+  }
+
+  &--2 {
+    width: min(35vw, 240px);
+    height: min(35vw, 240px);
+    background: $s97-glow-2;
+    bottom: -4%;
+    right: -6%;
+  }
+}
+
+.s97-layout {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 1.5rem);
+  flex-shrink: 0;
+}
+
+.s97-header {
+  text-align: center;
+}
+
+.s97-title {
+  font-family: $s97-serif;
+  font-size: clamp(1.75rem, 4.5vw, 2rem);
+  font-weight: 600;
+  font-style: italic;
+  color: $s97-text;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.s97-tagline {
+  font-family: $s97-sans;
+  font-size: clamp(0.8125rem, 2vw, 0.875rem);
+  font-weight: 400;
+  color: $s97-muted;
+  margin: 0.4rem 0 0;
+  line-height: 1.5;
+}
+
+.s97-form {
+  width: 100%;
+  padding: clamp(1.25rem, 3.5vw, 1.75rem);
+  background: $s97-card;
+  border: 1px solid $s97-border;
+  border-radius: $s97-radius;
+  backdrop-filter: blur(12px);
+}
+
+.s97-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.s97-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+
+  &--invalid .s97-input {
+    border-color: $s97-error;
+    box-shadow: 0 0 0 1px rgba(248, 113, 113, 0.2);
+  }
+}
+
+.s97-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: $s97-muted;
+  transition: color $s97-ease;
+}
+
+.s97-input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  padding-right: 3.25rem;
+  font-family: $s97-sans;
+  font-size: 0.9375rem;
+  color: $s97-text;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  border-radius: 10px;
+  outline: none;
+  transition: border-color $s97-ease, box-shadow $s97-ease;
+
+  &::placeholder {
+    color: $s97-muted;
+    opacity: 0.75;
+  }
+
+  &:focus {
+    border-color: $s97-accent;
+    box-shadow: 0 0 0 2px $s97-accent-soft;
+  }
+}
+
+.s97-pw-wrap {
+  position: relative;
+
+  .s97-input {
+    padding-right: 3.25rem;
+  }
+}
+
+.s97-pw-btn {
+  position: absolute;
+  right: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.3rem 0.5rem;
+  font-size: 0.6875rem;
+  font-family: $s97-sans;
+  color: $s97-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background $s97-ease;
+
+  &:hover {
+    background: $s97-accent-soft;
+  }
+}
+
+.s97-error {
+  font-size: 0.75rem;
+  color: $s97-error;
+  display: block;
+}
+
+.s97-actions {
+  margin-top: 1rem;
+}
+
+.s97-btn {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  font-family: $s97-sans;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #1a1625;
+  background: linear-gradient(135deg, $s97-accent 0%, darken($s97-accent, 6%) 100%);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: opacity $s97-ease, transform $s97-ease;
+
+  &:hover:not(:disabled) {
+    opacity: 0.95;
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

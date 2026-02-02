@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 69 · 미래적 클린 비대칭 레이아웃</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s69 signup-fixed" x-data="signupForm()">
+    <div class="s69-bg" aria-hidden="true"></div>
+    <div class="s69-layout" x-ref="layout">
+      <aside class="s69-aside" x-ref="aside">
+        <div class="s69-aside-inner">
+          <h1 class="s69-title">회원가입</h1>
+          <p class="s69-desc">간단한 정보만 입력하면 바로 시작할 수 있습니다.</p>
+          <div class="s69-accent-line" aria-hidden="true"></div>
+        </div>
+      </aside>
+      <div class="s69-form-wrap" x-ref="formWrap">
+        <form class="s69-form" method="post" action="#" hx-post="#" hx-swap="none" @submit.prevent="handleSubmit">
+          <div class="s69-field" :class="{ 's69-field--focused': focusedField === 'email', 's69-field--invalid': errors.email }">
+            <label for="s69-email" class="s69-label">이메일</label>
+            <input id="s69-email" type="email" name="email" class="s69-input" placeholder="you@example.com" autocomplete="email" required x-model="email" @focus="focusedField = 'email'" @blur="focusedField = null; validateEmail()" :aria-invalid="errors.email ? 'true' : 'false'" />
+            <span class="s69-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+          </div>
+          <div class="s69-field" :class="{ 's69-field--focused': focusedField === 'name', 's69-field--invalid': errors.name }">
+            <label for="s69-name" class="s69-label">이름</label>
+            <input id="s69-name" type="text" name="name" class="s69-input" placeholder="홍길동" autocomplete="name" required x-model="name" @focus="focusedField = 'name'" @blur="focusedField = null; validateName()" :aria-invalid="errors.name ? 'true' : 'false'" />
+            <span class="s69-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+          </div>
+          <div class="s69-field" :class="{ 's69-field--focused': focusedField === 'password', 's69-field--invalid': errors.password }">
+            <label for="s69-password" class="s69-label">비밀번호</label>
+            <div class="s69-pw-wrap">
+              <input id="s69-password" :type="showPassword ? 'text' : 'password'" name="password" class="s69-input" placeholder="8자 이상" autocomplete="new-password" required minlength="8" x-model="password" @focus="focusedField = 'password'" @blur="focusedField = null; validatePassword()" :aria-invalid="errors.password ? 'true' : 'false'" />
+              <button type="button" class="s69-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword"><span x-text="showPassword ? '숨기기' : '보기'"></span></button>
+            </div>
+            <span class="s69-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+          </div>
+          <div class="s69-field" :class="{ 's69-field--focused': focusedField === 'passwordConfirm', 's69-field--invalid': errors.passwordConfirm }">
+            <label for="s69-passwordConfirm" class="s69-label">비밀번호 확인</label>
+            <input id="s69-passwordConfirm" :type="showPassword ? 'text' : 'password'" name="password_confirm" class="s69-input" placeholder="다시 입력" autocomplete="new-password" required minlength="8" x-model="passwordConfirm" @focus="focusedField = 'passwordConfirm'" @blur="focusedField = null; validatePasswordConfirm()" :aria-invalid="errors.passwordConfirm ? 'true' : 'false'" />
+            <span class="s69-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+          </div>
+          <div class="s69-actions">
+            <button type="submit" class="s69-submit" :disabled="submitting" :aria-busy="submitting"><span class="s69-submit-text" x-text="submitting ? '가입 중…' : '가입하기'"></span></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

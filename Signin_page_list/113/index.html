@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 113 - 감성 테크 비대칭 레이아웃 GSAP 부드러운 전환</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s113 signup-fixed" x-data="signupForm113()" x-init="initAnim()">
+    <div class="s113-inner" x-ref="inner">
+      <aside class="s113-aside" x-ref="aside" aria-label="브랜드 영역">
+        <div class="s113-brand">
+          <h1 class="s113-title">회원가입</h1>
+          <p class="s113-tagline">함께하는 순간을 기록해요.</p>
+        </div>
+      </aside>
+      <section class="s113-form-section" aria-label="회원가입 폼" x-ref="formSection">
+        <form class="s113-form" method="post" action="#" hx-post="#" hx-swap="none" @submit.prevent="handleSubmit" aria-label="회원가입 폼">
+          <div class="s113-fields">
+            <div class="s113-field" :class="{ 's113-field--invalid': errors.email, 's113-field--valid': touched.email && !errors.email && email }">
+              <label for="s113-email" class="s113-label">이메일</label>
+              <input id="s113-email" type="email" name="email" class="s113-input" placeholder="you@example.com" autocomplete="email" required x-model="email" @blur="touched.email = true; validateEmail()" :aria-invalid="errors.email ? 'true' : 'false'" />
+              <span class="s113-error" x-show="errors.email" x-cloak x-text="errors.email"></span>
+            </div>
+            <div class="s113-field" :class="{ 's113-field--invalid': errors.name, 's113-field--valid': touched.name && !errors.name && name }">
+              <label for="s113-name" class="s113-label">이름</label>
+              <input id="s113-name" type="text" name="name" class="s113-input" placeholder="홍길동" autocomplete="name" required x-model="name" @blur="touched.name = true; validateName()" :aria-invalid="errors.name ? 'true' : 'false'" />
+              <span class="s113-error" x-show="errors.name" x-cloak x-text="errors.name"></span>
+            </div>
+            <div class="s113-field" :class="{ 's113-field--invalid': errors.password, 's113-field--valid': touched.password && !errors.password && password }">
+              <label for="s113-password" class="s113-label">비밀번호</label>
+              <div class="s113-pw-wrap">
+                <input id="s113-password" :type="showPassword ? 'text' : 'password'" name="password" class="s113-input" placeholder="8자 이상" autocomplete="new-password" required minlength="8" x-model="password" @blur="touched.password = true; validatePassword()" :aria-invalid="errors.password ? 'true' : 'false'" />
+                <button type="button" class="s113-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword"><span x-text="showPassword ? '숨기기' : '보기'"></span></button>
+              </div>
+              <span class="s113-error" x-show="errors.password" x-cloak x-text="errors.password"></span>
+            </div>
+            <div class="s113-field" :class="{ 's113-field--invalid': errors.passwordConfirm, 's113-field--valid': touched.passwordConfirm && !errors.passwordConfirm && passwordConfirm }">
+              <label for="s113-passwordConfirm" class="s113-label">비밀번호 확인</label>
+              <input id="s113-passwordConfirm" :type="showPassword ? 'text' : 'password'" name="password_confirm" class="s113-input" placeholder="다시 입력" autocomplete="new-password" required minlength="8" x-model="passwordConfirm" @blur="touched.passwordConfirm = true; validatePasswordConfirm()" :aria-invalid="errors.passwordConfirm ? 'true' : 'false'" />
+              <span class="s113-error" x-show="errors.passwordConfirm" x-cloak x-text="errors.passwordConfirm"></span>
+            </div>
+          </div>
+          <div class="s113-actions">
+            <button type="submit" class="s113-btn" :disabled="submitting" :class="{ 's113-btn--busy': submitting }" :aria-busy="submitting"><span x-text="submitting ? '처리 중...' : '가입하기'"></span></button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+// 시안 100: 다크 아카이브 + 단일 포커스 입력 흐름 + GSAP 기반 부드러운 전환
+$s100-serif: 'Crimson Pro', Georgia, serif;
+$s100-sans: 'Source Sans 3', system-ui, sans-serif;
+$s100-bg: #141312;
+$s100-surface: #1c1a18;
+$s100-border: rgba(168, 162, 158, 0.18);
+$s100-text: #f5f5f4;
+$s100-muted: #a8a29e;
+$s100-accent: #e7e5e4;
+$s100-accent-soft: rgba(231, 229, 228, 0.1);
+$s100-error: #fca5a5;
+$s100-radius: 6px;
+$s100-ease: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s100 {
+  font-family: $s100-sans;
+  color: $s100-text;
+  box-sizing: border-box;
+}
+
+.s100--full {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  padding: clamp(0.75rem, 3vw, 1.25rem);
+}
+
+.s100-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s100-bg;
+}
+
+.s100-layout {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 1.25rem);
+  flex-shrink: 0;
+}
+
+.s100-header {
+  text-align: center;
+}
+
+.s100-title {
+  font-family: $s100-serif;
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 600;
+  font-style: italic;
+  color: $s100-text;
+  margin: 0;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}
+
+.s100-tagline {
+  font-size: clamp(0.8125rem, 2vw, 0.875rem);
+  font-weight: 400;
+  color: $s100-muted;
+  margin: 0.35rem 0 0;
+  line-height: 1.5;
+}
+
+.s100-form {
+  width: 100%;
+}
+
+.s100-focus-flow {
+  position: relative;
+  min-height: 200px;
+}
+
+.s100-step {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &--active {
+    position: relative;
+  }
+}
+
+.s100-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: opacity $s100-ease;
+
+  &--invalid .s100-input {
+    border-color: $s100-error;
+    box-shadow: 0 0 0 1px rgba(252, 165, 165, 0.2);
+  }
+
+  &--invalid .s100-label {
+    color: $s100-error;
+  }
+}
+
+.s100-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: $s100-muted;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color $s100-ease;
+}
+
+.s100-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  padding-right: 3.25rem;
+  font-family: $s100-sans;
+  font-size: 0.9375rem;
+  color: $s100-text;
+  background: $s100-surface;
+  border: 1px solid $s100-border;
+  border-radius: $s100-radius;
+  outline: none;
+  transition: border-color $s100-ease, box-shadow $s100-ease;
+
+  &::placeholder {
+    color: $s100-muted;
+    opacity: 0.8;
+  }
+
+  &:focus {
+    border-color: rgba(231, 229, 228, 0.4);
+    box-shadow: 0 0 0 2px $s100-accent-soft;
+  }
+}
+
+.s100-pw-wrap {
+  position: relative;
+
+  .s100-input {
+    padding-right: 3.25rem;
+  }
+}
+
+.s100-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.35rem 0.5rem;
+  font-size: 0.6875rem;
+  font-family: $s100-sans;
+  font-weight: 500;
+  color: $s100-muted;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color $s100-ease, background $s100-ease;
+
+  &:hover {
+    color: $s100-accent;
+    background: $s100-accent-soft;
+  }
+}
+
+.s100-error {
+  font-size: 0.75rem;
+  color: $s100-error;
+  display: block;
+}
+
+.s100-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.s100-btn {
+  padding: 0.7rem 1.25rem;
+  font-family: $s100-sans;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: $s100-radius;
+  cursor: pointer;
+  transition: opacity $s100-ease, background $s100-ease, border-color $s100-ease;
+
+  &--primary {
+    flex: 1;
+    min-width: 100px;
+    color: $s100-bg;
+    background: $s100-accent;
+    border: 1px solid rgba(231, 229, 228, 0.3);
+
+    &:hover:not(:disabled) {
+      opacity: 0.92;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &--outline {
+    color: $s100-muted;
+    background: transparent;
+    border: 1px solid $s100-border;
+
+    &:hover:not(:disabled) {
+      color: $s100-accent;
+      border-color: rgba(231, 229, 228, 0.25);
+    }
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

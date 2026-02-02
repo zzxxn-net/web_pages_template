@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 32 · 다크 아카이브 비대칭</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="signup-arch-asym signup-fixed" x-data="signupForm()">
+    <div class="archasym-visual" aria-hidden="true">
+      <div class="archasym-visual-bg"></div>
+      <div class="archasym-visual-content">
+        <span class="archasym-visual-icon">▣</span>
+        <p class="archasym-visual-text">회원가입</p>
+      </div>
+    </div>
+    <div class="archasym-form-wrap">
+      <div class="archasym-form-inner">
+        <header class="archasym-header">
+          <h1 class="archasym-title">회원가입</h1>
+          <p class="archasym-desc">필수 항목을 입력해 주세요.</p>
+        </header>
+
+        <form
+          class="archasym-form"
+          method="post"
+          action="#"
+          hx-post="#"
+          hx-swap="none"
+          @submit.prevent="handleSubmit"
+        >
+          <div
+            class="archasym-field"
+            :class="{ 'archasym-field--focused': focusedField === 'email', 'archasym-field--invalid': errors.email }"
+          >
+            <label for="email" class="archasym-label">이메일</label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              class="archasym-input"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+              x-model="email"
+              @focus="focusedField = 'email'"
+              @blur="focusedField = null; validateEmail()"
+              :aria-invalid="errors.email ? 'true' : 'false'"
+            />
+            <span class="archasym-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+          </div>
+          <div
+            class="archasym-field"
+            :class="{ 'archasym-field--focused': focusedField === 'name', 'archasym-field--invalid': errors.name }"
+          >
+            <label for="name" class="archasym-label">이름</label>
+            <input
+              id="name"
+              type="text"
+              name="name"
+              class="archasym-input"
+              placeholder="홍길동"
+              autocomplete="name"
+              required
+              x-model="name"
+              @focus="focusedField = 'name'"
+              @blur="focusedField = null; validateName()"
+              :aria-invalid="errors.name ? 'true' : 'false'"
+            />
+            <span class="archasym-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+          </div>
+          <div
+            class="archasym-field"
+            :class="{ 'archasym-field--focused': focusedField === 'password', 'archasym-field--invalid': errors.password }"
+          >
+            <label for="password" class="archasym-label">비밀번호</label>
+            <div class="archasym-pw-wrap">
+              <input
+                id="password"
+                :type="showPassword ? 'text' : 'password'"
+                name="password"
+                class="archasym-input"
+                placeholder="8자 이상"
+                autocomplete="new-password"
+                required
+                minlength="8"
+                x-model="password"
+                @focus="focusedField = 'password'"
+                @blur="focusedField = null; validatePassword()"
+                :aria-invalid="errors.password ? 'true' : 'false'"
+              />
+              <button
+                type="button"
+                class="archasym-pw-btn"
+                :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'"
+                @click="showPassword = !showPassword"
+              >
+                <span x-text="showPassword ? '숨기기' : '보기'"></span>
+              </button>
+            </div>
+            <span class="archasym-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+          </div>
+          <div
+            class="archasym-field"
+            :class="{ 'archasym-field--focused': focusedField === 'passwordConfirm', 'archasym-field--invalid': errors.passwordConfirm }"
+          >
+            <label for="passwordConfirm" class="archasym-label">비밀번호 확인</label>
+            <input
+              id="passwordConfirm"
+              :type="showPassword ? 'text' : 'password'"
+              name="passwordConfirm"
+              class="archasym-input"
+              placeholder="비밀번호 재입력"
+              autocomplete="new-password"
+              required
+              x-model="passwordConfirm"
+              @focus="focusedField = 'passwordConfirm'"
+              @blur="focusedField = null; validatePasswordConfirm()"
+              :aria-invalid="errors.passwordConfirm ? 'true' : 'false'"
+            />
+            <span class="archasym-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+          </div>
+          <div class="archasym-nav">
+            <button type="submit" class="archasym-btn archasym-btn--primary" :disabled="submitting">
+              <span x-show="!submitting">가입하기</span>
+              <span x-show="submitting" x-cloak>처리 중...</span>
+            </button>
+          </div>
+        </form>
+
+        <footer class="archasym-footer">
+          <a href="#" class="archasym-link">이미 계정이 있으신가요? 로그인</a>
+        </footer>
+      </div>
+    </div>
+  </main>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

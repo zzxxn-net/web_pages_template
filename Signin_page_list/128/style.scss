@@ -1,0 +1,259 @@
+// 시안 128: 감성 테크 + 단계 분할형(Progressive Form) + 상태 변화 강조
+$s128-sans: 'Noto Sans KR', system-ui, sans-serif;
+$s128-bg: #fff8f5;
+$s128-surface: #fff;
+$s128-border: rgba(180, 120, 100, 0.2);
+$s128-text: #3d2c29;
+$s128-muted: #8b7355;
+$s128-accent: #c97b63;
+$s128-accent-soft: rgba(201, 123, 99, 0.15);
+$s128-valid: #7a9b76;
+$s128-valid-soft: rgba(122, 155, 118, 0.12);
+$s128-error: #c75c5c;
+$s128-error-soft: rgba(199, 92, 92, 0.12);
+$s128-radius: 12px;
+$s128-ease: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.s128 {
+  font-family: $s128-sans;
+  color: $s128-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-sizing: border-box;
+  background: $s128-bg;
+}
+
+.s128-inner {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.25rem, 5vw, 2rem);
+  box-sizing: border-box;
+}
+
+.s128-header {
+  text-align: center;
+  margin-bottom: clamp(1.25rem, 4vw, 1.75rem);
+}
+
+.s128-title {
+  font-size: clamp(1.5rem, 4vw, 1.85rem);
+  font-weight: 600;
+  color: $s128-text;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.s128-steps-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.s128-step-dot {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: $s128-border;
+  color: $s128-muted;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background $s128-ease, color $s128-ease;
+  &--active {
+    background: $s128-accent;
+    color: #fff;
+  }
+}
+
+.s128-step-line {
+  width: 2rem;
+  height: 2px;
+  background: $s128-border;
+  transition: background $s128-ease;
+  &--done { background: $s128-accent; }
+}
+
+.s128-form-wrap {
+  width: 100%;
+  max-width: 380px;
+}
+
+.s128-form {
+  width: 100%;
+}
+
+.s128-steps {
+  position: relative;
+  min-height: 12rem;
+}
+
+.s128-step {
+  width: 100%;
+}
+
+.s128-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.s128-field {
+  position: relative;
+  transition: border-color $s128-ease, box-shadow $s128-ease, background $s128-ease;
+
+  &--focused .s128-input {
+    border-color: $s128-accent;
+    box-shadow: 0 0 0 3px $s128-accent-soft;
+    background: $s128-surface;
+  }
+  &--focused .s128-label { color: $s128-accent; }
+
+  &--valid .s128-input {
+    border-color: $s128-valid;
+    background: $s128-valid-soft;
+  }
+  &--valid .s128-label { color: $s128-valid; }
+
+  &--invalid .s128-input {
+    border-color: $s128-error;
+    box-shadow: 0 0 0 2px $s128-error-soft;
+    background: $s128-error-soft;
+  }
+  &--invalid .s128-label { color: $s128-error; }
+}
+
+.s128-label {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: $s128-muted;
+  display: block;
+  margin-bottom: 0.4rem;
+  transition: color $s128-ease;
+}
+
+.s128-input {
+  width: 100%;
+  padding: 0.85rem 2.4rem 0.85rem 0.9rem;
+  font-family: $s128-sans;
+  font-size: 0.95rem;
+  color: $s128-text;
+  background: $s128-surface;
+  border: 1.5px solid $s128-border;
+  border-radius: $s128-radius;
+  outline: none;
+  transition: border-color $s128-ease, box-shadow $s128-ease, background $s128-ease;
+  &::placeholder { color: $s128-muted; opacity: 0.75; }
+}
+
+.s128-status {
+  position: absolute;
+  right: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: $s128-valid;
+  pointer-events: none;
+}
+
+.s128-pw-wrap {
+  position: relative;
+  .s128-input { padding-right: 3.1rem; }
+}
+
+.s128-pw-btn {
+  position: absolute;
+  right: 0.4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.22rem 0.45rem;
+  font-family: $s128-sans;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: $s128-muted;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color $s128-ease;
+  &:hover { color: $s128-accent; }
+}
+
+.s128-error {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: $s128-error;
+  display: block;
+  margin-top: 0.35rem;
+  transition: opacity $s128-ease;
+}
+
+.s128-actions {
+  margin-top: 1.35rem;
+  &--row {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.35rem;
+  }
+}
+
+.s128-btn {
+  padding: 0.85rem 1.25rem;
+  font-family: $s128-sans;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  border-radius: $s128-radius;
+  cursor: pointer;
+  transition: background $s128-ease, transform $s128-ease, box-shadow $s128-ease;
+  &--primary {
+    width: 100%;
+    color: #fff;
+    background: $s128-accent;
+    &:hover:not(:disabled) {
+      background: darken($s128-accent, 6%);
+      box-shadow: 0 4px 14px $s128-accent-soft;
+      transform: translateY(-1px);
+    }
+  }
+  &--secondary {
+    flex: 1;
+    color: $s128-muted;
+    background: $s128-surface;
+    border: 1.5px solid $s128-border;
+    &:hover { background: rgba($s128-accent, 0.08); color: $s128-accent; }
+  }
+  &--primary:active:not(:disabled), &--secondary:active { transform: translateY(0); }
+  &:disabled, &--busy { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+}
+
+.s128-actions--row .s128-btn--primary {
+  flex: 1.2;
+}
+
+[x-cloak] {
+  display: none !important;
+}

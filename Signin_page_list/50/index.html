@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 50 · 감성 테크 비대칭 고정 플로우</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s50 signup-fixed" x-data="signupForm()">
+    <div class="s50-bg" aria-hidden="true">
+      <div class="s50-gradient"></div>
+      <div class="s50-blob s50-blob--1"></div>
+      <div class="s50-blob s50-blob--2"></div>
+      <div class="s50-blob s50-blob--3"></div>
+    </div>
+
+    <div class="s50-aside" x-ref="aside">
+      <div class="s50-aside-inner">
+        <p class="s50-tagline">당신의 이야기가 시작됩니다</p>
+        <h2 class="s50-hero">환영해요</h2>
+        <p class="s50-desc">필수 정보만 입력하면 곧바로 이용할 수 있어요.</p>
+        <div class="s50-decoration" aria-hidden="true">
+          <span class="s50-dot"></span>
+          <span class="s50-dot"></span>
+          <span class="s50-dot"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="s50-form-section" x-ref="formSection">
+      <div class="s50-form-inner">
+        <header class="s50-header">
+          <h1 class="s50-title">회원가입</h1>
+          <p class="s50-sub">이메일 · 이름 · 비밀번호</p>
+        </header>
+
+        <form
+          class="s50-form"
+          method="post"
+          action="#"
+          hx-post="#"
+          hx-swap="none"
+          @submit.prevent="handleSubmit"
+        >
+          <div
+            class="s50-field"
+            :class="{ 's50-field--focused': focusedField === 'email', 's50-field--invalid': errors.email }"
+          >
+            <label for="s50-email" class="s50-label">이메일</label>
+            <input
+              id="s50-email"
+              type="email"
+              name="email"
+              class="s50-input"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+              x-model="email"
+              @focus="focusedField = 'email'"
+              @blur="focusedField = null; validateEmail()"
+              :aria-invalid="errors.email ? 'true' : 'false'"
+            />
+            <span class="s50-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+          </div>
+
+          <div
+            class="s50-field"
+            :class="{ 's50-field--focused': focusedField === 'name', 's50-field--invalid': errors.name }"
+          >
+            <label for="s50-name" class="s50-label">이름</label>
+            <input
+              id="s50-name"
+              type="text"
+              name="name"
+              class="s50-input"
+              placeholder="홍길동"
+              autocomplete="name"
+              required
+              x-model="name"
+              @focus="focusedField = 'name'"
+              @blur="focusedField = null; validateName()"
+              :aria-invalid="errors.name ? 'true' : 'false'"
+            />
+            <span class="s50-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+          </div>
+
+          <div
+            class="s50-field"
+            :class="{ 's50-field--focused': focusedField === 'password', 's50-field--invalid': errors.password }"
+          >
+            <label for="s50-password" class="s50-label">비밀번호</label>
+            <div class="s50-pw-wrap">
+              <input
+                id="s50-password"
+                :type="showPassword ? 'text' : 'password'"
+                name="password"
+                class="s50-input"
+                placeholder="8자 이상"
+                autocomplete="new-password"
+                required
+                minlength="8"
+                x-model="password"
+                @focus="focusedField = 'password'"
+                @blur="focusedField = null; validatePassword()"
+                :aria-invalid="errors.password ? 'true' : 'false'"
+              />
+              <button
+                type="button"
+                class="s50-pw-btn"
+                :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'"
+                @click="showPassword = !showPassword"
+              >
+                <span x-text="showPassword ? '숨기기' : '보기'"></span>
+              </button>
+            </div>
+            <span class="s50-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+          </div>
+
+          <div
+            class="s50-field"
+            :class="{ 's50-field--focused': focusedField === 'passwordConfirm', 's50-field--invalid': errors.passwordConfirm }"
+          >
+            <label for="s50-passwordConfirm" class="s50-label">비밀번호 확인</label>
+            <input
+              id="s50-passwordConfirm"
+              :type="showPassword ? 'text' : 'password'"
+              name="password_confirm"
+              class="s50-input"
+              placeholder="다시 입력"
+              autocomplete="new-password"
+              required
+              minlength="8"
+              x-model="passwordConfirm"
+              @focus="focusedField = 'passwordConfirm'"
+              @blur="focusedField = null; validatePasswordConfirm()"
+              :aria-invalid="errors.passwordConfirm ? 'true' : 'false'"
+            />
+            <span class="s50-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+          </div>
+
+          <button
+            type="submit"
+            class="s50-submit"
+            :disabled="submitting"
+            :aria-busy="submitting"
+          >
+            <span class="s50-submit-text" x-text="submitting ? '가입 중…' : '가입하기'"></span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

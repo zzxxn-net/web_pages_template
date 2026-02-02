@@ -1,0 +1,202 @@
+// 시안 130: 네오 브루탈리즘 + 카드 분리형 레이아웃 + 포커스 이동 중심 UX
+$s130-sans: 'Noto Sans KR', system-ui, sans-serif;
+$s130-bg: #f5f0e8;
+$s130-surface: #fff;
+$s130-border: #1a1a1a;
+$s130-text: #1a1a1a;
+$s130-muted: #5c5c5c;
+$s130-accent: #1a1a1a;
+$s130-accent-soft: rgba(26, 26, 26, 0.08);
+$s130-valid: #2d6a2d;
+$s130-valid-soft: rgba(45, 106, 45, 0.12);
+$s130-error: #c22;
+$s130-error-soft: rgba(204, 34, 34, 0.1);
+$s130-radius: 0;
+$s130-shadow: 4px 4px 0 $s130-border;
+$s130-ease: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.s130 {
+  font-family: $s130-sans;
+  color: $s130-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-sizing: border-box;
+  background: $s130-bg;
+  width: 100%;
+}
+
+.s130-inner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.25rem, 5vw, 2rem);
+  box-sizing: border-box;
+}
+
+.s130-header {
+  text-align: center;
+  margin-bottom: clamp(1.25rem, 4vw, 1.75rem);
+}
+
+.s130-title {
+  font-size: clamp(1.5rem, 4vw, 1.9rem);
+  font-weight: 800;
+  color: $s130-text;
+  margin: 0;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.s130-form-wrap {
+  width: 100%;
+  max-width: 400px;
+}
+
+.s130-form {
+  width: 100%;
+}
+
+.s130-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.s130-card {
+  background: $s130-surface;
+  border: 3px solid $s130-border;
+  border-radius: $s130-radius;
+  box-shadow: $s130-shadow;
+  padding: 1rem 1.1rem;
+  position: relative;
+  transition: border-color $s130-ease, box-shadow $s130-ease, transform $s130-ease;
+
+  &--focused {
+    border-color: $s130-accent;
+    box-shadow: 6px 6px 0 $s130-border;
+    transform: translate(-1px, -1px);
+  }
+  &--valid {
+    border-color: $s130-valid;
+    box-shadow: 4px 4px 0 $s130-valid;
+  }
+  &--invalid {
+    border-color: $s130-error;
+    box-shadow: 4px 4px 0 $s130-error;
+  }
+}
+
+.s130-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: $s130-muted;
+  display: block;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: color $s130-ease;
+}
+
+.s130-card--focused .s130-label { color: $s130-text; }
+.s130-card--valid .s130-label { color: $s130-valid; }
+.s130-card--invalid .s130-label { color: $s130-error; }
+
+.s130-input {
+  width: 100%;
+  padding: 0.75rem 2.2rem 0.75rem 0;
+  font-family: $s130-sans;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: $s130-text;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  transition: color $s130-ease;
+  &::placeholder { color: $s130-muted; opacity: 0.8; }
+}
+
+.s130-status {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: $s130-valid;
+  pointer-events: none;
+}
+
+.s130-pw-wrap {
+  position: relative;
+  .s130-input { padding-right: 3rem; }
+}
+
+.s130-pw-btn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.2rem 0.4rem;
+  font-family: $s130-sans;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: $s130-muted;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color $s130-ease;
+  &:hover { color: $s130-text; }
+}
+
+.s130-error {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: $s130-error;
+  display: block;
+  margin-top: 0.35rem;
+}
+
+.s130-actions {
+  margin-top: 1.5rem;
+}
+
+.s130-btn {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  font-family: $s130-sans;
+  font-size: 0.95rem;
+  font-weight: 800;
+  border: 3px solid $s130-border;
+  border-radius: $s130-radius;
+  box-shadow: $s130-shadow;
+  cursor: pointer;
+  background: $s130-text;
+  color: $s130-surface;
+  transition: transform $s130-ease, box-shadow $s130-ease;
+  &:hover:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 $s130-border;
+  }
+  &:active:not(:disabled) { transform: translate(4px, 4px); box-shadow: none; }
+  &:disabled, &--busy { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
+}
+
+[x-cloak] {
+  display: none !important;
+}

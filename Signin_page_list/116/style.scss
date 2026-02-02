@@ -1,0 +1,220 @@
+// 시안 116: 사이버 미니멀 + 풀스크린 몰입형 + 포커스 이동 중심 UX
+$s116-sans: 'DM Sans', system-ui, sans-serif;
+$s116-bg: #f4f6f8;
+$s116-surface: #fff;
+$s116-text: #1e293b;
+$s116-muted: #64748b;
+$s116-accent: #06b6d4;
+$s116-accent-soft: rgba(6, 182, 212, 0.12);
+$s116-valid: #10b981;
+$s116-valid-soft: rgba(16, 185, 129, 0.08);
+$s116-error: #ef4444;
+$s116-error-soft: rgba(239, 68, 68, 0.08);
+$s116-radius: 10px;
+$s116-ease: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s116 {
+  font-family: $s116-sans;
+  color: $s116-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  position: relative;
+  box-sizing: border-box;
+  background: $s116-bg;
+}
+
+.s116-inner {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.25rem, 5vw, 2rem);
+  box-sizing: border-box;
+}
+
+.s116-header {
+  text-align: center;
+  margin-bottom: clamp(1.25rem, 4vw, 1.75rem);
+}
+
+.s116-title {
+  font-size: clamp(1.4rem, 4vw, 1.75rem);
+  font-weight: 600;
+  color: $s116-text;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.s116-tagline {
+  font-size: clamp(0.75rem, 2vw, 0.8rem);
+  font-weight: 400;
+  color: $s116-muted;
+  margin: 0.4rem 0 0;
+  line-height: 1.5;
+}
+
+.s116-form-wrap {
+  width: 100%;
+  max-width: 380px;
+}
+
+.s116-form {
+  width: 100%;
+}
+
+.s116-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.s116-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  position: relative;
+  transition: opacity $s116-ease;
+
+  &:focus-within .s116-input,
+  &.s116-field--focused .s116-input {
+    border-color: $s116-accent;
+    box-shadow: 0 0 0 3px $s116-accent-soft;
+  }
+
+  &--valid .s116-input {
+    border-color: $s116-valid;
+    background: $s116-valid-soft;
+  }
+  &--valid .s116-label {
+    color: $s116-valid;
+  }
+
+  &--invalid .s116-input {
+    border-color: $s116-error;
+    background: $s116-error-soft;
+  }
+  &--invalid .s116-label {
+    color: $s116-error;
+  }
+}
+
+.s116-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: $s116-muted;
+  transition: color $s116-ease;
+}
+
+.s116-input {
+  width: 100%;
+  padding: 0.7rem 0.875rem;
+  padding-right: 3rem;
+  font-family: $s116-sans;
+  font-size: 0.9375rem;
+  color: $s116-text;
+  background: $s116-surface;
+  border: 1px solid rgba(100, 116, 139, 0.2);
+  border-radius: $s116-radius;
+  outline: none;
+  transition: border-color $s116-ease, box-shadow $s116-ease, background $s116-ease;
+
+  &::placeholder {
+    color: $s116-muted;
+    opacity: 0.8;
+  }
+}
+
+.s116-status {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: $s116-valid;
+  pointer-events: none;
+}
+
+.s116-pw-wrap {
+  position: relative;
+  .s116-input { padding-right: 3rem; }
+}
+
+.s116-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.25rem 0.4rem;
+  font-size: 0.7rem;
+  font-family: $s116-sans;
+  font-weight: 500;
+  color: $s116-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background $s116-ease;
+  &:hover {
+    background: $s116-accent-soft;
+  }
+}
+
+.s116-error {
+  font-size: 0.75rem;
+  color: $s116-error;
+  display: block;
+}
+
+.s116-actions {
+  margin-top: 1.5rem;
+}
+
+.s116-btn {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-family: $s116-sans;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #fff;
+  background: $s116-accent;
+  border: none;
+  border-radius: $s116-radius;
+  cursor: pointer;
+  transition: opacity $s116-ease, transform 0.2s ease;
+  &:hover:not(:disabled) {
+    opacity: 0.92;
+    transform: translateY(-1px);
+  }
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+  &:disabled,
+  &--busy {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

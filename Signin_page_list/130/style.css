@@ -1,0 +1,214 @@
+/* 시안 130: 네오 브루탈리즘 + 카드 분리형 레이아웃 + 포커스 이동 중심 UX */
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.s130 {
+  font-family: "Noto Sans KR", system-ui, sans-serif;
+  color: #1a1a1a;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-sizing: border-box;
+  background: #f5f0e8;
+  width: 100%;
+}
+
+.s130-inner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.25rem, 5vw, 2rem);
+  box-sizing: border-box;
+}
+
+.s130-header {
+  text-align: center;
+  margin-bottom: clamp(1.25rem, 4vw, 1.75rem);
+}
+
+.s130-title {
+  font-size: clamp(1.5rem, 4vw, 1.9rem);
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.s130-form-wrap {
+  width: 100%;
+  max-width: 400px;
+}
+
+.s130-form {
+  width: 100%;
+}
+
+.s130-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.s130-card {
+  background: #fff;
+  border: 3px solid #1a1a1a;
+  border-radius: 0;
+  box-shadow: 4px 4px 0 #1a1a1a;
+  padding: 1rem 1.1rem;
+  position: relative;
+  transition: border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s130-card--focused {
+  border-color: #1a1a1a;
+  box-shadow: 6px 6px 0 #1a1a1a;
+  transform: translate(-1px, -1px);
+}
+
+.s130-card--valid {
+  border-color: #2d6a2d;
+  box-shadow: 4px 4px 0 #2d6a2d;
+}
+
+.s130-card--invalid {
+  border-color: #c22;
+  box-shadow: 4px 4px 0 #c22;
+}
+
+.s130-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #5c5c5c;
+  display: block;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s130-card--focused .s130-label {
+  color: #1a1a1a;
+}
+
+.s130-card--valid .s130-label {
+  color: #2d6a2d;
+}
+
+.s130-card--invalid .s130-label {
+  color: #c22;
+}
+
+.s130-input {
+  width: 100%;
+  padding: 0.75rem 2.2rem 0.75rem 0;
+  font-family: "Noto Sans KR", system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s130-input::placeholder {
+  color: #5c5c5c;
+  opacity: 0.8;
+}
+
+.s130-status {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #2d6a2d;
+  pointer-events: none;
+}
+
+.s130-pw-wrap .s130-input {
+  padding-right: 3rem;
+}
+
+.s130-pw-btn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.2rem 0.4rem;
+  font-family: "Noto Sans KR", system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #5c5c5c;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s130-pw-btn:hover {
+  color: #1a1a1a;
+}
+
+.s130-error {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #c22;
+  display: block;
+  margin-top: 0.35rem;
+}
+
+.s130-actions {
+  margin-top: 1.5rem;
+}
+
+.s130-btn {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  font-family: "Noto Sans KR", system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  border: 3px solid #1a1a1a;
+  border-radius: 0;
+  box-shadow: 4px 4px 0 #1a1a1a;
+  cursor: pointer;
+  background: #1a1a1a;
+  color: #fff;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s130-btn:hover:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #1a1a1a;
+}
+
+.s130-btn:active:not(:disabled) {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+.s130-btn:disabled,
+.s130-btn.s130-btn--busy {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+[x-cloak] {
+  display: none !important;
+}

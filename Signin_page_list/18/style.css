@@ -1,0 +1,235 @@
+/* ============================================
+   회원가입 시안 18 - 카드 분리형 레이아웃 + 감성 테크
+   GSAP 기반 부드러운 전환, 입력 반응형 애니메이션
+   ============================================ */
+
+.signup-emotion.signup-cards {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: linear-gradient(160deg, #fef3f2 0%, #fce7f3 35%, #ede9fe 100%);
+  box-sizing: border-box;
+}
+
+.emotion-wrap {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.emotion-card {
+  width: 100%;
+  padding: 1.5rem 1.75rem;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(251, 207, 232, 0.6);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(12px);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.emotion-card--header {
+  text-align: center;
+}
+
+.emotion-card--form {
+  padding: 1.75rem 1.75rem 1.5rem;
+}
+
+@media (max-width: 480px) {
+  .emotion-card {
+    padding: 1.25rem 1.5rem;
+    border-radius: 14px;
+  }
+
+  .emotion-card--form {
+    padding: 1.5rem 1.5rem 1.25rem;
+  }
+}
+
+.emotion-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #1f2937;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 480px) {
+  .emotion-title {
+    font-size: 1.35rem;
+  }
+}
+
+.emotion-desc {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.emotion-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.emotion-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  transition: transform 0.25s ease;
+}
+
+.emotion-field.emotion-field--focused {
+  transform: scale(1.01);
+}
+
+.emotion-field.emotion-field--focused .emotion-input,
+.emotion-field.emotion-field--focused .emotion-pw-wrap {
+  border-color: rgba(168, 85, 247, 0.5);
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.12);
+}
+
+.emotion-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #1f2937;
+}
+
+.emotion-input {
+  width: 100%;
+  padding: 0.6875rem 1rem;
+  font-size: 1rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.5;
+  color: #1f2937;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(251, 207, 232, 0.6);
+  border-radius: 10px;
+  box-sizing: border-box;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.emotion-input::placeholder {
+  color: #9ca3af;
+}
+
+.emotion-input:focus {
+  outline: none;
+  border-color: rgba(168, 85, 247, 0.6);
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.12);
+}
+
+.emotion-input[aria-invalid="true"] {
+  border-color: rgba(225, 29, 72, 0.5);
+  box-shadow: 0 0 0 2px rgba(225, 29, 72, 0.12);
+}
+
+.emotion-pw-wrap {
+  display: flex;
+  border: 1px solid rgba(251, 207, 232, 0.6);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.emotion-pw-wrap:focus-within {
+  border-color: rgba(168, 85, 247, 0.6);
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.12);
+}
+
+.emotion-pw-wrap .emotion-input {
+  border: none;
+  flex: 1;
+}
+
+.emotion-pw-wrap .emotion-input:focus {
+  box-shadow: none;
+}
+
+.emotion-pw-wrap .emotion-pw-btn {
+  padding: 0 1rem;
+  font-size: 0.8125rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #6b7280;
+  background: transparent;
+  border: none;
+  border-left: 1px solid rgba(251, 207, 232, 0.6);
+  cursor: pointer;
+}
+
+.emotion-pw-wrap .emotion-pw-btn:hover {
+  color: #a855f7;
+}
+
+.emotion-error {
+  font-size: 0.8125rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #e11d48;
+}
+
+.emotion-actions {
+  margin-top: 0.25rem;
+}
+
+.emotion-btn {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #fff;
+  background: #a855f7;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.emotion-btn:hover:not(:disabled) {
+  background: #9333ea;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.35);
+}
+
+.emotion-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.emotion-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.emotion-footer {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(251, 207, 232, 0.6);
+  text-align: center;
+}
+
+.emotion-link {
+  font-size: 0.875rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #a855f7;
+  text-decoration: none;
+}
+
+.emotion-link:hover {
+  color: #9333ea;
+  text-decoration: underline;
+}
+
+[x-cloak] {
+  display: none !important;
+}

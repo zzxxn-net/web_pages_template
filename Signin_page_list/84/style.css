@@ -1,0 +1,203 @@
+/* 시안 84: 네오 브루탈리즘 + 카드 분리형 레이아웃 + 상태 변화 강조 */
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s84 {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  color: #1a1a1a;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 2rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s84-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #f5f5f0;
+  pointer-events: none;
+}
+
+.s84-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.s84-header {
+  margin-bottom: 0.25rem;
+}
+
+.s84-title {
+  font-size: clamp(1.75rem, 4vw, 2rem);
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 0.15rem;
+  letter-spacing: -0.03em;
+}
+
+.s84-desc {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
+  color: #666;
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+.s84-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.s84-card {
+  position: relative;
+  padding: 0.85rem 1rem;
+  background: #fff;
+  border: 3px solid #1a1a1a;
+  border-radius: 0;
+  box-shadow: 4px 4px 0 #1a1a1a;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.s84-card--focused {
+  border-color: #ff3366;
+  box-shadow: 4px 4px 0 #ff3366;
+  outline: none;
+}
+
+.s84-card--invalid {
+  border-color: #dc2626;
+  box-shadow: 4px 4px 0 #dc2626;
+}
+
+.s84-label {
+  display: block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: #666;
+  margin-bottom: 0.35rem;
+}
+
+.s84-input {
+  width: 100%;
+  padding: 0.5rem 0;
+  padding-right: 3.5rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.9375rem;
+  color: #1a1a1a;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.s84-input::placeholder {
+  color: #999;
+}
+
+.s84-pw-wrap .s84-input {
+  padding-right: 3.5rem;
+}
+
+.s84-pw-wrap {
+  position: relative;
+}
+
+.s84-pw-btn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.6875rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 500;
+  color: #1a1a1a;
+  background: transparent;
+  border: 2px solid #1a1a1a;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.s84-pw-btn:hover {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.s84-state {
+  display: block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.6875rem;
+  margin-top: 0.3rem;
+}
+
+.s84-state--error {
+  color: #dc2626;
+}
+
+.s84-state--ok {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  margin-top: 0;
+  color: #22c55e;
+  font-weight: 600;
+  transform: translateY(-50%);
+}
+
+.s84-card:has(.s84-state--error:not([x-cloak])) .s84-state--ok {
+  display: none !important;
+}
+
+.s84-actions {
+  margin-top: 0.5rem;
+}
+
+.s84-btn {
+  width: 100%;
+  padding: 0.85rem 1.25rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #fff;
+  background: #1a1a1a;
+  border: 3px solid #1a1a1a;
+  border-radius: 0;
+  box-shadow: 4px 4px 0 #1a1a1a;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.s84-btn:hover:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #1a1a1a;
+}
+
+.s84-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+[x-cloak] {
+  display: none !important;
+}

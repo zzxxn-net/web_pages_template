@@ -1,0 +1,200 @@
+// 시안 125: 다크 아카이브 + 풀스크린 몰입형 + GSAP 기반 부드러운 전환
+$s125-serif: 'IBM Plex Serif', serif;
+$s125-sans: 'IBM Plex Sans', 'Noto Sans KR', system-ui, sans-serif;
+$s125-bg: #0d0e12;
+$s125-surface: #16181e;
+$s125-border: rgba(200, 195, 180, 0.12);
+$s125-text: #e4e2dc;
+$s125-muted: #8a8680;
+$s125-accent: #c4a35a;
+$s125-accent-soft: rgba(196, 163, 90, 0.15);
+$s125-valid: #7a9b6e;
+$s125-error: #c45c5c;
+$s125-ease: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+$s125-radius: 10px;
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.s125 {
+  font-family: $s125-sans;
+  color: $s125-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-sizing: border-box;
+  background: $s125-bg;
+}
+
+.s125-inner {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 6vw, 2.5rem);
+  box-sizing: border-box;
+}
+
+.s125-header {
+  text-align: center;
+  margin-bottom: clamp(1.5rem, 5vw, 2rem);
+}
+
+.s125-title {
+  font-family: $s125-serif;
+  font-size: clamp(1.6rem, 4.5vw, 2rem);
+  font-weight: 600;
+  color: $s125-text;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  font-style: italic;
+}
+
+.s125-tagline {
+  font-size: clamp(0.8rem, 2vw, 0.88rem);
+  font-weight: 400;
+  color: $s125-muted;
+  margin: 0.4rem 0 0;
+  line-height: 1.5;
+}
+
+.s125-form-wrap {
+  width: 100%;
+  max-width: 400px;
+}
+
+.s125-form {
+  width: 100%;
+}
+
+.s125-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.s125-field {
+  position: relative;
+  transition: border-color $s125-ease, box-shadow $s125-ease;
+
+  &--focused .s125-input {
+    border-color: rgba($s125-accent, 0.5);
+    box-shadow: 0 0 0 2px $s125-accent-soft;
+  }
+
+  &--valid .s125-input { border-color: rgba($s125-valid, 0.4); }
+  &--valid .s125-label { color: $s125-valid; }
+
+  &--invalid .s125-input {
+    border-color: $s125-error;
+    box-shadow: 0 0 0 2px rgba($s125-error, 0.15);
+  }
+  &--invalid .s125-label { color: $s125-error; }
+}
+
+.s125-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: $s125-muted;
+  display: block;
+  margin-bottom: 0.4rem;
+  transition: color $s125-ease;
+}
+
+.s125-input {
+  width: 100%;
+  padding: 0.85rem 2.5rem 0.85rem 1rem;
+  font-family: $s125-sans;
+  font-size: 0.95rem;
+  color: $s125-text;
+  background: $s125-surface;
+  border: 1px solid $s125-border;
+  border-radius: $s125-radius;
+  outline: none;
+  transition: border-color $s125-ease, box-shadow $s125-ease;
+  &::placeholder { color: $s125-muted; opacity: 0.7; }
+}
+
+.s125-status {
+  position: absolute;
+  right: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: $s125-valid;
+  pointer-events: none;
+}
+
+.s125-pw-wrap {
+  position: relative;
+  .s125-input { padding-right: 3.2rem; }
+}
+
+.s125-pw-btn {
+  position: absolute;
+  right: 0.4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.25rem 0.5rem;
+  font-family: $s125-sans;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: $s125-muted;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color $s125-ease;
+  &:hover { color: $s125-accent; }
+}
+
+.s125-error {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: $s125-error;
+  display: block;
+  margin-top: 0.35rem;
+}
+
+.s125-actions {
+  margin-top: 1.5rem;
+}
+
+.s125-btn {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  font-family: $s125-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: $s125-bg;
+  background: $s125-accent;
+  border: none;
+  border-radius: $s125-radius;
+  cursor: pointer;
+  transition: background $s125-ease, transform $s125-ease, box-shadow $s125-ease;
+  font-style: italic;
+  &:hover:not(:disabled) {
+    background: lighten($s125-accent, 8%);
+    box-shadow: 0 6px 20px $s125-accent-soft;
+    transform: translateY(-1px);
+  }
+  &:active:not(:disabled) { transform: translateY(0); }
+  &:disabled, &--busy { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+}
+
+[x-cloak] {
+  display: none !important;
+}

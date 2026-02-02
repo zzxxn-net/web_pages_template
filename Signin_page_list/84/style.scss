@@ -1,0 +1,218 @@
+// 시안 84: 네오 브루탈리즘 + 카드 분리형 레이아웃 + 상태 변화 강조
+$s84-font: 'Space Grotesk', system-ui, sans-serif;
+$s84-mono: 'IBM Plex Mono', monospace;
+$s84-bg: #f5f5f0;
+$s84-card-bg: #fff;
+$s84-border: #1a1a1a;
+$s84-border-thick: 3px;
+$s84-text: #1a1a1a;
+$s84-muted: #666;
+$s84-accent: #1a1a1a;
+$s84-focus: #ff3366;
+$s84-ok: #22c55e;
+$s84-error: #dc2626;
+$s84-shadow: 4px 4px 0 $s84-border;
+$s84-ease: 0.2s ease;
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s84 {
+  font-family: $s84-font;
+  color: $s84-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 2rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s84-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: $s84-bg;
+  pointer-events: none;
+}
+
+.s84-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.s84-header {
+  margin-bottom: 0.25rem;
+}
+
+.s84-title {
+  font-size: clamp(1.75rem, 4vw, 2rem);
+  font-weight: 700;
+  color: $s84-text;
+  margin: 0 0 0.15rem;
+  letter-spacing: -0.03em;
+}
+
+.s84-desc {
+  font-family: $s84-mono;
+  font-size: 0.75rem;
+  color: $s84-muted;
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+.s84-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+// 카드 분리형: 필드마다 하나의 카드, 상태 변화 강조
+.s84-card {
+  position: relative;
+  padding: 0.85rem 1rem;
+  background: $s84-card-bg;
+  border: $s84-border-thick solid $s84-border;
+  border-radius: 0;
+  box-shadow: $s84-shadow;
+  transition: border-color $s84-ease, box-shadow $s84-ease, transform $s84-ease;
+
+  &--focused {
+    border-color: $s84-focus;
+    box-shadow: 4px 4px 0 $s84-focus;
+    outline: none;
+  }
+
+  &--invalid {
+    border-color: $s84-error;
+    box-shadow: 4px 4px 0 $s84-error;
+  }
+}
+
+.s84-label {
+  display: block;
+  font-family: $s84-mono;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: $s84-muted;
+  margin-bottom: 0.35rem;
+}
+
+.s84-input {
+  width: 100%;
+  padding: 0.5rem 0;
+  padding-right: 3.5rem;
+  font-family: $s84-mono;
+  font-size: 0.9375rem;
+  color: $s84-text;
+  background: transparent;
+  border: none;
+  outline: none;
+
+  &::placeholder {
+    color: #999;
+  }
+}
+
+.s84-pw-wrap .s84-input {
+  padding-right: 3.5rem;
+}
+
+.s84-pw-wrap {
+  position: relative;
+}
+
+.s84-pw-btn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.6875rem;
+  font-family: $s84-mono;
+  font-weight: 500;
+  color: $s84-accent;
+  background: transparent;
+  border: 2px solid $s84-border;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background $s84-ease, color $s84-ease;
+
+  &:hover {
+    background: $s84-border;
+    color: $s84-card-bg;
+  }
+}
+
+.s84-state {
+  display: block;
+  font-family: $s84-mono;
+  font-size: 0.6875rem;
+  margin-top: 0.3rem;
+
+  &--error {
+    color: $s84-error;
+  }
+
+  &--ok {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    margin-top: 0;
+    color: $s84-ok;
+    font-weight: 600;
+  }
+}
+
+.s84-card:has(.s84-state--error:not([x-cloak])) .s84-state--ok {
+  display: none !important;
+}
+
+.s84-actions {
+  margin-top: 0.5rem;
+}
+
+.s84-btn {
+  width: 100%;
+  padding: 0.85rem 1.25rem;
+  font-family: $s84-mono;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: $s84-card-bg;
+  background: $s84-border;
+  border: $s84-border-thick solid $s84-border;
+  border-radius: 0;
+  box-shadow: 4px 4px 0 $s84-border;
+  cursor: pointer;
+  transition: transform $s84-ease, box-shadow $s84-ease;
+
+  &:hover:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 $s84-border;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

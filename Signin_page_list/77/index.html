@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 77 - 다크 아카이브 비대칭 포커스 이동</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s77 signup-fixed" x-data="signupForm77()">
+    <div class="s77-bg" aria-hidden="true"><div class="s77-grid" aria-hidden="true"></div></div>
+    <div class="s77-inner" x-ref="inner">
+      <div class="s77-form-col">
+        <header class="s77-header">
+          <h1 class="s77-title">REGISTER</h1>
+          <p class="s77-desc">아카이브에 접근하려면 가입하세요.</p>
+        </header>
+        <form class="s77-form" method="post" action="#" hx-post="#" hx-swap="none" @submit.prevent="handleSubmit">
+          <div class="s77-field" :class="{ 's77-field--focused': focusedField === 'email', 's77-field--invalid': errors.email }">
+            <label for="s77-email" class="s77-label">01 · EMAIL</label>
+            <input id="s77-email" type="email" name="email" class="s77-input" placeholder="you@example.com" autocomplete="email" required x-model="email" x-ref="inputEmail" @focus="focusedField = 'email'" @blur="focusedField = null; validateEmail()" @keydown.enter.prevent="focusNext('email')" :aria-invalid="errors.email ? 'true' : 'false'" />
+            <span class="s77-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+          </div>
+          <div class="s77-field" :class="{ 's77-field--focused': focusedField === 'name', 's77-field--invalid': errors.name }">
+            <label for="s77-name" class="s77-label">02 · NAME</label>
+            <input id="s77-name" type="text" name="name" class="s77-input" placeholder="홍길동" autocomplete="name" required x-model="name" x-ref="inputName" @focus="focusedField = 'name'" @blur="focusedField = null; validateName()" @keydown.enter.prevent="focusNext('name')" :aria-invalid="errors.name ? 'true' : 'false'" />
+            <span class="s77-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+          </div>
+          <div class="s77-field" :class="{ 's77-field--focused': focusedField === 'password', 's77-field--invalid': errors.password }">
+            <label for="s77-password" class="s77-label">03 · PASSWORD</label>
+            <div class="s77-pw-wrap">
+              <input id="s77-password" :type="showPassword ? 'text' : 'password'" name="password" class="s77-input" placeholder="8자 이상" autocomplete="new-password" required minlength="8" x-model="password" x-ref="inputPassword" @focus="focusedField = 'password'" @blur="focusedField = null; validatePassword()" @keydown.enter.prevent="focusNext('password')" :aria-invalid="errors.password ? 'true' : 'false'" />
+              <button type="button" class="s77-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword"><span x-text="showPassword ? 'HIDE' : 'SHOW'"></span></button>
+            </div>
+            <span class="s77-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+          </div>
+          <div class="s77-field" :class="{ 's77-field--focused': focusedField === 'passwordConfirm', 's77-field--invalid': errors.passwordConfirm }">
+            <label for="s77-passwordConfirm" class="s77-label">04 · CONFIRM</label>
+            <input id="s77-passwordConfirm" :type="showPassword ? 'text' : 'password'" name="password_confirm" class="s77-input" placeholder="다시 입력" autocomplete="new-password" required minlength="8" x-model="passwordConfirm" x-ref="inputPasswordConfirm" @focus="focusedField = 'passwordConfirm'" @blur="focusedField = null; validatePasswordConfirm()" @keydown.enter.prevent="focusNext('passwordConfirm')" :aria-invalid="errors.passwordConfirm ? 'true' : 'false'" />
+            <span class="s77-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+          </div>
+          <div class="s77-actions">
+            <button type="submit" class="s77-submit" :disabled="submitting" :aria-busy="submitting"><span class="s77-submit-text" x-text="submitting ? '…' : 'SUBMIT'"></span></button>
+          </div>
+        </form>
+      </div>
+      <aside class="s77-visual" aria-hidden="true">
+        <div class="s77-visual-content">
+          <span class="s77-visual-label">ARCHIVE</span>
+          <p class="s77-visual-text">포커스를 이동하며 순서대로 입력하세요. Enter로 다음 필드로 이동합니다.</p>
+        </div>
+      </aside>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

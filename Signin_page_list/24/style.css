@@ -1,0 +1,277 @@
+/* 회원가입 시안 24 - 단계 분할형 + 감성 테크, 스크롤 없는 고정 플로우 */
+.signup-emotion-step.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: linear-gradient(160deg, #f8f4f0 0%, #efe8e0 50%, #e8dfd5 100%);
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+.emostep-wrap {
+  width: 100%;
+  max-width: 420px;
+  margin: auto;
+}
+
+.emostep-card {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(120, 80, 60, 0.08), 0 2px 8px rgba(120, 80, 60, 0.04);
+  padding: 2rem 1.75rem;
+  border: 1px solid rgba(139, 109, 89, 0.2);
+  backdrop-filter: blur(12px);
+}
+
+@media (max-width: 480px) {
+  .emostep-card {
+    padding: 1.5rem 1.25rem;
+    border-radius: 14px;
+  }
+}
+
+.emostep-header {
+  margin-bottom: 1.75rem;
+  text-align: center;
+}
+
+.emostep-title {
+  margin: 0 0 0.35rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #2c2419;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 480px) {
+  .emostep-title {
+    font-size: 1.35rem;
+  }
+}
+
+.emostep-desc {
+  margin: 0 0 1.25rem;
+  font-size: 0.875rem;
+  color: #6b5d52;
+  font-weight: 400;
+}
+
+.emostep-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.emostep-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #6b5d52;
+  background: rgba(139, 109, 89, 0.1);
+  border: 1px solid rgba(139, 109, 89, 0.2);
+  transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+.emostep-dot--active {
+  color: #fff;
+  background: #c17f59;
+  border-color: #c17f59;
+}
+
+.emostep-line {
+  width: 32px;
+  height: 2px;
+  background: rgba(139, 109, 89, 0.2);
+  border-radius: 1px;
+  transition: background 0.25s ease;
+}
+
+.emostep-line--filled {
+  background: #c17f59;
+}
+
+.emostep-form {
+  position: relative;
+  min-height: 220px;
+}
+
+.emostep-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+}
+
+.emostep-panel-title {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2c2419;
+}
+
+.emostep-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.emostep-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #2c2419;
+}
+
+.emostep-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  font-family: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #2c2419;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(139, 109, 89, 0.2);
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.emostep-input::placeholder {
+  color: #6b5d52;
+  opacity: 0.8;
+}
+
+.emostep-input:focus {
+  border-color: #c17f59;
+  box-shadow: 0 0 0 3px rgba(193, 127, 89, 0.15);
+}
+
+.emostep-input[aria-invalid="true"] {
+  border-color: #c45c4a;
+  box-shadow: 0 0 0 2px rgba(196, 92, 74, 0.12);
+}
+
+.emostep-pw-wrap {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border: 1px solid rgba(139, 109, 89, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.emostep-pw-wrap:focus-within {
+  border-color: #c17f59;
+  box-shadow: 0 0 0 3px rgba(193, 127, 89, 0.15);
+}
+
+.emostep-pw-wrap .emostep-input {
+  border: none;
+  box-shadow: none;
+  flex: 1;
+  min-width: 0;
+}
+
+.emostep-pw-wrap .emostep-input:focus {
+  box-shadow: none;
+}
+
+.emostep-pw-btn {
+  padding: 0 0.875rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #c17f59;
+  background: transparent;
+  border: none;
+  border-left: 1px solid rgba(139, 109, 89, 0.2);
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.emostep-pw-btn:hover {
+  color: #a86b48;
+  background: rgba(193, 127, 89, 0.15);
+}
+
+.emostep-error {
+  font-size: 0.75rem;
+  color: #c45c4a;
+  min-height: 1.25rem;
+}
+
+.emostep-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  padding-top: 0.5rem;
+}
+
+.emostep-btn {
+  padding: 0.65rem 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+
+.emostep-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.emostep-btn--primary {
+  color: #fff;
+  background: #c17f59;
+}
+
+.emostep-btn--primary:hover:not(:disabled) {
+  background: #a86b48;
+}
+
+.emostep-btn--secondary {
+  color: #6b5d52;
+  background: rgba(139, 109, 89, 0.1);
+  border: 1px solid rgba(139, 109, 89, 0.2);
+}
+
+.emostep-btn--secondary:hover:not(:disabled) {
+  background: rgba(139, 109, 89, 0.18);
+  color: #2c2419;
+}
+
+.emostep-footer {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(139, 109, 89, 0.2);
+  text-align: center;
+}
+
+.emostep-link {
+  font-size: 0.875rem;
+  color: #c17f59;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.emostep-link:hover {
+  color: #a86b48;
+  text-decoration: underline;
+}
+
+[x-cloak] {
+  display: none !important;
+}

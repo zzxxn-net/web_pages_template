@@ -1,0 +1,252 @@
+// ============================================
+// 회원가입 시안 29 - 카드 분리형 레이아웃 + 사이버 미니멀
+// 스크롤 없는 고정 플로우
+// ============================================
+
+$font-mono: "JetBrains Mono", "SF Mono", Consolas, monospace;
+$font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+$bg: #0c0e10;
+$card-bg: #161b22;
+$border: #21262d;
+$primary: #58a6ff;
+$primary-soft: rgba(88, 166, 255, 0.15);
+$text: #e6edf3;
+$text-muted: #8b949e;
+$error: #f85149;
+$error-soft: rgba(248, 81, 73, 0.15);
+$max-width: 400px;
+$break: 480px;
+$radius: 6px;
+
+.signup-cyber-cards.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: $bg;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.cmcard-fixed {
+  width: 100%;
+  max-width: $max-width;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: calc(100dvh - 32px);
+  overflow: hidden;
+}
+
+.cmcard-card {
+  width: 100%;
+  padding: 1.25rem 1.5rem;
+  background: $card-bg;
+  border: 1px solid $border;
+  border-radius: $radius;
+  box-sizing: border-box;
+  flex-shrink: 0;
+
+  &--head {
+    text-align: center;
+    padding: 1rem 1.5rem;
+  }
+
+  &--form {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem 1.5rem 1rem;
+  }
+
+  @media (max-width: $break) {
+    padding: 1rem 1.25rem;
+
+    &--head {
+      padding: 0.875rem 1.25rem;
+    }
+
+    &--form {
+      padding: 1rem 1.25rem 0.875rem;
+    }
+  }
+}
+
+.cmcard-title {
+  margin: 0 0 0.35rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+  font-family: $font-mono;
+  color: $text;
+  letter-spacing: -0.02em;
+
+  @media (max-width: $break) {
+    font-size: 1.2rem;
+  }
+}
+
+.cmcard-desc {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-family: $font-mono;
+  color: $text-muted;
+  letter-spacing: 0.02em;
+}
+
+.cmcard-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+  min-height: 0;
+}
+
+.cmcard-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex-shrink: 0;
+}
+
+.cmcard-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-family: $font-mono;
+  color: $text-muted;
+  letter-spacing: 0.04em;
+}
+
+.cmcard-input {
+  width: 100%;
+  padding: 0.65rem 0.875rem;
+  font-size: 0.9375rem;
+  font-family: $font-sans;
+  color: $text;
+  background: $bg;
+  border: 1px solid $border;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &::placeholder {
+    color: $text-muted;
+    opacity: 0.8;
+  }
+
+  &:focus {
+    border-color: $primary;
+    box-shadow: 0 0 0 2px $primary-soft;
+  }
+
+  &[aria-invalid="true"] {
+    border-color: $error;
+    box-shadow: 0 0 0 2px $error-soft;
+  }
+}
+
+.cmcard-pw-wrap {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border: 1px solid $border;
+  border-radius: 4px;
+  background: $bg;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:focus-within {
+    border-color: $primary;
+    box-shadow: 0 0 0 2px $primary-soft;
+  }
+
+  .cmcard-input {
+    border: none;
+    box-shadow: none;
+    flex: 1;
+    min-width: 0;
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+.cmcard-pw-btn {
+  padding: 0 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-family: $font-mono;
+  color: $primary;
+  background: transparent;
+  border: none;
+  border-left: 1px solid $border;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease;
+
+  &:hover {
+    color: $text;
+    background: $primary-soft;
+  }
+}
+
+.cmcard-error {
+  font-size: 0.6875rem;
+  font-family: $font-mono;
+  color: $error;
+  min-height: 1.125rem;
+}
+
+.cmcard-nav {
+  margin-top: 0.25rem;
+  flex-shrink: 0;
+}
+
+.cmcard-btn {
+  width: 100%;
+  padding: 0.65rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: $font-mono;
+  color: $bg;
+  background: $primary;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease, opacity 0.2s ease;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &--primary:hover:not(:disabled) {
+    background: lighten($primary, 6%);
+  }
+}
+
+.cmcard-footer {
+  flex-shrink: 0;
+  padding: 0.5rem 0;
+  text-align: center;
+}
+
+.cmcard-link {
+  font-size: 0.8125rem;
+  font-family: $font-sans;
+  color: $primary;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $text;
+    text-decoration: underline;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

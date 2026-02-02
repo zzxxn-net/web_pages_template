@@ -1,0 +1,305 @@
+// 시안 83: 감성 테크 + 비대칭 레이아웃 + 포커스 이동 중심 UX
+$s83-font: 'Outfit', system-ui, sans-serif;
+$s83-body: 'DM Sans', system-ui, sans-serif;
+$s83-bg-start: #1a1a2e;
+$s83-bg-mid: #16213e;
+$s83-bg-end: #0f3460;
+$s83-glow-1: rgba(233, 69, 96, 0.12);
+$s83-glow-2: rgba(78, 205, 196, 0.1);
+$s83-card: rgba(255, 255, 255, 0.06);
+$s83-card-border: rgba(255, 255, 255, 0.08);
+$s83-text: #f0f0f5;
+$s83-text-muted: #a0a0b0;
+$s83-accent: #e94560;
+$s83-accent-soft: rgba(233, 69, 96, 0.25);
+$s83-accent-teal: #4ecdc4;
+$s83-error: #ff6b6b;
+$s83-radius: 16px;
+$s83-radius-sm: 10px;
+$s83-ease: 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+$s83-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s83 {
+  font-family: $s83-font;
+  color: $s83-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 2.5rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s83-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, $s83-bg-start 0%, $s83-bg-mid 50%, $s83-bg-end 100%);
+}
+
+.s83-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.8;
+  pointer-events: none;
+
+  &--1 {
+    width: min(60vw, 400px);
+    height: min(60vw, 400px);
+    background: $s83-glow-1;
+    top: -10%;
+    left: -15%;
+  }
+
+  &--2 {
+    width: min(50vw, 320px);
+    height: min(50vw, 320px);
+    background: $s83-glow-2;
+    bottom: -5%;
+    right: -10%;
+  }
+}
+
+.s83-layout {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 920px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 6vw, 4rem);
+  align-items: center;
+  min-height: min(90vh, 520px);
+
+  @media (max-width: 720px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    min-height: auto;
+  }
+}
+
+// 비대칭: 좌측 브랜드 영역 (감성 테크)
+.s83-brand {
+  padding: clamp(0.5rem, 2vw, 1rem) 0;
+
+  @media (max-width: 720px) {
+    text-align: center;
+    order: 0;
+  }
+}
+
+.s83-brand-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.s83-title {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 600;
+  color: $s83-text;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.s83-tagline {
+  font-family: $s83-body;
+  font-size: clamp(0.9375rem, 2.2vw, 1.0625rem);
+  font-weight: 400;
+  color: $s83-text-muted;
+  margin: 0;
+  line-height: 1.5;
+  max-width: 28ch;
+}
+
+.s83-focus-hint {
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: $s83-accent-soft;
+  border-radius: $s83-radius-sm;
+  border-left: 3px solid $s83-accent;
+
+  @media (max-width: 720px) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.s83-focus-hint-text {
+  font-family: $s83-body;
+  font-size: 0.8125rem;
+  color: $s83-text;
+}
+
+// 우측 폼 카드
+.s83-form-section {
+  @media (max-width: 720px) {
+    order: 1;
+  }
+}
+
+.s83-form-card {
+  width: 100%;
+  max-width: 400px;
+  margin-left: auto;
+  padding: clamp(1.5rem, 4vw, 2rem);
+  background: $s83-card;
+  border: 1px solid $s83-card-border;
+  border-radius: $s83-radius;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+
+  @media (max-width: 720px) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.s83-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.s83-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: opacity $s83-ease, transform $s83-ease;
+
+  &--focused {
+    .s83-label {
+      color: $s83-accent;
+      transform: translateY(0);
+    }
+    .s83-input {
+      border-color: $s83-accent;
+      box-shadow: 0 0 0 2px $s83-accent-soft;
+    }
+  }
+
+  &--invalid .s83-input {
+    border-color: $s83-error;
+    box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
+  }
+
+  &:not(.s83-field--focused):not(.s83-field--invalid) {
+    .s83-label {
+      color: $s83-text-muted;
+    }
+  }
+}
+
+.s83-label {
+  font-family: $s83-body;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  transition: color $s83-ease, transform $s83-ease;
+}
+
+.s83-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: $s83-body;
+  font-size: 0.9375rem;
+  color: $s83-text;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: $s83-radius-sm;
+  outline: none;
+  transition: border-color $s83-ease, box-shadow $s83-ease, background $s83-ease;
+
+  &::placeholder {
+    color: $s83-text-muted;
+    opacity: 0.8;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.s83-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .s83-input {
+    padding-right: 4rem;
+  }
+}
+
+.s83-pw-btn {
+  position: absolute;
+  right: 0.6rem;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  font-family: $s83-body;
+  color: $s83-accent-teal;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background $s83-ease, color $s83-ease;
+
+  &:hover {
+    background: rgba(78, 205, 196, 0.15);
+    color: #5ffbf1;
+  }
+}
+
+.s83-error {
+  font-family: $s83-body;
+  font-size: 0.75rem;
+  color: $s83-error;
+  display: block;
+}
+
+.s83-actions {
+  margin-top: 0.5rem;
+}
+
+.s83-btn {
+  width: 100%;
+  padding: 0.85rem 1.25rem;
+  font-family: $s83-body;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #fff;
+  background: linear-gradient(135deg, $s83-accent 0%, darken($s83-accent, 6%) 100%);
+  border: none;
+  border-radius: $s83-radius-sm;
+  cursor: pointer;
+  transition: opacity $s83-ease, transform $s83-ease, box-shadow $s83-ease;
+
+  &--submit:hover:not(:disabled) {
+    opacity: 0.95;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(233, 69, 96, 0.35);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

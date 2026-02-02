@@ -1,0 +1,302 @@
+// ============================================
+// 회원가입 시안 32 - 비대칭 레이아웃 + 다크 아카이브
+// 입력 반응형 애니메이션
+// ============================================
+
+$font-mono: "IBM Plex Mono", "SF Mono", Consolas, monospace;
+$font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+$bg: #0c0a09;
+$visual-bg: linear-gradient(160deg, #141210 0%, #1a1816 50%, #0f0d0b 100%);
+$form-bg: #0f0d0b;
+$border: #2c2824;
+$primary: #8b7355;
+$primary-soft: rgba(139, 115, 85, 0.2);
+$text: #e6e2dc;
+$text-muted: #8a847c;
+$error: #b85450;
+$error-soft: rgba(184, 84, 80, 0.15);
+$radius: 6px;
+$break: 768px;
+$max-form: 380px;
+
+.signup-arch-asym.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  grid-template-rows: 1fr;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: $bg;
+
+  @media (max-width: $break) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+}
+
+.archasym-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: $visual-bg;
+  min-height: 0;
+  position: relative;
+
+  @media (max-width: $break) {
+    min-height: 160px;
+    padding: 1.5rem;
+  }
+}
+
+.archasym-visual-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.archasym-visual-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.archasym-visual-icon {
+  font-size: 2.5rem;
+  font-family: $font-mono;
+  color: rgba(139, 115, 85, 0.5);
+  line-height: 1;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.signup-arch-asym:has(.archasym-form-wrap:focus-within) .archasym-visual-icon {
+  transform: scale(1.08);
+  color: rgba(139, 115, 85, 0.75);
+}
+
+.archasym-visual-text {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-family: $font-mono;
+  font-weight: 500;
+  color: $text-muted;
+  letter-spacing: 0.02em;
+}
+
+.archasym-form-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: $form-bg;
+  min-height: 0;
+  overflow: auto;
+
+  @media (max-width: $break) {
+    padding: 1.5rem;
+    align-items: flex-start;
+  }
+}
+
+.archasym-form-inner {
+  width: 100%;
+  max-width: $max-form;
+}
+
+.archasym-header {
+  margin-bottom: 1.75rem;
+}
+
+.archasym-title {
+  margin: 0 0 0.35rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: $font-mono;
+  color: $text;
+  letter-spacing: 0.02em;
+
+  @media (max-width: $break) {
+    font-size: 1.35rem;
+  }
+}
+
+.archasym-desc {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-family: $font-sans;
+  color: $text-muted;
+}
+
+.archasym-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.archasym-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: transform 0.22s ease;
+
+  &--focused {
+    .archasym-input,
+    .archasym-pw-wrap {
+      border-color: $primary;
+      box-shadow: 0 0 0 2px $primary-soft;
+    }
+    transform: translateX(4px);
+  }
+
+  &--invalid {
+    .archasym-input,
+    .archasym-pw-wrap {
+      border-color: $error;
+      box-shadow: 0 0 0 2px $error-soft;
+    }
+  }
+}
+
+.archasym-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-family: $font-mono;
+  color: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.archasym-input {
+  width: 100%;
+  padding: 0.7rem 0.875rem;
+  font-size: 0.9375rem;
+  font-family: $font-sans;
+  color: $text;
+  background: $bg;
+  border: 1px solid $border;
+  border-radius: $radius;
+  outline: none;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
+
+  &::placeholder {
+    color: $text-muted;
+    opacity: 0.75;
+  }
+
+  &:focus {
+    border-color: $primary;
+    box-shadow: 0 0 0 2px $primary-soft;
+  }
+
+  &[aria-invalid="true"] {
+    border-color: $error;
+    box-shadow: 0 0 0 2px $error-soft;
+  }
+}
+
+.archasym-pw-wrap {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border: 1px solid $border;
+  border-radius: $radius;
+  background: $bg;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease;
+
+  &:focus-within {
+    border-color: $primary;
+    box-shadow: 0 0 0 2px $primary-soft;
+  }
+
+  .archasym-input {
+    border: none;
+    box-shadow: none;
+    flex: 1;
+    min-width: 0;
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+.archasym-pw-btn {
+  padding: 0 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-family: $font-mono;
+  color: $primary;
+  background: transparent;
+  border: none;
+  border-left: 1px solid $border;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease;
+
+  &:hover {
+    color: $text;
+    background: $primary-soft;
+  }
+}
+
+.archasym-error {
+  font-size: 0.6875rem;
+  font-family: $font-mono;
+  color: $error;
+  min-height: 1.125rem;
+}
+
+.archasym-nav {
+  margin-top: 0.5rem;
+}
+
+.archasym-btn {
+  width: 100%;
+  padding: 0.7rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: $font-mono;
+  color: $text;
+  background: $primary;
+  border: none;
+  border-radius: $radius;
+  cursor: pointer;
+  transition: background 0.2s ease, opacity 0.2s ease;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &--primary:hover:not(:disabled) {
+    background: lighten($primary, 6%);
+  }
+}
+
+.archasym-footer {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid $border;
+  text-align: center;
+}
+
+.archasym-link {
+  font-size: 0.8125rem;
+  font-family: $font-sans;
+  color: $primary;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $text;
+    text-decoration: underline;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

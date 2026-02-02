@@ -1,0 +1,224 @@
+// 시안 96: 실험적 인터페이스 + 비대칭 레이아웃 + GSAP 기반 부드러운 전환
+$s96-font: 'Syne', system-ui, sans-serif;
+$s96-bg: #0c0c0c;
+$s96-aside-bg: #171717;
+$s96-form-bg: #1a1a1a;
+$s96-border: rgba(255, 255, 255, 0.08);
+$s96-text: #fafafa;
+$s96-muted: #a3a3a3;
+$s96-accent: #a78bfa;
+$s96-error: #f87171;
+$s96-ease: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s96 {
+  font-family: $s96-font;
+  color: $s96-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s96-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s96-bg;
+}
+
+// 비대칭: 좌측 좁은 영역(브랜드) / 우측 넓은 영역(폼)
+.s96-layout {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 880px;
+  min-height: min(85vh, 520px);
+  display: grid;
+  grid-template-columns: 0.38fr 0.62fr;
+  align-items: stretch;
+  border: 1px solid $s96-border;
+  border-radius: 0;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    min-height: auto;
+  }
+}
+
+// 실험적: 좌측 브랜드 블록 (비대칭 비율)
+.s96-aside {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  background: $s96-aside-bg;
+  border-right: 1px solid $s96-border;
+
+  @media (max-width: 640px) {
+    border-right: none;
+    border-bottom: 1px solid $s96-border;
+    padding: clamp(1.25rem, 3vw, 1.5rem);
+  }
+}
+
+.s96-aside-inner {
+  text-align: center;
+}
+
+.s96-title {
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 700;
+  color: $s96-text;
+  margin: 0;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+}
+
+.s96-tagline {
+  font-size: clamp(0.75rem, 1.8vw, 0.8125rem);
+  font-weight: 500;
+  color: $s96-muted;
+  margin: 0.5rem 0 0;
+  line-height: 1.4;
+}
+
+.s96-form-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 4vw, 2rem);
+  background: $s96-form-bg;
+
+  @media (max-width: 640px) {
+    padding: clamp(1.25rem, 3vw, 1.5rem);
+  }
+}
+
+.s96-form {
+  width: 100%;
+  max-width: 320px;
+}
+
+.s96-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.s96-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+
+  &--invalid .s96-input {
+    border-color: $s96-error;
+  }
+}
+
+.s96-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $s96-muted;
+  letter-spacing: 0.02em;
+}
+
+.s96-input {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  padding-right: 3rem;
+  font-family: $s96-font;
+  font-size: 0.9375rem;
+  color: $s96-text;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid $s96-border;
+  outline: none;
+  transition: border-color $s96-ease;
+
+  &::placeholder {
+    color: $s96-muted;
+    opacity: 0.7;
+  }
+
+  &:focus {
+    border-color: $s96-accent;
+  }
+}
+
+.s96-pw-wrap {
+  position: relative;
+
+  .s96-input {
+    padding-right: 3rem;
+  }
+}
+
+.s96-pw-btn {
+  position: absolute;
+  right: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.25rem 0.4rem;
+  font-size: 0.6875rem;
+  font-family: $s96-font;
+  color: $s96-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: opacity $s96-ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.s96-error {
+  font-size: 0.75rem;
+  color: $s96-error;
+  display: block;
+}
+
+.s96-actions {
+  margin-top: 1rem;
+}
+
+.s96-btn {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  font-family: $s96-font;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: $s96-bg;
+  background: $s96-accent;
+  border: none;
+  cursor: pointer;
+  transition: opacity $s96-ease;
+
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

@@ -1,0 +1,224 @@
+// ============================================
+// 회원가입 시안 46 - 네오 브루탈리즘 + 카드 분리형 레이아웃
+// 입력 반응형 애니메이션
+// ============================================
+
+$font-head: "Archivo Black", sans-serif;
+$font: "Archivo", -apple-system, BlinkMacSystemFont, sans-serif;
+$bg: #fafaf9;
+$card-bg: #ffffff;
+$border: #18181b;
+$border-width: 3px;
+$primary: #eab308;
+$primary-dark: #ca8a04;
+$text: #18181b;
+$text-muted: #52525b;
+$valid: #16a34a;
+$valid-border: #15803d;
+$error: #dc2626;
+$error-border: #b91c1c;
+$radius: 0;
+$break: 480px;
+$max-width: 400px;
+
+.signup-nbc.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  background: $bg;
+}
+
+.nbc-wrap {
+  width: 100%;
+  max-width: $max-width;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+// 카드 분리형: 헤더·필드·제출 각각 독립 카드
+.nbc-card {
+  padding: 1rem 1.25rem;
+  background: $card-bg;
+  border: $border-width solid $border;
+  border-radius: $radius;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+
+  @media (max-width: $break) {
+    padding: 0.9rem 1rem;
+  }
+
+  &--header {
+    padding: 1.25rem 1.25rem;
+  }
+
+  &--field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+
+    // 입력 반응형 애니메이션: focus 시 scale·shadow, valid 시 border 색
+    &.nbc-card--focused {
+      transform: scale(1.01);
+      border-color: $primary-dark;
+      box-shadow: 4px 4px 0 $primary;
+    }
+
+    &.nbc-card--valid {
+      border-color: $valid-border;
+      box-shadow: 2px 2px 0 rgba($valid, 0.3);
+    }
+
+    &.nbc-card--invalid {
+      border-color: $error-border;
+      box-shadow: 2px 2px 0 rgba($error, 0.3);
+    }
+  }
+
+  &--submit {
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.nbc-title {
+  margin: 0 0 0.25rem;
+  font-size: 1.5rem;
+  font-weight: 400;
+  font-family: $font-head;
+  color: $text;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.nbc-desc {
+  margin: 0;
+  font-size: 0.875rem;
+  font-family: $font;
+  color: $text-muted;
+}
+
+.nbc-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.nbc-label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  font-family: $font;
+  color: $text;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.nbc-input {
+  width: 100%;
+  padding: 0.65rem 0 0.5rem;
+  font-size: 0.9375rem;
+  font-family: $font;
+  color: $text;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid $border;
+  border-radius: 0;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.2s ease;
+
+  &::placeholder {
+    color: $text-muted;
+    opacity: 0.8;
+  }
+
+  &:focus {
+    border-bottom-color: $primary-dark;
+    box-shadow: 0 2px 0 $primary;
+  }
+}
+
+.nbc-pw-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid $border;
+  transition: border-color 0.25s ease, box-shadow 0.2s ease;
+
+  .nbc-input {
+    padding: 0.5rem 0 0;
+    border-bottom: none;
+    flex: 1;
+    min-width: 0;
+  }
+
+  &:focus-within {
+    border-bottom-color: $primary-dark;
+    box-shadow: 0 2px 0 $primary;
+  }
+}
+
+.nbc-pw-btn {
+  flex-shrink: 0;
+  padding: 0.25rem 0.5rem;
+  border: 2px solid $border;
+  border-radius: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: $font;
+  color: $text-muted;
+  background: transparent;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  transition: color 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    color: $primary-dark;
+    border-color: $primary-dark;
+  }
+}
+
+.nbc-error {
+  font-size: 0.8125rem;
+  font-family: $font;
+  color: $error;
+  font-weight: 500;
+}
+
+.nbc-btn {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  border: $border-width solid $border;
+  border-radius: $radius;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  font-family: $font-head;
+  color: $text;
+  background: $primary;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+
+  &:hover:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: -2px -2px 0 $border;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

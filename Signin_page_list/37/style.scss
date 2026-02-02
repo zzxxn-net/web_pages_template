@@ -1,0 +1,254 @@
+// ============================================
+// 회원가입 시안 37 - 사이버 미니멀 + 단일 포커스 입력 흐름
+// 입력 반응형 애니메이션
+// ============================================
+
+$font: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+$font-mono: "IBM Plex Mono", "SF Mono", Consolas, monospace;
+$bg: #0a0a0c;
+$card-bg: #111113;
+$card-border: rgba(255, 255, 255, 0.06);
+$primary: #22d3ee;
+$primary-soft: rgba(34, 211, 238, 0.15);
+$text: #fafafa;
+$text-muted: #71717a;
+$error: #f87171;
+$error-soft: rgba(248, 113, 113, 0.12);
+$done: #4ade80;
+$done-soft: rgba(74, 222, 128, 0.12);
+$radius: 8px;
+$break: 480px;
+$max-width: 360px;
+
+.signup-cyber-single.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  box-sizing: border-box;
+  background: $bg;
+}
+
+.cybs-wrap {
+  width: 100%;
+  max-width: $max-width;
+  margin: auto;
+}
+
+.cybs-card {
+  padding: 1.5rem 1.25rem;
+  background: $card-bg;
+  border: 1px solid $card-border;
+  border-radius: $radius;
+
+  @media (max-width: $break) {
+    padding: 1.25rem 1rem;
+  }
+}
+
+.cybs-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  margin-bottom: 1.5rem;
+}
+
+.cybs-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-family: $font-mono;
+  color: $text-muted;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid $card-border;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+
+  &--on {
+    color: $primary;
+    border-color: rgba($primary, 0.4);
+    background: $primary-soft;
+  }
+
+  &--done {
+    color: $done;
+    border-color: rgba($done, 0.4);
+    background: $done-soft;
+  }
+}
+
+.cybs-line {
+  width: 20px;
+  height: 2px;
+  background: $card-border;
+  border-radius: 1px;
+  transition: background 0.2s ease;
+
+  &--on {
+    background: $primary;
+    opacity: 0.6;
+  }
+}
+
+.cybs-form {
+  position: relative;
+  min-height: 180px;
+}
+
+.cybs-step {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &--invalid .cybs-input,
+  &--invalid .cybs-pw-wrap {
+    border-left-color: $error;
+    box-shadow: 0 0 0 1px $error-soft;
+  }
+}
+
+.cybs-prompt {
+  margin: 0 0 0.2rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-family: $font-mono;
+  color: $text-muted;
+  letter-spacing: 0.02em;
+}
+
+.cybs-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+// 입력 반응형 애니메이션: 포커스 시 left border·glow·scale
+.cybs-input {
+  width: 100%;
+  padding: 0.65rem 1rem 0.65rem 1rem;
+  font-size: 0.9375rem;
+  font-family: $font-mono;
+  font-weight: 500;
+  color: $text;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid $card-border;
+  border-left: 3px solid $card-border;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.25s ease, border-left-width 0.2s ease, box-shadow 0.25s ease, transform 0.2s ease;
+
+  &::placeholder {
+    color: $text-muted;
+    opacity: 0.7;
+  }
+
+  &:focus {
+    border-left-width: 3px;
+    border-left-color: $primary;
+    border-color: rgba($primary, 0.3);
+    box-shadow: 0 0 0 2px $primary-soft;
+    transform: translateX(2px);
+  }
+}
+
+.cybs-pw-wrap {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid $card-border;
+  border-left: 3px solid $card-border;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+
+  .cybs-input {
+    border: none;
+    border-left: none;
+    background: transparent;
+    flex: 1;
+  }
+
+  &:focus-within {
+    border-left-color: $primary;
+    border-color: rgba($primary, 0.3);
+    box-shadow: 0 0 0 2px $primary-soft;
+    transform: translateX(2px);
+  }
+}
+
+.cybs-pw-btn {
+  padding: 0 0.6rem;
+  border: none;
+  background: transparent;
+  font-size: 0.75rem;
+  font-family: $font-mono;
+  font-weight: 500;
+  color: $text-muted;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+.cybs-error {
+  font-size: 0.75rem;
+  font-family: $font-mono;
+  color: $error;
+}
+
+.cybs-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.25rem;
+}
+
+.cybs-btn {
+  padding: 0.55rem 1rem;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-family: $font-mono;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &--pri {
+    border: 1px solid $primary;
+    background: $primary-soft;
+    color: $primary;
+
+    &:hover:not(:disabled) {
+      background: rgba($primary, 0.25);
+    }
+  }
+
+  &--sec {
+    border: 1px solid $card-border;
+    background: transparent;
+    color: $text-muted;
+
+    &:hover:not(:disabled) {
+      color: $text;
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

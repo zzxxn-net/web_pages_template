@@ -1,0 +1,187 @@
+// 시안 78: 미래적 클린 + 풀스크린 몰입형 + 스크롤 없는 고정 플로우
+$s78-font: 'DM Sans', system-ui, sans-serif;
+$s78-mono: 'JetBrains Mono', monospace;
+$s78-bg: #f8fafc;
+$s78-surface: #ffffff;
+$s78-border: #e2e8f0;
+$s78-text: #0f172a;
+$s78-text-soft: #64748b;
+$s78-accent: #0ea5e9;
+$s78-accent-soft: rgba(14, 165, 233, 0.12);
+$s78-error: #ef4444;
+$s78-radius: 8px;
+$s78-transition: 0.2s ease;
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s78 {
+  font-family: $s78-font;
+  color: $s78-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.75rem, 2.5vw, 1.25rem);
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.s78-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s78-bg;
+}
+
+.s78-viewport {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 100%;
+  justify-content: center;
+}
+
+.s78-title {
+  font-family: $s78-mono;
+  font-size: clamp(1.4rem, 4vw, 1.65rem);
+  font-weight: 500;
+  color: $s78-text;
+  margin: 0 0 0.6rem;
+  letter-spacing: -0.02em;
+}
+
+.s78-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.s78-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+
+  &--focused .s78-label {
+    color: $s78-accent;
+  }
+
+  &--focused .s78-input {
+    border-color: $s78-accent;
+    box-shadow: 0 0 0 2px $s78-accent-soft;
+  }
+
+  &--invalid .s78-input {
+    border-color: $s78-error;
+  }
+}
+
+.s78-label {
+  font-family: $s78-mono;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: $s78-text-soft;
+  transition: color $s78-transition;
+}
+
+.s78-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  color: $s78-text;
+  background: $s78-surface;
+  border: 1px solid $s78-border;
+  border-radius: $s78-radius;
+  outline: none;
+  transition: border-color $s78-transition, box-shadow $s78-transition;
+
+  &::placeholder {
+    color: $s78-text-soft;
+    opacity: 0.7;
+  }
+}
+
+.s78-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .s78-input {
+    padding-right: 3rem;
+  }
+}
+
+.s78-pw-btn {
+  position: absolute;
+  right: 0.4rem;
+  padding: 0.25rem 0.45rem;
+  font-size: 0.6875rem;
+  font-family: $s78-mono;
+  color: $s78-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background $s78-transition;
+
+  &:hover {
+    background: $s78-accent-soft;
+  }
+}
+
+.s78-error {
+  font-size: 0.6875rem;
+  color: $s78-error;
+  display: block;
+}
+
+.s78-actions {
+  margin-top: 0.3rem;
+}
+
+.s78-submit {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  background: $s78-accent;
+  border: none;
+  border-radius: $s78-radius;
+  cursor: pointer;
+  transition: opacity $s78-transition, transform $s78-transition;
+
+  &:hover:not(:disabled) {
+    opacity: 0.92;
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.s78-submit-text {
+  display: block;
+}
+
+[x-cloak] {
+  display: none !important;
+}

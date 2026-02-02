@@ -1,0 +1,343 @@
+/* 회원가입 시안 33 - 실험적 인터페이스 + 단계 분할형, 포커스 이동 중심 UX */
+.signup-exp-prog.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  overflow: auto;
+  position: relative;
+}
+
+.expp-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: #0a0a0c;
+  overflow: hidden;
+}
+
+.expp-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.8;
+}
+
+.expp-shape {
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 0;
+}
+
+.expp-shape--1 {
+  width: 280px;
+  height: 280px;
+  top: 10%;
+  right: 5%;
+  transform: rotate(15deg);
+  background: linear-gradient(135deg, rgba(0, 255, 157, 0.03) 0%, transparent 50%);
+}
+
+.expp-shape--2 {
+  width: 160px;
+  height: 160px;
+  bottom: 15%;
+  left: 8%;
+  transform: rotate(-10deg);
+  background: linear-gradient(225deg, rgba(124, 58, 237, 0.04) 0%, transparent 50%);
+}
+
+.expp-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  margin: auto;
+}
+
+.expp-card {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  grid-template-rows: auto;
+  gap: 0;
+  padding: 0;
+  background: rgba(14, 14, 18, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.02);
+  min-height: 420px;
+}
+
+@media (max-width: 768px) {
+  .expp-card {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    min-height: auto;
+  }
+}
+
+.expp-steps {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 0;
+}
+
+@media (max-width: 768px) {
+  .expp-steps {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 1rem 1rem 0.75rem;
+  }
+}
+
+.expp-step-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.5rem;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+  text-align: left;
+  color: #71717a;
+  transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  .expp-step-trigger {
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.5rem;
+    text-align: center;
+  }
+}
+
+.expp-step-trigger:hover:not(:disabled) {
+  color: #f4f4f5;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.expp-step-trigger--active {
+  color: #00ff9d;
+  background: rgba(0, 255, 157, 0.12);
+  box-shadow: 0 0 0 1px rgba(0, 255, 157, 0.2);
+}
+
+.expp-step-trigger--done {
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.15);
+}
+
+.expp-step-num {
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: "JetBrains Mono", "SF Mono", Consolas, monospace;
+  letter-spacing: 0.05em;
+}
+
+.expp-step-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.expp-step-line {
+  width: 2px;
+  height: 12px;
+  margin-left: 1.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 1px;
+  transition: background 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .expp-step-line {
+    width: 12px;
+    height: 2px;
+    margin: 0 0.25rem;
+  }
+}
+
+.expp-step-line--filled {
+  background: #00ff9d;
+  opacity: 0.6;
+}
+
+.expp-form-area {
+  padding: 1.75rem 1.5rem;
+  min-height: 320px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .expp-form-area {
+    padding: 1.5rem 1.25rem;
+    min-height: 280px;
+  }
+}
+
+.expp-form {
+  width: 100%;
+  max-width: 320px;
+  position: relative;
+}
+
+.expp-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: opacity 0.25s ease;
+}
+
+.expp-panel--invalid .expp-input,
+.expp-panel--invalid .expp-pw-wrap {
+  border-color: #f43f5e;
+  box-shadow: 0 0 0 2px rgba(244, 63, 94, 0.15);
+}
+
+.expp-prompt {
+  margin: 0 0 0.15rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #f4f4f5;
+  letter-spacing: -0.02em;
+}
+
+.expp-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.expp-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #71717a;
+}
+
+.expp-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  font-family: "JetBrains Mono", "SF Mono", Consolas, monospace;
+  color: #f4f4f5;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.expp-input::placeholder {
+  color: #71717a;
+  opacity: 0.8;
+}
+
+.expp-input:focus {
+  border-color: #00ff9d;
+  box-shadow: 0 0 0 2px rgba(0, 255, 157, 0.12), 0 0 20px rgba(0, 255, 157, 0.35);
+}
+
+.expp-pw-wrap {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.expp-pw-wrap .expp-input {
+  border: none;
+  background: transparent;
+  flex: 1;
+}
+
+.expp-pw-wrap:focus-within {
+  border-color: #00ff9d;
+  box-shadow: 0 0 0 2px rgba(0, 255, 157, 0.12), 0 0 20px rgba(0, 255, 157, 0.35);
+}
+
+.expp-pw-btn {
+  padding: 0 0.75rem;
+  border: none;
+  background: transparent;
+  font-size: 0.8125rem;
+  font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #71717a;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.expp-pw-btn:hover {
+  color: #f4f4f5;
+}
+
+.expp-error {
+  font-size: 0.8125rem;
+  font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #f43f5e;
+}
+
+.expp-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.expp-btn {
+  padding: 0.65rem 1.25rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.expp-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.expp-btn--primary {
+  border: 1px solid #00ff9d;
+  background: rgba(0, 255, 157, 0.12);
+  color: #00ff9d;
+}
+
+.expp-btn--primary:hover:not(:disabled) {
+  background: rgba(0, 255, 157, 0.2);
+  box-shadow: 0 0 16px rgba(0, 255, 157, 0.35);
+}
+
+.expp-btn--secondary {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: transparent;
+  color: #71717a;
+}
+
+.expp-btn--secondary:hover:not(:disabled) {
+  color: #f4f4f5;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+[x-cloak] {
+  display: none !important;
+}

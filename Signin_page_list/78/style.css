@@ -1,0 +1,24 @@
+.signup-fixed{min-height:100vh;min-height:100dvh;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.s78{font-family:"DM Sans",system-ui,sans-serif;color:#0f172a;min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:clamp(0.75rem,2.5vw,1.25rem);position:relative;box-sizing:border-box;overflow:hidden}
+.s78-bg{position:absolute;inset:0;z-index:0;pointer-events:none;background:#f8fafc}
+.s78-viewport{position:relative;z-index:1;width:100%;max-width:360px;display:flex;flex-direction:column;gap:0.5rem;max-height:100%;justify-content:center}
+.s78-title{font-family:"JetBrains Mono",monospace;font-size:clamp(1.4rem,4vw,1.65rem);font-weight:500;color:#0f172a;margin:0 0 0.6rem;letter-spacing:-0.02em}
+.s78-form{display:flex;flex-direction:column;gap:0.45rem}
+.s78-field{display:flex;flex-direction:column;gap:0.15rem}
+.s78-field--focused .s78-label{color:#0ea5e9}
+.s78-field--focused .s78-input{border-color:#0ea5e9;box-shadow:0 0 0 2px rgba(14,165,233,0.12)}
+.s78-field--invalid .s78-input{border-color:#ef4444}
+.s78-label{font-family:"JetBrains Mono",monospace;font-size:0.6875rem;font-weight:500;color:#64748b;transition:color 0.2s ease}
+.s78-input{width:100%;padding:0.5rem 0.75rem;font-family:inherit;font-size:0.875rem;color:#0f172a;background:#fff;border:1px solid #e2e8f0;border-radius:8px;outline:none;transition:border-color 0.2s ease,box-shadow 0.2s ease}
+.s78-input::placeholder{color:#64748b;opacity:0.7}
+.s78-pw-wrap{position:relative;display:flex;align-items:center}
+.s78-pw-wrap .s78-input{padding-right:3rem}
+.s78-pw-btn{position:absolute;right:0.4rem;padding:0.25rem 0.45rem;font-size:0.6875rem;font-family:"JetBrains Mono",monospace;color:#0ea5e9;background:transparent;border:none;cursor:pointer;border-radius:4px;transition:background 0.2s ease}
+.s78-pw-btn:hover{background:rgba(14,165,233,0.12)}
+.s78-error{font-size:0.6875rem;color:#ef4444;display:block}
+.s78-actions{margin-top:0.3rem}
+.s78-submit{width:100%;padding:0.65rem 1rem;font-family:inherit;font-size:0.875rem;font-weight:600;color:#fff;background:#0ea5e9;border:none;border-radius:8px;cursor:pointer;transition:opacity 0.2s ease,transform 0.2s ease}
+.s78-submit:hover:not(:disabled){opacity:0.92;transform:translateY(-1px)}
+.s78-submit:disabled{opacity:0.5;cursor:not-allowed}
+.s78-submit-text{display:block}
+[x-cloak]{display:none!important}

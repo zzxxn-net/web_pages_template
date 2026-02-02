@@ -1,0 +1,32 @@
+/* 시안 119: 감성 테크 + 풀스크린 몰입형 + 입력 반응형 애니메이션 */
+.signup-fixed { min-height: 100vh; min-height: 100dvh; overflow: auto; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.s119 { font-family: "Noto Sans KR", system-ui, sans-serif; color: #3d2c29; min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding: 0; position: relative; box-sizing: border-box; background: linear-gradient(160deg, #fff5f0 0%, #fef7f2 100%); }
+.s119-inner { width: 100%; min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: clamp(1.25rem, 5vw, 2rem); box-sizing: border-box; }
+.s119-header { text-align: center; margin-bottom: clamp(1.5rem, 4vw, 2rem); }
+.s119-title { font-size: clamp(1.5rem, 4vw, 1.85rem); font-weight: 600; color: #3d2c29; margin: 0; letter-spacing: -0.02em; line-height: 1.3; }
+.s119-tagline { font-size: clamp(0.85rem, 2vw, 0.9rem); font-weight: 400; color: #8b7355; margin: 0.5rem 0 0; line-height: 1.5; }
+.s119-form-wrap { width: 100%; max-width: 380px; }
+.s119-form { width: 100%; }
+.s119-fields { display: flex; flex-direction: column; gap: 1.1rem; }
+.s119-field { position: relative; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.s119-field--focused .s119-label { transform: translateY(-1.6rem) scale(0.88); color: #c97b63; }
+.s119-field--focused .s119-input { border-color: #c97b63; box-shadow: 0 0 0 3px rgba(201, 123, 99, 0.18); }
+.s119-field--has-value:not(.s119-field--focused) .s119-label { transform: translateY(-1.6rem) scale(0.88); color: #8b7355; }
+.s119-field--valid .s119-input { border-color: #7a9b76; background: rgba(122, 155, 118, 0.12); }
+.s119-field--valid .s119-label { color: #7a9b76; }
+.s119-field--invalid .s119-input { border-color: #c75c5c; background: rgba(199, 92, 92, 0.12); }
+.s119-field--invalid .s119-label { color: #c75c5c; }
+.s119-label { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); font-size: 0.9375rem; font-weight: 400; color: #8b7355; pointer-events: none; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1); transform-origin: left center; }
+.s119-input { width: 100%; padding: 1rem 2.5rem 1rem 1rem; font-family: "Noto Sans KR", system-ui, sans-serif; font-size: 0.9375rem; color: #3d2c29; background: rgba(255, 255, 255, 0.85); border: 1px solid rgba(180, 120, 100, 0.2); border-radius: 14px; outline: none; transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s cubic-bezier(0.4, 0, 0.2, 1); backdrop-filter: blur(8px); }
+.s119-input::placeholder { color: transparent; }
+.s119-status { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); font-size: 0.9rem; font-weight: 600; color: #7a9b76; pointer-events: none; }
+.s119-pw-wrap .s119-input { padding-right: 3rem; }
+.s119-pw-btn { position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); padding: 0.25rem 0.4rem; font-size: 0.7rem; font-family: "Noto Sans KR", system-ui, sans-serif; font-weight: 500; color: #c97b63; background: transparent; border: none; cursor: pointer; border-radius: 6px; transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.s119-pw-btn:hover { background: rgba(201, 123, 99, 0.18); }
+.s119-error { font-size: 0.75rem; color: #c75c5c; display: block; margin-top: 0.35rem; padding-left: 0.1rem; }
+.s119-actions { margin-top: 1.75rem; }
+.s119-btn { width: 100%; padding: 0.9rem 1rem; font-family: "Noto Sans KR", system-ui, sans-serif; font-size: 0.9375rem; font-weight: 500; color: #fff; background: linear-gradient(135deg, #c97b63 0%, #b86d55 100%); border: none; border-radius: 14px; cursor: pointer; transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 14px rgba(201, 123, 99, 0.35); }
+.s119-btn:hover:not(:disabled) { opacity: 0.95; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(201, 123, 99, 0.4); }
+.s119-btn:active:not(:disabled) { transform: translateY(0); }
+.s119-btn:disabled, .s119-btn.s119-btn--busy { opacity: 0.65; cursor: not-allowed; transform: none; }
+[x-cloak] { display: none !important; }

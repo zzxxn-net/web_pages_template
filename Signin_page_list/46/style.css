@@ -1,0 +1,117 @@
+/* 시안 46 - 네오 브루탈리즘 + 카드 분리형 + 입력 반응형 애니메이션 */
+.signup-nbc.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  background: #fafaf9;
+}
+.nbc-wrap {
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.nbc-card {
+  padding: 1rem 1.25rem;
+  background: #fff;
+  border: 3px solid #18181b;
+  border-radius: 0;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+@media (max-width: 480px) {
+  .nbc-card { padding: 0.9rem 1rem; }
+}
+.nbc-card--header { padding: 1.25rem 1.25rem; }
+.nbc-card--field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.nbc-card--field.nbc-card--focused {
+  transform: scale(1.01);
+  border-color: #ca8a04;
+  box-shadow: 4px 4px 0 #eab308;
+}
+.nbc-card--field.nbc-card--valid {
+  border-color: #15803d;
+  box-shadow: 2px 2px 0 rgba(22,163,74,0.3);
+}
+.nbc-card--field.nbc-card--invalid {
+  border-color: #b91c1c;
+  box-shadow: 2px 2px 0 rgba(220,38,38,0.3);
+}
+.nbc-card--submit {
+  padding: 1rem 1.25rem;
+  display: flex;
+  justify-content: center;
+}
+.nbc-title { margin: 0 0 0.25rem; font-size: 1.5rem; font-weight: 400; font-family: "Archivo Black", sans-serif; color: #18181b; letter-spacing: -0.02em; text-transform: uppercase; }
+.nbc-desc { margin: 0; font-size: 0.875rem; font-family: "Archivo", sans-serif; color: #52525b; }
+.nbc-form { display: flex; flex-direction: column; gap: 0.75rem; }
+.nbc-label { font-size: 0.8125rem; font-weight: 700; font-family: "Archivo", sans-serif; color: #18181b; text-transform: uppercase; letter-spacing: 0.03em; }
+.nbc-input {
+  width: 100%;
+  padding: 0.65rem 0 0.5rem;
+  font-size: 0.9375rem;
+  font-family: "Archivo", sans-serif;
+  color: #18181b;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #18181b;
+  border-radius: 0;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.2s ease;
+}
+.nbc-input::placeholder { color: #52525b; opacity: 0.8; }
+.nbc-input:focus { border-bottom-color: #ca8a04; box-shadow: 0 2px 0 #eab308; }
+.nbc-pw-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #18181b;
+  transition: border-color 0.25s ease, box-shadow 0.2s ease;
+}
+.nbc-pw-wrap .nbc-input { padding: 0.5rem 0 0; border-bottom: none; flex: 1; min-width: 0; }
+.nbc-pw-wrap:focus-within { border-bottom-color: #ca8a04; box-shadow: 0 2px 0 #eab308; }
+.nbc-pw-btn {
+  flex-shrink: 0;
+  padding: 0.25rem 0.5rem;
+  border: 2px solid #18181b;
+  border-radius: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: "Archivo", sans-serif;
+  color: #52525b;
+  background: transparent;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.nbc-pw-btn:hover { color: #ca8a04; border-color: #ca8a04; }
+.nbc-error { font-size: 0.8125rem; font-family: "Archivo", sans-serif; color: #dc2626; font-weight: 500; }
+.nbc-btn {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  border: 3px solid #18181b;
+  border-radius: 0;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  font-family: "Archivo Black", sans-serif;
+  color: #18181b;
+  background: #eab308;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+.nbc-btn:hover:not(:disabled) { transform: translate(2px, 2px); box-shadow: -2px -2px 0 #18181b; }
+.nbc-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+[x-cloak] { display: none !important; }

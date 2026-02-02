@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 80 - 실험적 단계 분할형 GSAP 전환</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s80 signup-fixed" x-data="signupForm80()">
+    <div class="s80-bg" aria-hidden="true">
+      <div class="s80-grid" aria-hidden="true"></div>
+    </div>
+    <div class="s80-wrap" x-ref="wrap">
+      <header class="s80-header">
+        <h1 class="s80-title">SIGN UP</h1>
+        <p class="s80-desc">Step by step</p>
+        <div class="s80-indicator" role="tablist" aria-label="가입 단계">
+          <span class="s80-dot" :class="{ 's80-dot--active': step >= 1 }">1</span>
+          <span class="s80-line" :class="{ 's80-line--filled': step >= 2 }"></span>
+          <span class="s80-dot" :class="{ 's80-dot--active': step >= 2 }">2</span>
+        </div>
+      </header>
+      <form class="s80-form" method="post" action="#" hx-post="#" hx-swap="none" @submit.prevent="handleSubmit">
+        <div class="s80-panel" x-show="step === 1" x-cloak x-ref="panel1">
+          <h2 class="s80-panel-title">기본 정보</h2>
+          <div class="s80-field" :class="{ 's80-field--invalid': errors.email }">
+            <label for="s80-email" class="s80-label">EMAIL</label>
+            <input id="s80-email" type="email" name="email" class="s80-input" placeholder="you@example.com" autocomplete="email" required x-model="email" @blur="validateEmail()" @keydown.enter.prevent="goNext()" :aria-invalid="errors.email ? 'true' : 'false'" />
+            <span class="s80-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+          </div>
+          <div class="s80-field" :class="{ 's80-field--invalid': errors.name }">
+            <label for="s80-name" class="s80-label">NAME</label>
+            <input id="s80-name" type="text" name="name" class="s80-input" placeholder="홍길동" autocomplete="name" required x-model="name" @blur="validateName()" @keydown.enter.prevent="goNext()" :aria-invalid="errors.name ? 'true' : 'false'" />
+            <span class="s80-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+          </div>
+          <div class="s80-nav">
+            <button type="button" class="s80-btn s80-btn--next" @click="goNext()">다음</button>
+          </div>
+        </div>
+        <div class="s80-panel" x-show="step === 2" x-cloak x-ref="panel2">
+          <h2 class="s80-panel-title">비밀번호</h2>
+          <div class="s80-field" :class="{ 's80-field--invalid': errors.password }">
+            <label for="s80-password" class="s80-label">PASSWORD</label>
+            <div class="s80-pw-wrap">
+              <input id="s80-password" :type="showPassword ? 'text' : 'password'" name="password" class="s80-input" placeholder="8자 이상" autocomplete="new-password" required minlength="8" x-model="password" @blur="validatePassword()" :aria-invalid="errors.password ? 'true' : 'false'" />
+              <button type="button" class="s80-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword"><span x-text="showPassword ? 'HIDE' : 'SHOW'"></span></button>
+            </div>
+            <span class="s80-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+          </div>
+          <div class="s80-field" :class="{ 's80-field--invalid': errors.passwordConfirm }">
+            <label for="s80-passwordConfirm" class="s80-label">CONFIRM</label>
+            <input id="s80-passwordConfirm" :type="showPassword ? 'text' : 'password'" name="password_confirm" class="s80-input" placeholder="다시 입력" autocomplete="new-password" required minlength="8" x-model="passwordConfirm" @blur="validatePasswordConfirm()" :aria-invalid="errors.passwordConfirm ? 'true' : 'false'" />
+            <span class="s80-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+          </div>
+          <div class="s80-nav">
+            <button type="button" class="s80-btn s80-btn--prev" @click="goPrev()">이전</button>
+            <button type="submit" class="s80-btn s80-btn--submit" :disabled="submitting" :aria-busy="submitting"><span x-text="submitting ? '…' : '가입하기'"></span></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

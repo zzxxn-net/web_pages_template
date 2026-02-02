@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 78 - 미래적 클린 풀스크린 스크롤 없음</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s78 signup-fixed" x-data="signupForm78()">
+    <div class="s78-bg" aria-hidden="true"></div>
+    <div class="s78-viewport" x-ref="viewport">
+      <h1 class="s78-title">Sign up</h1>
+      <form class="s78-form" method="post" action="#" hx-post="#" hx-swap="none" @submit.prevent="handleSubmit">
+        <div class="s78-field" :class="{ 's78-field--focused': focusedField === 'email', 's78-field--invalid': errors.email }">
+          <label for="s78-email" class="s78-label">Email</label>
+          <input id="s78-email" type="email" name="email" class="s78-input" placeholder="you@example.com" autocomplete="email" required x-model="email" @focus="focusedField = 'email'" @blur="focusedField = null; validateEmail()" :aria-invalid="errors.email ? 'true' : 'false'" />
+          <span class="s78-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+        </div>
+        <div class="s78-field" :class="{ 's78-field--focused': focusedField === 'name', 's78-field--invalid': errors.name }">
+          <label for="s78-name" class="s78-label">Name</label>
+          <input id="s78-name" type="text" name="name" class="s78-input" placeholder="홍길동" autocomplete="name" required x-model="name" @focus="focusedField = 'name'" @blur="focusedField = null; validateName()" :aria-invalid="errors.name ? 'true' : 'false'" />
+          <span class="s78-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+        </div>
+        <div class="s78-field" :class="{ 's78-field--focused': focusedField === 'password', 's78-field--invalid': errors.password }">
+          <label for="s78-password" class="s78-label">Password</label>
+          <div class="s78-pw-wrap">
+            <input id="s78-password" :type="showPassword ? 'text' : 'password'" name="password" class="s78-input" placeholder="8자 이상" autocomplete="new-password" required minlength="8" x-model="password" @focus="focusedField = 'password'" @blur="focusedField = null; validatePassword()" :aria-invalid="errors.password ? 'true' : 'false'" />
+            <button type="button" class="s78-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword"><span x-text="showPassword ? 'Hide' : 'Show'"></span></button>
+          </div>
+          <span class="s78-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+        </div>
+        <div class="s78-field" :class="{ 's78-field--focused': focusedField === 'passwordConfirm', 's78-field--invalid': errors.passwordConfirm }">
+          <label for="s78-passwordConfirm" class="s78-label">Confirm</label>
+          <input id="s78-passwordConfirm" :type="showPassword ? 'text' : 'password'" name="password_confirm" class="s78-input" placeholder="다시 입력" autocomplete="new-password" required minlength="8" x-model="passwordConfirm" @focus="focusedField = 'passwordConfirm'" @blur="focusedField = null; validatePasswordConfirm()" :aria-invalid="errors.passwordConfirm ? 'true' : 'false'" />
+          <span class="s78-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+        </div>
+        <div class="s78-actions">
+          <button type="submit" class="s78-submit" :disabled="submitting" :aria-busy="submitting"><span class="s78-submit-text" x-text="submitting ? '…' : 'Sign up'"></span></button>
+        </div>
+      </form>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

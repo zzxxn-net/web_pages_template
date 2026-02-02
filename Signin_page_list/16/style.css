@@ -1,0 +1,211 @@
+/* ============================================
+   회원가입 시안 16 - 풀스크린 몰입형 + 다크 아카이브
+   입력 반응형 애니메이션, 상태 변화 강조
+   ============================================ */
+
+.signup-full.signup-archive {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: #0d0c0a;
+  box-sizing: border-box;
+}
+
+.archive-inner {
+  width: 100%;
+  max-width: 440px;
+  margin: auto;
+}
+
+.archive-header {
+  margin-bottom: 2rem;
+}
+
+.archive-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  font-family: "Georgia", "Times New Roman", serif;
+  color: #e8e4dc;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 480px) {
+  .archive-title {
+    font-size: 1.5rem;
+  }
+}
+
+.archive-desc {
+  margin: 0;
+  font-size: 0.875rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #9a948a;
+}
+
+.archive-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.archive-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.archive-field--focused .archive-input,
+.archive-field--focused .archive-pw-wrap {
+  border-color: #8b7355;
+  box-shadow: 0 0 0 2px rgba(139, 115, 85, 0.25);
+}
+
+.archive-field--invalid .archive-input,
+.archive-field--invalid .archive-pw-wrap {
+  border-color: #b85450;
+  box-shadow: 0 0 0 2px rgba(184, 84, 80, 0.3);
+}
+
+.archive-label {
+  font-size: 0.8125rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
+  color: #9a948a;
+}
+
+.archive-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+  color: #e8e4dc;
+  background: #161410;
+  border: 1px solid #2a2620;
+  border-radius: 6px;
+  box-sizing: border-box;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+}
+
+.archive-input::placeholder {
+  color: #6e6a62;
+}
+
+.archive-input:focus {
+  outline: none;
+  border-color: #8b7355;
+  box-shadow: 0 0 0 2px rgba(139, 115, 85, 0.25);
+  transform: translateY(-1px);
+}
+
+.archive-input[aria-invalid="true"] {
+  border-color: #b85450;
+  box-shadow: 0 0 0 2px rgba(184, 84, 80, 0.3);
+}
+
+.archive-pw-wrap {
+  display: flex;
+  border: 1px solid #2a2620;
+  border-radius: 6px;
+  background: #161410;
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+}
+
+.archive-pw-wrap:focus-within {
+  border-color: #8b7355;
+  box-shadow: 0 0 0 2px rgba(139, 115, 85, 0.25);
+  transform: translateY(-1px);
+}
+
+.archive-pw-wrap .archive-input {
+  border: none;
+  border-radius: 0;
+  flex: 1;
+  transform: none;
+}
+
+.archive-pw-wrap .archive-input:focus {
+  box-shadow: none;
+  transform: none;
+}
+
+.archive-pw-wrap .archive-pw-btn {
+  padding: 0 1rem;
+  font-size: 0.8125rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #9a948a;
+  background: transparent;
+  border: none;
+  border-left: 1px solid #2a2620;
+  cursor: pointer;
+}
+
+.archive-pw-wrap .archive-pw-btn:hover {
+  color: #a08060;
+}
+
+.archive-error {
+  font-size: 0.8125rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #b85450;
+}
+
+.archive-actions {
+  margin-top: 0.5rem;
+}
+
+.archive-btn {
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #0d0c0a;
+  background: #a08060;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.archive-btn:hover:not(:disabled) {
+  background: #b8946a;
+  transform: translateY(-1px);
+}
+
+.archive-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.archive-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.archive-footer {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #2a2620;
+  text-align: center;
+}
+
+.archive-link {
+  font-size: 0.875rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #a08060;
+  text-decoration: none;
+}
+
+.archive-link:hover {
+  text-decoration: underline;
+}
+
+[x-cloak] {
+  display: none !important;
+}

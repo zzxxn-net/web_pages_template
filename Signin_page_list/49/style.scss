@@ -1,0 +1,229 @@
+// ============================================
+// 회원가입 시안 49 - 현대 판타지 + 풀스크린 몰입형
+// 포커스 이동 중심 UX
+// ============================================
+
+$font-head: "Cormorant Garamond", Georgia, serif;
+$font: "Outfit", -apple-system, BlinkMacSystemFont, sans-serif;
+$bg: linear-gradient(165deg, #2d1b4e 0%, #1a0f2e 45%, #0f0818 100%);
+$card-bg: rgba(255, 255, 255, 0.06);
+$card-border: rgba(212, 175, 55, 0.22);
+$primary: #d4af37;
+$primary-soft: rgba(212, 175, 55, 0.15);
+$text: #f5f0e8;
+$text-muted: #a89f8f;
+$error: #e07a7a;
+$error-soft: rgba(224, 122, 122, 0.15);
+$radius: 12px;
+$break: 480px;
+$max-width: 400px;
+
+// 풀스크린 몰입형
+.signup-fpf.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  background: $bg;
+  position: relative;
+}
+
+.fpf-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: $bg;
+}
+
+.fpf-wrap {
+  position: relative;
+  width: 100%;
+  max-width: $max-width;
+  margin: auto;
+}
+
+.fpf-card {
+  padding: 1.75rem 1.5rem;
+  background: $card-bg;
+  border: 1px solid $card-border;
+  border-radius: $radius;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+
+  @media (max-width: $break) {
+    padding: 1.5rem 1.25rem;
+  }
+}
+
+.fpf-header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.fpf-title {
+  margin: 0 0 0.3rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: $font-head;
+  color: $text;
+  letter-spacing: -0.02em;
+}
+
+.fpf-desc {
+  margin: 0;
+  font-size: 0.875rem;
+  font-family: $font;
+  color: $text-muted;
+}
+
+.fpf-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+// 포커스 이동 중심: 현재 포커스 필드 강조
+.fpf-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  &.fpf-field--focused .fpf-input,
+  &.fpf-field--focused .fpf-pw-wrap {
+    border-color: $primary;
+    box-shadow: 0 0 0 2px $primary-soft;
+  }
+
+  &.fpf-field--invalid .fpf-input,
+  &.fpf-field--invalid .fpf-pw-wrap {
+    border-color: $error;
+    box-shadow: 0 0 0 2px $error-soft;
+  }
+}
+
+.fpf-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: $font-head;
+  color: $text-muted;
+  letter-spacing: 0.02em;
+}
+
+.fpf-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  font-family: $font;
+  color: $text;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid $card-border;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+  &::placeholder {
+    color: $text-muted;
+    opacity: 0.8;
+  }
+
+  &:focus {
+    border-color: $primary;
+    box-shadow: 0 0 0 2px $primary-soft;
+  }
+}
+
+.fpf-pw-wrap {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid $card-border;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+  .fpf-input {
+    border: none;
+    background: transparent;
+    flex: 1;
+    padding-right: 0.5rem;
+  }
+
+  &:focus-within {
+    border-color: $primary;
+    box-shadow: 0 0 0 2px $primary-soft;
+  }
+}
+
+.fpf-pw-btn {
+  flex-shrink: 0;
+  padding: 0 0.75rem;
+  border: none;
+  background: transparent;
+  font-size: 0.8125rem;
+  font-family: $font;
+  color: $text-muted;
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+.fpf-error {
+  font-size: 0.8125rem;
+  font-family: $font;
+  color: $error;
+}
+
+.fpf-focus-btn {
+  align-self: flex-start;
+  margin-top: 0.2rem;
+  padding: 0.35rem 0.6rem;
+  border: none;
+  background: transparent;
+  font-size: 0.75rem;
+  font-family: $font;
+  color: $primary;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.fpf-actions {
+  margin-top: 0.5rem;
+}
+
+.fpf-btn {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid $primary;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: $font;
+  color: $primary;
+  background: $primary-soft;
+  cursor: pointer;
+  transition: background 0.25s ease, opacity 0.25s ease;
+
+  &:hover:not(:disabled) {
+    background: rgba($primary, 0.25);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

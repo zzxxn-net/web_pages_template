@@ -1,0 +1,264 @@
+// 시안 86: 미래적 클린 + 단계 분할형(Progressive Form) + GSAP 기반 부드러운 전환
+$s86-font: 'Inter', system-ui, sans-serif;
+$s86-mono: 'JetBrains Mono', monospace;
+$s86-bg: #f8fafc;
+$s86-card: #fff;
+$s86-border: #e2e8f0;
+$s86-text: #0f172a;
+$s86-muted: #64748b;
+$s86-accent: #0ea5e9;
+$s86-accent-soft: rgba(14, 165, 233, 0.15);
+$s86-error: #ef4444;
+$s86-radius: 12px;
+$s86-ease: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s86 {
+  font-family: $s86-font;
+  color: $s86-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 2rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s86-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: $s86-bg;
+  pointer-events: none;
+}
+
+.s86-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  padding: clamp(1.25rem, 4vw, 1.75rem);
+  background: $s86-card;
+  border: 1px solid $s86-border;
+  border-radius: $s86-radius;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.s86-header {
+  margin-bottom: 1.25rem;
+}
+
+.s86-title {
+  font-size: clamp(1.5rem, 3.5vw, 1.75rem);
+  font-weight: 600;
+  color: $s86-text;
+  margin: 0 0 0.2rem;
+  letter-spacing: -0.02em;
+}
+
+.s86-desc {
+  font-family: $s86-mono;
+  font-size: 0.75rem;
+  color: $s86-muted;
+  margin: 0 0 0.85rem;
+  letter-spacing: 0.04em;
+}
+
+.s86-steps {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.s86-step {
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $s86-mono;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: $s86-muted;
+  background: #f1f5f9;
+  border: 1px solid $s86-border;
+  border-radius: 50%;
+  transition: color $s86-ease, border-color $s86-ease, background $s86-ease;
+
+  &--active {
+    color: $s86-accent;
+    border-color: $s86-accent;
+    background: $s86-accent-soft;
+  }
+}
+
+.s86-step-line {
+  flex: 1;
+  max-width: 2.5rem;
+  height: 2px;
+  background: $s86-border;
+  border-radius: 1px;
+  transition: background $s86-ease;
+
+  &--filled {
+    background: $s86-accent;
+  }
+}
+
+.s86-form {
+  position: relative;
+  min-height: 200px;
+}
+
+.s86-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.s86-panel-title {
+  font-family: $s86-mono;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: $s86-muted;
+  margin: 0 0 0.35rem;
+  letter-spacing: 0.08em;
+}
+
+.s86-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  &--invalid .s86-input {
+    border-color: $s86-error;
+    box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.2);
+  }
+}
+
+.s86-label {
+  font-family: $s86-mono;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: $s86-muted;
+}
+
+.s86-input {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  padding-right: 3.25rem;
+  font-family: $s86-font;
+  font-size: 0.9375rem;
+  color: $s86-text;
+  background: #f8fafc;
+  border: 1px solid $s86-border;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color $s86-ease, box-shadow $s86-ease;
+
+  &::placeholder {
+    color: $s86-muted;
+    opacity: 0.8;
+  }
+
+  &:focus {
+    border-color: $s86-accent;
+    box-shadow: 0 0 0 2px $s86-accent-soft;
+  }
+}
+
+.s86-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .s86-input {
+    padding-right: 3.25rem;
+  }
+}
+
+.s86-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.6875rem;
+  font-family: $s86-mono;
+  color: $s86-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background $s86-ease;
+
+  &:hover {
+    background: $s86-accent-soft;
+  }
+}
+
+.s86-error {
+  font-size: 0.75rem;
+  color: $s86-error;
+  display: block;
+}
+
+.s86-nav {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  justify-content: flex-end;
+}
+
+.s86-btn {
+  padding: 0.65rem 1.1rem;
+  font-family: $s86-mono;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity $s86-ease, transform $s86-ease, background $s86-ease;
+
+  &--next,
+  &--submit {
+    color: #fff;
+    background: $s86-accent;
+
+    &:hover:not(:disabled) {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+  }
+
+  &--prev {
+    color: $s86-muted;
+    background: #f1f5f9;
+    border: 1px solid $s86-border;
+
+    &:hover {
+      background: #e2e8f0;
+      color: $s86-text;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

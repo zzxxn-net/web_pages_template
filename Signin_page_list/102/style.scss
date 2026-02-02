@@ -1,0 +1,263 @@
+// 시안 102: 사이버 미니멀 + 카드 분리형 레이아웃 + 포커스 이동 중심 UX
+$s102-font: 'Inter', system-ui, sans-serif;
+$s102-bg: #f4f4f5;
+$s102-card: #ffffff;
+$s102-card-border: #e4e4e7;
+$s102-text: #18181b;
+$s102-muted: #71717a;
+$s102-accent: #06b6d4;
+$s102-accent-soft: rgba(6, 182, 212, 0.12);
+$s102-error: #ef4444;
+$s102-radius: 10px;
+$s102-ease: 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s102 {
+  font-family: $s102-font;
+  color: $s102-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 2rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s102-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s102-bg;
+}
+
+.s102-layout {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 1.25rem);
+}
+
+.s102-header {
+  text-align: center;
+}
+
+.s102-title {
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 600;
+  color: $s102-text;
+  margin: 0;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+}
+
+.s102-tagline {
+  font-size: clamp(0.8125rem, 2vw, 0.875rem);
+  font-weight: 400;
+  color: $s102-muted;
+  margin: 0.35rem 0 0;
+  line-height: 1.5;
+}
+
+.s102-form {
+  width: 100%;
+}
+
+.s102-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1rem, 3vw, 1.5rem);
+  width: 100%;
+  max-width: 660px;
+  margin: 0 auto;
+
+  @media (max-width: 620px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.s102-card {
+  padding: clamp(1.25rem, 3.5vw, 1.5rem);
+  background: $s102-card;
+  border: 1px solid $s102-card-border;
+  border-radius: $s102-radius;
+  transition: border-color $s102-ease, box-shadow $s102-ease;
+
+  &--basic {
+    border-top: 3px solid $s102-accent;
+  }
+
+  &--account {
+    border-top: 3px solid rgba(6, 182, 212, 0.5);
+  }
+}
+
+.s102-card-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: $s102-accent;
+  margin: 0 0 1rem;
+  letter-spacing: 0.02em;
+}
+
+.s102-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.s102-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  transition: transform $s102-ease;
+
+  &--focus .s102-input {
+    border-color: $s102-accent;
+    box-shadow: 0 0 0 2px $s102-accent-soft;
+  }
+
+  &--focus .s102-label {
+    color: $s102-accent;
+  }
+
+  &--invalid .s102-input {
+    border-color: $s102-error;
+    box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.15);
+  }
+
+  &--invalid .s102-label {
+    color: $s102-error;
+  }
+}
+
+.s102-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: $s102-muted;
+  transition: color $s102-ease;
+}
+
+.s102-input {
+  width: 100%;
+  padding: 0.6rem 0.875rem;
+  padding-right: 3rem;
+  font-family: $s102-font;
+  font-size: 0.875rem;
+  color: $s102-text;
+  background: #fafafa;
+  border: 1px solid $s102-card-border;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color $s102-ease, box-shadow $s102-ease;
+
+  &::placeholder {
+    color: $s102-muted;
+    opacity: 0.8;
+  }
+
+  &:focus {
+    border-color: $s102-accent;
+    box-shadow: 0 0 0 2px $s102-accent-soft;
+  }
+}
+
+.s102-pw-wrap {
+  position: relative;
+
+  .s102-input {
+    padding-right: 3rem;
+  }
+}
+
+.s102-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.3rem 0.45rem;
+  font-size: 0.6875rem;
+  font-family: $s102-font;
+  color: $s102-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background $s102-ease;
+
+  &:hover {
+    background: $s102-accent-soft;
+  }
+}
+
+.s102-error {
+  font-size: 0.75rem;
+  color: $s102-error;
+  display: block;
+}
+
+.s102-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.s102-btn {
+  padding: 0.6rem 1rem;
+  font-family: $s102-font;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity $s102-ease, background $s102-ease, border-color $s102-ease;
+
+  &--primary {
+    flex: 1;
+    min-width: 100px;
+    color: #fff;
+    background: $s102-accent;
+    border: none;
+
+    &:hover:not(:disabled) {
+      opacity: 0.92;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &--outline {
+    color: $s102-muted;
+    background: transparent;
+    border: 1px solid $s102-card-border;
+
+    &:hover:not(:disabled) {
+      color: $s102-accent;
+      border-color: $s102-accent;
+      background: $s102-accent-soft;
+    }
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

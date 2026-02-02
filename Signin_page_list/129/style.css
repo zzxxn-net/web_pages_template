@@ -1,0 +1,258 @@
+/* 시안 129: 실험적 인터페이스 + 단일 포커스 입력 흐름 + 스크롤 없는 고정 플로우 */
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.s129 {
+  font-family: "Noto Sans KR", system-ui, sans-serif;
+  color: #e8e8ec;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-sizing: border-box;
+  background: #0f0f12;
+  width: 100%;
+}
+
+.s129-inner {
+  width: 100%;
+  max-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 1.5rem);
+  box-sizing: border-box;
+}
+
+.s129-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  z-index: 10;
+  overflow: hidden;
+}
+
+.s129-progress-bar {
+  height: 100%;
+  background: #00d4aa;
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s129-header {
+  text-align: center;
+  margin-bottom: clamp(1.25rem, 4vw, 1.75rem);
+}
+
+.s129-title {
+  font-family: "JetBrains Mono", monospace;
+  font-size: clamp(1.35rem, 3.5vw, 1.65rem);
+  font-weight: 600;
+  color: #e8e8ec;
+  margin: 0;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}
+
+.s129-step-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #8888a0;
+  margin: 0.5rem 0 0;
+}
+
+.s129-form-wrap {
+  width: 100%;
+  max-width: 360px;
+}
+
+.s129-form {
+  width: 100%;
+}
+
+.s129-fields {
+  position: relative;
+  min-height: 5.5rem;
+}
+
+.s129-field-wrap {
+  width: 100%;
+}
+
+.s129-field {
+  position: relative;
+  transition: border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), background 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s129-field--focused .s129-input {
+  border-color: #00d4aa;
+  box-shadow: 0 0 0 2px rgba(0, 212, 170, 0.15);
+  background: #1a1a1f;
+}
+
+.s129-field--focused .s129-label {
+  color: #00d4aa;
+}
+
+.s129-field--valid .s129-input {
+  border-color: #00d4aa;
+  background: rgba(0, 212, 170, 0.1);
+}
+
+.s129-field--valid .s129-label {
+  color: #00d4aa;
+}
+
+.s129-field--invalid .s129-input {
+  border-color: #ff5c7a;
+  box-shadow: 0 0 0 2px rgba(255, 92, 122, 0.12);
+  background: rgba(255, 92, 122, 0.12);
+}
+
+.s129-field--invalid .s129-label {
+  color: #ff5c7a;
+}
+
+.s129-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #8888a0;
+  display: block;
+  margin-bottom: 0.4rem;
+  transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s129-input {
+  width: 100%;
+  padding: 0.9rem 2.2rem 0.9rem 0.85rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.9rem;
+  color: #e8e8ec;
+  background: #1a1a1f;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), background 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s129-input::placeholder {
+  color: #8888a0;
+  opacity: 0.7;
+}
+
+.s129-status {
+  position: absolute;
+  right: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #00d4aa;
+  pointer-events: none;
+}
+
+.s129-pw-wrap .s129-input {
+  padding-right: 3rem;
+}
+
+.s129-pw-btn {
+  position: absolute;
+  right: 0.35rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.2rem 0.4rem;
+  font-family: "Noto Sans KR", system-ui, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: #8888a0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s129-pw-btn:hover {
+  color: #00d4aa;
+}
+
+.s129-error {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #ff5c7a;
+  display: block;
+  margin-top: 0.35rem;
+  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s129-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.s129-btn {
+  padding: 0.8rem 1.5rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s129-btn--primary {
+  color: #0f0f12;
+  background: #00d4aa;
+  min-width: 8rem;
+}
+
+.s129-btn--primary:hover:not(:disabled) {
+  background: #00e6b8;
+  box-shadow: 0 0 20px rgba(0, 212, 170, 0.15);
+  transform: translateY(-1px);
+}
+
+.s129-btn--secondary {
+  color: #8888a0;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.s129-btn--secondary:hover {
+  background: rgba(0, 212, 170, 0.08);
+  color: #00d4aa;
+  border-color: #00d4aa;
+}
+
+.s129-btn--primary:active:not(:disabled),
+.s129-btn--secondary:active {
+  transform: translateY(0);
+}
+
+.s129-btn:disabled,
+.s129-btn.s129-btn--busy {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+[x-cloak] {
+  display: none !important;
+}

@@ -1,0 +1,195 @@
+// 시안 54: 미래적 클린 + 풀스크린 몰입형 + 포커스 이동 중심 UX
+// PC~모바일 반응형, 풀뷰포트 몰입, Enter로 다음 필드 이동
+
+$s54-font: 'Inter', system-ui, sans-serif;
+$s54-bg: #f8fafc;
+$s54-surface: #ffffff;
+$s54-border: #e2e8f0;
+$s54-text: #0f172a;
+$s54-text-muted: #64748b;
+$s54-accent: #0ea5e9;
+$s54-accent-soft: rgba(14, 165, 233, 0.12);
+$s54-error: #ef4444;
+$s54-radius: 10px;
+$s54-transition: 0.2s ease;
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s54 {
+  font-family: $s54-font;
+  color: $s54-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s54-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s54-bg;
+}
+
+.s54-full {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s54-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.s54-title {
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 600;
+  color: $s54-text;
+  margin-bottom: 0.35rem;
+}
+
+.s54-desc {
+  font-size: 0.875rem;
+  color: $s54-text-muted;
+  line-height: 1.5;
+}
+
+.s54-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.s54-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: transform $s54-transition;
+
+  &--focused .s54-input {
+    border-color: $s54-accent;
+    box-shadow: 0 0 0 3px $s54-accent-soft;
+  }
+
+  &--invalid .s54-input {
+    border-color: $s54-error;
+    box-shadow: 0 0 0 2px rgba($s54-error, 0.1);
+  }
+}
+
+.s54-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: $s54-text;
+}
+
+.s54-input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: $s54-text;
+  background: $s54-surface;
+  border: 1px solid $s54-border;
+  border-radius: $s54-radius;
+  outline: none;
+  transition: border-color $s54-transition, box-shadow $s54-transition;
+
+  &::placeholder {
+    color: $s54-text-muted;
+  }
+
+  &:focus {
+    border-color: $s54-accent;
+    box-shadow: 0 0 0 3px $s54-accent-soft;
+  }
+}
+
+.s54-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .s54-input {
+    padding-right: 4rem;
+  }
+}
+
+.s54-pw-btn {
+  position: absolute;
+  right: 0.75rem;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.75rem;
+  font-family: inherit;
+  color: $s54-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background $s54-transition;
+
+  &:hover {
+    background: $s54-accent-soft;
+  }
+}
+
+.s54-error {
+  font-size: 0.75rem;
+  color: $s54-error;
+}
+
+.s54-actions {
+  margin-top: 0.75rem;
+  width: 100%;
+}
+
+.s54-submit {
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #fff;
+  background: $s54-accent;
+  border: none;
+  border-radius: $s54-radius;
+  cursor: pointer;
+  transition: opacity $s54-transition, background $s54-transition;
+
+  &:hover:not(:disabled) {
+    background: darken($s54-accent, 6%);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.s54-submit-text {
+  display: block;
+}
+
+[x-cloak] {
+  display: none !important;
+}

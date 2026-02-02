@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 75 - 사이버 미니멀 카드 분리형</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s75 signup-fixed" x-data="signupForm75()">
+    <div class="s75-bg" aria-hidden="true"></div>
+    <div class="s75-wrap" x-ref="wrap">
+      <header class="s75-header">
+        <h1 class="s75-title">SIGN UP</h1>
+        <p class="s75-desc">Create your account</p>
+      </header>
+      <form class="s75-form" method="post" action="#" hx-post="#" hx-swap="none" @submit.prevent="handleSubmit">
+        <div class="s75-cards">
+          <div class="s75-card" :class="{ 's75-card--focused': focusedField === 'email', 's75-card--invalid': errors.email }">
+            <label for="s75-email" class="s75-label">EMAIL</label>
+            <input id="s75-email" type="email" name="email" class="s75-input" placeholder="you@example.com" autocomplete="email" required x-model="email" @focus="focusedField = 'email'" @blur="focusedField = null; validateEmail()" :aria-invalid="errors.email ? 'true' : 'false'" />
+            <span class="s75-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+          </div>
+          <div class="s75-card" :class="{ 's75-card--focused': focusedField === 'name', 's75-card--invalid': errors.name }">
+            <label for="s75-name" class="s75-label">NAME</label>
+            <input id="s75-name" type="text" name="name" class="s75-input" placeholder="홍길동" autocomplete="name" required x-model="name" @focus="focusedField = 'name'" @blur="focusedField = null; validateName()" :aria-invalid="errors.name ? 'true' : 'false'" />
+            <span class="s75-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+          </div>
+          <div class="s75-card" :class="{ 's75-card--focused': focusedField === 'password', 's75-card--invalid': errors.password }">
+            <label for="s75-password" class="s75-label">PASSWORD</label>
+            <div class="s75-pw-wrap">
+              <input id="s75-password" :type="showPassword ? 'text' : 'password'" name="password" class="s75-input" placeholder="8자 이상" autocomplete="new-password" required minlength="8" x-model="password" @focus="focusedField = 'password'" @blur="focusedField = null; validatePassword()" :aria-invalid="errors.password ? 'true' : 'false'" />
+              <button type="button" class="s75-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword"><span x-text="showPassword ? 'HIDE' : 'SHOW'"></span></button>
+            </div>
+            <span class="s75-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+          </div>
+          <div class="s75-card" :class="{ 's75-card--focused': focusedField === 'passwordConfirm', 's75-card--invalid': errors.passwordConfirm }">
+            <label for="s75-passwordConfirm" class="s75-label">CONFIRM PASSWORD</label>
+            <input id="s75-passwordConfirm" :type="showPassword ? 'text' : 'password'" name="password_confirm" class="s75-input" placeholder="다시 입력" autocomplete="new-password" required minlength="8" x-model="passwordConfirm" @focus="focusedField = 'passwordConfirm'" @blur="focusedField = null; validatePasswordConfirm()" :aria-invalid="errors.passwordConfirm ? 'true' : 'false'" />
+            <span class="s75-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+          </div>
+        </div>
+        <div class="s75-actions">
+          <button type="submit" class="s75-submit" :disabled="submitting" :aria-busy="submitting"><span class="s75-submit-text" x-text="submitting ? '…' : 'SIGN UP'"></span></button>
+        </div>
+      </form>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

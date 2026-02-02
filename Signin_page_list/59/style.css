@@ -1,0 +1,28 @@
+/* 시안 59: 다크 아카이브 + 풀스크린 몰입형 + 입력 반응형 애니메이션 */
+.signup-fixed { min-height: 100vh; min-height: 100dvh; overflow: auto; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.s59 { font-family: "Source Sans 3", sans-serif; color: #e8e6e4; min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding: 2rem 1rem; position: relative; box-sizing: border-box; }
+.s59-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; background: #1a1918; }
+.s59-full { position: relative; z-index: 1; width: 100%; max-width: 400px; }
+.s59-header { text-align: center; margin-bottom: 1.75rem; }
+.s59-title { font-family: "Libre Baskerville", serif; font-size: clamp(1.4rem, 4vw, 1.65rem); font-weight: 600; color: #e8e6e4; margin-bottom: 0.3rem; }
+.s59-desc { font-size: 0.875rem; color: #9a9692; }
+.s59-form { display: flex; flex-direction: column; gap: 1.1rem; }
+.s59-field { display: flex; flex-direction: column; gap: 0.35rem; transition: transform 0.26s ease; }
+.s59-field--focused .s59-label { color: #b8956b; }
+.s59-field--focused .s59-input { border-color: #b8956b; box-shadow: 0 0 0 3px rgba(184,149,107,0.2); transform: scale(1.02); }
+.s59-field--invalid .s59-input { border-color: #c45c5c; box-shadow: 0 0 0 2px rgba(196,92,92,0.2); }
+.s59-label { font-size: 0.8125rem; font-weight: 500; color: #9a9692; transition: color 0.26s ease; }
+.s59-input { width: 100%; padding: 0.8rem 1rem; font-family: inherit; font-size: 0.9375rem; color: #e8e6e4; background: #242220; border: 1px solid #3a3836; border-radius: 8px; outline: none; transition: transform 0.26s ease, border-color 0.26s ease, box-shadow 0.26s ease; }
+.s59-input::placeholder { color: #9a9692; opacity: 0.75; }
+.s59-input:focus { border-color: #b8956b; box-shadow: 0 0 0 3px rgba(184,149,107,0.2); transform: scale(1.02); }
+.s59-pw-wrap { position: relative; display: flex; align-items: center; }
+.s59-pw-wrap .s59-input { padding-right: 4rem; }
+.s59-pw-btn { position: absolute; right: 0.6rem; padding: 0.35rem 0.6rem; font-size: 0.75rem; font-family: inherit; color: #b8956b; background: transparent; border: none; cursor: pointer; border-radius: 6px; transition: background 0.26s ease; }
+.s59-pw-btn:hover { background: rgba(184,149,107,0.2); }
+.s59-error { font-size: 0.75rem; color: #c45c5c; }
+.s59-actions { margin-top: 0.5rem; }
+.s59-submit { width: 100%; padding: 0.85rem 1.25rem; font-family: "Source Sans 3", sans-serif; font-size: 0.9375rem; font-weight: 600; color: #1a1918; background: #b8956b; border: none; border-radius: 8px; cursor: pointer; transition: opacity 0.26s ease, transform 0.26s ease; }
+.s59-submit:hover:not(:disabled) { opacity: 0.95; transform: translateY(-1px); }
+.s59-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+.s59-submit-text { display: block; }
+[x-cloak] { display: none !important; }

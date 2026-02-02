@@ -1,0 +1,145 @@
+/* 시안 56: 네오 브루탈리즘 + 풀스크린 몰입형 + GSAP 기반 부드러운 전환 */
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s56 {
+  font-family: "Archivo", system-ui, sans-serif;
+  color: #1a1a1a;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s56-full {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s56-header { text-align: center; margin-bottom: 2rem; }
+
+.s56-title {
+  font-family: "Archivo Black", system-ui, sans-serif;
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  font-weight: 400;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.s56-desc { font-size: 0.875rem; color: #444; }
+
+.s56-form { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.s56-field { display: flex; flex-direction: column; gap: 0.4rem; }
+
+.s56-field--focused .s56-input {
+  border-color: #1a1a1a;
+  border-width: 3px;
+  box-shadow: 4px 4px 0 #1a1a1a;
+}
+
+.s56-field--invalid .s56-input {
+  border-color: #c00;
+  box-shadow: 4px 4px 0 #c00;
+}
+
+.s56-label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.s56-input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  background: #fff;
+  border: 3px solid #1a1a1a;
+  border-radius: 0;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.s56-input::placeholder { color: #444; font-weight: 400; }
+
+.s56-input:focus {
+  border-color: #1a1a1a;
+  box-shadow: 4px 4px 0 #1a1a1a;
+}
+
+.s56-pw-wrap { position: relative; display: flex; align-items: center; }
+
+.s56-pw-wrap .s56-input { padding-right: 4.5rem; }
+
+.s56-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.75rem;
+  font-family: inherit;
+  font-weight: 700;
+  color: #1a1a1a;
+  background: transparent;
+  border: 3px solid #1a1a1a;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.s56-pw-btn:hover { background: #1a1a1a; color: #fff; }
+
+.s56-error { font-size: 0.75rem; font-weight: 600; color: #c00; }
+
+.s56-actions { margin-top: 0.75rem; width: 100%; }
+
+.s56-submit {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  font-family: "Archivo Black", system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #fff;
+  background: #1a1a1a;
+  border: 3px solid #1a1a1a;
+  border-radius: 0;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 6px 6px 0 #1a1a1a;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.s56-submit:hover:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 4px 4px 0 #1a1a1a;
+}
+
+.s56-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.s56-submit-text { display: block; }
+
+[x-cloak] { display: none !important; }

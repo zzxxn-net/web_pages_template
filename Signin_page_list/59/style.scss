@@ -1,0 +1,38 @@
+// 시안 59: 다크 아카이브 + 풀스크린 몰입형 + 입력 반응형 애니메이션
+$s59-font-serif: 'Libre Baskerville', serif;
+$s59-font-sans: 'Source Sans 3', sans-serif;
+$s59-bg: #1a1918;
+$s59-surface: #242220;
+$s59-border: #3a3836;
+$s59-text: #e8e6e4;
+$s59-text-soft: #9a9692;
+$s59-accent: #b8956b;
+$s59-accent-soft: rgba(184, 149, 107, 0.2);
+$s59-error: #c45c5c;
+$s59-radius: 8px;
+$s59-transition: 0.26s ease;
+
+.signup-fixed { min-height: 100vh; min-height: 100dvh; overflow: auto; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.s59 { font-family: $s59-font-sans; color: $s59-text; min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding: 2rem 1rem; position: relative; box-sizing: border-box; }
+.s59-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; background: $s59-bg; }
+.s59-full { position: relative; z-index: 1; width: 100%; max-width: 400px; }
+.s59-header { text-align: center; margin-bottom: 1.75rem; }
+.s59-title { font-family: $s59-font-serif; font-size: clamp(1.4rem, 4vw, 1.65rem); font-weight: 600; color: $s59-text; margin-bottom: 0.3rem; }
+.s59-desc { font-size: 0.875rem; color: $s59-text-soft; }
+.s59-form { display: flex; flex-direction: column; gap: 1.1rem; }
+.s59-field { display: flex; flex-direction: column; gap: 0.35rem; transition: transform $s59-transition;
+  &--focused { .s59-label { color: $s59-accent; } .s59-input { border-color: $s59-accent; box-shadow: 0 0 0 3px $s59-accent-soft; transform: scale(1.02); } }
+  &--invalid .s59-input { border-color: $s59-error; box-shadow: 0 0 0 2px rgba($s59-error, 0.2); }
+}
+.s59-label { font-size: 0.8125rem; font-weight: 500; color: $s59-text-soft; transition: color $s59-transition; }
+.s59-input { width: 100%; padding: 0.8rem 1rem; font-family: inherit; font-size: 0.9375rem; color: $s59-text; background: $s59-surface; border: 1px solid $s59-border; border-radius: $s59-radius; outline: none; transition: transform $s59-transition, border-color $s59-transition, box-shadow $s59-transition;
+  &::placeholder { color: $s59-text-soft; opacity: 0.75; }
+  &:focus { border-color: $s59-accent; box-shadow: 0 0 0 3px $s59-accent-soft; transform: scale(1.02); }
+}
+.s59-pw-wrap { position: relative; display: flex; align-items: center; .s59-input { padding-right: 4rem; } }
+.s59-pw-btn { position: absolute; right: 0.6rem; padding: 0.35rem 0.6rem; font-size: 0.75rem; font-family: inherit; color: $s59-accent; background: transparent; border: none; cursor: pointer; border-radius: 6px; transition: background $s59-transition; &:hover { background: $s59-accent-soft; } }
+.s59-error { font-size: 0.75rem; color: $s59-error; }
+.s59-actions { margin-top: 0.5rem; }
+.s59-submit { width: 100%; padding: 0.85rem 1.25rem; font-family: $s59-font-sans; font-size: 0.9375rem; font-weight: 600; color: #1a1918; background: $s59-accent; border: none; border-radius: $s59-radius; cursor: pointer; transition: opacity $s59-transition, transform $s59-transition; &:hover:not(:disabled) { opacity: 0.95; transform: translateY(-1px); } &:disabled { opacity: 0.6; cursor: not-allowed; } }
+.s59-submit-text { display: block; }
+[x-cloak] { display: none !important; }

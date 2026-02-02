@@ -1,0 +1,234 @@
+/* 회원가입 시안 40 - 실험적 인터페이스 + 풀스크린 몰입형, 입력 반응형 애니메이션 */
+.signup-exp-full.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  overflow: auto;
+  position: relative;
+  background: #0d0d0f;
+}
+
+.expfull-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.expfull-lines {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.7;
+}
+
+.expfull-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.8;
+}
+
+.expfull-blob--1 {
+  width: 320px;
+  height: 320px;
+  top: -10%;
+  left: -5%;
+  background: rgba(255, 107, 107, 0.08);
+}
+
+.expfull-blob--2 {
+  width: 280px;
+  height: 280px;
+  bottom: -15%;
+  right: -8%;
+  background: rgba(78, 205, 196, 0.06);
+}
+
+.expfull-inner {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.expfull-card {
+  width: 100%;
+  padding: 2rem 1.5rem;
+  background: rgba(18, 18, 22, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 480px) {
+  .expfull-card {
+    padding: 1.5rem 1.25rem;
+  }
+}
+
+.expfull-header {
+  margin-bottom: 1.75rem;
+}
+
+.expfull-title {
+  margin: 0 0 0.35rem;
+  font-size: 1.625rem;
+  font-weight: 700;
+  font-family: "Syne", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #f0f0f2;
+  letter-spacing: -0.03em;
+}
+
+.expfull-desc {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-family: "Syne", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #888899;
+}
+
+.expfull-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.expfull-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: transform 0.2s ease;
+}
+
+.expfull-field--focused .expfull-input,
+.expfull-field--focused .expfull-pw-wrap {
+  border-color: #ff6b6b;
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.18), 0 0 24px rgba(255, 107, 107, 0.15);
+  transform: scale(1.01);
+}
+
+.expfull-field--invalid .expfull-input,
+.expfull-field--invalid .expfull-pw-wrap {
+  border-color: #ff6b6b;
+  box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.12);
+}
+
+.expfull-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-family: "Syne", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #888899;
+  letter-spacing: 0.02em;
+}
+
+.expfull-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  font-family: "Syne", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #f0f0f2;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.expfull-input::placeholder {
+  color: #888899;
+  opacity: 0.7;
+}
+
+.expfull-input:focus {
+  border-color: #ff6b6b;
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.18), 0 0 24px rgba(255, 107, 107, 0.15);
+  transform: scale(1.01);
+}
+
+.expfull-pw-wrap {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.expfull-pw-wrap .expfull-input {
+  border: none;
+  background: transparent;
+  flex: 1;
+}
+
+.expfull-pw-wrap:focus-within {
+  border-color: #ff6b6b;
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.18), 0 0 24px rgba(255, 107, 107, 0.15);
+  transform: scale(1.01);
+}
+
+.expfull-pw-btn {
+  padding: 0 0.75rem;
+  border: none;
+  background: transparent;
+  font-size: 0.8125rem;
+  font-family: "Syne", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #888899;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.expfull-pw-btn:hover {
+  color: #4ecdc4;
+}
+
+.expfull-error {
+  font-size: 0.8125rem;
+  font-family: "Syne", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #ff6b6b;
+}
+
+.expfull-submit {
+  margin-top: 0.5rem;
+}
+
+.expfull-btn {
+  width: 100%;
+  padding: 0.8rem 1.25rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: "Syne", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #0d0d0f;
+  background: #ff6b6b;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.expfull-btn:hover:not(:disabled) {
+  background: #ff7a7a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 107, 107, 0.35);
+}
+
+.expfull-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+[x-cloak] {
+  display: none !important;
+}

@@ -1,0 +1,200 @@
+// 시안 75: 사이버 미니멀 + 카드 분리형 레이아웃 + GSAP 기반 부드러운 전환
+$s75-font: 'Space Grotesk', system-ui, sans-serif;
+$s75-mono: 'IBM Plex Mono', monospace;
+$s75-bg: #0c0e12;
+$s75-surface: #161a21;
+$s75-border: #272c36;
+$s75-text: #e4e8ed;
+$s75-text-soft: #7d8590;
+$s75-accent: #3b82f6;
+$s75-accent-soft: rgba(59, 130, 246, 0.15);
+$s75-error: #f87171;
+$s75-radius: 10px;
+$s75-transition: 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s75 {
+  font-family: $s75-font;
+  color: $s75-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 3vw, 2rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s75-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s75-bg;
+}
+
+.s75-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+}
+
+.s75-header {
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.s75-title {
+  font-family: $s75-mono;
+  font-size: clamp(1.2rem, 3.5vw, 1.45rem);
+  font-weight: 500;
+  color: $s75-text;
+  margin: 0 0 0.3rem;
+  letter-spacing: -0.01em;
+}
+
+.s75-desc {
+  font-size: 0.8125rem;
+  color: $s75-text-soft;
+  margin: 0;
+}
+
+.s75-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.s75-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.s75-card {
+  background: $s75-surface;
+  border: 1px solid $s75-border;
+  border-radius: $s75-radius;
+  padding: 0.75rem 1rem;
+  transition: border-color $s75-transition, box-shadow $s75-transition;
+
+  &--focused {
+    border-color: $s75-accent;
+    box-shadow: 0 0 0 2px $s75-accent-soft;
+  }
+
+  &--focused .s75-label {
+    color: $s75-accent;
+  }
+
+  &--invalid {
+    border-color: $s75-error;
+  }
+}
+
+.s75-label {
+  font-family: $s75-mono;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: $s75-text-soft;
+  display: block;
+  margin-bottom: 0.35rem;
+  transition: color $s75-transition;
+}
+
+.s75-input {
+  width: 100%;
+  padding: 0.5rem 0;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: $s75-text;
+  background: transparent;
+  border: none;
+  outline: none;
+
+  &::placeholder {
+    color: $s75-text-soft;
+    opacity: 0.7;
+  }
+}
+
+.s75-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .s75-input {
+    padding-right: 3.5rem;
+  }
+}
+
+.s75-pw-btn {
+  position: absolute;
+  right: 0;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.75rem;
+  font-family: inherit;
+  color: $s75-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background $s75-transition;
+  &:hover {
+    background: $s75-accent-soft;
+  }
+}
+
+.s75-error {
+  font-size: 0.75rem;
+  color: $s75-error;
+  margin-top: 0.35rem;
+  display: block;
+}
+
+.s75-actions {
+  margin-top: 0.25rem;
+}
+
+.s75-submit {
+  width: 100%;
+  padding: 0.8rem 1.25rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #fff;
+  background: $s75-accent;
+  border: none;
+  border-radius: $s75-radius;
+  cursor: pointer;
+  transition: opacity $s75-transition, transform $s75-transition;
+
+  &:hover:not(:disabled) {
+    opacity: 0.95;
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.s75-submit-text {
+  display: block;
+}
+
+[x-cloak] {
+  display: none !important;
+}

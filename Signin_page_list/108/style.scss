@@ -1,0 +1,234 @@
+// 시안 108: 네오 브루탈리즘 + 카드 분리형 레이아웃 + GSAP 기반 부드러운 전환
+$s108-sans: 'Space Grotesk', system-ui, sans-serif;
+$s108-bg: #f5f5f5;
+$s108-card-bg: #ffffff;
+$s108-text: #0a0a0a;
+$s108-muted: #525252;
+$s108-border: #0a0a0a;
+$s108-accent: #0a0a0a;
+$s108-valid: #166534;
+$s108-error: #b91c1c;
+$s108-ease: 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s108 {
+  font-family: $s108-sans;
+  color: $s108-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.75rem, 3vw, 1.5rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s108-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s108-bg;
+}
+
+.s108-layout {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 720px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 400px;
+  border: 2px solid $s108-border;
+  box-sizing: border-box;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    min-height: auto;
+  }
+}
+
+.s108-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.5rem, 4vw, 2rem);
+  background: $s108-card-bg;
+  border-right: 2px solid $s108-border;
+  box-sizing: border-box;
+
+  &:last-child {
+    border-right: none;
+  }
+
+  @media (max-width: 600px) {
+    border-right: none;
+    border-bottom: 2px solid $s108-border;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.s108-card--brand {
+  align-items: center;
+  text-align: center;
+}
+
+.s108-card--form {
+  justify-content: center;
+}
+
+.s108-title {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  color: $s108-text;
+  margin: 0;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.s108-tagline {
+  font-size: clamp(0.75rem, 2vw, 0.875rem);
+  font-weight: 500;
+  color: $s108-muted;
+  margin: 0.5rem 0 0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.s108-form {
+  width: 100%;
+}
+
+.s108-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.s108-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+
+  &--invalid .s108-input {
+    border-color: $s108-error;
+    background: rgba(185, 28, 28, 0.06);
+  }
+  &--invalid .s108-label {
+    color: $s108-error;
+  }
+  &--valid .s108-input {
+    border-color: $s108-valid;
+    background: rgba(22, 101, 52, 0.06);
+  }
+  &--valid .s108-label {
+    color: $s108-valid;
+  }
+}
+
+.s108-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $s108-text;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.s108-input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  padding-right: 3rem;
+  font-family: $s108-sans;
+  font-size: 0.875rem;
+  color: $s108-text;
+  background: $s108-bg;
+  border: 2px solid $s108-border;
+  outline: none;
+  transition: border-color $s108-ease, background $s108-ease;
+
+  &::placeholder {
+    color: $s108-muted;
+  }
+  &:focus {
+    border-color: $s108-accent;
+    background: $s108-card-bg;
+  }
+}
+
+.s108-pw-wrap {
+  position: relative;
+  .s108-input {
+    padding-right: 3rem;
+  }
+}
+
+.s108-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.25rem 0.4rem;
+  font-size: 0.65rem;
+  font-family: $s108-sans;
+  font-weight: 600;
+  color: $s108-text;
+  background: transparent;
+  border: 2px solid $s108-border;
+  cursor: pointer;
+  transition: background $s108-ease;
+
+  &:hover {
+    background: $s108-bg;
+  }
+}
+
+.s108-error {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: $s108-error;
+  display: block;
+}
+
+.s108-actions {
+  margin-top: 1.25rem;
+}
+
+.s108-btn {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: $s108-sans;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: $s108-card-bg;
+  background: $s108-accent;
+  border: 2px solid $s108-border;
+  cursor: pointer;
+  transition: opacity $s108-ease;
+
+  &:hover:not(:disabled) {
+    opacity: 0.88;
+  }
+  &:disabled,
+  &--busy {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

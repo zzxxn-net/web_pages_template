@@ -1,0 +1,203 @@
+// 시안 66: 실험적 인터페이스 + 카드 분리형 레이아웃 + GSAP 기반 부드러운 전환
+$s66-font: 'Work Sans', system-ui, sans-serif;
+$s66-display: 'Syne', sans-serif;
+$s66-bg: #0d0d0f;
+$s66-surface: #16161a;
+$s66-border: #2a2a30;
+$s66-text: #f0f0f2;
+$s66-text-soft: #88889a;
+$s66-accent: #00d4aa;
+$s66-accent-soft: rgba(0, 212, 170, 0.15);
+$s66-error: #ff6b6b;
+$s66-radius: 16px;
+$s66-card-radius: 18px;
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s66 {
+  font-family: $s66-font;
+  color: $s66-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s66-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s66-bg;
+}
+
+.s66-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+}
+
+.s66-header {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.s66-title {
+  font-family: $s66-display;
+  font-size: clamp(1.4rem, 4vw, 1.7rem);
+  font-weight: 700;
+  color: $s66-text;
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.02em;
+}
+
+.s66-desc {
+  font-size: 0.875rem;
+  color: $s66-text-soft;
+}
+
+.s66-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.s66-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.s66-card {
+  background: $s66-surface;
+  border: 1px solid $s66-border;
+  border-radius: $s66-card-radius;
+  padding: 1rem 1.2rem;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+
+  &--focused {
+    border-color: $s66-accent;
+    box-shadow: 0 0 0 2px $s66-accent-soft;
+  }
+
+  &--invalid {
+    border-color: $s66-error;
+  }
+}
+
+.s66-card-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.s66-card--focused .s66-label {
+  color: $s66-accent;
+}
+
+.s66-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: $s66-text-soft;
+  transition: color 0.25s ease;
+}
+
+.s66-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: $s66-text;
+  background: $s66-bg;
+  border: 1px solid $s66-border;
+  border-radius: $s66-radius;
+  outline: none;
+  transition: border-color 0.25s ease;
+
+  &::placeholder {
+    color: $s66-text-soft;
+    opacity: 0.7;
+  }
+}
+
+.s66-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .s66-input {
+    padding-right: 4rem;
+  }
+}
+
+.s66-pw-btn {
+  position: absolute;
+  right: 0.6rem;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  font-family: inherit;
+  color: $s66-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background 0.25s ease;
+
+  &:hover {
+    background: $s66-accent-soft;
+  }
+}
+
+.s66-error {
+  font-size: 0.75rem;
+  color: $s66-error;
+}
+
+.s66-actions {
+  margin-top: 0.5rem;
+}
+
+.s66-submit {
+  width: 100%;
+  padding: 0.9rem 1.25rem;
+  font-family: $s66-display;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: $s66-bg;
+  background: $s66-accent;
+  border: none;
+  border-radius: $s66-radius;
+  cursor: pointer;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+
+  &:hover:not(:disabled) {
+    opacity: 0.95;
+    transform: translateY(-2px);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.s66-submit-text {
+  display: block;
+}
+
+[x-cloak] {
+  display: none !important;
+}

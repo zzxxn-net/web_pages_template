@@ -1,0 +1,201 @@
+/* 시안 101: 미래적 클린 + 풀스크린 몰입형 + 스크롤 없는 고정 플로우 */
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s101 {
+  font-family: "DM Sans", system-ui, sans-serif;
+  color: #0f172a;
+  box-sizing: border-box;
+}
+
+.s101--full {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  padding: clamp(0.5rem, 2.5vw, 1rem);
+}
+
+.s101-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: #f8fafc;
+}
+
+.s101-layout {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.5rem, 2vw, 0.75rem);
+  flex-shrink: 0;
+}
+
+.s101-header {
+  text-align: center;
+  margin-bottom: 0.25rem;
+}
+
+.s101-title {
+  font-size: clamp(1.25rem, 3.5vw, 1.5rem);
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.s101-tagline {
+  font-size: clamp(0.75rem, 2vw, 0.8125rem);
+  font-weight: 400;
+  color: #64748b;
+  margin: 0.25rem 0 0;
+  line-height: 1.4;
+}
+
+.s101-form {
+  width: 100%;
+}
+
+.s101-fields {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.4rem, 1.5vw, 0.6rem);
+}
+
+.s101-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s101-field--focus .s101-input {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+.s101-field--focus .s101-label {
+  color: #3b82f6;
+}
+
+.s101-field--invalid .s101-input {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.15);
+}
+
+.s101-field--invalid .s101-label {
+  color: #ef4444;
+}
+
+.s101-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #64748b;
+  transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s101-input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  padding-right: 3rem;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.9375rem;
+  color: #0f172a;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s101-input::placeholder {
+  color: #64748b;
+  opacity: 0.8;
+}
+
+.s101-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+.s101-pw-wrap .s101-input {
+  padding-right: 3rem;
+}
+
+.s101-pw-btn {
+  position: absolute;
+  right: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.3rem 0.5rem;
+  font-size: 0.6875rem;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: #3b82f6;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.s101-pw-btn:hover {
+  background: rgba(59, 130, 246, 0.12);
+}
+
+.s101-pw-btn:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+.s101-error {
+  font-size: 0.75rem;
+  color: #ef4444;
+  display: block;
+}
+
+.s101-actions {
+  margin-top: 1rem;
+}
+
+.s101-btn {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #fff;
+  background: #3b82f6;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.s101-btn:hover:not(:disabled) {
+  opacity: 0.95;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.s101-btn:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+}
+
+.s101-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+[x-cloak] {
+  display: none !important;
+}

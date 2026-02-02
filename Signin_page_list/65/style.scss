@@ -1,0 +1,218 @@
+// 시안 65: 감성 테크 + 풀스크린 몰입형 + 상태 변화 강조
+$s65-font: 'Nunito', 'Quicksand', system-ui, sans-serif;
+$s65-display: 'Quicksand', sans-serif;
+$s65-bg-start: #f8f4ff;
+$s65-bg-end: #f0e8ff;
+$s65-surface: #ffffff;
+$s65-border: #e8e0f0;
+$s65-text: #2d2640;
+$s65-text-soft: #6b6280;
+$s65-accent: #8b7ab8;
+$s65-accent-soft: rgba(139, 122, 184, 0.18);
+$s65-ok: #7ab89a;
+$s65-ok-soft: rgba(122, 184, 154, 0.2);
+$s65-error: #c47a7a;
+$s65-error-soft: rgba(196, 122, 122, 0.15);
+$s65-radius: 14px;
+$s65-transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s65 {
+  font-family: $s65-font;
+  color: $s65-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s65-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(160deg, $s65-bg-start 0%, $s65-bg-end 100%);
+}
+
+.s65-full {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+}
+
+.s65-header {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.s65-title {
+  font-family: $s65-display;
+  font-size: clamp(1.4rem, 4vw, 1.65rem);
+  font-weight: 600;
+  color: $s65-text;
+  margin-bottom: 0.35rem;
+}
+
+.s65-desc {
+  font-size: 0.875rem;
+  color: $s65-text-soft;
+}
+
+.s65-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.s65-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: transform $s65-transition;
+
+  &--focused .s65-label {
+    color: $s65-accent;
+  }
+
+  &--focused .s65-input {
+    border-color: $s65-accent;
+    box-shadow: 0 0 0 3px $s65-accent-soft;
+  }
+
+  &--ok .s65-label {
+    color: $s65-ok;
+  }
+
+  &--ok .s65-input {
+    border-color: $s65-ok;
+    box-shadow: 0 0 0 2px $s65-ok-soft;
+  }
+
+  &--invalid .s65-input {
+    border-color: $s65-error;
+    box-shadow: 0 0 0 2px $s65-error-soft;
+  }
+
+  &--invalid .s65-label {
+    color: $s65-error;
+  }
+}
+
+.s65-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: $s65-text-soft;
+  transition: color $s65-transition;
+}
+
+.s65-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: $s65-text;
+  background: $s65-surface;
+  border: 2px solid $s65-border;
+  border-radius: $s65-radius;
+  outline: none;
+  transition: border-color $s65-transition, box-shadow $s65-transition;
+
+  &::placeholder {
+    color: $s65-text-soft;
+    opacity: 0.75;
+  }
+}
+
+.s65-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .s65-input {
+    padding-right: 4rem;
+  }
+}
+
+.s65-pw-btn {
+  position: absolute;
+  right: 0.6rem;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  font-family: inherit;
+  color: $s65-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background $s65-transition;
+
+  &:hover {
+    background: $s65-accent-soft;
+  }
+}
+
+.s65-msg {
+  font-size: 0.75rem;
+  min-height: 1.2em;
+}
+
+.s65-msg--error {
+  color: $s65-error;
+}
+
+.s65-msg--ok {
+  color: $s65-ok;
+  font-weight: 600;
+}
+
+.s65-actions {
+  margin-top: 0.5rem;
+}
+
+.s65-submit {
+  width: 100%;
+  padding: 0.9rem 1.25rem;
+  font-family: $s65-display;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, $s65-accent 0%, darken($s65-accent, 6%) 100%);
+  border: none;
+  border-radius: $s65-radius;
+  cursor: pointer;
+  transition: opacity $s65-transition, transform $s65-transition;
+  box-shadow: 0 4px 14px rgba(139, 122, 184, 0.35);
+
+  &:hover:not(:disabled) {
+    opacity: 0.95;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(139, 122, 184, 0.4);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.s65-submit-text {
+  display: block;
+}
+
+[x-cloak] {
+  display: none !important;
+}

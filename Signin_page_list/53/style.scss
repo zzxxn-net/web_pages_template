@@ -1,0 +1,252 @@
+// 시안 53: 다크 아카이브 + 단일 포커스 입력 흐름 + 상태 변화 강조
+// PC~모바일 반응형, 중앙 정렬, 포커스 필드·유효/무효 상태 시각적 강조
+
+$s53-font-serif: 'IBM Plex Serif', serif;
+$s53-font-mono: 'IBM Plex Mono', monospace;
+$s53-bg: #0f0f0f;
+$s53-surface: #181818;
+$s53-surface-elevated: #1f1f1f;
+$s53-border: #2a2a2a;
+$s53-text: #e8e8e8;
+$s53-text-muted: #888;
+$s53-accent: #c9a227;
+$s53-valid: #2d8a5e;
+$s53-invalid: #c24a4a;
+$s53-radius: 6px;
+$s53-transition: 0.22s ease;
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s53 {
+  font-family: $s53-font-mono;
+  color: $s53-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s53-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s53-bg;
+}
+
+.s53-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.s53-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+}
+
+.s53-card {
+  background: $s53-surface;
+  border: 1px solid $s53-border;
+  border-radius: $s53-radius;
+  padding: 1.75rem 1.5rem;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+}
+
+.s53-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid $s53-border;
+}
+
+.s53-title {
+  font-family: $s53-font-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: $s53-text;
+  margin-bottom: 0.25rem;
+}
+
+.s53-desc {
+  font-size: 0.8125rem;
+  color: $s53-text-muted;
+}
+
+.s53-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.s53-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid transparent;
+  border-radius: $s53-radius;
+  background: $s53-surface-elevated;
+  transition: border-color $s53-transition, box-shadow $s53-transition, background $s53-transition;
+
+  &--focused {
+    border-color: $s53-accent;
+    box-shadow: 0 0 0 2px rgba($s53-accent, 0.2);
+    background: lighten($s53-surface-elevated, 2%);
+  }
+
+  &--valid {
+    border-color: rgba($s53-valid, 0.4);
+    .s53-state--ok {
+      opacity: 1;
+      color: $s53-valid;
+    }
+  }
+
+  &--invalid {
+    border-color: rgba($s53-invalid, 0.5);
+    box-shadow: 0 0 0 1px rgba($s53-invalid, 0.15);
+    .s53-state--err {
+      opacity: 1;
+      color: $s53-invalid;
+    }
+  }
+}
+
+.s53-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: $s53-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.s53-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.s53-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.5rem 0;
+  font-family: $s53-font-mono;
+  font-size: 0.9375rem;
+  color: $s53-text;
+  background: transparent;
+  border: none;
+  outline: none;
+  transition: color $s53-transition;
+
+  &::placeholder {
+    color: $s53-text-muted;
+    opacity: 0.7;
+  }
+}
+
+.s53-pw-wrap {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  .s53-input {
+    padding-right: 3.5rem;
+  }
+}
+
+.s53-pw-btn {
+  position: absolute;
+  right: 0;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.6875rem;
+  font-family: inherit;
+  color: $s53-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background $s53-transition;
+
+  &:hover {
+    background: rgba($s53-accent, 0.1);
+  }
+}
+
+.s53-state {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity $s53-transition;
+
+  &--ok {
+    color: $s53-valid;
+  }
+
+  &--err {
+    color: $s53-invalid;
+  }
+}
+
+.s53-error {
+  font-size: 0.75rem;
+  color: $s53-invalid;
+}
+
+.s53-actions {
+  margin-top: 0.5rem;
+}
+
+.s53-submit {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  font-family: $s53-font-mono;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #0f0f0f;
+  background: $s53-accent;
+  border: none;
+  border-radius: $s53-radius;
+  cursor: pointer;
+  transition: opacity $s53-transition, background $s53-transition;
+
+  &:hover:not(:disabled) {
+    background: lighten($s53-accent, 6%);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.s53-submit-text {
+  display: block;
+}
+
+[x-cloak] {
+  display: none !important;
+}

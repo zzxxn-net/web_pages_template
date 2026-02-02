@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 44 · 감성 테크 단계 분할 GSAP 전환</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="signup-gtp signup-fixed" x-data="signupForm()">
+    <div class="gtp-bg" aria-hidden="true"></div>
+
+    <div class="gtp-wrap">
+      <div class="gtp-card" x-ref="card">
+        <div class="gtp-steps" role="tablist" aria-label="가입 단계">
+          <div class="gtp-step-item" :class="{ 'gtp-step-item--on': step >= 1, 'gtp-step-item--done': step > 1 }">
+            <span class="gtp-step-num">1</span>
+            <span class="gtp-step-label">이메일</span>
+          </div>
+          <div class="gtp-step-item" :class="{ 'gtp-step-item--on': step >= 2, 'gtp-step-item--done': step > 2 }">
+            <span class="gtp-step-num">2</span>
+            <span class="gtp-step-label">이름</span>
+          </div>
+          <div class="gtp-step-item" :class="{ 'gtp-step-item--on': step >= 3, 'gtp-step-item--done': step > 3 }">
+            <span class="gtp-step-num">3</span>
+            <span class="gtp-step-label">비밀번호</span>
+          </div>
+          <div class="gtp-step-item" :class="{ 'gtp-step-item--on': step >= 4, 'gtp-step-item--done': step > 4 }">
+            <span class="gtp-step-num">4</span>
+            <span class="gtp-step-label">확인</span>
+          </div>
+        </div>
+
+        <form
+          class="gtp-form"
+          method="post"
+          action="#"
+          hx-post="#"
+          hx-swap="none"
+          @submit.prevent="handleSubmit"
+        >
+          <div class="gtp-panel" x-show="step === 1" x-cloak :class="{ 'gtp-panel--invalid': errors.email }">
+            <p class="gtp-prompt">이메일을 입력하세요</p>
+            <div class="gtp-field">
+              <input
+                id="gtp-email"
+                type="email"
+                name="email"
+                class="gtp-input"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required
+                x-model="email"
+                x-ref="inputStep1"
+                @blur="validateEmail()"
+                @keydown.enter.prevent="goNext()"
+                :aria-invalid="errors.email ? 'true' : 'false'"
+              />
+              <span class="gtp-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+            </div>
+            <div class="gtp-nav">
+              <button type="button" class="gtp-btn gtp-btn--pri" @click="goNext()">다음</button>
+            </div>
+          </div>
+
+          <div class="gtp-panel" x-show="step === 2" x-cloak :class="{ 'gtp-panel--invalid': errors.name }">
+            <p class="gtp-prompt">이름을 입력하세요</p>
+            <div class="gtp-field">
+              <input
+                id="gtp-name"
+                type="text"
+                name="name"
+                class="gtp-input"
+                placeholder="홍길동"
+                autocomplete="name"
+                required
+                x-model="name"
+                x-ref="inputStep2"
+                @blur="validateName()"
+                @keydown.enter.prevent="goNext()"
+                :aria-invalid="errors.name ? 'true' : 'false'"
+              />
+              <span class="gtp-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+            </div>
+            <div class="gtp-nav">
+              <button type="button" class="gtp-btn gtp-btn--sec" @click="goPrev()">이전</button>
+              <button type="button" class="gtp-btn gtp-btn--pri" @click="goNext()">다음</button>
+            </div>
+          </div>
+
+          <div class="gtp-panel" x-show="step === 3" x-cloak :class="{ 'gtp-panel--invalid': errors.password }">
+            <p class="gtp-prompt">비밀번호를 설정하세요</p>
+            <div class="gtp-field">
+              <div class="gtp-pw-wrap">
+                <input
+                  id="gtp-password"
+                  :type="showPassword ? 'text' : 'password'"
+                  name="password"
+                  class="gtp-input"
+                  placeholder="8자 이상"
+                  autocomplete="new-password"
+                  required
+                  minlength="8"
+                  x-model="password"
+                  x-ref="inputStep3"
+                  @blur="validatePassword()"
+                  @keydown.enter.prevent="goNext()"
+                  :aria-invalid="errors.password ? 'true' : 'false'"
+                />
+                <button
+                  type="button"
+                  class="gtp-pw-btn"
+                  :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'"
+                  @click="showPassword = !showPassword"
+                >
+                  <span x-text="showPassword ? '숨기기' : '보기'"></span>
+                </button>
+              </div>
+              <span class="gtp-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+            </div>
+            <div class="gtp-nav">
+              <button type="button" class="gtp-btn gtp-btn--sec" @click="goPrev()">이전</button>
+              <button type="button" class="gtp-btn gtp-btn--pri" @click="goNext()">다음</button>
+            </div>
+          </div>
+
+          <div class="gtp-panel" x-show="step === 4" x-cloak :class="{ 'gtp-panel--invalid': errors.passwordConfirm }">
+            <p class="gtp-prompt">비밀번호를 다시 입력하세요</p>
+            <div class="gtp-field">
+              <input
+                id="gtp-passwordConfirm"
+                :type="showPassword ? 'text' : 'password'"
+                name="passwordConfirm"
+                class="gtp-input"
+                placeholder="비밀번호 재입력"
+                autocomplete="new-password"
+                required
+                x-model="passwordConfirm"
+                x-ref="inputStep4"
+                @blur="validatePasswordConfirm()"
+                @keydown.enter.prevent="handleSubmit()"
+                :aria-invalid="errors.passwordConfirm ? 'true' : 'false'"
+              />
+              <span class="gtp-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+            </div>
+            <div class="gtp-nav">
+              <button type="button" class="gtp-btn gtp-btn--sec" @click="goPrev()">이전</button>
+              <button type="submit" class="gtp-btn gtp-btn--pri" :disabled="submitting">
+                <span x-text="submitting ? '처리 중…' : '가입하기'"></span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

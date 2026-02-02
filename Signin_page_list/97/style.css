@@ -1,0 +1,209 @@
+/* 시안 97: 현대 판타지 + 풀스크린 몰입형 + 포커스 이동 중심 UX */
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s97 {
+  font-family: 'Outfit', system-ui, sans-serif;
+  color: #f4f4f5;
+  box-sizing: border-box;
+}
+
+.s97--full {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  padding: clamp(0.75rem, 3vw, 1.25rem);
+}
+
+.s97-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(160deg, #1a1625 0%, #2d2438 100%);
+}
+
+.s97-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.s97-glow--1 {
+  width: min(45vw, 320px);
+  height: min(45vw, 320px);
+  background: rgba(212, 175, 55, 0.06);
+  top: -5%;
+  left: -8%;
+}
+
+.s97-glow--2 {
+  width: min(35vw, 240px);
+  height: min(35vw, 240px);
+  background: rgba(139, 92, 246, 0.06);
+  bottom: -4%;
+  right: -6%;
+}
+
+.s97-layout {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 1.5rem);
+  flex-shrink: 0;
+}
+
+.s97-header {
+  text-align: center;
+}
+
+.s97-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.75rem, 4.5vw, 2rem);
+  font-weight: 600;
+  font-style: italic;
+  color: #f4f4f5;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.s97-tagline {
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-size: clamp(0.8125rem, 2vw, 0.875rem);
+  font-weight: 400;
+  color: #a1a1aa;
+  margin: 0.4rem 0 0;
+  line-height: 1.5;
+}
+
+.s97-form {
+  width: 100%;
+  padding: clamp(1.25rem, 3.5vw, 1.75rem);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 14px;
+  backdrop-filter: blur(12px);
+}
+
+.s97-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.s97-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.s97-field--invalid .s97-input {
+  border-color: #f87171;
+  box-shadow: 0 0 0 1px rgba(248, 113, 113, 0.2);
+}
+
+.s97-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #a1a1aa;
+  transition: color 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s97-input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  padding-right: 3.25rem;
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-size: 0.9375rem;
+  color: #f4f4f5;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s97-input::placeholder {
+  color: #a1a1aa;
+  opacity: 0.75;
+}
+
+.s97-input:focus {
+  border-color: #d4af37;
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.15);
+}
+
+.s97-pw-wrap .s97-input {
+  padding-right: 3.25rem;
+}
+
+.s97-pw-btn {
+  position: absolute;
+  right: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.3rem 0.5rem;
+  font-size: 0.6875rem;
+  font-family: 'Outfit', system-ui, sans-serif;
+  color: #d4af37;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s97-pw-btn:hover {
+  background: rgba(212, 175, 55, 0.15);
+}
+
+.s97-error {
+  font-size: 0.75rem;
+  color: #f87171;
+  display: block;
+}
+
+.s97-actions {
+  margin-top: 1rem;
+}
+
+.s97-btn {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #1a1625;
+  background: linear-gradient(135deg, #d4af37 0%, #c19b2e 100%);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1), transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s97-btn:hover:not(:disabled) {
+  opacity: 0.95;
+  transform: translateY(-1px);
+}
+
+.s97-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+[x-cloak] {
+  display: none !important;
+}

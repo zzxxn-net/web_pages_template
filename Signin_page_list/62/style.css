@@ -1,0 +1,204 @@
+/* 시안 62: 네오 브루탈리즘 + 단일 포커스 + 스크롤 없는 고정 플로우 */
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s62 {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  color: #fafafa;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s62-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: #0a0a0a;
+}
+
+.s62-frame {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 380px;
+  border: 3px solid #2a2a2a;
+  background: #141414;
+  padding: 1.5rem 1.25rem;
+  box-sizing: border-box;
+}
+
+.s62-header {
+  text-align: center;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid #2a2a2a;
+}
+
+.s62-title {
+  font-family: "Archivo Black", sans-serif;
+  font-size: clamp(1.25rem, 4vw, 1.5rem);
+  font-weight: 400;
+  color: #fafafa;
+  margin: 0 0 0.25rem 0;
+  letter-spacing: -0.02em;
+}
+
+.s62-desc {
+  font-size: 0.8125rem;
+  color: #a3a3a3;
+  margin: 0;
+}
+
+.s62-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.s62-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.s62-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  border: 2px solid #2a2a2a;
+  padding: 0.6rem 0.75rem;
+  background: #0a0a0a;
+  transition: opacity 0.22s ease-out, border-color 0.22s ease-out, box-shadow 0.22s ease-out;
+}
+
+.s62-field--active {
+  border-color: #facc15;
+  box-shadow: 0 0 0 2px rgba(250, 204, 21, 0.15);
+}
+
+.s62-field--dim {
+  opacity: 0.45;
+}
+
+.s62-field[data-state="invalid"] {
+  border-color: #f87171;
+}
+
+.s62-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #a3a3a3;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.22s ease-out;
+}
+
+.s62-field--active .s62-label {
+  color: #facc15;
+}
+
+.s62-input {
+  width: 100%;
+  padding: 0.5rem 0;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: #fafafa;
+  background: transparent;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.s62-input::placeholder {
+  color: #a3a3a3;
+  opacity: 0.6;
+}
+
+.s62-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.s62-pw-wrap .s62-input {
+  padding-right: 3.5rem;
+}
+
+.s62-pw-btn {
+  position: absolute;
+  right: 0;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.6875rem;
+  font-family: inherit;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #facc15;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.22s ease-out;
+}
+
+.s62-pw-btn:hover {
+  opacity: 0.85;
+}
+
+.s62-error {
+  font-size: 0.6875rem;
+  color: #f87171;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.s62-actions {
+  margin-top: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 2px solid #2a2a2a;
+}
+
+.s62-submit {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: "Archivo Black", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: #0a0a0a;
+  background: #facc15;
+  border: 3px solid #facc15;
+  cursor: pointer;
+  transition: opacity 0.22s ease-out, transform 0.22s ease-out;
+}
+
+.s62-submit:hover:not(:disabled) {
+  opacity: 0.95;
+  transform: scale(1.01);
+}
+
+.s62-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.s62-submit-text {
+  display: block;
+}
+
+[x-cloak] {
+  display: none !important;
+}

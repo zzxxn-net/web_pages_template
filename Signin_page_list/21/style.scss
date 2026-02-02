@@ -1,0 +1,205 @@
+// ============================================
+// 회원가입 시안 21 - 실험적 인터페이스 + 풀스크린 몰입형
+// GSAP 기반 부드러운 전환
+// ============================================
+
+$font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+$bg: #0a0a0f;
+$surface: rgba(255, 255, 255, 0.04);
+$border: rgba(255, 255, 255, 0.12);
+$primary: #60a5fa;
+$primary-hover: #93c5fd;
+$text: #fafafa;
+$text-muted: #a1a1aa;
+$error: #f87171;
+$max-width: 380px;
+$break: 480px;
+
+.signup-exp.signup-fullscreen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: $bg;
+  box-sizing: border-box;
+}
+
+.exp-canvas {
+  width: 100%;
+  max-width: $max-width;
+  margin: auto;
+}
+
+.exp-inner {
+  width: 100%;
+}
+
+.exp-header {
+  margin-bottom: 2rem;
+}
+
+.exp-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: $font-sans;
+  color: $text;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+
+  @media (max-width: $break) {
+    font-size: 1.35rem;
+  }
+}
+
+.exp-desc {
+  margin: 0;
+  font-size: 0.875rem;
+  font-family: $font-sans;
+  color: $text-muted;
+}
+
+.exp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.exp-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.exp-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-family: $font-sans;
+  color: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.exp-input {
+  width: 100%;
+  padding: 0.75rem 0 0.5rem;
+  font-size: 1rem;
+  font-family: $font-sans;
+  line-height: 1.5;
+  color: $text;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid $border;
+  border-radius: 0;
+  box-sizing: border-box;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+  &::placeholder {
+    color: rgba(161, 161, 170, 0.6);
+  }
+
+  &:focus {
+    outline: none;
+    border-bottom-color: $primary;
+    box-shadow: 0 1px 0 0 $primary;
+  }
+
+  &[aria-invalid="true"] {
+    border-bottom-color: $error;
+    box-shadow: 0 1px 0 0 $error;
+  }
+}
+
+.exp-pw-wrap {
+  display: flex;
+  border-bottom: 1px solid $border;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+  &:focus-within {
+    border-bottom-color: $primary;
+    box-shadow: 0 1px 0 0 $primary;
+  }
+
+  .exp-input {
+    border: none;
+    flex: 1;
+    box-shadow: none;
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .exp-pw-btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+    font-family: $font-sans;
+    color: $text-muted;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+.exp-error {
+  font-size: 0.8125rem;
+  font-family: $font-sans;
+  color: $error;
+}
+
+.exp-actions {
+  margin-top: 0.5rem;
+}
+
+.exp-btn {
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: $font-sans;
+  color: $bg;
+  background: $primary;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background: $primary-hover;
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.exp-footer {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid $border;
+  text-align: center;
+}
+
+.exp-link {
+  font-size: 0.875rem;
+  font-family: $font-sans;
+  color: $primary;
+  text-decoration: none;
+
+  &:hover {
+    color: $primary-hover;
+    text-decoration: underline;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

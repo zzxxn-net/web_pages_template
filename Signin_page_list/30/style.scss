@@ -1,0 +1,303 @@
+// ============================================
+// 회원가입 시안 30 - 단일 포커스 입력 흐름 + 실험적 인터페이스
+// 상태 변화 강조
+// ============================================
+
+$font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+$bg: #0f0f12;
+$card-bg: #18181c;
+$border: #2a2a30;
+$primary: #a78bfa;
+$primary-soft: rgba(167, 139, 250, 0.2);
+$valid: #34d399;
+$valid-soft: rgba(52, 211, 153, 0.15);
+$error: #f87171;
+$error-soft: rgba(248, 113, 113, 0.15);
+$text: #fafafa;
+$text-muted: #a1a1aa;
+$max-width: 400px;
+$break: 480px;
+$radius: 12px;
+$radius-sm: 8px;
+
+.signup-exp-single.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: $bg;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+.expsf-wrap {
+  width: 100%;
+  max-width: $max-width;
+  margin: auto;
+}
+
+.expsf-card {
+  padding: 1.75rem 1.5rem;
+  background: $card-bg;
+  border: 1px solid $border;
+  border-radius: $radius;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.03);
+
+  @media (max-width: $break) {
+    padding: 1.5rem 1.25rem;
+    border-radius: 10px;
+  }
+}
+
+.expsf-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.expsf-prog-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-family: $font-sans;
+  color: $text-muted;
+  background: $border;
+  border: 2px solid transparent;
+  transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+
+  &--active {
+    color: $text;
+    background: $primary-soft;
+    border-color: $primary;
+    transform: scale(1.08);
+  }
+
+  &--done {
+    color: $valid;
+    background: $valid-soft;
+    border-color: $valid;
+  }
+}
+
+.expsf-form {
+  position: relative;
+  min-height: 200px;
+}
+
+.expsf-step {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: opacity 0.2s ease;
+
+  &--invalid .expsf-input,
+  &--invalid .expsf-pw-wrap {
+    border-color: $error;
+    box-shadow: 0 0 0 2px $error-soft;
+  }
+}
+
+.expsf-prompt {
+  margin: 0 0 0.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: $font-sans;
+  color: $text;
+  letter-spacing: -0.02em;
+}
+
+.expsf-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.expsf-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-family: $font-sans;
+  color: $text-muted;
+}
+
+.expsf-input {
+  width: 100%;
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  font-size: 0.9375rem;
+  font-family: $font-sans;
+  color: $text;
+  background: $bg;
+  border: 1px solid $border;
+  border-radius: $radius-sm;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+  &::placeholder {
+    color: $text-muted;
+    opacity: 0.8;
+  }
+
+  &:focus {
+    border-color: $primary;
+    box-shadow: 0 0 0 2px $primary-soft;
+  }
+
+  &[aria-invalid="true"] {
+    border-color: $error;
+    box-shadow: 0 0 0 2px $error-soft;
+  }
+}
+
+.expsf-state {
+  position: absolute;
+  right: 0.875rem;
+  top: 2.25rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: $valid;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+
+  &--valid {
+    opacity: 1;
+  }
+}
+
+.expsf-pw-wrap {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border: 1px solid $border;
+  border-radius: $radius-sm;
+  background: $bg;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+
+  &:focus-within {
+    border-color: $primary;
+    box-shadow: 0 0 0 2px $primary-soft;
+  }
+
+  .expsf-input {
+    border: none;
+    box-shadow: none;
+    flex: 1;
+    min-width: 0;
+    padding-right: 1rem;
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .expsf-state--valid {
+    top: 50%;
+    transform: translateY(-50%);
+    right: 3.5rem;
+  }
+}
+
+.expsf-pw-btn {
+  padding: 0 0.875rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: $primary;
+  background: transparent;
+  border: none;
+  border-left: 1px solid $border;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease;
+
+  &:hover {
+    color: $text;
+    background: $primary-soft;
+  }
+}
+
+.expsf-error {
+  font-size: 0.75rem;
+  color: $error;
+  min-height: 1.25rem;
+}
+
+.expsf-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.expsf-btn {
+  padding: 0.65rem 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: $font-sans;
+  border-radius: $radius-sm;
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, opacity 0.2s ease, transform 0.15s ease;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  &--primary {
+    color: $bg;
+    background: $primary;
+
+    &:hover:not(:disabled) {
+      background: lighten($primary, 5%);
+    }
+  }
+
+  &--secondary {
+    color: $text-muted;
+    background: transparent;
+    border: 1px solid $border;
+
+    &:hover:not(:disabled) {
+      color: $text;
+      border-color: $primary;
+      background: $primary-soft;
+    }
+  }
+}
+
+.expsf-footer {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid $border;
+  text-align: center;
+}
+
+.expsf-link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: $primary;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: lighten($primary, 10%);
+    text-decoration: underline;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

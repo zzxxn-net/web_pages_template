@@ -1,0 +1,361 @@
+// ============================================
+// 회원가입 시안 33 - 실험적 인터페이스 + 단계 분할형
+// 포커스 이동 중심 UX
+// ============================================
+
+$font-sans: "Space Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+$font-mono: "JetBrains Mono", "SF Mono", Consolas, monospace;
+$bg: #0a0a0c;
+$grid-color: rgba(255, 255, 255, 0.03);
+$card-bg: rgba(14, 14, 18, 0.92);
+$card-border: rgba(255, 255, 255, 0.08);
+$primary: #00ff9d;
+$primary-soft: rgba(0, 255, 157, 0.12);
+$primary-glow: rgba(0, 255, 157, 0.35);
+$accent: #7c3aed;
+$accent-soft: rgba(124, 58, 237, 0.15);
+$text: #f4f4f5;
+$text-muted: #71717a;
+$error: #f43f5e;
+$error-soft: rgba(244, 63, 94, 0.15);
+$done: #22c55e;
+$done-soft: rgba(34, 197, 94, 0.15);
+$break: 768px;
+$max-card: 720px;
+$radius: 4px;
+
+.signup-exp-prog.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  overflow: auto;
+  position: relative;
+}
+
+.expp-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: $bg;
+  overflow: hidden;
+}
+
+.expp-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient($grid-color 1px, transparent 1px),
+    linear-gradient(90deg, $grid-color 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.8;
+}
+
+.expp-shape {
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 0;
+
+  &--1 {
+    width: 280px;
+    height: 280px;
+    top: 10%;
+    right: 5%;
+    transform: rotate(15deg);
+    background: linear-gradient(135deg, rgba(0, 255, 157, 0.03) 0%, transparent 50%);
+  }
+
+  &--2 {
+    width: 160px;
+    height: 160px;
+    bottom: 15%;
+    left: 8%;
+    transform: rotate(-10deg);
+    background: linear-gradient(225deg, rgba(124, 58, 237, 0.04) 0%, transparent 50%);
+  }
+}
+
+.expp-wrap {
+  position: relative;
+  width: 100%;
+  max-width: $max-card;
+  margin: auto;
+}
+
+.expp-card {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  grid-template-rows: auto;
+  gap: 0;
+  padding: 0;
+  background: $card-bg;
+  border: 1px solid $card-border;
+  border-radius: $radius;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.02);
+  min-height: 420px;
+
+  @media (max-width: $break) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    min-height: auto;
+  }
+}
+
+// 좌측 단계 바 - 단계 분할형
+.expp-steps {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem;
+  border-right: 1px solid $card-border;
+  gap: 0;
+
+  @media (max-width: $break) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-right: none;
+    border-bottom: 1px solid $card-border;
+    padding: 1rem 1rem 0.75rem;
+  }
+}
+
+.expp-step-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.5rem;
+  border: none;
+  border-radius: $radius;
+  background: transparent;
+  cursor: pointer;
+  font-family: $font-sans;
+  text-align: left;
+  color: $text-muted;
+  transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+
+  @media (max-width: $break) {
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  &:hover:not(:disabled) {
+    color: $text;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  &--active {
+    color: $primary;
+    background: $primary-soft;
+    box-shadow: 0 0 0 1px rgba(0, 255, 157, 0.2);
+  }
+
+  &--done {
+    color: $done;
+    background: $done-soft;
+  }
+}
+
+.expp-step-num {
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: $font-mono;
+  letter-spacing: 0.05em;
+}
+
+.expp-step-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.expp-step-line {
+  width: 2px;
+  height: 12px;
+  margin-left: 1.5rem;
+  background: $card-border;
+  border-radius: 1px;
+  transition: background 0.3s ease;
+
+  @media (max-width: $break) {
+    width: 12px;
+    height: 2px;
+    margin: 0 0.25rem;
+  }
+
+  &--filled {
+    background: $primary;
+    opacity: 0.6;
+  }
+}
+
+.expp-form-area {
+  padding: 1.75rem 1.5rem;
+  min-height: 320px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+
+  @media (max-width: $break) {
+    padding: 1.5rem 1.25rem;
+    min-height: 280px;
+  }
+}
+
+.expp-form {
+  width: 100%;
+  max-width: 320px;
+  position: relative;
+}
+
+.expp-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: opacity 0.25s ease;
+
+  &--invalid .expp-input,
+  &--invalid .expp-pw-wrap {
+    border-color: $error;
+    box-shadow: 0 0 0 2px $error-soft;
+  }
+}
+
+.expp-prompt {
+  margin: 0 0 0.15rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: $font-sans;
+  color: $text;
+  letter-spacing: -0.02em;
+}
+
+.expp-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.expp-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-family: $font-sans;
+  color: $text-muted;
+}
+
+// 포커스 이동 중심: 강한 포커스 링/글로우
+.expp-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  font-family: $font-mono;
+  color: $text;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid $card-border;
+  border-radius: $radius;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+  &::placeholder {
+    color: $text-muted;
+    opacity: 0.8;
+  }
+
+  &:focus {
+    border-color: $primary;
+    box-shadow: 0 0 0 2px $primary-soft, 0 0 20px $primary-glow;
+  }
+}
+
+.expp-pw-wrap {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid $card-border;
+  border-radius: $radius;
+  background: rgba(255, 255, 255, 0.04);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+  .expp-input {
+    border: none;
+    background: transparent;
+    flex: 1;
+  }
+
+  &:focus-within {
+    border-color: $primary;
+    box-shadow: 0 0 0 2px $primary-soft, 0 0 20px $primary-glow;
+  }
+}
+
+.expp-pw-btn {
+  padding: 0 0.75rem;
+  border: none;
+  background: transparent;
+  font-size: 0.8125rem;
+  font-family: $font-sans;
+  color: $text-muted;
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $text;
+  }
+}
+
+.expp-error {
+  font-size: 0.8125rem;
+  font-family: $font-sans;
+  color: $error;
+}
+
+.expp-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.expp-btn {
+  padding: 0.65rem 1.25rem;
+  border-radius: $radius;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: $font-sans;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &--primary {
+    border: 1px solid $primary;
+    background: $primary-soft;
+    color: $primary;
+
+    &:hover:not(:disabled) {
+      background: rgba(0, 255, 157, 0.2);
+      box-shadow: 0 0 16px $primary-glow;
+    }
+  }
+
+  &--secondary {
+    border: 1px solid $card-border;
+    background: transparent;
+    color: $text-muted;
+
+    &:hover:not(:disabled) {
+      color: $text;
+      background: rgba(255, 255, 255, 0.06);
+    }
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

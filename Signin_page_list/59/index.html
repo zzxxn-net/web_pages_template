@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 59 · 다크 아카이브 풀스크린 입력 반응형</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,600&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s59 signup-fixed" x-data="signupForm()">
+    <div class="s59-bg" aria-hidden="true"></div>
+
+    <div class="s59-full" x-ref="full">
+      <header class="s59-header">
+        <h1 class="s59-title">회원가입</h1>
+        <p class="s59-desc">필수 정보를 입력하세요.</p>
+      </header>
+
+      <form class="s59-form" method="post" action="#" hx-post="#" hx-swap="none" @submit.prevent="handleSubmit">
+        <div class="s59-field" :class="{ 's59-field--focused': focusedField === 'email', 's59-field--invalid': errors.email }" x-ref="fieldEmail">
+          <label for="s59-email" class="s59-label">이메일</label>
+          <input id="s59-email" type="email" name="email" class="s59-input" placeholder="you@example.com" autocomplete="email" required x-model="email" @focus="focusedField = 'email'" @blur="focusedField = null; validateEmail()" :aria-invalid="errors.email ? 'true' : 'false'" />
+          <span class="s59-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+        </div>
+
+        <div class="s59-field" :class="{ 's59-field--focused': focusedField === 'name', 's59-field--invalid': errors.name }" x-ref="fieldName">
+          <label for="s59-name" class="s59-label">이름</label>
+          <input id="s59-name" type="text" name="name" class="s59-input" placeholder="홍길동" autocomplete="name" required x-model="name" @focus="focusedField = 'name'" @blur="focusedField = null; validateName()" :aria-invalid="errors.name ? 'true' : 'false'" />
+          <span class="s59-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+        </div>
+
+        <div class="s59-field" :class="{ 's59-field--focused': focusedField === 'password', 's59-field--invalid': errors.password }" x-ref="fieldPassword">
+          <label for="s59-password" class="s59-label">비밀번호</label>
+          <div class="s59-pw-wrap">
+            <input id="s59-password" :type="showPassword ? 'text' : 'password'" name="password" class="s59-input" placeholder="8자 이상" autocomplete="new-password" required minlength="8" x-model="password" @focus="focusedField = 'password'" @blur="focusedField = null; validatePassword()" :aria-invalid="errors.password ? 'true' : 'false'" />
+            <button type="button" class="s59-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword"><span x-text="showPassword ? '숨기기' : '보기'"></span></button>
+          </div>
+          <span class="s59-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+        </div>
+
+        <div class="s59-field" :class="{ 's59-field--focused': focusedField === 'passwordConfirm', 's59-field--invalid': errors.passwordConfirm }" x-ref="fieldPasswordConfirm">
+          <label for="s59-passwordConfirm" class="s59-label">비밀번호 확인</label>
+          <input id="s59-passwordConfirm" :type="showPassword ? 'text' : 'password'" name="password_confirm" class="s59-input" placeholder="다시 입력" autocomplete="new-password" required minlength="8" x-model="passwordConfirm" @focus="focusedField = 'passwordConfirm'" @blur="focusedField = null; validatePasswordConfirm()" :aria-invalid="errors.passwordConfirm ? 'true' : 'false'" />
+          <span class="s59-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+        </div>
+
+        <div class="s59-actions" x-ref="actions">
+          <button type="submit" class="s59-submit" :disabled="submitting" :aria-busy="submitting"><span class="s59-submit-text" x-text="submitting ? '가입 중…' : '가입하기'"></span></button>
+        </div>
+      </form>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

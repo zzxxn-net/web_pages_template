@@ -1,0 +1,35 @@
+.signup-fixed{min-height:100vh;min-height:100dvh;overflow:auto;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.s115{font-family:"Outfit",system-ui,sans-serif;color:#f0eef4;min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:0;position:relative;box-sizing:border-box}
+.s115-bg{position:fixed;inset:0;background:#0f0e12;background-image:linear-gradient(rgba(139,92,246,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,246,.03) 1px,transparent 1px);background-size:24px 24px;pointer-events:none;z-index:0}
+.s115-layout{position:relative;z-index:1;width:100%;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(1.25rem,5vw,2rem);box-sizing:border-box}
+.s115-header{text-align:center;margin-bottom:clamp(1.25rem,4vw,1.75rem);width:100%;max-width:400px}
+.s115-title{font-family:"JetBrains Mono",monospace;font-size:clamp(1.25rem,4vw,1.5rem);font-weight:600;color:#f0eef4;margin:0;letter-spacing:.02em;line-height:1.3}
+.s115-progress{width:100%;height:4px;background:rgba(139,92,246,.2);border-radius:2px;margin-top:.75rem;overflow:hidden}
+.s115-progress-bar{height:100%;background:#a78bfa;border-radius:2px;transition:width .26s cubic-bezier(.4,0,.2,1)}
+.s115-step-label{font-family:"JetBrains Mono",monospace;font-size:clamp(0.65rem,1.6vw,0.7rem);font-weight:500;color:#8b8499;margin:.4rem 0 0;letter-spacing:.06em;line-height:1.4}
+.s115-form-wrap{width:100%;max-width:400px}
+.s115-form{width:100%}
+.s115-panels{position:relative;min-height:180px}
+.s115-panel{width:100%;display:flex;flex-direction:column;gap:1rem}
+.s115-field{display:flex;flex-direction:column;gap:.35rem;transition:transform .26s cubic-bezier(.4,0,.2,1)}
+.s115-field:focus-within .s115-input{border-color:#a78bfa;box-shadow:0 0 0 3px rgba(167,139,250,.2);transform:scale(1.008)}
+.s115-field--valid .s115-input{border-color:#34d399;background:rgba(52,211,153,.12)}
+.s115-field--valid .s115-label{color:#34d399}
+.s115-field--invalid .s115-input{border-color:#f87171;background:rgba(248,113,113,.12);animation:s115-shake .4s ease}
+.s115-field--invalid .s115-label{color:#f87171}
+@keyframes s115-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.s115-label{font-family:"JetBrains Mono",monospace;font-size:.72rem;font-weight:500;color:#8b8499;letter-spacing:.03em;transition:color .26s cubic-bezier(.4,0,.2,1)}
+.s115-input{width:100%;padding:.7rem .875rem;padding-right:3rem;font-family:"Outfit",system-ui,sans-serif;font-size:.9375rem;color:#f0eef4;background:rgba(26,24,31,.9);border:1px solid rgba(139,92,246,.25);border-radius:8px;outline:none;transition:border-color .26s,box-shadow .26s,background .26s,transform .26s cubic-bezier(.4,0,.2,1)}
+.s115-input::placeholder{color:#8b8499;opacity:.8}
+.s115-pw-wrap{position:relative}.s115-pw-wrap .s115-input{padding-right:3rem}
+.s115-pw-btn{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);padding:.25rem .4rem;font-size:.65rem;font-family:"JetBrains Mono",monospace;font-weight:500;color:#a78bfa;background:transparent;border:none;cursor:pointer;border-radius:4px;transition:background .26s cubic-bezier(.4,0,.2,1)}
+.s115-pw-btn:hover{background:rgba(167,139,250,.2)}
+.s115-error{font-size:.72rem;font-family:"JetBrains Mono",monospace;color:#f87171;display:block}
+.s115-actions{margin-top:1.5rem;display:flex;gap:.75rem;justify-content:flex-end}
+.s115-btn{padding:.75rem 1.25rem;font-family:"JetBrains Mono",monospace;font-size:.8rem;font-weight:500;letter-spacing:.02em;color:#0f0e12;background:#a78bfa;border:none;border-radius:8px;cursor:pointer;transition:opacity .26s,transform .2s,box-shadow .26s cubic-bezier(.4,0,.2,1)}
+.s115-btn:hover:not(:disabled){opacity:.95;transform:translateY(-1px);box-shadow:0 4px 14px rgba(167,139,250,.35)}
+.s115-btn:active:not(:disabled){transform:translateY(0)}
+.s115-btn:disabled,.s115-btn--busy{opacity:.6;cursor:not-allowed;transform:none}
+.s115-btn--secondary{background:transparent;color:#a78bfa;border:1px solid rgba(167,139,250,.5)}
+.s115-btn--secondary:hover:not(:disabled){background:rgba(167,139,250,.2)}
+[x-cloak]{display:none!important}

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 20 · 네오 브루탈리즘</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="signup-brutal signup-micro" x-data="signupForm()">
+    <div class="brutal-wrap">
+      <div class="brutal-card" x-ref="card">
+        <header class="brutal-header">
+          <h1 class="brutal-title">회원가입</h1>
+          <p class="brutal-desc">필수 항목을 입력한 뒤 가입해 주세요.</p>
+        </header>
+
+        <form
+          class="brutal-form"
+          method="post"
+          action="#"
+          hx-post="#"
+          hx-swap="none"
+          @submit.prevent="handleSubmit"
+        >
+          <div
+            class="brutal-field"
+            :class="{
+              'brutal-field--focused': focusedField === 'email',
+              'brutal-field--valid': validEmail,
+              'brutal-field--invalid': errors.email
+            }"
+          >
+            <label for="email" class="brutal-label">이메일</label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              class="brutal-input"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+              x-model="email"
+              @focus="focusedField = 'email'"
+              @blur="focusedField = null; validateEmail()"
+              :aria-invalid="errors.email ? 'true' : 'false'"
+            />
+            <span class="brutal-check" x-show="validEmail" x-cloak aria-hidden="true">✓</span>
+            <span class="brutal-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+          </div>
+          <div
+            class="brutal-field"
+            :class="{
+              'brutal-field--focused': focusedField === 'name',
+              'brutal-field--valid': validName,
+              'brutal-field--invalid': errors.name
+            }"
+          >
+            <label for="name" class="brutal-label">이름</label>
+            <input
+              id="name"
+              type="text"
+              name="name"
+              class="brutal-input"
+              placeholder="홍길동"
+              autocomplete="name"
+              required
+              x-model="name"
+              @focus="focusedField = 'name'"
+              @blur="focusedField = null; validateName()"
+              :aria-invalid="errors.name ? 'true' : 'false'"
+            />
+            <span class="brutal-check" x-show="validName" x-cloak aria-hidden="true">✓</span>
+            <span class="brutal-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+          </div>
+          <div
+            class="brutal-field"
+            :class="{
+              'brutal-field--focused': focusedField === 'password',
+              'brutal-field--valid': validPassword,
+              'brutal-field--invalid': errors.password
+            }"
+          >
+            <label for="password" class="brutal-label">비밀번호</label>
+            <div class="brutal-pw-wrap">
+              <input
+                id="password"
+                :type="showPassword ? 'text' : 'password'"
+                name="password"
+                class="brutal-input"
+                placeholder="8자 이상"
+                autocomplete="new-password"
+                required
+                minlength="8"
+                x-model="password"
+                @focus="focusedField = 'password'"
+                @blur="focusedField = null; validatePassword()"
+                :aria-invalid="errors.password ? 'true' : 'false'"
+              />
+              <button
+                type="button"
+                class="brutal-pw-btn"
+                :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'"
+                @click="showPassword = !showPassword"
+              >
+                <span x-text="showPassword ? '숨기기' : '보기'"></span>
+              </button>
+            </div>
+            <span class="brutal-check" x-show="validPassword" x-cloak aria-hidden="true">✓</span>
+            <span class="brutal-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+          </div>
+          <div
+            class="brutal-field"
+            :class="{
+              'brutal-field--focused': focusedField === 'passwordConfirm',
+              'brutal-field--valid': validPasswordConfirm,
+              'brutal-field--invalid': errors.passwordConfirm
+            }"
+          >
+            <label for="passwordConfirm" class="brutal-label">비밀번호 확인</label>
+            <input
+              id="passwordConfirm"
+              :type="showPassword ? 'text' : 'password'"
+              name="passwordConfirm"
+              class="brutal-input"
+              placeholder="비밀번호 재입력"
+              autocomplete="new-password"
+              required
+              x-model="passwordConfirm"
+              @focus="focusedField = 'passwordConfirm'"
+              @blur="focusedField = null; validatePasswordConfirm()"
+              :aria-invalid="errors.passwordConfirm ? 'true' : 'false'"
+            />
+            <span class="brutal-check" x-show="validPasswordConfirm" x-cloak aria-hidden="true">✓</span>
+            <span class="brutal-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+          </div>
+          <div class="brutal-actions">
+            <button type="submit" class="brutal-btn" :disabled="submitting" x-ref="submitBtn">
+              <span x-show="!submitting">가입하기</span>
+              <span x-show="submitting" x-cloak>처리 중...</span>
+            </button>
+          </div>
+        </form>
+
+        <footer class="brutal-footer">
+          <a href="#" class="brutal-link">이미 계정이 있으신가요? 로그인</a>
+        </footer>
+      </div>
+    </div>
+  </main>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 38 · 감성 테크 비대칭</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="signup-emotion-asym signup-fixed" x-data="signupForm()">
+    <div class="emasym-visual" aria-hidden="true">
+      <div class="emasym-visual-bg"></div>
+      <div class="emasym-visual-content" x-ref="visualContent">
+        <p class="emasym-quote">시작은 작은 한 걸음으로</p>
+        <p class="emasym-sub">필수 정보만 입력해 주세요.</p>
+      </div>
+    </div>
+    <div class="emasym-form-wrap">
+      <div class="emasym-form-inner" x-ref="formInner">
+        <header class="emasym-header">
+          <h1 class="emasym-title">회원가입</h1>
+        </header>
+
+        <form
+          class="emasym-form"
+          method="post"
+          action="#"
+          hx-post="#"
+          hx-swap="none"
+          @submit.prevent="handleSubmit"
+        >
+          <div
+            class="emasym-field"
+            :class="{ 'emasym-field--focused': focusedField === 'email', 'emasym-field--invalid': errors.email }"
+          >
+            <label for="emasym-email" class="emasym-label">이메일</label>
+            <input
+              id="emasym-email"
+              type="email"
+              name="email"
+              class="emasym-input"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+              x-model="email"
+              x-ref="inputEmail"
+              @focus="focusedField = 'email'"
+              @blur="focusedField = null; validateEmail()"
+              @keydown.enter.prevent="focusNext('name')"
+              :aria-invalid="errors.email ? 'true' : 'false'"
+            />
+            <span class="emasym-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+            <button type="button" class="emasym-focus-btn" @click="focusNext('name')">다음 필드로</button>
+          </div>
+
+          <div
+            class="emasym-field"
+            :class="{ 'emasym-field--focused': focusedField === 'name', 'emasym-field--invalid': errors.name }"
+          >
+            <label for="emasym-name" class="emasym-label">이름</label>
+            <input
+              id="emasym-name"
+              type="text"
+              name="name"
+              class="emasym-input"
+              placeholder="홍길동"
+              autocomplete="name"
+              required
+              x-model="name"
+              x-ref="inputName"
+              @focus="focusedField = 'name'"
+              @blur="focusedField = null; validateName()"
+              @keydown.enter.prevent="focusNext('password')"
+              :aria-invalid="errors.name ? 'true' : 'false'"
+            />
+            <span class="emasym-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+            <button type="button" class="emasym-focus-btn" @click="focusNext('password')">다음 필드로</button>
+          </div>
+
+          <div
+            class="emasym-field"
+            :class="{ 'emasym-field--focused': focusedField === 'password', 'emasym-field--invalid': errors.password }"
+          >
+            <label for="emasym-password" class="emasym-label">비밀번호</label>
+            <div class="emasym-pw-wrap">
+              <input
+                id="emasym-password"
+                :type="showPassword ? 'text' : 'password'"
+                name="password"
+                class="emasym-input"
+                placeholder="8자 이상"
+                autocomplete="new-password"
+                required
+                minlength="8"
+                x-model="password"
+                x-ref="inputPassword"
+                @focus="focusedField = 'password'"
+                @blur="focusedField = null; validatePassword()"
+                @keydown.enter.prevent="focusNext('passwordConfirm')"
+                :aria-invalid="errors.password ? 'true' : 'false'"
+              />
+              <button
+                type="button"
+                class="emasym-pw-btn"
+                :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'"
+                @click="showPassword = !showPassword"
+              >
+                <span x-text="showPassword ? '숨기기' : '보기'"></span>
+              </button>
+            </div>
+            <span class="emasym-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+            <button type="button" class="emasym-focus-btn" @click="focusNext('passwordConfirm')">다음 필드로</button>
+          </div>
+
+          <div
+            class="emasym-field"
+            :class="{ 'emasym-field--focused': focusedField === 'passwordConfirm', 'emasym-field--invalid': errors.passwordConfirm }"
+          >
+            <label for="emasym-passwordConfirm" class="emasym-label">비밀번호 확인</label>
+            <input
+              id="emasym-passwordConfirm"
+              :type="showPassword ? 'text' : 'password'"
+              name="passwordConfirm"
+              class="emasym-input"
+              placeholder="비밀번호 재입력"
+              autocomplete="new-password"
+              required
+              x-model="passwordConfirm"
+              x-ref="inputPasswordConfirm"
+              @focus="focusedField = 'passwordConfirm'"
+              @blur="focusedField = null; validatePasswordConfirm()"
+              @keydown.enter.prevent="handleSubmit()"
+              :aria-invalid="errors.passwordConfirm ? 'true' : 'false'"
+            />
+            <span class="emasym-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+          </div>
+
+          <div class="emasym-submit">
+            <button type="submit" class="emasym-btn" :disabled="submitting">
+              <span x-text="submitting ? '처리 중…' : '가입하기'"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

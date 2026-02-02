@@ -1,0 +1,301 @@
+// ============================================
+// 회원가입 시안 41 - 현대 판타지 + 단계 분할형(Progressive Form)
+// 상태 변화 강조
+// ============================================
+
+$font-head: "Cormorant Garamond", Georgia, serif;
+$font: "Outfit", -apple-system, BlinkMacSystemFont, sans-serif;
+$bg: linear-gradient(165deg, #2d1b4e 0%, #1a0f2e 40%, #0f0818 100%);
+$card-bg: rgba(255, 255, 255, 0.06);
+$card-border: rgba(212, 175, 55, 0.2);
+$primary: #d4af37;
+$primary-soft: rgba(212, 175, 55, 0.15);
+$text: #f5f0e8;
+$text-muted: #a89f8f;
+$valid: #6bcf7f;
+$valid-soft: rgba(107, 207, 127, 0.15);
+$error: #e07a7a;
+$error-soft: rgba(224, 122, 122, 0.15);
+$radius: 12px;
+$break: 600px;
+$max-width: 420px;
+
+.signup-fantasy-step.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  background: $bg;
+  position: relative;
+}
+
+.fstep-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: $bg;
+}
+
+.fstep-wrap {
+  position: relative;
+  width: 100%;
+  max-width: $max-width;
+  margin: auto;
+}
+
+.fstep-card {
+  padding: 1.75rem 1.5rem;
+  background: $card-bg;
+  border: 1px solid $card-border;
+  border-radius: $radius;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  grid-template-rows: auto;
+  gap: 1.5rem;
+
+  @media (max-width: $break) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    padding: 1.5rem 1.25rem;
+  }
+}
+
+// 단계 분할형: 좌측 스텝 인디케이터
+.fstep-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-right: 1rem;
+  border-right: 1px solid $card-border;
+
+  @media (max-width: $break) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-right: 0;
+    padding-bottom: 1rem;
+    border-right: none;
+    border-bottom: 1px solid $card-border;
+  }
+}
+
+.fstep-step-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 8px;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  border: 1px solid transparent;
+
+  &--on {
+    color: $primary;
+    background: $primary-soft;
+    border-color: rgba($primary, 0.3);
+  }
+
+  &--done {
+    color: $valid;
+    background: $valid-soft;
+    border-color: rgba($valid, 0.25);
+  }
+}
+
+.fstep-step-num {
+  font-size: 0.875rem;
+  font-weight: 700;
+  font-family: $font-head;
+  color: inherit;
+}
+
+.fstep-step-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-family: $font;
+  color: inherit;
+  opacity: 0.95;
+}
+
+.fstep-form {
+  position: relative;
+  min-height: 220px;
+}
+
+.fstep-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &--invalid .fstep-input,
+  &--invalid .fstep-pw-wrap {
+    border-color: $error;
+    box-shadow: 0 0 0 2px $error-soft;
+  }
+}
+
+.fstep-prompt {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: $font-head;
+  color: $text;
+  letter-spacing: 0.02em;
+}
+
+.fstep-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.fstep-input {
+  width: 100%;
+  padding: 0.7rem 2.25rem 0.7rem 1rem;
+  font-size: 0.9375rem;
+  font-family: $font;
+  color: $text;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid $card-border;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+  &::placeholder {
+    color: $text-muted;
+    opacity: 0.8;
+  }
+
+  &:focus {
+    border-color: $primary;
+    box-shadow: 0 0 0 2px $primary-soft;
+  }
+}
+
+.fstep-pw-wrap {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid $card-border;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+  .fstep-input {
+    border: none;
+    background: transparent;
+    flex: 1;
+    padding-right: 0.5rem;
+  }
+
+  &:focus-within {
+    border-color: $primary;
+    box-shadow: 0 0 0 2px $primary-soft;
+  }
+}
+
+.fstep-pw-btn {
+  padding: 0 0.75rem;
+  border: none;
+  background: transparent;
+  font-size: 0.8125rem;
+  font-family: $font;
+  color: $text-muted;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+// 상태 변화 강조: ✓ / !
+.fstep-state {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  font-weight: 700;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+
+  &--ok {
+    color: $valid;
+  }
+
+  &--err {
+    color: $error;
+  }
+}
+
+.fstep-panel--invalid .fstep-state--err {
+  opacity: 1;
+}
+
+.fstep-field--valid .fstep-state--ok {
+  opacity: 1;
+}
+
+.fstep-pw-wrap + .fstep-state--ok,
+.fstep-pw-wrap + .fstep-state--err {
+  right: 2.75rem;
+}
+
+.fstep-error {
+  font-size: 0.8125rem;
+  font-family: $font;
+  color: $error;
+}
+
+.fstep-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+}
+
+.fstep-btn {
+  padding: 0.65rem 1.2rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: $font;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &--pri {
+    border: 1px solid $primary;
+    background: $primary-soft;
+    color: $primary;
+
+    &:hover:not(:disabled) {
+      background: rgba($primary, 0.25);
+    }
+  }
+
+  &--sec {
+    border: 1px solid $card-border;
+    background: transparent;
+    color: $text-muted;
+
+    &:hover:not(:disabled) {
+      color: $text;
+      background: rgba(255, 255, 255, 0.06);
+    }
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

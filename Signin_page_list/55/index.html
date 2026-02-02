@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 55 · 실험적 인터페이스 마이크로 인터랙션 고정 플로우</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s55 signup-fixed" x-data="signupForm()">
+    <div class="s55-bg" aria-hidden="true">
+      <div class="s55-orb s55-orb--1"></div>
+      <div class="s55-orb s55-orb--2"></div>
+    </div>
+
+    <div class="s55-container" x-ref="container">
+      <div class="s55-blob">
+        <header class="s55-header">
+          <h1 class="s55-title">회원가입</h1>
+          <p class="s55-desc">한 화면에서 완료하세요.</p>
+        </header>
+
+        <form
+          class="s55-form"
+          method="post"
+          action="#"
+          hx-post="#"
+          hx-swap="none"
+          @submit.prevent="handleSubmit"
+        >
+          <div
+            class="s55-field"
+            :class="{ 's55-field--focused': focusedField === 'email', 's55-field--invalid': errors.email }"
+          >
+            <label for="s55-email" class="s55-label">이메일</label>
+            <input
+              id="s55-email"
+              type="email"
+              name="email"
+              class="s55-input"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+              x-model="email"
+              @focus="focusedField = 'email'"
+              @blur="focusedField = null; validateEmail()"
+              :aria-invalid="errors.email ? 'true' : 'false'"
+            />
+            <span class="s55-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+          </div>
+
+          <div
+            class="s55-field"
+            :class="{ 's55-field--focused': focusedField === 'name', 's55-field--invalid': errors.name }"
+          >
+            <label for="s55-name" class="s55-label">이름</label>
+            <input
+              id="s55-name"
+              type="text"
+              name="name"
+              class="s55-input"
+              placeholder="홍길동"
+              autocomplete="name"
+              required
+              x-model="name"
+              @focus="focusedField = 'name'"
+              @blur="focusedField = null; validateName()"
+              :aria-invalid="errors.name ? 'true' : 'false'"
+            />
+            <span class="s55-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+          </div>
+
+          <div
+            class="s55-field"
+            :class="{ 's55-field--focused': focusedField === 'password', 's55-field--invalid': errors.password }"
+          >
+            <label for="s55-password" class="s55-label">비밀번호</label>
+            <div class="s55-pw-wrap">
+              <input
+                id="s55-password"
+                :type="showPassword ? 'text' : 'password'"
+                name="password"
+                class="s55-input"
+                placeholder="8자 이상"
+                autocomplete="new-password"
+                required
+                minlength="8"
+                x-model="password"
+                @focus="focusedField = 'password'"
+                @blur="focusedField = null; validatePassword()"
+                :aria-invalid="errors.password ? 'true' : 'false'"
+              />
+              <button type="button" class="s55-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword">
+                <span x-text="showPassword ? '숨기기' : '보기'"></span>
+              </button>
+            </div>
+            <span class="s55-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+          </div>
+
+          <div
+            class="s55-field"
+            :class="{ 's55-field--focused': focusedField === 'passwordConfirm', 's55-field--invalid': errors.passwordConfirm }"
+          >
+            <label for="s55-passwordConfirm" class="s55-label">비밀번호 확인</label>
+            <input
+              id="s55-passwordConfirm"
+              :type="showPassword ? 'text' : 'password'"
+              name="password_confirm"
+              class="s55-input"
+              placeholder="다시 입력"
+              autocomplete="new-password"
+              required
+              minlength="8"
+              x-model="passwordConfirm"
+              @focus="focusedField = 'passwordConfirm'"
+              @blur="focusedField = null; validatePasswordConfirm()"
+              :aria-invalid="errors.passwordConfirm ? 'true' : 'false'"
+            />
+            <span class="s55-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+          </div>
+
+          <button type="submit" class="s55-submit" :disabled="submitting" :aria-busy="submitting">
+            <span class="s55-submit-text" x-text="submitting ? '가입 중…' : '가입하기'"></span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

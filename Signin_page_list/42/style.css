@@ -1,0 +1,218 @@
+/* 회원가입 시안 42 - 다크 아카이브 + 카드 분리형 레이아웃, 스크롤 없는 고정 플로우 */
+.signup-dac.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.5rem, 2vw, 1rem);
+  box-sizing: border-box;
+  background: #0c0a09;
+  position: relative;
+}
+
+.dac-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: #0c0a09;
+}
+
+.dac-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(139, 115, 85, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 115, 85, 0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.dac-inner {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  max-height: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.5rem, 1.5vh, 0.75rem);
+  flex-shrink: 1;
+  min-height: 0;
+}
+
+.dac-header {
+  flex-shrink: 0;
+  text-align: center;
+  padding: 0 0.25rem;
+}
+
+.dac-title {
+  margin: 0 0 0.2em;
+  font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+  font-weight: 600;
+  font-family: "IBM Plex Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #e7e5e4;
+  letter-spacing: -0.02em;
+}
+
+.dac-desc {
+  margin: 0;
+  font-size: clamp(0.75rem, 1.8vw, 0.8125rem);
+  font-family: "IBM Plex Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #78716c;
+}
+
+.dac-form {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  gap: clamp(0.4rem, 1.2vh, 0.6rem);
+  flex-shrink: 1;
+  min-height: 0;
+  align-content: center;
+}
+
+.dac-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: clamp(0.5rem, 1.5vh, 0.75rem) clamp(0.65rem, 1.5vw, 0.9rem);
+  background: #1c1917;
+  border: 1px solid rgba(139, 115, 85, 0.22);
+  border-radius: 8px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  min-height: 0;
+}
+
+.dac-card--focused {
+  border-color: #a78b71;
+  box-shadow: 0 0 0 2px rgba(167, 139, 113, 0.12);
+}
+
+.dac-card--invalid {
+  border-color: #b85450;
+  box-shadow: 0 0 0 2px rgba(184, 84, 80, 0.12);
+}
+
+@media (max-width: 640px) {
+  .dac-card {
+    padding: 0.55rem 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .dac-card {
+    grid-column: 1 / -1;
+  }
+}
+
+.dac-label {
+  font-size: clamp(0.6875rem, 1.6vw, 0.75rem);
+  font-weight: 500;
+  font-family: "IBM Plex Mono", "SF Mono", Consolas, monospace;
+  color: #78716c;
+  letter-spacing: 0.02em;
+}
+
+.dac-input {
+  width: 100%;
+  padding: 0.4rem 0 0.35rem;
+  font-size: clamp(0.8125rem, 1.8vw, 0.875rem);
+  font-family: "IBM Plex Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #e7e5e4;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(139, 115, 85, 0.2);
+  border-radius: 0;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.dac-input::placeholder {
+  color: #78716c;
+  opacity: 0.7;
+}
+
+.dac-input:focus {
+  border-bottom-color: #a78b71;
+}
+
+.dac-pw-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0 0.35rem;
+  border-bottom: 1px solid rgba(139, 115, 85, 0.2);
+  transition: border-color 0.2s ease;
+}
+
+.dac-pw-wrap .dac-input {
+  padding: 0;
+  border-bottom: none;
+  flex: 1;
+  min-width: 0;
+}
+
+.dac-pw-wrap:focus-within {
+  border-bottom-color: #a78b71;
+}
+
+.dac-pw-btn {
+  flex-shrink: 0;
+  padding: 0.2rem 0.35rem;
+  border: none;
+  background: transparent;
+  font-size: 0.6875rem;
+  font-family: "IBM Plex Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #78716c;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.dac-pw-btn:hover {
+  color: #a78b71;
+}
+
+.dac-error {
+  font-size: 0.6875rem;
+  font-family: "IBM Plex Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #b85450;
+}
+
+.dac-actions {
+  grid-column: 1 / -1;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  padding-top: 0.25rem;
+}
+
+.dac-btn {
+  padding: 0.5rem 1.25rem;
+  border: 1px solid #a78b71;
+  border-radius: 8px;
+  font-size: clamp(0.8125rem, 1.8vw, 0.875rem);
+  font-weight: 500;
+  font-family: "IBM Plex Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #a78b71;
+  background: rgba(167, 139, 113, 0.12);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+
+.dac-btn:hover:not(:disabled) {
+  background: rgba(167, 139, 113, 0.2);
+}
+
+.dac-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+[x-cloak] {
+  display: none !important;
+}

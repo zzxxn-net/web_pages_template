@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 53 · 다크 아카이브 단일 포커스 상태 변화</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s53 signup-fixed" x-data="signupForm()">
+    <div class="s53-bg" aria-hidden="true">
+      <div class="s53-noise"></div>
+    </div>
+
+    <div class="s53-wrap" x-ref="wrap">
+      <div class="s53-card" x-ref="card">
+        <header class="s53-header">
+          <h1 class="s53-title">회원가입</h1>
+          <p class="s53-desc">한 필드씩 입력 후 다음으로 이동하세요.</p>
+        </header>
+
+        <form
+          class="s53-form"
+          method="post"
+          action="#"
+          hx-post="#"
+          hx-swap="none"
+          @submit.prevent="handleSubmit"
+        >
+          <div
+            class="s53-field"
+            :class="{
+              's53-field--focused': focusedField === 'email',
+              's53-field--valid': email && !errors.email && (focusedField !== 'email' || email.length > 0),
+              's53-field--invalid': errors.email
+            }"
+          >
+            <label for="s53-email" class="s53-label">이메일</label>
+            <div class="s53-input-wrap">
+              <input
+                id="s53-email"
+                type="email"
+                name="email"
+                class="s53-input"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required
+                x-model="email"
+                @focus="focusedField = 'email'"
+                @blur="focusedField = null; validateEmail()"
+                :aria-invalid="errors.email ? 'true' : 'false'"
+              />
+              <span class="s53-state s53-state--ok" x-show="email && !errors.email" x-cloak aria-hidden="true">✓</span>
+              <span class="s53-state s53-state--err" x-show="errors.email" x-cloak aria-hidden="true">!</span>
+            </div>
+            <span class="s53-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+          </div>
+
+          <div
+            class="s53-field"
+            :class="{
+              's53-field--focused': focusedField === 'name',
+              's53-field--valid': name && name.length >= 2 && !errors.name && (focusedField !== 'name' || name.length >= 2),
+              's53-field--invalid': errors.name
+            }"
+          >
+            <label for="s53-name" class="s53-label">이름</label>
+            <div class="s53-input-wrap">
+              <input
+                id="s53-name"
+                type="text"
+                name="name"
+                class="s53-input"
+                placeholder="홍길동"
+                autocomplete="name"
+                required
+                x-model="name"
+                @focus="focusedField = 'name'"
+                @blur="focusedField = null; validateName()"
+                :aria-invalid="errors.name ? 'true' : 'false'"
+              />
+              <span class="s53-state s53-state--ok" x-show="name && name.length >= 2 && !errors.name" x-cloak aria-hidden="true">✓</span>
+              <span class="s53-state s53-state--err" x-show="errors.name" x-cloak aria-hidden="true">!</span>
+            </div>
+            <span class="s53-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+          </div>
+
+          <div
+            class="s53-field"
+            :class="{
+              's53-field--focused': focusedField === 'password',
+              's53-field--valid': password && password.length >= 8 && !errors.password && (focusedField !== 'password' || password.length >= 8),
+              's53-field--invalid': errors.password
+            }"
+          >
+            <label for="s53-password" class="s53-label">비밀번호</label>
+            <div class="s53-input-wrap">
+              <div class="s53-pw-wrap">
+                <input
+                  id="s53-password"
+                  :type="showPassword ? 'text' : 'password'"
+                  name="password"
+                  class="s53-input"
+                  placeholder="8자 이상"
+                  autocomplete="new-password"
+                  required
+                  minlength="8"
+                  x-model="password"
+                  @focus="focusedField = 'password'"
+                  @blur="focusedField = null; validatePassword()"
+                  :aria-invalid="errors.password ? 'true' : 'false'"
+                />
+                <button type="button" class="s53-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword">
+                  <span x-text="showPassword ? '숨기기' : '보기'"></span>
+                </button>
+              </div>
+              <span class="s53-state s53-state--ok" x-show="password && password.length >= 8 && !errors.password" x-cloak aria-hidden="true">✓</span>
+              <span class="s53-state s53-state--err" x-show="errors.password" x-cloak aria-hidden="true">!</span>
+            </div>
+            <span class="s53-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+          </div>
+
+          <div
+            class="s53-field"
+            :class="{
+              's53-field--focused': focusedField === 'passwordConfirm',
+              's53-field--valid': passwordConfirm && password === passwordConfirm && !errors.passwordConfirm,
+              's53-field--invalid': errors.passwordConfirm
+            }"
+          >
+            <label for="s53-passwordConfirm" class="s53-label">비밀번호 확인</label>
+            <div class="s53-input-wrap">
+              <input
+                id="s53-passwordConfirm"
+                :type="showPassword ? 'text' : 'password'"
+                name="password_confirm"
+                class="s53-input"
+                placeholder="다시 입력"
+                autocomplete="new-password"
+                required
+                minlength="8"
+                x-model="passwordConfirm"
+                @focus="focusedField = 'passwordConfirm'"
+                @blur="focusedField = null; validatePasswordConfirm()"
+                :aria-invalid="errors.passwordConfirm ? 'true' : 'false'"
+              />
+              <span class="s53-state s53-state--ok" x-show="passwordConfirm && password === passwordConfirm && !errors.passwordConfirm" x-cloak aria-hidden="true">✓</span>
+              <span class="s53-state s53-state--err" x-show="errors.passwordConfirm" x-cloak aria-hidden="true">!</span>
+            </div>
+            <span class="s53-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+          </div>
+
+          <div class="s53-actions">
+            <button type="submit" class="s53-submit" :disabled="submitting" :aria-busy="submitting">
+              <span class="s53-submit-text" x-text="submitting ? '가입 중…' : '가입하기'"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

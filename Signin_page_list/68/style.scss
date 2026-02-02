@@ -1,0 +1,198 @@
+// 시안 68: 사이버 미니멀 + 단일 포커스 입력 흐름 + 입력 반응형 애니메이션
+$s68-font: 'Space Grotesk', system-ui, sans-serif;
+$s68-mono: 'IBM Plex Mono', monospace;
+$s68-bg: #0c0e12;
+$s68-surface: #161a21;
+$s68-border: #272c36;
+$s68-text: #e4e8ed;
+$s68-text-soft: #7d8590;
+$s68-accent: #3b82f6;
+$s68-accent-soft: rgba(59, 130, 246, 0.15);
+$s68-error: #f87171;
+$s68-radius: 10px;
+$s68-transition: 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s68 {
+  font-family: $s68-font;
+  color: $s68-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s68-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s68-bg;
+}
+
+.s68-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+}
+
+.s68-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.s68-title {
+  font-family: $s68-mono;
+  font-size: clamp(1.2rem, 3.5vw, 1.45rem);
+  font-weight: 500;
+  color: $s68-text;
+  margin-bottom: 0.3rem;
+  letter-spacing: -0.01em;
+}
+
+.s68-desc {
+  font-size: 0.8125rem;
+  color: $s68-text-soft;
+}
+
+.s68-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.s68-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: opacity $s68-transition, transform $s68-transition;
+
+  &--active .s68-label {
+    color: $s68-accent;
+  }
+
+  &--active .s68-input {
+    border-color: $s68-accent;
+    box-shadow: 0 0 0 2px $s68-accent-soft;
+  }
+
+  &--dim {
+    opacity: 0.4;
+  }
+
+  &--active {
+    transform: scale(1.01);
+  }
+}
+
+.s68-field--invalid .s68-input {
+  border-color: $s68-error;
+}
+
+.s68-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: $s68-text-soft;
+  transition: color $s68-transition;
+}
+
+.s68-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: $s68-text;
+  background: $s68-surface;
+  border: 1px solid $s68-border;
+  border-radius: $s68-radius;
+  outline: none;
+  transition: border-color $s68-transition, box-shadow $s68-transition, transform $s68-transition;
+
+  &::placeholder {
+    color: $s68-text-soft;
+    opacity: 0.7;
+  }
+}
+
+.s68-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .s68-input {
+    padding-right: 4rem;
+  }
+}
+
+.s68-pw-btn {
+  position: absolute;
+  right: 0.6rem;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  font-family: inherit;
+  color: $s68-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background $s68-transition;
+
+  &:hover {
+    background: $s68-accent-soft;
+  }
+}
+
+.s68-error {
+  font-size: 0.75rem;
+  color: $s68-error;
+}
+
+.s68-actions {
+  margin-top: 0.5rem;
+}
+
+.s68-submit {
+  width: 100%;
+  padding: 0.85rem 1.25rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #fff;
+  background: $s68-accent;
+  border: none;
+  border-radius: $s68-radius;
+  cursor: pointer;
+  transition: opacity $s68-transition, transform $s68-transition;
+
+  &:hover:not(:disabled) {
+    opacity: 0.95;
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.s68-submit-text {
+  display: block;
+}
+
+[x-cloak] {
+  display: none !important;
+}

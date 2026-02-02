@@ -1,0 +1,259 @@
+/* ============================================
+   회원가입 시안 20 - 네오 브루탈리즘 + 마이크로 인터랙션 중심
+   상태 변화 강조
+   ============================================ */
+
+.signup-brutal.signup-micro {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: #f5f5f0;
+  box-sizing: border-box;
+}
+
+.brutal-wrap {
+  width: 100%;
+  max-width: 420px;
+}
+
+.brutal-card {
+  width: 100%;
+  padding: 2rem 1.75rem;
+  background: #ffffff;
+  border: 3px solid #1a1a1a;
+  border-radius: 0;
+  box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+  .brutal-card {
+    padding: 1.5rem 1.5rem;
+  }
+}
+
+.brutal-header {
+  margin-bottom: 1.75rem;
+}
+
+.brutal-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.75rem;
+  font-weight: 800;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #1a1a1a;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 480px) {
+  .brutal-title {
+    font-size: 1.5rem;
+  }
+}
+
+.brutal-desc {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #4a4a4a;
+  font-weight: 500;
+}
+
+.brutal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.brutal-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem 3px;
+  border: 3px solid transparent;
+  margin: 0 -3px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.brutal-field--focused {
+  border-color: #1a1a1a;
+  background: rgba(26, 26, 26, 0.03);
+}
+
+.brutal-field--valid .brutal-input,
+.brutal-field--valid .brutal-pw-wrap {
+  border-color: #22c55e;
+  background: rgba(34, 197, 94, 0.06);
+}
+
+.brutal-field--invalid .brutal-input,
+.brutal-field--invalid .brutal-pw-wrap {
+  border-color: #dc2626;
+  background: rgba(220, 38, 38, 0.06);
+}
+
+.brutal-label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.brutal-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #1a1a1a;
+  background: #ffffff;
+  border: 3px solid #1a1a1a;
+  border-radius: 0;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.brutal-input::placeholder {
+  color: #737373;
+}
+
+.brutal-input:focus {
+  outline: none;
+  border-color: #1a1a1a;
+  background: rgba(26, 26, 26, 0.02);
+}
+
+.brutal-input[aria-invalid="true"] {
+  border-color: #dc2626;
+  background: rgba(220, 38, 38, 0.06);
+}
+
+.brutal-check {
+  position: absolute;
+  top: 2.5rem;
+  right: 1rem;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #22c55e;
+  line-height: 1;
+}
+
+.brutal-pw-wrap {
+  display: flex;
+  border: 3px solid #1a1a1a;
+  border-radius: 0;
+  background: #ffffff;
+  overflow: hidden;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.brutal-pw-wrap:focus-within {
+  border-color: #1a1a1a;
+  background: rgba(26, 26, 26, 0.02);
+}
+
+.brutal-pw-wrap .brutal-input {
+  border: none;
+  flex: 1;
+}
+
+.brutal-pw-wrap .brutal-input:focus {
+  background: transparent;
+}
+
+.brutal-pw-wrap .brutal-pw-btn {
+  padding: 0 1rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #4a4a4a;
+  background: transparent;
+  border: none;
+  border-left: 3px solid #1a1a1a;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.brutal-pw-wrap .brutal-pw-btn:hover {
+  color: #1a1a1a;
+  background: rgba(26, 26, 26, 0.05);
+}
+
+.brutal-error {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #dc2626;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.brutal-actions {
+  margin-top: 0.5rem;
+}
+
+.brutal-btn {
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 800;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #1a1a1a;
+  background: transparent;
+  border: 3px solid #1a1a1a;
+  border-radius: 0;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.brutal-btn:hover:not(:disabled) {
+  background: #1a1a1a;
+  color: #fff;
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 0 #1a1a1a;
+}
+
+.brutal-btn:active:not(:disabled) {
+  transform: translate(0, 0);
+  box-shadow: none;
+}
+
+.brutal-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.brutal-footer {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 3px solid #1a1a1a;
+  text-align: center;
+}
+
+.brutal-link {
+  font-size: 0.875rem;
+  font-weight: 700;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #1a1a1a;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.brutal-link:hover {
+  text-decoration: underline;
+}
+
+[x-cloak] {
+  display: none !important;
+}

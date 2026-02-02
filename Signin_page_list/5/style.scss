@@ -1,0 +1,203 @@
+// ============================================
+// 회원가입 시안 5 - Bento Grid Form
+// PC: 2열 그리드(이메일|이름, 비밀번호|비밀번호확인) | 모바일: 1열
+// ============================================
+
+$bg: #f1f5f9;
+$card-bg: #fff;
+$primary: #7c3aed;
+$primary-hover: #6d28d9;
+$text: #0f172a;
+$text-muted: #64748b;
+$border: #e2e8f0;
+$error: #dc2626;
+$radius: 14px;
+$max-width: 560px;
+$break: 520px;
+
+.signup-wrap {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: $bg;
+  box-sizing: border-box;
+}
+
+.signup-bento {
+  width: 100%;
+  max-width: $max-width;
+  padding: 2rem;
+  background: $card-bg;
+  border-radius: $radius;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid $border;
+  box-sizing: border-box;
+
+  @media (max-width: $break) {
+    padding: 1.5rem;
+  }
+}
+
+.bento-header {
+  margin-bottom: 1.5rem;
+}
+
+.bento-title {
+  margin: 0 0 0.375rem;
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: $text;
+  line-height: 1.3;
+
+  @media (max-width: $break) {
+    font-size: 1.25rem;
+  }
+}
+
+.bento-desc {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: $text-muted;
+}
+
+.bento-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.125rem;
+
+  @media (min-width: $break) {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 1.25rem;
+  }
+}
+
+.bento-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  min-width: 0;
+}
+
+.bento-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: $text;
+}
+
+.bento-input {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: $text;
+  background: #fff;
+  border: 1px solid $border;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  &::placeholder {
+    color: #94a3b8;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $primary;
+    box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
+  }
+
+  &[aria-invalid="true"] {
+    border-color: $error;
+  }
+}
+
+.bento-pw-wrap {
+  display: flex;
+  border: 1px solid $border;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  &:focus-within {
+    border-color: $primary;
+    box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
+  }
+
+  .bento-input {
+    border: none;
+    flex: 1;
+  }
+
+  .bento-pw-btn {
+    padding: 0 0.875rem;
+    font-size: 0.8125rem;
+    color: $text-muted;
+    background: #f8fafc;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+.bento-error {
+  font-size: 0.8125rem;
+  color: $error;
+}
+
+.bento-actions {
+  margin-top: 0.25rem;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: $primary;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover:not(:disabled) {
+    background: $primary-hover;
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+.bento-footer {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.bento-link {
+  font-size: 0.875rem;
+  color: $primary;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

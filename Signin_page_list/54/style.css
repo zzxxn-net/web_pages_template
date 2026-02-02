@@ -1,0 +1,181 @@
+/* 시안 54: 미래적 클린 + 풀스크린 몰입형 + 포커스 이동 중심 UX */
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s54 {
+  font-family: "Inter", system-ui, sans-serif;
+  color: #0f172a;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s54-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: #f8fafc;
+}
+
+.s54-full {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s54-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.s54-title {
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 0.35rem;
+}
+
+.s54-desc {
+  font-size: 0.875rem;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.s54-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.s54-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: transform 0.2s ease;
+}
+
+.s54-field--focused .s54-input {
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.12);
+}
+
+.s54-field--invalid .s54-input {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.1);
+}
+
+.s54-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #0f172a;
+}
+
+.s54-input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: #0f172a;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.s54-input::placeholder {
+  color: #64748b;
+}
+
+.s54-input:focus {
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.12);
+}
+
+.s54-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.s54-pw-wrap .s54-input {
+  padding-right: 4rem;
+}
+
+.s54-pw-btn {
+  position: absolute;
+  right: 0.75rem;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.75rem;
+  font-family: inherit;
+  color: #0ea5e9;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.s54-pw-btn:hover {
+  background: rgba(14, 165, 233, 0.12);
+}
+
+.s54-error {
+  font-size: 0.75rem;
+  color: #ef4444;
+}
+
+.s54-actions {
+  margin-top: 0.75rem;
+  width: 100%;
+}
+
+.s54-submit {
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #fff;
+  background: #0ea5e9;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.s54-submit:hover:not(:disabled) {
+  background: #0284c7;
+}
+
+.s54-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.s54-submit-text {
+  display: block;
+}
+
+[x-cloak] {
+  display: none !important;
+}

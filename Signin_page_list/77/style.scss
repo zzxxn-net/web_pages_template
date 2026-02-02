@@ -1,0 +1,262 @@
+// 시안 77: 다크 아카이브 + 비대칭 레이아웃 + 포커스 이동 중심 UX
+$s77-font: 'IBM Plex Sans KR', system-ui, sans-serif;
+$s77-mono: 'IBM Plex Mono', monospace;
+$s77-bg: #0c0a09;
+$s77-grid: rgba(167, 139, 113, 0.06);
+$s77-surface: #161412;
+$s77-border: #2a2522;
+$s77-text: #e8e4e0;
+$s77-text-soft: #8a847c;
+$s77-accent: #a78b71;
+$s77-accent-soft: rgba(167, 139, 113, 0.2);
+$s77-error: #c75c5c;
+$s77-radius: 6px;
+$s77-transition: 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s77 {
+  font-family: $s77-font;
+  color: $s77-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 3vw, 2rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s77-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s77-bg;
+}
+
+.s77-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient($s77-grid 1px, transparent 1px),
+    linear-gradient(90deg, $s77-grid 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.s77-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 900px;
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 0;
+  min-height: 0;
+  align-items: center;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.s77-form-col {
+  padding: clamp(1.25rem, 4vw, 2rem);
+  max-width: 380px;
+  margin: 0 auto;
+  width: 100%;
+
+  @media (max-width: 640px) {
+    max-width: 100%;
+  }
+}
+
+.s77-header {
+  margin-bottom: 1.25rem;
+}
+
+.s77-title {
+  font-family: $s77-mono;
+  font-size: clamp(1.35rem, 3.5vw, 1.6rem);
+  font-weight: 500;
+  color: $s77-text;
+  margin: 0 0 0.35rem;
+  letter-spacing: 0.02em;
+}
+
+.s77-desc {
+  font-size: 0.8125rem;
+  color: $s77-text-soft;
+  margin: 0;
+}
+
+.s77-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.s77-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transition: border-color $s77-transition;
+
+  &--focused .s77-label {
+    color: $s77-accent;
+  }
+
+  &--focused .s77-input {
+    border-color: $s77-accent;
+    box-shadow: 0 0 0 2px $s77-accent-soft;
+  }
+
+  &--invalid .s77-input {
+    border-color: $s77-error;
+  }
+}
+
+.s77-label {
+  font-family: $s77-mono;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: $s77-text-soft;
+  transition: color $s77-transition;
+}
+
+.s77-input {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: $s77-text;
+  background: $s77-surface;
+  border: 1px solid $s77-border;
+  border-radius: $s77-radius;
+  outline: none;
+  transition: border-color $s77-transition, box-shadow $s77-transition;
+
+  &::placeholder {
+    color: $s77-text-soft;
+    opacity: 0.7;
+  }
+}
+
+.s77-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .s77-input {
+    padding-right: 3.25rem;
+  }
+}
+
+.s77-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.6875rem;
+  font-family: $s77-mono;
+  color: $s77-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background $s77-transition;
+
+  &:hover {
+    background: $s77-accent-soft;
+  }
+}
+
+.s77-error {
+  font-size: 0.75rem;
+  color: $s77-error;
+  display: block;
+}
+
+.s77-actions {
+  margin-top: 0.35rem;
+}
+
+.s77-submit {
+  width: 100%;
+  padding: 0.8rem 1.25rem;
+  font-family: $s77-mono;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: $s77-bg;
+  background: $s77-accent;
+  border: none;
+  border-radius: $s77-radius;
+  cursor: pointer;
+  transition: opacity $s77-transition, transform $s77-transition;
+
+  &:hover:not(:disabled) {
+    opacity: 0.92;
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.s77-submit-text {
+  display: block;
+}
+
+.s77-visual {
+  background: $s77-surface;
+  border-left: 1px solid $s77-border;
+  padding: clamp(2rem, 5vw, 3rem);
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 640px) {
+    border-left: none;
+    border-top: 1px solid $s77-border;
+    min-height: 160px;
+  }
+}
+
+.s77-visual-content {
+  text-align: center;
+  max-width: 320px;
+}
+
+.s77-visual-label {
+  font-family: $s77-mono;
+  font-size: 0.6875rem;
+  letter-spacing: 0.2em;
+  color: $s77-accent;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.s77-visual-text {
+  font-size: 0.8125rem;
+  color: $s77-text-soft;
+  margin: 0;
+  line-height: 1.5;
+}
+
+[x-cloak] {
+  display: none !important;
+}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 40 · 실험적 풀스크린 입력 반응형</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="signup-exp-full signup-fixed" x-data="signupForm()">
+    <div class="expfull-bg" aria-hidden="true">
+      <div class="expfull-lines"></div>
+      <div class="expfull-blob expfull-blob--1"></div>
+      <div class="expfull-blob expfull-blob--2"></div>
+    </div>
+
+    <div class="expfull-inner">
+      <div class="expfull-card" x-ref="card">
+        <header class="expfull-header">
+          <h1 class="expfull-title">회원가입</h1>
+          <p class="expfull-desc">필수 정보를 입력하세요.</p>
+        </header>
+
+        <form
+          class="expfull-form"
+          method="post"
+          action="#"
+          hx-post="#"
+          hx-swap="none"
+          @submit.prevent="handleSubmit"
+        >
+          <div
+            class="expfull-field"
+            :class="{ 'expfull-field--focused': focusedField === 'email', 'expfull-field--invalid': errors.email }"
+          >
+            <label for="expfull-email" class="expfull-label">이메일</label>
+            <input
+              id="expfull-email"
+              type="email"
+              name="email"
+              class="expfull-input"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+              x-model="email"
+              @focus="focusedField = 'email'"
+              @blur="focusedField = null; validateEmail()"
+              :aria-invalid="errors.email ? 'true' : 'false'"
+            />
+            <span class="expfull-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+          </div>
+
+          <div
+            class="expfull-field"
+            :class="{ 'expfull-field--focused': focusedField === 'name', 'expfull-field--invalid': errors.name }"
+          >
+            <label for="expfull-name" class="expfull-label">이름</label>
+            <input
+              id="expfull-name"
+              type="text"
+              name="name"
+              class="expfull-input"
+              placeholder="홍길동"
+              autocomplete="name"
+              required
+              x-model="name"
+              @focus="focusedField = 'name'"
+              @blur="focusedField = null; validateName()"
+              :aria-invalid="errors.name ? 'true' : 'false'"
+            />
+            <span class="expfull-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+          </div>
+
+          <div
+            class="expfull-field"
+            :class="{ 'expfull-field--focused': focusedField === 'password', 'expfull-field--invalid': errors.password }"
+          >
+            <label for="expfull-password" class="expfull-label">비밀번호</label>
+            <div class="expfull-pw-wrap">
+              <input
+                id="expfull-password"
+                :type="showPassword ? 'text' : 'password'"
+                name="password"
+                class="expfull-input"
+                placeholder="8자 이상"
+                autocomplete="new-password"
+                required
+                minlength="8"
+                x-model="password"
+                @focus="focusedField = 'password'"
+                @blur="focusedField = null; validatePassword()"
+                :aria-invalid="errors.password ? 'true' : 'false'"
+              />
+              <button
+                type="button"
+                class="expfull-pw-btn"
+                :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'"
+                @click="showPassword = !showPassword"
+              >
+                <span x-text="showPassword ? '숨기기' : '보기'"></span>
+              </button>
+            </div>
+            <span class="expfull-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+          </div>
+
+          <div
+            class="expfull-field"
+            :class="{ 'expfull-field--focused': focusedField === 'passwordConfirm', 'expfull-field--invalid': errors.passwordConfirm }"
+          >
+            <label for="expfull-passwordConfirm" class="expfull-label">비밀번호 확인</label>
+            <input
+              id="expfull-passwordConfirm"
+              :type="showPassword ? 'text' : 'password'"
+              name="passwordConfirm"
+              class="expfull-input"
+              placeholder="비밀번호 재입력"
+              autocomplete="new-password"
+              required
+              x-model="passwordConfirm"
+              @focus="focusedField = 'passwordConfirm'"
+              @blur="focusedField = null; validatePasswordConfirm()"
+              :aria-invalid="errors.passwordConfirm ? 'true' : 'false'"
+            />
+            <span class="expfull-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+          </div>
+
+          <div class="expfull-submit">
+            <button type="submit" class="expfull-btn" :disabled="submitting">
+              <span x-text="submitting ? '처리 중…' : '가입하기'"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

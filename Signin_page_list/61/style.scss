@@ -1,0 +1,223 @@
+// 시안 61: 사이버 미니멀 + 비대칭 레이아웃 + 포커스 이동 중심 UX
+$s61-font: 'Space Grotesk', system-ui, sans-serif;
+$s61-mono: 'JetBrains Mono', monospace;
+$s61-bg: #0f1419;
+$s61-surface: #1a1f26;
+$s61-border: #2d3640;
+$s61-text: #e6edf3;
+$s61-text-soft: #8b949e;
+$s61-accent: #58a6ff;
+$s61-accent-soft: rgba(88, 166, 255, 0.15);
+$s61-error: #f85149;
+$s61-radius: 8px;
+$s61-transition: 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s61 {
+  font-family: $s61-font;
+  color: $s61-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s61-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s61-bg;
+}
+
+.s61-layout {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 720px;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 2rem;
+  align-items: start;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.s61-aside {
+  text-align: left;
+  padding-top: 0.25rem;
+}
+
+.s61-header .s61-label {
+  font-family: $s61-mono;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: $s61-accent;
+  margin-bottom: 0.5rem;
+}
+
+.s61-title {
+  font-size: clamp(1.25rem, 3.5vw, 1.5rem);
+  font-weight: 600;
+  color: $s61-text;
+  margin-bottom: 0.35rem;
+}
+
+.s61-desc {
+  font-size: 0.8125rem;
+  color: $s61-text-soft;
+  line-height: 1.45;
+}
+
+.s61-focus-hint {
+  margin-top: 1.25rem;
+  padding: 0.5rem 0;
+  font-family: $s61-mono;
+  font-size: 0.75rem;
+  color: $s61-text-soft;
+}
+
+.s61-focus-name {
+  color: $s61-accent;
+}
+
+.s61-form-wrap {
+  min-width: 0;
+}
+
+.s61-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.s61-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: opacity $s61-transition;
+
+  &--focused .s61-label {
+    color: $s61-accent;
+  }
+
+  &--focused .s61-input {
+    border-color: $s61-accent;
+    box-shadow: 0 0 0 2px $s61-accent-soft;
+  }
+
+  &--invalid .s61-input {
+    border-color: $s61-error;
+  }
+}
+
+.s61-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: $s61-text-soft;
+  transition: color $s61-transition;
+}
+
+.s61-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: $s61-text;
+  background: $s61-surface;
+  border: 1px solid $s61-border;
+  border-radius: $s61-radius;
+  outline: none;
+  transition: border-color $s61-transition, box-shadow $s61-transition;
+
+  &::placeholder {
+    color: $s61-text-soft;
+    opacity: 0.7;
+  }
+}
+
+.s61-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .s61-input {
+    padding-right: 4rem;
+  }
+}
+
+.s61-pw-btn {
+  position: absolute;
+  right: 0.6rem;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  font-family: inherit;
+  color: $s61-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background $s61-transition;
+
+  &:hover {
+    background: $s61-accent-soft;
+  }
+}
+
+.s61-error {
+  font-size: 0.75rem;
+  color: $s61-error;
+}
+
+.s61-actions {
+  margin-top: 0.5rem;
+}
+
+.s61-submit {
+  width: 100%;
+  padding: 0.85rem 1.25rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: $s61-bg;
+  background: $s61-accent;
+  border: none;
+  border-radius: $s61-radius;
+  cursor: pointer;
+  transition: opacity $s61-transition, transform $s61-transition;
+
+  &:hover:not(:disabled) {
+    opacity: 0.92;
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.s61-submit-text {
+  display: block;
+}
+
+[x-cloak] {
+  display: none !important;
+}

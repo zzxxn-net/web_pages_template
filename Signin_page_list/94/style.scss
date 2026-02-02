@@ -1,0 +1,223 @@
+// 시안 94: 미래적 클린 + 마이크로 인터랙션 중심 + 입력 반응형 애니메이션
+$s94-font: 'DM Sans', system-ui, sans-serif;
+$s94-bg: #f8fafc;
+$s94-surface: #ffffff;
+$s94-border: #e2e8f0;
+$s94-text: #0f172a;
+$s94-muted: #64748b;
+$s94-accent: #3b82f6;
+$s94-accent-soft: rgba(59, 130, 246, 0.12);
+$s94-error: #ef4444;
+$s94-radius: 12px;
+$s94-ease: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s94 {
+  font-family: $s94-font;
+  color: $s94-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 2rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s94-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s94-bg;
+}
+
+.s94-layout {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 1.5rem);
+}
+
+.s94-header {
+  text-align: center;
+}
+
+.s94-title {
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 600;
+  color: $s94-text;
+  margin: 0;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+}
+
+.s94-tagline {
+  font-size: clamp(0.8125rem, 2vw, 0.875rem);
+  font-weight: 400;
+  color: $s94-muted;
+  margin: 0.4rem 0 0;
+  line-height: 1.4;
+}
+
+.s94-form {
+  width: 100%;
+  padding: clamp(1.25rem, 3.5vw, 1.75rem);
+  background: $s94-surface;
+  border: 1px solid $s94-border;
+  border-radius: $s94-radius;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.s94-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+// 입력 반응형: 포커스 시 라벨·테두리 전환
+.s94-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: transform $s94-ease;
+
+  &--focus .s94-input {
+    border-color: $s94-accent;
+    box-shadow: 0 0 0 3px $s94-accent-soft;
+  }
+
+  &--focus .s94-label {
+    color: $s94-accent;
+  }
+
+  &--invalid .s94-input {
+    border-color: $s94-error;
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.15);
+  }
+
+  &--invalid .s94-label {
+    color: $s94-error;
+  }
+}
+
+.s94-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: $s94-muted;
+  transition: color $s94-ease;
+}
+
+.s94-input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  padding-right: 3rem;
+  font-family: $s94-font;
+  font-size: 0.9375rem;
+  color: $s94-text;
+  background: $s94-bg;
+  border: 1px solid $s94-border;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color $s94-ease, box-shadow $s94-ease;
+
+  &::placeholder {
+    color: $s94-muted;
+    opacity: 0.8;
+  }
+
+  &:focus {
+    border-color: $s94-accent;
+    box-shadow: 0 0 0 3px $s94-accent-soft;
+  }
+}
+
+.s94-pw-wrap {
+  position: relative;
+
+  .s94-input {
+    padding-right: 3rem;
+  }
+}
+
+.s94-pw-btn {
+  position: absolute;
+  right: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.3rem 0.5rem;
+  font-size: 0.6875rem;
+  font-family: $s94-font;
+  color: $s94-accent;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color $s94-ease, background $s94-ease, transform $s94-ease;
+
+  &:hover {
+    background: $s94-accent-soft;
+  }
+
+  &:active {
+    transform: translateY(-50%) scale(0.96);
+  }
+}
+
+.s94-error {
+  font-size: 0.75rem;
+  color: $s94-error;
+  display: block;
+}
+
+.s94-actions {
+  margin-top: 1rem;
+}
+
+// 마이크로 인터랙션: 버튼 호버·액티브 스케일
+.s94-btn {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  font-family: $s94-font;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #fff;
+  background: $s94-accent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity $s94-ease, transform $s94-ease, box-shadow $s94-ease;
+
+  &:hover:not(:disabled) {
+    opacity: 0.95;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0) scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

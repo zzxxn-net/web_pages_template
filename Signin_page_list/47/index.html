@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 47 · 실험적 마이크로 인터랙션 GSAP</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="signup-eim signup-fixed" x-data="signupForm()">
+    <div class="eim-bg" aria-hidden="true">
+      <div class="eim-lines"></div>
+      <div class="eim-blob eim-blob--1"></div>
+      <div class="eim-blob eim-blob--2"></div>
+    </div>
+
+    <div class="eim-inner">
+      <div class="eim-card" x-ref="card">
+        <header class="eim-header" x-ref="header">
+          <h1 class="eim-title">회원가입</h1>
+          <p class="eim-desc">필수 정보를 입력하세요.</p>
+        </header>
+
+        <form
+          class="eim-form"
+          method="post"
+          action="#"
+          hx-post="#"
+          hx-swap="none"
+          @submit.prevent="handleSubmit"
+        >
+          <div
+            class="eim-field"
+            :class="{ 'eim-field--focused': focusedField === 'email', 'eim-field--invalid': errors.email }"
+            x-ref="fieldEmail"
+          >
+            <label for="eim-email" class="eim-label">
+              <span class="eim-label-text">이메일</span>
+              <span class="eim-label-line" aria-hidden="true"></span>
+            </label>
+            <input
+              id="eim-email"
+              type="email"
+              name="email"
+              class="eim-input"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+              x-model="email"
+              @focus="focusedField = 'email'"
+              @blur="focusedField = null; validateEmail()"
+              :aria-invalid="errors.email ? 'true' : 'false'"
+            />
+            <span class="eim-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+          </div>
+
+          <div
+            class="eim-field"
+            :class="{ 'eim-field--focused': focusedField === 'name', 'eim-field--invalid': errors.name }"
+            x-ref="fieldName"
+          >
+            <label for="eim-name" class="eim-label">
+              <span class="eim-label-text">이름</span>
+              <span class="eim-label-line" aria-hidden="true"></span>
+            </label>
+            <input
+              id="eim-name"
+              type="text"
+              name="name"
+              class="eim-input"
+              placeholder="홍길동"
+              autocomplete="name"
+              required
+              x-model="name"
+              @focus="focusedField = 'name'"
+              @blur="focusedField = null; validateName()"
+              :aria-invalid="errors.name ? 'true' : 'false'"
+            />
+            <span class="eim-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+          </div>
+
+          <div
+            class="eim-field"
+            :class="{ 'eim-field--focused': focusedField === 'password', 'eim-field--invalid': errors.password }"
+            x-ref="fieldPassword"
+          >
+            <label for="eim-password" class="eim-label">
+              <span class="eim-label-text">비밀번호</span>
+              <span class="eim-label-line" aria-hidden="true"></span>
+            </label>
+            <div class="eim-pw-wrap">
+              <input
+                id="eim-password"
+                :type="showPassword ? 'text' : 'password'"
+                name="password"
+                class="eim-input"
+                placeholder="8자 이상"
+                autocomplete="new-password"
+                required
+                minlength="8"
+                x-model="password"
+                @focus="focusedField = 'password'"
+                @blur="focusedField = null; validatePassword()"
+                :aria-invalid="errors.password ? 'true' : 'false'"
+              />
+              <button
+                type="button"
+                class="eim-pw-btn"
+                :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'"
+                @click="showPassword = !showPassword"
+              >
+                <span x-text="showPassword ? '숨기기' : '보기'"></span>
+              </button>
+            </div>
+            <span class="eim-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+          </div>
+
+          <div
+            class="eim-field"
+            :class="{ 'eim-field--focused': focusedField === 'passwordConfirm', 'eim-field--invalid': errors.passwordConfirm }"
+            x-ref="fieldPasswordConfirm"
+          >
+            <label for="eim-passwordConfirm" class="eim-label">
+              <span class="eim-label-text">비밀번호 확인</span>
+              <span class="eim-label-line" aria-hidden="true"></span>
+            </label>
+            <input
+              id="eim-passwordConfirm"
+              :type="showPassword ? 'text' : 'password'"
+              name="passwordConfirm"
+              class="eim-input"
+              placeholder="비밀번호 재입력"
+              autocomplete="new-password"
+              required
+              x-model="passwordConfirm"
+              @focus="focusedField = 'passwordConfirm'"
+              @blur="focusedField = null; validatePasswordConfirm()"
+              :aria-invalid="errors.passwordConfirm ? 'true' : 'false'"
+            />
+            <span class="eim-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+          </div>
+
+          <div class="eim-actions" x-ref="actions">
+            <button type="submit" class="eim-btn" :disabled="submitting">
+              <span class="eim-btn-text" x-text="submitting ? '처리 중…' : '가입하기'"></span>
+              <span class="eim-btn-line" aria-hidden="true"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

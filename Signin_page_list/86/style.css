@@ -1,0 +1,252 @@
+/* 시안 86: 미래적 클린 + 단계 분할형(Progressive Form) + GSAP 기반 부드러운 전환 */
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s86 {
+  font-family: "Inter", system-ui, sans-serif;
+  color: #0f172a;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 2rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s86-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #f8fafc;
+  pointer-events: none;
+}
+
+.s86-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  padding: clamp(1.25rem, 4vw, 1.75rem);
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.s86-header {
+  margin-bottom: 1.25rem;
+}
+
+.s86-title {
+  font-size: clamp(1.5rem, 3.5vw, 1.75rem);
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 0.2rem;
+  letter-spacing: -0.02em;
+}
+
+.s86-desc {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  color: #64748b;
+  margin: 0 0 0.85rem;
+  letter-spacing: 0.04em;
+}
+
+.s86-steps {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.s86-step {
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #64748b;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 50%;
+  transition: color 0.28s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.28s cubic-bezier(0.4, 0, 0.2, 1), background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s86-step--active {
+  color: #0ea5e9;
+  border-color: #0ea5e9;
+  background: rgba(14, 165, 233, 0.15);
+}
+
+.s86-step-line {
+  flex: 1;
+  max-width: 2.5rem;
+  height: 2px;
+  background: #e2e8f0;
+  border-radius: 1px;
+  transition: background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s86-step-line--filled {
+  background: #0ea5e9;
+}
+
+.s86-form {
+  position: relative;
+  min-height: 200px;
+}
+
+.s86-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.s86-panel-title {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #64748b;
+  margin: 0 0 0.35rem;
+  letter-spacing: 0.08em;
+}
+
+.s86-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.s86-field--invalid .s86-input {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.2);
+}
+
+.s86-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: #64748b;
+}
+
+.s86-input {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  padding-right: 3.25rem;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.9375rem;
+  color: #0f172a;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s86-input::placeholder {
+  color: #64748b;
+  opacity: 0.8;
+}
+
+.s86-input:focus {
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.15);
+}
+
+.s86-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.s86-pw-wrap .s86-input {
+  padding-right: 3.25rem;
+}
+
+.s86-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.6875rem;
+  font-family: "JetBrains Mono", monospace;
+  color: #0ea5e9;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s86-pw-btn:hover {
+  background: rgba(14, 165, 233, 0.15);
+}
+
+.s86-error {
+  font-size: 0.75rem;
+  color: #ef4444;
+  display: block;
+}
+
+.s86-nav {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  justify-content: flex-end;
+}
+
+.s86-btn {
+  padding: 0.65rem 1.1rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1), transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s86-btn--next,
+.s86-btn--submit {
+  color: #fff;
+  background: #0ea5e9;
+}
+
+.s86-btn--next:hover:not(:disabled),
+.s86-btn--submit:hover:not(:disabled) {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.s86-btn--prev {
+  color: #64748b;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+}
+
+.s86-btn--prev:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.s86-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+[x-cloak] {
+  display: none !important;
+}

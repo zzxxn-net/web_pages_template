@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 84 - 네오 브루탈리즘 카드 분리형 상태 강조</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s84 signup-fixed" x-data="signupForm84()">
+    <div class="s84-bg" aria-hidden="true"></div>
+    <div class="s84-wrap" x-ref="wrap">
+      <header class="s84-header">
+        <h1 class="s84-title">SIGN UP</h1>
+        <p class="s84-desc">네오 브루탈리즘</p>
+      </header>
+      <form class="s84-form" method="post" action="#" hx-post="#" hx-swap="none" @submit.prevent="handleSubmit">
+        <div class="s84-card" :class="{ 's84-card--focused': focusedField === 'email', 's84-card--invalid': errors.email }">
+          <label for="s84-email" class="s84-label">EMAIL</label>
+          <input
+            id="s84-email"
+            type="email"
+            name="email"
+            class="s84-input"
+            placeholder="you@example.com"
+            autocomplete="email"
+            required
+            x-model="email"
+            @focus="focusedField = 'email'"
+            @blur="validateEmail(); focusedField = null"
+            :aria-invalid="errors.email ? 'true' : 'false'"
+          />
+          <span class="s84-state s84-state--error" x-show="errors.email" x-cloak x-text="errors.email"></span>
+          <span class="s84-state s84-state--ok" x-show="email && !errors.email" x-cloak aria-hidden="true">✓</span>
+        </div>
+        <div class="s84-card" :class="{ 's84-card--focused': focusedField === 'name', 's84-card--invalid': errors.name }">
+          <label for="s84-name" class="s84-label">NAME</label>
+          <input
+            id="s84-name"
+            type="text"
+            name="name"
+            class="s84-input"
+            placeholder="홍길동"
+            autocomplete="name"
+            required
+            x-model="name"
+            @focus="focusedField = 'name'"
+            @blur="validateName(); focusedField = null"
+            :aria-invalid="errors.name ? 'true' : 'false'"
+          />
+          <span class="s84-state s84-state--error" x-show="errors.name" x-cloak x-text="errors.name"></span>
+          <span class="s84-state s84-state--ok" x-show="name && !errors.name" x-cloak aria-hidden="true">✓</span>
+        </div>
+        <div class="s84-card" :class="{ 's84-card--focused': focusedField === 'password', 's84-card--invalid': errors.password }">
+          <label for="s84-password" class="s84-label">PASSWORD</label>
+          <div class="s84-pw-wrap">
+            <input
+              id="s84-password"
+              :type="showPassword ? 'text' : 'password'"
+              name="password"
+              class="s84-input"
+              placeholder="8자 이상"
+              autocomplete="new-password"
+              required
+              minlength="8"
+              x-model="password"
+              @focus="focusedField = 'password'"
+              @blur="validatePassword(); focusedField = null"
+              :aria-invalid="errors.password ? 'true' : 'false'"
+            />
+            <button type="button" class="s84-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword"><span x-text="showPassword ? 'HIDE' : 'SHOW'"></span></button>
+          </div>
+          <span class="s84-state s84-state--error" x-show="errors.password" x-cloak x-text="errors.password"></span>
+          <span class="s84-state s84-state--ok" x-show="password.length >= 8 && !errors.password" x-cloak aria-hidden="true">✓</span>
+        </div>
+        <div class="s84-card" :class="{ 's84-card--focused': focusedField === 'passwordConfirm', 's84-card--invalid': errors.passwordConfirm }">
+          <label for="s84-passwordConfirm" class="s84-label">CONFIRM</label>
+          <input
+            id="s84-passwordConfirm"
+            :type="showPassword ? 'text' : 'password'"
+            name="password_confirm"
+            class="s84-input"
+            placeholder="다시 입력"
+            autocomplete="new-password"
+            required
+            minlength="8"
+            x-model="passwordConfirm"
+            @focus="focusedField = 'passwordConfirm'"
+            @blur="validatePasswordConfirm(); focusedField = null"
+            :aria-invalid="errors.passwordConfirm ? 'true' : 'false'"
+          />
+          <span class="s84-state s84-state--error" x-show="errors.passwordConfirm" x-cloak x-text="errors.passwordConfirm"></span>
+          <span class="s84-state s84-state--ok" x-show="passwordConfirm && password === passwordConfirm && !errors.passwordConfirm" x-cloak aria-hidden="true">✓</span>
+        </div>
+        <div class="s84-actions">
+          <button type="submit" class="s84-btn" :disabled="submitting" :aria-busy="submitting"><span x-text="submitting ? '…' : '가입하기'"></span></button>
+        </div>
+      </form>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

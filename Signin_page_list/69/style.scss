@@ -1,0 +1,241 @@
+// 시안 69: 미래적 클린 + 비대칭 레이아웃 + GSAP 기반 부드러운 전환
+$s69-font: 'DM Sans', system-ui, sans-serif;
+$s69-bg: #f8fafc;
+$s69-surface: #ffffff;
+$s69-border: #e2e8f0;
+$s69-text: #0f172a;
+$s69-text-soft: #64748b;
+$s69-accent: #0ea5e9;
+$s69-accent-soft: rgba(14, 165, 233, 0.12);
+$s69-error: #dc2626;
+$s69-radius: 12px;
+$s69-transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s69 {
+  font-family: $s69-font;
+  color: $s69-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s69-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s69-bg;
+}
+
+.s69-layout {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 920px;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: center;
+  min-height: 0;
+}
+
+.s69-aside {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 3vw, 2rem) 0;
+}
+
+.s69-aside-inner {
+  max-width: 360px;
+}
+
+.s69-title {
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 600;
+  color: $s69-text;
+  margin: 0 0 0.75rem;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.s69-desc {
+  font-size: clamp(0.9375rem, 2vw, 1rem);
+  color: $s69-text-soft;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.s69-accent-line {
+  margin-top: 1.75rem;
+  width: 48px;
+  height: 4px;
+  background: linear-gradient(90deg, $s69-accent, transparent);
+  border-radius: 2px;
+}
+
+.s69-form-wrap {
+  background: $s69-surface;
+  border-radius: $s69-radius;
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.04);
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  border: 1px solid $s69-border;
+}
+
+.s69-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+}
+
+.s69-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: transform $s69-transition;
+
+  &--focused .s69-label {
+    color: $s69-accent;
+  }
+
+  &--focused .s69-input {
+    border-color: $s69-accent;
+    box-shadow: 0 0 0 3px $s69-accent-soft;
+  }
+
+  &--invalid .s69-input {
+    border-color: $s69-error;
+    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.12);
+  }
+}
+
+.s69-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: $s69-text-soft;
+  transition: color $s69-transition;
+}
+
+.s69-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: $s69-text;
+  background: $s69-surface;
+  border: 1px solid $s69-border;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color $s69-transition, box-shadow $s69-transition;
+
+  &::placeholder {
+    color: $s69-text-soft;
+    opacity: 0.8;
+  }
+}
+
+.s69-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .s69-input {
+    padding-right: 4rem;
+  }
+}
+
+.s69-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  padding: 0.4rem 0.65rem;
+  font-size: 0.75rem;
+  font-family: inherit;
+  color: $s69-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background $s69-transition;
+
+  &:hover {
+    background: $s69-accent-soft;
+  }
+}
+
+.s69-error {
+  font-size: 0.75rem;
+  color: $s69-error;
+}
+
+.s69-actions {
+  margin-top: 0.5rem;
+}
+
+.s69-submit {
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #fff;
+  background: $s69-accent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity $s69-transition, transform $s69-transition, background $s69-transition;
+
+  &:hover:not(:disabled) {
+    background: darken($s69-accent, 6%);
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.s69-submit-text {
+  display: block;
+}
+
+// 비대칭: 모바일에서 세로 스택, aside 위 / 폼 아래
+@media (max-width: 639px) {
+  .s69-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .s69-aside {
+    padding: 0.5rem 0;
+  }
+
+  .s69-aside-inner {
+    max-width: 100%;
+  }
+
+  .s69-accent-line {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

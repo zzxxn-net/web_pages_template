@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 90 - 현대 판타지 카드 분리형 입력 반응형</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s90 signup-fixed" x-data="signupForm90()" x-init="initAnim()">
+    <div class="s90-bg" aria-hidden="true">
+      <div class="s90-glow s90-glow--1" aria-hidden="true"></div>
+      <div class="s90-glow s90-glow--2" aria-hidden="true"></div>
+    </div>
+    <div class="s90-layout" x-ref="layout">
+      <header class="s90-header" aria-label="페이지 제목">
+        <h1 class="s90-title">Join the realm</h1>
+        <p class="s90-tagline">당신만의 이야기가 시작됩니다.</p>
+      </header>
+      <form id="s90-form" class="s90-form" method="post" action="#" hx-post="#" hx-swap="none" @submit.prevent="handleSubmit" aria-label="회원가입 폼">
+        <div class="s90-cards">
+          <section class="s90-card s90-card--basic" aria-label="기본 정보" x-ref="cardBasic">
+            <h2 class="s90-card-title">기본 정보</h2>
+            <div class="s90-fields">
+              <div class="s90-field" :class="{ 's90-field--focus': focusEmail, 's90-field--invalid': errors.email }">
+                <label for="s90-email" class="s90-label">이메일</label>
+                <input id="s90-email" type="email" name="email" class="s90-input" placeholder="you@example.com" autocomplete="email" required x-model="email" @focus="focusEmail = true" @blur="focusEmail = false; validateEmail()" :aria-invalid="errors.email ? 'true' : 'false'" />
+                <span class="s90-error" x-show="errors.email" x-cloak x-text="errors.email"></span>
+              </div>
+              <div class="s90-field" :class="{ 's90-field--focus': focusName, 's90-field--invalid': errors.name }">
+                <label for="s90-name" class="s90-label">이름</label>
+                <input id="s90-name" type="text" name="name" class="s90-input" placeholder="홍길동" autocomplete="name" required x-model="name" @focus="focusName = true" @blur="focusName = false; validateName()" :aria-invalid="errors.name ? 'true' : 'false'" />
+                <span class="s90-error" x-show="errors.name" x-cloak x-text="errors.name"></span>
+              </div>
+            </div>
+          </section>
+          <section class="s90-card s90-card--account" aria-label="계정 보안" x-ref="cardAccount">
+            <h2 class="s90-card-title">계정 보안</h2>
+            <div class="s90-fields">
+              <div class="s90-field" :class="{ 's90-field--focus': focusPassword, 's90-field--invalid': errors.password }">
+                <label for="s90-password" class="s90-label">비밀번호</label>
+                <div class="s90-pw-wrap">
+                  <input id="s90-password" :type="showPassword ? 'text' : 'password'" name="password" class="s90-input" placeholder="8자 이상" autocomplete="new-password" required minlength="8" x-model="password" @focus="focusPassword = true" @blur="focusPassword = false; validatePassword()" :aria-invalid="errors.password ? 'true' : 'false'" />
+                  <button type="button" class="s90-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword"><span x-text="showPassword ? '숨기기' : '보기'"></span></button>
+                </div>
+                <span class="s90-error" x-show="errors.password" x-cloak x-text="errors.password"></span>
+              </div>
+              <div class="s90-field" :class="{ 's90-field--focus': focusPasswordConfirm, 's90-field--invalid': errors.passwordConfirm }">
+                <label for="s90-passwordConfirm" class="s90-label">비밀번호 확인</label>
+                <input id="s90-passwordConfirm" :type="showPassword ? 'text' : 'password'" name="password_confirm" class="s90-input" placeholder="다시 입력" autocomplete="new-password" required minlength="8" x-model="passwordConfirm" @focus="focusPasswordConfirm = true" @blur="focusPasswordConfirm = false; validatePasswordConfirm()" :aria-invalid="errors.passwordConfirm ? 'true' : 'false'" />
+                <span class="s90-error" x-show="errors.passwordConfirm" x-cloak x-text="errors.passwordConfirm"></span>
+              </div>
+              <div class="s90-actions">
+                <button type="submit" class="s90-btn" :disabled="submitting" :aria-busy="submitting"><span x-text="submitting ? '처리 중…' : '가입하기'"></span></button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </form>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

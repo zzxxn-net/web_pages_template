@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 36 · 현대 판타지 마이크로 인터랙션</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="signup-fantasy-micro signup-fixed" x-data="signupForm()">
+    <div class="fmic-bg" aria-hidden="true">
+      <div class="fmic-glow fmic-glow--1"></div>
+      <div class="fmic-glow fmic-glow--2"></div>
+    </div>
+
+    <div class="fmic-scroll-lock">
+      <div class="fmic-wrap" x-ref="wrap">
+        <header class="fmic-header">
+          <h1 class="fmic-title">회원가입</h1>
+          <p class="fmic-desc">필수 정보를 입력해 주세요.</p>
+        </header>
+
+        <form
+          class="fmic-form"
+          method="post"
+          action="#"
+          hx-post="#"
+          hx-swap="none"
+          @submit.prevent="handleSubmit"
+        >
+          <div
+            class="fmic-field"
+            :class="{
+              'fmic-field--focused': focusedField === 'email',
+              'fmic-field--valid': email && !errors.email,
+              'fmic-field--invalid': errors.email
+            }"
+          >
+            <label for="fmic-email" class="fmic-label">이메일</label>
+            <input
+              id="fmic-email"
+              type="email"
+              name="email"
+              class="fmic-input"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+              x-model="email"
+              @focus="focusedField = 'email'"
+              @blur="focusedField = null; validateEmail()"
+              :aria-invalid="errors.email ? 'true' : 'false'"
+            />
+            <span class="fmic-check" x-show="email && !errors.email" x-cloak aria-hidden="true">✓</span>
+            <span class="fmic-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+          </div>
+
+          <div
+            class="fmic-field"
+            :class="{
+              'fmic-field--focused': focusedField === 'name',
+              'fmic-field--valid': name && name.length >= 2 && !errors.name,
+              'fmic-field--invalid': errors.name
+            }"
+          >
+            <label for="fmic-name" class="fmic-label">이름</label>
+            <input
+              id="fmic-name"
+              type="text"
+              name="name"
+              class="fmic-input"
+              placeholder="홍길동"
+              autocomplete="name"
+              required
+              x-model="name"
+              @focus="focusedField = 'name'"
+              @blur="focusedField = null; validateName()"
+              :aria-invalid="errors.name ? 'true' : 'false'"
+            />
+            <span class="fmic-check" x-show="name && name.length >= 2 && !errors.name" x-cloak aria-hidden="true">✓</span>
+            <span class="fmic-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+          </div>
+
+          <div
+            class="fmic-field"
+            :class="{
+              'fmic-field--focused': focusedField === 'password',
+              'fmic-field--valid': password && password.length >= 8 && !errors.password,
+              'fmic-field--invalid': errors.password
+            }"
+          >
+            <label for="fmic-password" class="fmic-label">비밀번호</label>
+            <div class="fmic-pw-wrap">
+              <input
+                id="fmic-password"
+                :type="showPassword ? 'text' : 'password'"
+                name="password"
+                class="fmic-input"
+                placeholder="8자 이상"
+                autocomplete="new-password"
+                required
+                minlength="8"
+                x-model="password"
+                @focus="focusedField = 'password'"
+                @blur="focusedField = null; validatePassword()"
+                :aria-invalid="errors.password ? 'true' : 'false'"
+              />
+              <button
+                type="button"
+                class="fmic-pw-btn"
+                :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'"
+                @click="showPassword = !showPassword"
+              >
+                <span x-text="showPassword ? '숨기기' : '보기'"></span>
+              </button>
+            </div>
+            <span class="fmic-check" x-show="password && password.length >= 8 && !errors.password" x-cloak aria-hidden="true">✓</span>
+            <span class="fmic-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+          </div>
+
+          <div
+            class="fmic-field"
+            :class="{
+              'fmic-field--focused': focusedField === 'passwordConfirm',
+              'fmic-field--valid': passwordConfirm && password === passwordConfirm && !errors.passwordConfirm,
+              'fmic-field--invalid': errors.passwordConfirm
+            }"
+          >
+            <label for="fmic-passwordConfirm" class="fmic-label">비밀번호 확인</label>
+            <input
+              id="fmic-passwordConfirm"
+              :type="showPassword ? 'text' : 'password'"
+              name="passwordConfirm"
+              class="fmic-input"
+              placeholder="비밀번호 재입력"
+              autocomplete="new-password"
+              required
+              x-model="passwordConfirm"
+              @focus="focusedField = 'passwordConfirm'"
+              @blur="focusedField = null; validatePasswordConfirm()"
+              :aria-invalid="errors.passwordConfirm ? 'true' : 'false'"
+            />
+            <span class="fmic-check" x-show="passwordConfirm && password === passwordConfirm && !errors.passwordConfirm" x-cloak aria-hidden="true">✓</span>
+            <span class="fmic-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+          </div>
+
+          <div class="fmic-submit">
+            <button type="submit" class="fmic-btn" :disabled="submitting">
+              <span x-text="submitting ? '처리 중…' : '가입하기'"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

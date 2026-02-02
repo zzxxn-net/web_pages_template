@@ -1,0 +1,222 @@
+/* 시안 88: 실험적 인터페이스 + 마이크로 인터랙션 중심 + 상태 변화 강조 */
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s88 {
+  font-family: "Syne", system-ui, sans-serif;
+  color: #f4f4f5;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 2rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s88-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: #0c0c0e;
+}
+
+.s88-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(139, 92, 246, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 92, 246, 0.06) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.s88-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  padding: clamp(1.25rem, 4vw, 1.75rem);
+  background: rgba(18, 18, 22, 0.9);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 10px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.s88-header {
+  margin-bottom: 1rem;
+}
+
+.s88-title {
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 700;
+  color: #f4f4f5;
+  margin: 0 0 0.2rem;
+  letter-spacing: 0.04em;
+}
+
+.s88-desc {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.6875rem;
+  color: #71717a;
+  margin: 0;
+  letter-spacing: 0.1em;
+}
+
+.s88-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.s88-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s88-field--focused {
+  transform: scale(1.01);
+}
+
+.s88-field--focused .s88-label {
+  color: #8b5cf6;
+}
+
+.s88-field--focused .s88-input {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+}
+
+.s88-field--invalid .s88-input {
+  border-color: #f87171;
+  box-shadow: 0 0 0 2px rgba(248, 113, 113, 0.2);
+}
+
+.s88-field--valid .s88-valid {
+  opacity: 1;
+}
+
+.s88-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: #71717a;
+  transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s88-input {
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  padding-right: 3.25rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: #f4f4f5;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s88-input::placeholder {
+  color: #71717a;
+  opacity: 0.7;
+}
+
+.s88-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.s88-pw-wrap .s88-input {
+  padding-right: 3.25rem;
+}
+
+.s88-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.6875rem;
+  font-family: "JetBrains Mono", monospace;
+  color: #8b5cf6;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s88-pw-btn:hover {
+  background: rgba(139, 92, 246, 0.2);
+  transform: scale(1.03);
+}
+
+.s88-error {
+  font-size: 0.75rem;
+  color: #f87171;
+  display: block;
+}
+
+.s88-valid {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  margin-top: 0.1rem;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #34d399;
+  opacity: 0;
+  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.s88-field--valid .s88-valid {
+  opacity: 1;
+}
+
+.s88-actions {
+  margin-top: 0.5rem;
+}
+
+.s88-btn {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: #0c0c0e;
+  background: #8b5cf6;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s88-btn:hover:not(:disabled) {
+  opacity: 0.95;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.35);
+}
+
+.s88-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+[x-cloak] {
+  display: none !important;
+}

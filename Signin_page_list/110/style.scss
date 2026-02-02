@@ -1,0 +1,235 @@
+// 시안 110: 미래적 클린 + 카드 분리형 레이아웃 + GSAP 기반 부드러운 전환
+$s110-sans: 'Inter', system-ui, sans-serif;
+$s110-bg: #f8fafc;
+$s110-card: #ffffff;
+$s110-text: #0f172a;
+$s110-muted: #64748b;
+$s110-accent: #3b82f6;
+$s110-valid: #10b981;
+$s110-valid-soft: rgba(16, 185, 129, 0.08);
+$s110-error: #ef4444;
+$s110-error-soft: rgba(239, 68, 68, 0.06);
+$s110-radius: 14px;
+$s110-ease: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s110 {
+  font-family: $s110-sans;
+  color: $s110-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.75rem, 3vw, 1.5rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s110-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s110-bg;
+}
+
+.s110-layout {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 680px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 380px;
+  border-radius: $s110-radius;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06);
+  box-sizing: border-box;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    min-height: auto;
+  }
+}
+
+.s110-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.5rem, 4vw, 2rem);
+  background: $s110-card;
+  box-sizing: border-box;
+
+  @media (max-width: 600px) {
+    padding: clamp(1.25rem, 3.5vw, 1.5rem);
+  }
+}
+
+.s110-card--brand {
+  align-items: center;
+  text-align: center;
+  border-right: 1px solid rgba(100, 116, 139, 0.12);
+
+  @media (max-width: 600px) {
+    border-right: none;
+    border-bottom: 1px solid rgba(100, 116, 139, 0.12);
+  }
+}
+
+.s110-card--form {
+  justify-content: center;
+}
+
+.s110-title {
+  font-size: clamp(1.35rem, 3.5vw, 1.75rem);
+  font-weight: 600;
+  color: $s110-text;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.s110-tagline {
+  font-size: clamp(0.8rem, 2vw, 0.875rem);
+  font-weight: 400;
+  color: $s110-muted;
+  margin: 0.4rem 0 0;
+  line-height: 1.5;
+}
+
+.s110-form {
+  width: 100%;
+}
+
+.s110-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.s110-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+
+  &--invalid .s110-input {
+    border-color: $s110-error;
+    background: $s110-error-soft;
+  }
+  &--invalid .s110-label {
+    color: $s110-error;
+  }
+  &--valid .s110-input {
+    border-color: $s110-valid;
+    background: $s110-valid-soft;
+  }
+  &--valid .s110-label {
+    color: $s110-valid;
+  }
+}
+
+.s110-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: $s110-muted;
+  transition: color $s110-ease;
+}
+
+.s110-input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  padding-right: 3rem;
+  font-family: $s110-sans;
+  font-size: 0.875rem;
+  color: $s110-text;
+  background: $s110-bg;
+  border: 1px solid rgba(100, 116, 139, 0.2);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color $s110-ease, background $s110-ease;
+
+  &::placeholder {
+    color: $s110-muted;
+    opacity: 0.8;
+  }
+  &:focus {
+    border-color: $s110-accent;
+    background: $s110-card;
+  }
+}
+
+.s110-pw-wrap {
+  position: relative;
+  .s110-input {
+    padding-right: 3rem;
+  }
+}
+
+.s110-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.25rem 0.4rem;
+  font-size: 0.7rem;
+  font-family: $s110-sans;
+  font-weight: 500;
+  color: $s110-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: opacity $s110-ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.s110-error {
+  font-size: 0.7rem;
+  color: $s110-error;
+  display: block;
+}
+
+.s110-actions {
+  margin-top: 1.25rem;
+}
+
+.s110-btn {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  font-family: $s110-sans;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #fff;
+  background: $s110-accent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity $s110-ease;
+
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+  &:disabled,
+  &--busy {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

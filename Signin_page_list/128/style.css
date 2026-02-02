@@ -1,0 +1,282 @@
+/* 시안 128: 감성 테크 + 단계 분할형(Progressive Form) + 상태 변화 강조 */
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.s128 {
+  font-family: "Noto Sans KR", system-ui, sans-serif;
+  color: #3d2c29;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-sizing: border-box;
+  background: #fff8f5;
+}
+
+.s128-inner {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.25rem, 5vw, 2rem);
+  box-sizing: border-box;
+}
+
+.s128-header {
+  text-align: center;
+  margin-bottom: clamp(1.25rem, 4vw, 1.75rem);
+}
+
+.s128-title {
+  font-size: clamp(1.5rem, 4vw, 1.85rem);
+  font-weight: 600;
+  color: #3d2c29;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.s128-steps-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.s128-step-dot {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: rgba(180, 120, 100, 0.2);
+  color: #8b7355;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s128-step-dot--active {
+  background: #c97b63;
+  color: #fff;
+}
+
+.s128-step-line {
+  width: 2rem;
+  height: 2px;
+  background: rgba(180, 120, 100, 0.2);
+  transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s128-step-line--done {
+  background: #c97b63;
+}
+
+.s128-form-wrap {
+  width: 100%;
+  max-width: 380px;
+}
+
+.s128-form {
+  width: 100%;
+}
+
+.s128-steps {
+  position: relative;
+  min-height: 12rem;
+}
+
+.s128-step {
+  width: 100%;
+}
+
+.s128-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.s128-field {
+  position: relative;
+  transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s128-field--focused .s128-input {
+  border-color: #c97b63;
+  box-shadow: 0 0 0 3px rgba(201, 123, 99, 0.15);
+  background: #fff;
+}
+
+.s128-field--focused .s128-label {
+  color: #c97b63;
+}
+
+.s128-field--valid .s128-input {
+  border-color: #7a9b76;
+  background: rgba(122, 155, 118, 0.12);
+}
+
+.s128-field--valid .s128-label {
+  color: #7a9b76;
+}
+
+.s128-field--invalid .s128-input {
+  border-color: #c75c5c;
+  box-shadow: 0 0 0 2px rgba(199, 92, 92, 0.12);
+  background: rgba(199, 92, 92, 0.12);
+}
+
+.s128-field--invalid .s128-label {
+  color: #c75c5c;
+}
+
+.s128-label {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #8b7355;
+  display: block;
+  margin-bottom: 0.4rem;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s128-input {
+  width: 100%;
+  padding: 0.85rem 2.4rem 0.85rem 0.9rem;
+  font-family: "Noto Sans KR", system-ui, sans-serif;
+  font-size: 0.95rem;
+  color: #3d2c29;
+  background: #fff;
+  border: 1.5px solid rgba(180, 120, 100, 0.2);
+  border-radius: 12px;
+  outline: none;
+  transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s128-input::placeholder {
+  color: #8b7355;
+  opacity: 0.75;
+}
+
+.s128-status {
+  position: absolute;
+  right: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #7a9b76;
+  pointer-events: none;
+}
+
+.s128-pw-wrap .s128-input {
+  padding-right: 3.1rem;
+}
+
+.s128-pw-btn {
+  position: absolute;
+  right: 0.4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.22rem 0.45rem;
+  font-family: "Noto Sans KR", system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #8b7355;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s128-pw-btn:hover {
+  color: #c97b63;
+}
+
+.s128-error {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #c75c5c;
+  display: block;
+  margin-top: 0.35rem;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s128-actions {
+  margin-top: 1.35rem;
+}
+
+.s128-actions--row {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.35rem;
+}
+
+.s128-btn {
+  padding: 0.85rem 1.25rem;
+  font-family: "Noto Sans KR", system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.s128-btn--primary {
+  width: 100%;
+  color: #fff;
+  background: #c97b63;
+}
+
+.s128-btn--primary:hover:not(:disabled) {
+  background: #b86a52;
+  box-shadow: 0 4px 14px rgba(201, 123, 99, 0.15);
+  transform: translateY(-1px);
+}
+
+.s128-btn--secondary {
+  flex: 1;
+  color: #8b7355;
+  background: #fff;
+  border: 1.5px solid rgba(180, 120, 100, 0.2);
+}
+
+.s128-btn--secondary:hover {
+  background: rgba(201, 123, 99, 0.08);
+  color: #c97b63;
+}
+
+.s128-btn--primary:active:not(:disabled),
+.s128-btn--secondary:active {
+  transform: translateY(0);
+}
+
+.s128-btn:disabled,
+.s128-btn.s128-btn--busy {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.s128-actions--row .s128-btn--primary {
+  flex: 1.2;
+}
+
+[x-cloak] {
+  display: none !important;
+}

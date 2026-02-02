@@ -1,0 +1,289 @@
+// 시안 90: 현대 판타지 + 카드 분리형 레이아웃 + 입력 반응형 애니메이션
+$s90-serif: 'Cormorant Garamond', Georgia, serif;
+$s90-sans: 'Outfit', system-ui, sans-serif;
+$s90-bg-start: #1a1625;
+$s90-bg-mid: #2d2438;
+$s90-bg-end: #1f1b2e;
+$s90-glow-1: rgba(212, 175, 55, 0.08);
+$s90-glow-2: rgba(139, 92, 246, 0.08);
+$s90-card: rgba(255, 255, 255, 0.05);
+$s90-card-border: rgba(212, 175, 55, 0.18);
+$s90-text: #f4f4f5;
+$s90-muted: #a1a1aa;
+$s90-accent: #d4af37;
+$s90-accent-soft: rgba(212, 175, 55, 0.2);
+$s90-error: #f87171;
+$s90-radius: 14px;
+$s90-ease: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+$s90-focus-glow: 0 0 0 2px $s90-accent-soft, 0 0 20px rgba(212, 175, 55, 0.12);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s90 {
+  font-family: $s90-sans;
+  color: $s90-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 2.5rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s90-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(145deg, $s90-bg-start 0%, $s90-bg-mid 50%, $s90-bg-end 100%);
+}
+
+.s90-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.9;
+  pointer-events: none;
+
+  &--1 {
+    width: min(50vw, 340px);
+    height: min(50vw, 340px);
+    background: $s90-glow-1;
+    top: -6%;
+    left: -10%;
+  }
+
+  &--2 {
+    width: min(40vw, 260px);
+    height: min(40vw, 260px);
+    background: $s90-glow-2;
+    bottom: -4%;
+    right: -6%;
+  }
+}
+
+.s90-layout {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.25rem, 4vw, 2rem);
+  min-height: min(88vh, 520px);
+}
+
+.s90-header {
+  text-align: center;
+  padding: 0;
+}
+
+.s90-title {
+  font-family: $s90-serif;
+  font-size: clamp(1.85rem, 4.5vw, 2.35rem);
+  font-weight: 600;
+  font-style: italic;
+  color: $s90-text;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.s90-tagline {
+  font-family: $s90-sans;
+  font-size: clamp(0.875rem, 1.8vw, 0.9375rem);
+  font-weight: 400;
+  color: $s90-muted;
+  margin: 0.4rem 0 0;
+  line-height: 1.5;
+}
+
+.s90-form {
+  width: 100%;
+}
+
+.s90-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1rem, 3vw, 1.5rem);
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.s90-card {
+  padding: clamp(1.25rem, 3.5vw, 1.75rem);
+  background: $s90-card;
+  border: 1px solid $s90-card-border;
+  border-radius: $s90-radius;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  transition: border-color $s90-ease, box-shadow $s90-ease;
+
+  &--basic {
+    border-left: 3px solid rgba(212, 175, 55, 0.5);
+  }
+
+  &--account {
+    border-left: 3px solid rgba(139, 92, 246, 0.5);
+  }
+}
+
+.s90-card-title {
+  font-family: $s90-sans;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: $s90-accent;
+  margin: 0 0 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.s90-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+// 입력 반응형: 포커스 시 테두리·그림자·라벨 색 전환
+.s90-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: transform $s90-ease;
+
+  &--focus .s90-input {
+    border-color: rgba(212, 175, 55, 0.5);
+    box-shadow: $s90-focus-glow;
+  }
+
+  &--focus .s90-label {
+    color: $s90-accent;
+  }
+
+  &--invalid .s90-input {
+    border-color: $s90-error;
+    box-shadow: 0 0 0 2px rgba(248, 113, 113, 0.2);
+  }
+
+  &--invalid .s90-label {
+    color: $s90-error;
+  }
+}
+
+.s90-label {
+  font-family: $s90-sans;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: $s90-muted;
+  transition: color $s90-ease;
+}
+
+.s90-input {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  padding-right: 3.25rem;
+  font-family: $s90-sans;
+  font-size: 0.9375rem;
+  color: $s90-text;
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(212, 175, 55, 0.12);
+  border-radius: 10px;
+  outline: none;
+  transition: border-color $s90-ease, box-shadow $s90-ease, background $s90-ease;
+
+  &::placeholder {
+    color: $s90-muted;
+    opacity: 0.75;
+  }
+
+  &:focus {
+    border-color: rgba(212, 175, 55, 0.5);
+    box-shadow: $s90-focus-glow;
+    background: rgba(0, 0, 0, 0.35);
+  }
+}
+
+.s90-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .s90-input {
+    padding-right: 3.25rem;
+  }
+}
+
+.s90-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.6875rem;
+  font-family: $s90-sans;
+  color: $s90-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background $s90-ease;
+
+  &:hover {
+    background: $s90-accent-soft;
+  }
+}
+
+.s90-error {
+  font-size: 0.75rem;
+  color: $s90-error;
+  display: block;
+}
+
+.s90-actions {
+  margin-top: 0.25rem;
+  padding-top: 0.25rem;
+}
+
+.s90-btn {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  font-family: $s90-sans;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #1a1625;
+  background: linear-gradient(135deg, $s90-accent 0%, darken($s90-accent, 8%) 100%);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: opacity $s90-ease, transform $s90-ease, box-shadow $s90-ease;
+
+  &:hover:not(:disabled) {
+    opacity: 0.95;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

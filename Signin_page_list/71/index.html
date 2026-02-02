@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 71 · 네오 브루탈리즘 마이크로 인터랙션</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Archivo+Black&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s71 signup-fixed" x-data="signupForm()">
+    <div class="s71-bg" aria-hidden="true"></div>
+    <div class="s71-box" x-ref="box">
+      <h1 class="s71-title">SIGN UP</h1>
+      <p class="s71-desc">Fill in the form below.</p>
+      <form class="s71-form" method="post" action="#" hx-post="#" hx-swap="none" @submit.prevent="handleSubmit">
+        <div class="s71-field" :class="{ 's71-field--focused': focusedField === 'email', 's71-field--invalid': errors.email }" x-ref="fieldEmail">
+          <label for="s71-email" class="s71-label">EMAIL</label>
+          <input id="s71-email" type="email" name="email" class="s71-input" placeholder="you@example.com" autocomplete="email" required x-model="email" @focus="focusedField = 'email'" @blur="focusedField = null; validateEmail()" :aria-invalid="errors.email ? 'true' : 'false'" />
+          <span class="s71-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+        </div>
+        <div class="s71-field" :class="{ 's71-field--focused': focusedField === 'name', 's71-field--invalid': errors.name }" x-ref="fieldName">
+          <label for="s71-name" class="s71-label">NAME</label>
+          <input id="s71-name" type="text" name="name" class="s71-input" placeholder="Hong Gildong" autocomplete="name" required x-model="name" @focus="focusedField = 'name'" @blur="focusedField = null; validateName()" :aria-invalid="errors.name ? 'true' : 'false'" />
+          <span class="s71-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+        </div>
+        <div class="s71-field" :class="{ 's71-field--focused': focusedField === 'password', 's71-field--invalid': errors.password }" x-ref="fieldPassword">
+          <label for="s71-password" class="s71-label">PASSWORD</label>
+          <div class="s71-pw-wrap">
+            <input id="s71-password" :type="showPassword ? 'text' : 'password'" name="password" class="s71-input" placeholder="8+ chars" autocomplete="new-password" required minlength="8" x-model="password" @focus="focusedField = 'password'" @blur="focusedField = null; validatePassword()" :aria-invalid="errors.password ? 'true' : 'false'" />
+            <button type="button" class="s71-pw-btn" :aria-label="showPassword ? 'Hide' : 'Show'" @click="showPassword = !showPassword"><span x-text="showPassword ? 'HIDE' : 'SHOW'"></span></button>
+          </div>
+          <span class="s71-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+        </div>
+        <div class="s71-field" :class="{ 's71-field--focused': focusedField === 'passwordConfirm', 's71-field--invalid': errors.passwordConfirm }" x-ref="fieldPasswordConfirm">
+          <label for="s71-passwordConfirm" class="s71-label">CONFIRM</label>
+          <input id="s71-passwordConfirm" :type="showPassword ? 'text' : 'password'" name="password_confirm" class="s71-input" placeholder="Repeat" autocomplete="new-password" required minlength="8" x-model="passwordConfirm" @focus="focusedField = 'passwordConfirm'" @blur="focusedField = null; validatePasswordConfirm()" :aria-invalid="errors.passwordConfirm ? 'true' : 'false'" />
+          <span class="s71-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+        </div>
+        <div class="s71-actions">
+          <button type="submit" class="s71-submit" :disabled="submitting" :aria-busy="submitting" :class="{ 's71-submit--busy': submitting }"><span class="s71-submit-text" x-text="submitting ? '…' : 'SUBMIT'"></span></button>
+        </div>
+      </form>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

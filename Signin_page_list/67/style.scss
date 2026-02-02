@@ -1,0 +1,188 @@
+// 시안 67: 현대 판타지 + 풀스크린 몰입형 + 스크롤 없는 고정 플로우
+$s67-font: 'Literata', Georgia, serif;
+$s67-display: 'Crimson Pro', serif;
+$s67-bg: #1a1612;
+$s67-surface: #252019;
+$s67-border: #3d352c;
+$s67-text: #f2ebe3;
+$s67-text-soft: #a89a8a;
+$s67-accent: #c9a227;
+$s67-accent-soft: rgba(201, 162, 39, 0.18);
+$s67-error: #c45c5c;
+$s67-radius: 10px;
+$s67-transition: 0.24s ease;
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s67 {
+  font-family: $s67-font;
+  color: $s67-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s67-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s67-bg;
+}
+
+.s67-full {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 360px;
+}
+
+.s67-header {
+  text-align: center;
+  margin-bottom: 1.1rem;
+}
+
+.s67-title {
+  font-family: $s67-display;
+  font-size: clamp(1.25rem, 3.8vw, 1.5rem);
+  font-weight: 600;
+  color: $s67-text;
+  margin-bottom: 0.25rem;
+}
+
+.s67-desc {
+  font-size: 0.8125rem;
+  color: $s67-text-soft;
+}
+
+.s67-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.s67-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+
+  &--focused .s67-label {
+    color: $s67-accent;
+  }
+
+  &--focused .s67-input {
+    border-color: $s67-accent;
+    box-shadow: 0 0 0 2px $s67-accent-soft;
+  }
+
+  &--invalid .s67-input {
+    border-color: $s67-error;
+  }
+}
+
+.s67-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: $s67-text-soft;
+  transition: color $s67-transition;
+}
+
+.s67-input {
+  width: 100%;
+  padding: 0.55rem 0.85rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: $s67-text;
+  background: $s67-surface;
+  border: 1px solid $s67-border;
+  border-radius: $s67-radius;
+  outline: none;
+  transition: border-color $s67-transition, box-shadow $s67-transition;
+
+  &::placeholder {
+    color: $s67-text-soft;
+    opacity: 0.7;
+  }
+}
+
+.s67-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .s67-input {
+    padding-right: 3.5rem;
+  }
+}
+
+.s67-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.7rem;
+  font-family: inherit;
+  color: $s67-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background $s67-transition;
+
+  &:hover {
+    background: $s67-accent-soft;
+  }
+}
+
+.s67-error {
+  font-size: 0.7rem;
+  color: $s67-error;
+}
+
+.s67-actions {
+  margin-top: 0.4rem;
+}
+
+.s67-submit {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  font-family: $s67-display;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: $s67-bg;
+  background: $s67-accent;
+  border: none;
+  border-radius: $s67-radius;
+  cursor: pointer;
+  transition: opacity $s67-transition, transform $s67-transition;
+
+  &:hover:not(:disabled) {
+    opacity: 0.95;
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.s67-submit-text {
+  display: block;
+}
+
+[x-cloak] {
+  display: none !important;
+}

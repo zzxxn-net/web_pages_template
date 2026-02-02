@@ -1,0 +1,235 @@
+// ============================================
+// 회원가입 시안 31 - 풀스크린 몰입형 + 감성 테크
+// 포커스 이동 중심 UX
+// ============================================
+
+$font-sans: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+$bg: linear-gradient(165deg, #faf6f2 0%, #f0e9e2 40%, #eae2d9 100%);
+$bg-soft: radial-gradient(ellipse 70% 40% at 50% 0%, rgba(193, 127, 89, 0.08), transparent);
+$text: #2c2419;
+$text-muted: #6b5d52;
+$primary: #b8734a;
+$primary-soft: rgba(184, 115, 74, 0.18);
+$border: rgba(139, 109, 89, 0.22);
+$error: #c45c4a;
+$error-soft: rgba(196, 92, 74, 0.12);
+$max-width: 400px;
+$break: 480px;
+$radius: 12px;
+
+.signup-emotion-full.signup-full {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: $bg;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.emofull-bg {
+  position: absolute;
+  inset: 0;
+  background: $bg-soft;
+  pointer-events: none;
+}
+
+.emofull-wrap {
+  width: 100%;
+  max-width: $max-width;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.emofull-header {
+  margin-bottom: 1.75rem;
+  text-align: center;
+}
+
+.emofull-title {
+  margin: 0 0 0.4rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  font-family: $font-sans;
+  color: $text;
+  letter-spacing: -0.02em;
+
+  @media (max-width: $break) {
+    font-size: 1.4rem;
+  }
+}
+
+.emofull-desc {
+  margin: 0;
+  font-size: 0.875rem;
+  font-family: $font-sans;
+  color: $text-muted;
+}
+
+.emofull-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.emofull-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: transform 0.22s ease;
+
+  &--focused {
+    .emofull-input,
+    .emofull-pw-wrap {
+      border-color: $primary;
+      box-shadow: 0 0 0 3px $primary-soft;
+    }
+    transform: translateY(-1px);
+  }
+
+  &--invalid {
+    .emofull-input,
+    .emofull-pw-wrap {
+      border-color: $error;
+      box-shadow: 0 0 0 2px $error-soft;
+    }
+  }
+}
+
+.emofull-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-family: $font-sans;
+  color: $text;
+}
+
+.emofull-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  font-family: $font-sans;
+  color: $text;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid $border;
+  border-radius: $radius;
+  outline: none;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
+
+  &::placeholder {
+    color: $text-muted;
+    opacity: 0.85;
+  }
+
+  &:focus {
+    border-color: $primary;
+    box-shadow: 0 0 0 3px $primary-soft;
+  }
+
+  &[aria-invalid="true"] {
+    border-color: $error;
+    box-shadow: 0 0 0 2px $error-soft;
+  }
+}
+
+.emofull-pw-wrap {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border: 1px solid $border;
+  border-radius: $radius;
+  background: rgba(255, 255, 255, 0.85);
+  transition: border-color 0.22s ease, box-shadow 0.22s ease;
+
+  &:focus-within {
+    border-color: $primary;
+    box-shadow: 0 0 0 3px $primary-soft;
+  }
+
+  .emofull-input {
+    border: none;
+    box-shadow: none;
+    flex: 1;
+    min-width: 0;
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+.emofull-pw-btn {
+  padding: 0 0.875rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: $primary;
+  background: transparent;
+  border: none;
+  border-left: 1px solid $border;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease;
+
+  &:hover {
+    color: darken($primary, 8%);
+    background: $primary-soft;
+  }
+}
+
+.emofull-error {
+  font-size: 0.75rem;
+  color: $error;
+  min-height: 1.25rem;
+}
+
+.emofull-nav {
+  margin-top: 0.5rem;
+}
+
+.emofull-btn {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: $font-sans;
+  color: #fff;
+  background: $primary;
+  border: none;
+  border-radius: $radius;
+  cursor: pointer;
+  transition: background 0.2s ease, opacity 0.2s ease;
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  &--primary:hover:not(:disabled) {
+    background: darken($primary, 5%);
+  }
+}
+
+.emofull-footer {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid $border;
+  text-align: center;
+}
+
+.emofull-link {
+  font-size: 0.875rem;
+  color: $primary;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: darken($primary, 8%);
+    text-decoration: underline;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

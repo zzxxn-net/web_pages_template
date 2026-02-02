@@ -1,0 +1,204 @@
+// 시안 71: 네오 브루탈리즘 + 마이크로 인터랙션 중심 + 입력 반응형 애니메이션
+$s71-font: 'Space Mono', monospace;
+$s71-title-font: 'Archivo Black', sans-serif;
+$s71-bg: #f5f5f0;
+$s71-surface: #fff;
+$s71-border: #1a1a1a;
+$s71-text: #1a1a1a;
+$s71-text-soft: #555;
+$s71-accent: #1a1a1a;
+$s71-accent-bg: #ff0;
+$s71-error: #c00;
+$s71-transition: 0.2s ease;
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s71 {
+  font-family: $s71-font;
+  color: $s71-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 3vw, 2rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s71-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s71-bg;
+}
+
+.s71-box {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  background: $s71-surface;
+  border: 4px solid $s71-border;
+  padding: clamp(1.25rem, 4vw, 1.75rem);
+  box-shadow: 8px 8px 0 $s71-border;
+}
+
+.s71-title {
+  font-family: $s71-title-font;
+  font-size: clamp(1.5rem, 4vw, 1.875rem);
+  font-weight: 400;
+  color: $s71-text;
+  margin: 0 0 0.25rem;
+  letter-spacing: 0.02em;
+}
+
+.s71-desc {
+  font-size: 0.8125rem;
+  color: $s71-text-soft;
+  margin: 0 0 1.25rem;
+}
+
+.s71-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.s71-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  border-left: 3px solid transparent;
+  padding-left: 0.5rem;
+  margin-left: -0.5rem;
+  transition: border-left-color $s71-transition;
+
+  &--focused {
+    border-left-color: $s71-border;
+  }
+
+  &--focused .s71-label {
+    color: $s71-text;
+  }
+
+  &--invalid {
+    border-left-color: $s71-error;
+  }
+
+  &--invalid .s71-input {
+    border-color: $s71-error;
+    background: rgba(204, 0, 0, 0.04);
+  }
+}
+
+.s71-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: $s71-text-soft;
+  transition: color $s71-transition;
+}
+
+.s71-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  color: $s71-text;
+  background: $s71-surface;
+  border: 2px solid $s71-border;
+  outline: none;
+  transition: border-color $s71-transition, background $s71-transition;
+
+  &::placeholder {
+    color: $s71-text-soft;
+    opacity: 0.7;
+  }
+}
+
+.s71-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .s71-input {
+    padding-right: 4rem;
+  }
+}
+
+.s71-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.6875rem;
+  font-family: inherit;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: $s71-text;
+  background: transparent;
+  border: 2px solid $s71-border;
+  cursor: pointer;
+  transition: background $s71-transition, color $s71-transition;
+
+  &:hover {
+    background: $s71-border;
+    color: $s71-surface;
+  }
+}
+
+.s71-error {
+  font-size: 0.6875rem;
+  color: $s71-error;
+  font-weight: 700;
+}
+
+.s71-actions {
+  margin-top: 0.25rem;
+}
+
+.s71-submit {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: $s71-title-font;
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: $s71-accent;
+  background: $s71-accent-bg;
+  border: 3px solid $s71-border;
+  cursor: pointer;
+  transition: transform $s71-transition, box-shadow $s71-transition;
+  box-shadow: 4px 4px 0 $s71-border;
+
+  &:hover:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 $s71-border;
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  &--busy {
+    cursor: wait;
+  }
+}
+
+.s71-submit-text {
+  display: block;
+}
+
+[x-cloak] {
+  display: none !important;
+}

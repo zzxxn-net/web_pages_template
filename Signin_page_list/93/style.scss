@@ -1,0 +1,225 @@
+// 시안 93: 사이버 미니멀 + 단일 포커스 입력 흐름 + 상태 변화 강조
+$s93-font: 'Inter', system-ui, sans-serif;
+$s93-bg: #0f172a;
+$s93-surface: #1e293b;
+$s93-border: rgba(148, 163, 184, 0.2);
+$s93-text: #f8fafc;
+$s93-muted: #94a3b8;
+$s93-accent: #22d3ee;
+$s93-accent-soft: rgba(34, 211, 238, 0.15);
+$s93-error: #f87171;
+$s93-valid: #4ade80;
+$s93-radius: 10px;
+$s93-ease: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s93 {
+  font-family: $s93-font;
+  color: $s93-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 2rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s93-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s93-bg;
+}
+
+.s93-layout {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 1.5rem);
+}
+
+.s93-header {
+  text-align: center;
+}
+
+.s93-title {
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 600;
+  color: $s93-text;
+  margin: 0;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+}
+
+.s93-tagline {
+  font-size: clamp(0.8125rem, 2vw, 0.875rem);
+  font-weight: 400;
+  color: $s93-muted;
+  margin: 0.4rem 0 0;
+  line-height: 1.4;
+}
+
+.s93-form {
+  width: 100%;
+}
+
+.s93-focus-flow {
+  position: relative;
+  width: 100%;
+  min-height: 180px;
+}
+
+.s93-step {
+  width: 100%;
+  padding: clamp(1.25rem, 3.5vw, 1.75rem);
+  background: $s93-surface;
+  border: 1px solid $s93-border;
+  border-radius: $s93-radius;
+  transition: border-color $s93-ease, box-shadow $s93-ease;
+
+  &--active {
+    border-color: rgba(34, 211, 238, 0.35);
+    box-shadow: 0 0 0 1px $s93-accent-soft, 0 0 24px rgba(34, 211, 238, 0.08);
+  }
+}
+
+.s93-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  &--invalid .s93-input {
+    border-color: $s93-error;
+    box-shadow: 0 0 0 1px rgba(248, 113, 113, 0.25);
+  }
+}
+
+.s93-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: $s93-muted;
+  letter-spacing: 0.02em;
+  transition: color $s93-ease;
+}
+
+.s93-input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  padding-right: 3rem;
+  font-family: $s93-font;
+  font-size: 0.9375rem;
+  color: $s93-text;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid $s93-border;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color $s93-ease, box-shadow $s93-ease;
+
+  &::placeholder {
+    color: $s93-muted;
+    opacity: 0.7;
+  }
+
+  &:focus {
+    border-color: $s93-accent;
+    box-shadow: 0 0 0 2px $s93-accent-soft;
+  }
+}
+
+.s93-pw-wrap {
+  position: relative;
+
+  .s93-input {
+    padding-right: 3rem;
+  }
+}
+
+.s93-pw-btn {
+  position: absolute;
+  right: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.25rem 0.4rem;
+  font-size: 0.6875rem;
+  font-family: $s93-font;
+  color: $s93-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color $s93-ease, background $s93-ease;
+
+  &:hover {
+    background: $s93-accent-soft;
+  }
+}
+
+.s93-error {
+  font-size: 0.75rem;
+  color: $s93-error;
+  display: block;
+  transition: opacity $s93-ease;
+}
+
+.s93-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.s93-btn {
+  padding: 0.65rem 1.2rem;
+  font-family: $s93-font;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity $s93-ease, background $s93-ease, border-color $s93-ease;
+
+  &--primary {
+    flex: 1;
+    color: $s93-bg;
+    background: $s93-accent;
+    border: none;
+
+    &:hover:not(:disabled) {
+      opacity: 0.9;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &--outline {
+    color: $s93-muted;
+    background: transparent;
+    border: 1px solid $s93-border;
+
+    &:hover {
+      border-color: $s93-muted;
+      background: rgba(148, 163, 184, 0.08);
+    }
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

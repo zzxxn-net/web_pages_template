@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 123 - 실험적 인터페이스 카드 분리형 포커스 이동 중심</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700&family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s123 signup-fixed" x-data="signupForm123()" x-init="initAnim()">
+    <div class="s123-inner" x-ref="inner">
+      <header class="s123-header">
+        <h1 class="s123-title">회원가입</h1>
+        <p class="s123-tagline">포커스를 옮기면 해당 카드가 강조됩니다.</p>
+      </header>
+      <section class="s123-form-wrap" aria-label="회원가입 폼" x-ref="formWrap">
+        <form class="s123-form" method="post" action="#" hx-post="#" hx-swap="none" @submit.prevent="handleSubmit" aria-label="회원가입 폼">
+          <div class="s123-cards">
+            <div class="s123-card" :class="{ 's123-card--focused': focusedField === 'email', 's123-card--valid': touched.email && !errors.email && email, 's123-card--invalid': errors.email }" data-field="email" x-ref="cardEmail">
+              <label for="s123-email" class="s123-label">이메일</label>
+              <input id="s123-email" type="email" name="email" class="s123-input" placeholder="you@example.com" autocomplete="email" required x-model="email" @focus="focusedField = 'email'" @blur="touched.email = true; validateEmail(); focusedField = null" @keydown.enter.prevent="focusNext('name')" :aria-invalid="errors.email ? 'true' : 'false'" />
+              <span class="s123-status" x-show="touched.email && !errors.email && email" x-cloak aria-hidden="true">✓</span>
+              <span class="s123-error" x-show="errors.email" x-cloak x-text="errors.email"></span>
+            </div>
+            <div class="s123-card" :class="{ 's123-card--focused': focusedField === 'name', 's123-card--valid': touched.name && !errors.name && name, 's123-card--invalid': errors.name }" data-field="name" x-ref="cardName">
+              <label for="s123-name" class="s123-label">이름</label>
+              <input id="s123-name" type="text" name="name" class="s123-input" placeholder="홍길동" autocomplete="name" required x-model="name" @focus="focusedField = 'name'" @blur="touched.name = true; validateName(); focusedField = null" @keydown.enter.prevent="focusNext('password')" :aria-invalid="errors.name ? 'true' : 'false'" />
+              <span class="s123-status" x-show="touched.name && !errors.name && name" x-cloak aria-hidden="true">✓</span>
+              <span class="s123-error" x-show="errors.name" x-cloak x-text="errors.name"></span>
+            </div>
+            <div class="s123-card" :class="{ 's123-card--focused': focusedField === 'password', 's123-card--valid': touched.password && !errors.password && password, 's123-card--invalid': errors.password }" data-field="password" x-ref="cardPassword">
+              <label for="s123-password" class="s123-label">비밀번호</label>
+              <div class="s123-pw-wrap">
+                <input id="s123-password" :type="showPassword ? 'text' : 'password'" name="password" class="s123-input" placeholder="8자 이상" autocomplete="new-password" required minlength="8" x-model="password" @focus="focusedField = 'password'" @blur="touched.password = true; validatePassword(); focusedField = null" @keydown.enter.prevent="focusNext('passwordConfirm')" :aria-invalid="errors.password ? 'true' : 'false'" />
+                <button type="button" class="s123-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword"><span x-text="showPassword ? '숨기기' : '보기'"></span></button>
+              </div>
+              <span class="s123-status" x-show="touched.password && !errors.password && password" x-cloak aria-hidden="true">✓</span>
+              <span class="s123-error" x-show="errors.password" x-cloak x-text="errors.password"></span>
+            </div>
+            <div class="s123-card" :class="{ 's123-card--focused': focusedField === 'passwordConfirm', 's123-card--valid': touched.passwordConfirm && !errors.passwordConfirm && passwordConfirm, 's123-card--invalid': errors.passwordConfirm }" data-field="passwordConfirm" x-ref="cardPasswordConfirm">
+              <label for="s123-passwordConfirm" class="s123-label">비밀번호 확인</label>
+              <input id="s123-passwordConfirm" :type="showPassword ? 'text' : 'password'" name="password_confirm" class="s123-input" placeholder="다시 입력" autocomplete="new-password" required minlength="8" x-model="passwordConfirm" @focus="focusedField = 'passwordConfirm'" @blur="touched.passwordConfirm = true; validatePasswordConfirm(); focusedField = null" @keydown.enter.prevent="handleSubmit" :aria-invalid="errors.passwordConfirm ? 'true' : 'false'" />
+              <span class="s123-status" x-show="touched.passwordConfirm && !errors.passwordConfirm && passwordConfirm" x-cloak aria-hidden="true">✓</span>
+              <span class="s123-error" x-show="errors.passwordConfirm" x-cloak x-text="errors.passwordConfirm"></span>
+            </div>
+          </div>
+          <div class="s123-actions">
+            <button type="submit" class="s123-btn" :disabled="submitting" :class="{ 's123-btn--busy': submitting }" :aria-busy="submitting"><span x-text="submitting ? '처리 중...' : '가입하기'"></span></button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

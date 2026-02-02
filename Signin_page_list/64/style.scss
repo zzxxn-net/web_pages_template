@@ -1,0 +1,185 @@
+// 시안 64: 다크 아카이브 + 마이크로 인터랙션 중심 + GSAP 기반 부드러운 전환
+$s64-font-serif: 'Libre Baskerville', serif;
+$s64-font-sans: 'Source Sans 3', sans-serif;
+$s64-bg: #1a1918;
+$s64-surface: #242220;
+$s64-border: #3a3836;
+$s64-text: #e8e6e4;
+$s64-text-soft: #9a9692;
+$s64-accent: #b8956b;
+$s64-accent-soft: rgba(184, 149, 107, 0.2);
+$s64-error: #c45c5c;
+$s64-radius: 8px;
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s64 {
+  font-family: $s64-font-sans;
+  color: $s64-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s64-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s64-bg;
+}
+
+.s64-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+}
+
+.s64-header {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.s64-title {
+  font-family: $s64-font-serif;
+  font-size: clamp(1.4rem, 4vw, 1.65rem);
+  font-weight: 600;
+  color: $s64-text;
+  margin-bottom: 0.3rem;
+}
+
+.s64-desc {
+  font-size: 0.875rem;
+  color: $s64-text-soft;
+}
+
+.s64-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.s64-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+
+  &--focused .s64-label {
+    color: $s64-accent;
+  }
+
+  &--focused .s64-input {
+    border-color: $s64-accent;
+    box-shadow: 0 0 0 3px $s64-accent-soft;
+  }
+
+  &--invalid .s64-input {
+    border-color: $s64-error;
+  }
+}
+
+.s64-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: $s64-text-soft;
+}
+
+.s64-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: $s64-text;
+  background: $s64-surface;
+  border: 1px solid $s64-border;
+  border-radius: $s64-radius;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &::placeholder {
+    color: $s64-text-soft;
+    opacity: 0.75;
+  }
+}
+
+.s64-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .s64-input {
+    padding-right: 4rem;
+  }
+}
+
+.s64-pw-btn {
+  position: absolute;
+  right: 0.6rem;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  font-family: inherit;
+  color: $s64-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: $s64-accent-soft;
+  }
+}
+
+.s64-error {
+  font-size: 0.75rem;
+  color: $s64-error;
+}
+
+.s64-actions {
+  margin-top: 0.5rem;
+}
+
+.s64-submit {
+  width: 100%;
+  padding: 0.85rem 1.25rem;
+  font-family: $s64-font-sans;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: $s64-bg;
+  background: $s64-accent;
+  border: none;
+  border-radius: $s64-radius;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+
+  &:hover:not(:disabled) {
+    opacity: 0.95;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.s64-submit-text {
+  display: block;
+}
+
+[x-cloak] {
+  display: none !important;
+}

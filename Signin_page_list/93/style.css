@@ -1,0 +1,205 @@
+/* 시안 93: 사이버 미니멀 + 단일 포커스 + 상태 변화 강조 */
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s93 {
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #f8fafc;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 2rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s93-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: #0f172a;
+}
+
+.s93-layout {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 1.5rem);
+}
+
+.s93-header {
+  text-align: center;
+}
+
+.s93-title {
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 600;
+  color: #f8fafc;
+  margin: 0;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+}
+
+.s93-tagline {
+  font-size: clamp(0.8125rem, 2vw, 0.875rem);
+  font-weight: 400;
+  color: #94a3b8;
+  margin: 0.4rem 0 0;
+  line-height: 1.4;
+}
+
+.s93-form {
+  width: 100%;
+}
+
+.s93-focus-flow {
+  position: relative;
+  width: 100%;
+  min-height: 180px;
+}
+
+.s93-step {
+  width: 100%;
+  padding: clamp(1.25rem, 3.5vw, 1.75rem);
+  background: #1e293b;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 10px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.s93-step--active {
+  border-color: rgba(34, 211, 238, 0.35);
+  box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.15), 0 0 24px rgba(34, 211, 238, 0.08);
+}
+
+.s93-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.s93-field--invalid .s93-input {
+  border-color: #f87171;
+  box-shadow: 0 0 0 1px rgba(248, 113, 113, 0.25);
+}
+
+.s93-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #94a3b8;
+  letter-spacing: 0.02em;
+}
+
+.s93-input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  padding-right: 3rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.9375rem;
+  color: #f8fafc;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.s93-input::placeholder {
+  color: #94a3b8;
+  opacity: 0.7;
+}
+
+.s93-input:focus {
+  border-color: #22d3ee;
+  box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.15);
+}
+
+.s93-pw-wrap .s93-input {
+  padding-right: 3rem;
+}
+
+.s93-pw-btn {
+  position: absolute;
+  right: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.25rem 0.4rem;
+  font-size: 0.6875rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #22d3ee;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.s93-pw-btn:hover {
+  background: rgba(34, 211, 238, 0.15);
+}
+
+.s93-error {
+  font-size: 0.75rem;
+  color: #f87171;
+  display: block;
+}
+
+.s93-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.s93-btn {
+  padding: 0.65rem 1.2rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.25s ease;
+}
+
+.s93-btn--primary {
+  flex: 1;
+  color: #0f172a;
+  background: #22d3ee;
+  border: none;
+}
+
+.s93-btn--primary:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.s93-btn--primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.s93-btn--outline {
+  color: #94a3b8;
+  background: transparent;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.s93-btn--outline:hover {
+  border-color: #94a3b8;
+  background: rgba(148, 163, 184, 0.08);
+}
+
+[x-cloak] {
+  display: none !important;
+}

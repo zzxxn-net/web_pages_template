@@ -1,0 +1,237 @@
+// 시안 88: 실험적 인터페이스 + 마이크로 인터랙션 중심 + 상태 변화 강조
+$s88-font: 'Syne', system-ui, sans-serif;
+$s88-mono: 'JetBrains Mono', monospace;
+$s88-bg: #0c0c0e;
+$s88-grid: rgba(139, 92, 246, 0.06);
+$s88-card: rgba(18, 18, 22, 0.9);
+$s88-border: rgba(139, 92, 246, 0.2);
+$s88-text: #f4f4f5;
+$s88-muted: #71717a;
+$s88-accent: #8b5cf6;
+$s88-accent-soft: rgba(139, 92, 246, 0.2);
+$s88-error: #f87171;
+$s88-valid: #34d399;
+$s88-radius: 10px;
+$s88-ease: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s88 {
+  font-family: $s88-font;
+  color: $s88-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 2rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s88-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s88-bg;
+}
+
+.s88-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient($s88-grid 1px, transparent 1px), linear-gradient(90deg, $s88-grid 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.s88-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  padding: clamp(1.25rem, 4vw, 1.75rem);
+  background: $s88-card;
+  border: 1px solid $s88-border;
+  border-radius: $s88-radius;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.s88-header {
+  margin-bottom: 1rem;
+}
+
+.s88-title {
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 700;
+  color: $s88-text;
+  margin: 0 0 0.2rem;
+  letter-spacing: 0.04em;
+}
+
+.s88-desc {
+  font-family: $s88-mono;
+  font-size: 0.6875rem;
+  color: $s88-muted;
+  margin: 0;
+  letter-spacing: 0.1em;
+}
+
+.s88-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+// 마이크로 인터랙션: 포커스 시 scale·라벨·글로우 / 상태 변화: invalid·valid 시각화
+.s88-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transition: transform $s88-ease;
+
+  &--focused {
+    transform: scale(1.01);
+
+    .s88-label {
+      color: $s88-accent;
+    }
+    .s88-input {
+      border-color: $s88-accent;
+      box-shadow: 0 0 0 2px $s88-accent-soft;
+    }
+  }
+
+  &--invalid .s88-input {
+    border-color: $s88-error;
+    box-shadow: 0 0 0 2px rgba(248, 113, 113, 0.2);
+  }
+
+  &--valid .s88-valid {
+    opacity: 1;
+  }
+}
+
+.s88-label {
+  font-family: $s88-mono;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: $s88-muted;
+  transition: color $s88-ease;
+}
+
+.s88-input {
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  padding-right: 3.25rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: $s88-text;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 6px;
+  outline: none;
+  transition: border-color $s88-ease, box-shadow $s88-ease;
+
+  &::placeholder {
+    color: $s88-muted;
+    opacity: 0.7;
+  }
+}
+
+.s88-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .s88-input {
+    padding-right: 3.25rem;
+  }
+}
+
+.s88-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.6875rem;
+  font-family: $s88-mono;
+  color: $s88-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background $s88-ease, transform $s88-ease;
+
+  &:hover {
+    background: $s88-accent-soft;
+    transform: scale(1.03);
+  }
+}
+
+.s88-error {
+  font-size: 0.75rem;
+  color: $s88-error;
+  display: block;
+}
+
+.s88-valid {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  margin-top: 0.1rem;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $s88-valid;
+  opacity: 0;
+  transition: opacity $s88-ease;
+  pointer-events: none;
+}
+
+.s88-field--valid .s88-valid {
+  opacity: 1;
+}
+
+.s88-actions {
+  margin-top: 0.5rem;
+}
+
+.s88-btn {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: $s88-mono;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: #0c0c0e;
+  background: $s88-accent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: opacity $s88-ease, transform $s88-ease, box-shadow $s88-ease;
+
+  &:hover:not(:disabled) {
+    opacity: 0.95;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.35);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

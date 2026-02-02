@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 87 - 사이버 미니멀 풀스크린 스크롤 없음</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s87 signup-fixed" x-data="signupForm87()">
+    <div class="s87-bg" aria-hidden="true"></div>
+    <div class="s87-viewport" x-ref="viewport">
+      <h1 class="s87-title">SIGN UP</h1>
+      <p class="s87-desc">cyber minimal</p>
+      <form class="s87-form" method="post" action="#" hx-post="#" hx-swap="none" @submit.prevent="handleSubmit">
+        <div class="s87-field" :class="{ 's87-field--invalid': errors.email }">
+          <label for="s87-email" class="s87-label">EMAIL</label>
+          <input id="s87-email" type="email" name="email" class="s87-input" placeholder="you@example.com" autocomplete="email" required x-model="email" @blur="validateEmail()" :aria-invalid="errors.email ? 'true' : 'false'" />
+          <span class="s87-error" x-show="errors.email" x-cloak x-text="errors.email"></span>
+        </div>
+        <div class="s87-field" :class="{ 's87-field--invalid': errors.name }">
+          <label for="s87-name" class="s87-label">NAME</label>
+          <input id="s87-name" type="text" name="name" class="s87-input" placeholder="홍길동" autocomplete="name" required x-model="name" @blur="validateName()" :aria-invalid="errors.name ? 'true' : 'false'" />
+          <span class="s87-error" x-show="errors.name" x-cloak x-text="errors.name"></span>
+        </div>
+        <div class="s87-field" :class="{ 's87-field--invalid': errors.password }">
+          <label for="s87-password" class="s87-label">PASSWORD</label>
+          <div class="s87-pw-wrap">
+            <input id="s87-password" :type="showPassword ? 'text' : 'password'" name="password" class="s87-input" placeholder="8자 이상" autocomplete="new-password" required minlength="8" x-model="password" @blur="validatePassword()" :aria-invalid="errors.password ? 'true' : 'false'" />
+            <button type="button" class="s87-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword"><span x-text="showPassword ? 'HIDE' : 'SHOW'"></span></button>
+          </div>
+          <span class="s87-error" x-show="errors.password" x-cloak x-text="errors.password"></span>
+        </div>
+        <div class="s87-field" :class="{ 's87-field--invalid': errors.passwordConfirm }">
+          <label for="s87-passwordConfirm" class="s87-label">CONFIRM</label>
+          <input id="s87-passwordConfirm" :type="showPassword ? 'text' : 'password'" name="password_confirm" class="s87-input" placeholder="다시 입력" autocomplete="new-password" required minlength="8" x-model="passwordConfirm" @blur="validatePasswordConfirm()" :aria-invalid="errors.passwordConfirm ? 'true' : 'false'" />
+          <span class="s87-error" x-show="errors.passwordConfirm" x-cloak x-text="errors.passwordConfirm"></span>
+        </div>
+        <div class="s87-actions">
+          <button type="submit" class="s87-submit" :disabled="submitting" :aria-busy="submitting"><span x-text="submitting ? '…' : '가입하기'"></span></button>
+        </div>
+      </form>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

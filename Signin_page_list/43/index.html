@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 43 · 미래적 클린 단일 포커스 이동 UX</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="signup-fcf signup-fixed" x-data="signupForm()">
+    <div class="fcf-wrap">
+      <div class="fcf-card" x-ref="card">
+        <header class="fcf-header">
+          <h1 class="fcf-title">회원가입</h1>
+          <p class="fcf-desc">한 단계씩 입력해 주세요.</p>
+        </header>
+
+        <div class="fcf-progress" role="tablist" aria-label="가입 단계">
+          <button
+            type="button"
+            class="fcf-progress-item"
+            :class="{ 'fcf-progress-item--on': step === 1, 'fcf-progress-item--done': step > 1 }"
+            :aria-current="step === 1 ? 'step' : undefined"
+            @click="goToStep(1)"
+          >
+            <span class="fcf-progress-num">1</span>
+            <span class="fcf-progress-label">이메일</span>
+          </button>
+          <span class="fcf-progress-line" :class="{ 'fcf-progress-line--done': step > 1 }" aria-hidden="true"></span>
+          <button
+            type="button"
+            class="fcf-progress-item"
+            :class="{ 'fcf-progress-item--on': step === 2, 'fcf-progress-item--done': step > 2 }"
+            :aria-current="step === 2 ? 'step' : undefined"
+            @click="goToStep(2)"
+          >
+            <span class="fcf-progress-num">2</span>
+            <span class="fcf-progress-label">이름</span>
+          </button>
+          <span class="fcf-progress-line" :class="{ 'fcf-progress-line--done': step > 2 }" aria-hidden="true"></span>
+          <button
+            type="button"
+            class="fcf-progress-item"
+            :class="{ 'fcf-progress-item--on': step === 3, 'fcf-progress-item--done': step > 3 }"
+            :aria-current="step === 3 ? 'step' : undefined"
+            @click="goToStep(3)"
+          >
+            <span class="fcf-progress-num">3</span>
+            <span class="fcf-progress-label">비밀번호</span>
+          </button>
+          <span class="fcf-progress-line" :class="{ 'fcf-progress-line--done': step > 3 }" aria-hidden="true"></span>
+          <button
+            type="button"
+            class="fcf-progress-item"
+            :class="{ 'fcf-progress-item--on': step === 4, 'fcf-progress-item--done': false }"
+            :aria-current="step === 4 ? 'step' : undefined"
+            @click="goToStep(4)"
+          >
+            <span class="fcf-progress-num">4</span>
+            <span class="fcf-progress-label">확인</span>
+          </button>
+        </div>
+
+        <form
+          class="fcf-form"
+          method="post"
+          action="#"
+          hx-post="#"
+          hx-swap="none"
+          @submit.prevent="handleSubmit"
+        >
+          <div class="fcf-step" x-show="step === 1" x-cloak :class="{ 'fcf-step--invalid': errors.email }">
+            <label for="fcf-email" class="fcf-label">이메일</label>
+            <input
+              id="fcf-email"
+              type="email"
+              name="email"
+              class="fcf-input"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+              x-model="email"
+              x-ref="inputStep1"
+              @blur="validateEmail()"
+              @keydown.enter.prevent="goNext()"
+              :aria-invalid="errors.email ? 'true' : 'false'"
+            />
+            <span class="fcf-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+            <div class="fcf-nav">
+              <button type="button" class="fcf-btn fcf-btn--pri" @click="goNext()">다음</button>
+            </div>
+          </div>
+
+          <div class="fcf-step" x-show="step === 2" x-cloak :class="{ 'fcf-step--invalid': errors.name }">
+            <label for="fcf-name" class="fcf-label">이름</label>
+            <input
+              id="fcf-name"
+              type="text"
+              name="name"
+              class="fcf-input"
+              placeholder="홍길동"
+              autocomplete="name"
+              required
+              x-model="name"
+              x-ref="inputStep2"
+              @blur="validateName()"
+              @keydown.enter.prevent="goNext()"
+              :aria-invalid="errors.name ? 'true' : 'false'"
+            />
+            <span class="fcf-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+            <div class="fcf-nav">
+              <button type="button" class="fcf-btn fcf-btn--sec" @click="goPrev()">이전</button>
+              <button type="button" class="fcf-btn fcf-btn--pri" @click="goNext()">다음</button>
+            </div>
+          </div>
+
+          <div class="fcf-step" x-show="step === 3" x-cloak :class="{ 'fcf-step--invalid': errors.password }">
+            <label for="fcf-password" class="fcf-label">비밀번호</label>
+            <div class="fcf-pw-wrap">
+              <input
+                id="fcf-password"
+                :type="showPassword ? 'text' : 'password'"
+                name="password"
+                class="fcf-input"
+                placeholder="8자 이상"
+                autocomplete="new-password"
+                required
+                minlength="8"
+                x-model="password"
+                x-ref="inputStep3"
+                @blur="validatePassword()"
+                @keydown.enter.prevent="goNext()"
+                :aria-invalid="errors.password ? 'true' : 'false'"
+              />
+              <button
+                type="button"
+                class="fcf-pw-btn"
+                :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'"
+                @click="showPassword = !showPassword"
+              >
+                <span x-text="showPassword ? '숨기기' : '보기'"></span>
+              </button>
+            </div>
+            <span class="fcf-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+            <div class="fcf-nav">
+              <button type="button" class="fcf-btn fcf-btn--sec" @click="goPrev()">이전</button>
+              <button type="button" class="fcf-btn fcf-btn--pri" @click="goNext()">다음</button>
+            </div>
+          </div>
+
+          <div class="fcf-step" x-show="step === 4" x-cloak :class="{ 'fcf-step--invalid': errors.passwordConfirm }">
+            <label for="fcf-passwordConfirm" class="fcf-label">비밀번호 확인</label>
+            <input
+              id="fcf-passwordConfirm"
+              :type="showPassword ? 'text' : 'password'"
+              name="passwordConfirm"
+              class="fcf-input"
+              placeholder="비밀번호 재입력"
+              autocomplete="new-password"
+              required
+              x-model="passwordConfirm"
+              x-ref="inputStep4"
+              @blur="validatePasswordConfirm()"
+              @keydown.enter.prevent="handleSubmit()"
+              :aria-invalid="errors.passwordConfirm ? 'true' : 'false'"
+            />
+            <span class="fcf-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+            <div class="fcf-nav">
+              <button type="button" class="fcf-btn fcf-btn--sec" @click="goPrev()">이전</button>
+              <button type="submit" class="fcf-btn fcf-btn--pri" :disabled="submitting">
+                <span x-text="submitting ? '처리 중…' : '가입하기'"></span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,262 @@
+// 시안 80: 실험적 인터페이스 + 단계 분할형(Progressive Form) + GSAP 기반 부드러운 전환
+$s80-font: 'Syne', system-ui, sans-serif;
+$s80-mono: 'JetBrains Mono', monospace;
+$s80-bg: #0d0d0f;
+$s80-grid: rgba(167, 139, 250, 0.06);
+$s80-card: rgba(20, 20, 24, 0.85);
+$s80-border: rgba(167, 139, 250, 0.25);
+$s80-text: #f4f4f5;
+$s80-muted: #71717a;
+$s80-accent: #a78bfa;
+$s80-accent-soft: rgba(167, 139, 250, 0.2);
+$s80-error: #f87171;
+$s80-radius: 8px;
+$s80-ease: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s80 {
+  font-family: $s80-font;
+  color: $s80-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 3vw, 2rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s80-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s80-bg;
+}
+
+.s80-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient($s80-grid 1px, transparent 1px), linear-gradient(90deg, $s80-grid 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.s80-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  padding: 1.5rem 1.5rem 1.25rem;
+  background: $s80-card;
+  border: 1px solid $s80-border;
+  border-radius: $s80-radius;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+.s80-header {
+  margin-bottom: 1.25rem;
+}
+
+.s80-title {
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 700;
+  color: $s80-text;
+  margin: 0 0 0.25rem;
+  letter-spacing: 0.04em;
+}
+
+.s80-desc {
+  font-family: $s80-mono;
+  font-size: 0.6875rem;
+  color: $s80-muted;
+  margin: 0 0 0.85rem;
+  letter-spacing: 0.08em;
+}
+
+.s80-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.s80-dot {
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $s80-mono;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: $s80-muted;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: 50%;
+  transition: color $s80-ease, border-color $s80-ease, background $s80-ease;
+
+  &--active {
+    color: $s80-accent;
+    border-color: $s80-accent;
+    background: $s80-accent-soft;
+  }
+}
+
+.s80-line {
+  flex: 1;
+  max-width: 2.5rem;
+  height: 2px;
+  background: rgba(167, 139, 250, 0.2);
+  border-radius: 1px;
+  transition: background $s80-ease;
+
+  &--filled {
+    background: $s80-accent;
+  }
+}
+
+.s80-form {
+  position: relative;
+  min-height: 200px;
+}
+
+.s80-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.s80-panel-title {
+  font-family: $s80-mono;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: $s80-muted;
+  margin: 0 0 0.25rem;
+  letter-spacing: 0.1em;
+}
+
+.s80-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+
+  &--invalid .s80-input {
+    border-color: $s80-error;
+  }
+}
+
+.s80-label {
+  font-family: $s80-mono;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: $s80-muted;
+}
+
+.s80-input {
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: $s80-text;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: 6px;
+  outline: none;
+  transition: border-color $s80-ease, box-shadow $s80-ease;
+
+  &::placeholder {
+    color: $s80-muted;
+    opacity: 0.7;
+  }
+
+  &:focus {
+    border-color: $s80-accent;
+    box-shadow: 0 0 0 2px $s80-accent-soft;
+  }
+}
+
+.s80-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  .s80-input { padding-right: 3.25rem; }
+}
+
+.s80-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.6875rem;
+  font-family: $s80-mono;
+  color: $s80-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background $s80-ease;
+  &:hover { background: $s80-accent-soft; }
+}
+
+.s80-error {
+  font-size: 0.75rem;
+  color: $s80-error;
+  display: block;
+}
+
+.s80-nav {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  justify-content: flex-end;
+}
+
+.s80-btn {
+  padding: 0.65rem 1.1rem;
+  font-family: $s80-mono;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: opacity $s80-ease, transform $s80-ease, background $s80-ease;
+
+  &--next, &--submit {
+    color: #0d0d0f;
+    background: $s80-accent;
+    &:hover:not(:disabled) {
+      opacity: 0.95;
+      transform: translateY(-1px);
+    }
+  }
+
+  &--prev {
+    color: $s80-muted;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(167, 139, 250, 0.2);
+    &:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: $s80-text;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

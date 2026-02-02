@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 57 · 감성 테크 단계 분할 입력 반응형</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s57 signup-fixed" x-data="signupForm()">
+    <div class="s57-bg" aria-hidden="true">
+      <div class="s57-soft s57-soft--1"></div>
+      <div class="s57-soft s57-soft--2"></div>
+    </div>
+
+    <div class="s57-wrap" x-ref="wrap">
+      <div class="s57-card" x-ref="card">
+        <div class="s57-steps" role="tablist" aria-label="가입 단계">
+          <div class="s57-step" :class="{ 's57-step--on': step >= 1, 's57-step--done': step > 1 }">
+            <span class="s57-step-num">1</span>
+            <span class="s57-step-label">이메일</span>
+          </div>
+          <div class="s57-step" :class="{ 's57-step--on': step >= 2, 's57-step--done': step > 2 }">
+            <span class="s57-step-num">2</span>
+            <span class="s57-step-label">이름</span>
+          </div>
+          <div class="s57-step" :class="{ 's57-step--on': step >= 3, 's57-step--done': step > 3 }">
+            <span class="s57-step-num">3</span>
+            <span class="s57-step-label">비밀번호</span>
+          </div>
+          <div class="s57-step" :class="{ 's57-step--on': step >= 4 }">
+            <span class="s57-step-num">4</span>
+            <span class="s57-step-label">확인</span>
+          </div>
+        </div>
+
+        <form class="s57-form" method="post" action="#" hx-post="#" hx-swap="none" @submit.prevent="handleSubmit">
+          <div class="s57-panels">
+            <div class="s57-panel" :class="{ 's57-panel--active': step === 1, 's57-panel--invalid': errors.email }" x-ref="panel1">
+              <p class="s57-prompt">이메일을 입력하세요</p>
+              <div class="s57-field-wrap" x-ref="fieldWrap1">
+                <input
+                  id="s57-email"
+                  type="email"
+                  name="email"
+                  class="s57-input"
+                  placeholder="you@example.com"
+                  autocomplete="email"
+                  required
+                  x-model="email"
+                  @blur="validateEmail()"
+                  @keydown.enter.prevent="goNext()"
+                  :aria-invalid="errors.email ? 'true' : 'false'"
+                />
+                <span class="s57-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+              </div>
+              <div class="s57-nav">
+                <button type="button" class="s57-btn s57-btn--pri" @click="goNext()">다음</button>
+              </div>
+            </div>
+
+            <div class="s57-panel" :class="{ 's57-panel--active': step === 2, 's57-panel--invalid': errors.name }" x-ref="panel2">
+              <p class="s57-prompt">이름을 입력하세요</p>
+              <div class="s57-field-wrap" x-ref="fieldWrap2">
+                <input
+                  id="s57-name"
+                  type="text"
+                  name="name"
+                  class="s57-input"
+                  placeholder="홍길동"
+                  autocomplete="name"
+                  required
+                  x-model="name"
+                  @blur="validateName()"
+                  @keydown.enter.prevent="goNext()"
+                  :aria-invalid="errors.name ? 'true' : 'false'"
+                />
+                <span class="s57-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+              </div>
+              <div class="s57-nav">
+                <button type="button" class="s57-btn s57-btn--sec" @click="goPrev()">이전</button>
+                <button type="button" class="s57-btn s57-btn--pri" @click="goNext()">다음</button>
+              </div>
+            </div>
+
+            <div class="s57-panel" :class="{ 's57-panel--active': step === 3, 's57-panel--invalid': errors.password }" x-ref="panel3">
+              <p class="s57-prompt">비밀번호를 설정하세요 (8자 이상)</p>
+              <div class="s57-field-wrap" x-ref="fieldWrap3">
+                <div class="s57-pw-wrap">
+                  <input
+                    id="s57-password"
+                    :type="showPassword ? 'text' : 'password'"
+                    name="password"
+                    class="s57-input"
+                    placeholder="••••••••"
+                    autocomplete="new-password"
+                    required
+                    minlength="8"
+                    x-model="password"
+                    @blur="validatePassword()"
+                    @keydown.enter.prevent="goNext()"
+                    :aria-invalid="errors.password ? 'true' : 'false'"
+                  />
+                  <button type="button" class="s57-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword">
+                    <span x-text="showPassword ? '숨기기' : '보기'"></span>
+                  </button>
+                </div>
+                <span class="s57-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+              </div>
+              <div class="s57-nav">
+                <button type="button" class="s57-btn s57-btn--sec" @click="goPrev()">이전</button>
+                <button type="button" class="s57-btn s57-btn--pri" @click="goNext()">다음</button>
+              </div>
+            </div>
+
+            <div class="s57-panel" :class="{ 's57-panel--active': step === 4, 's57-panel--invalid': errors.passwordConfirm }" x-ref="panel4">
+              <p class="s57-prompt">비밀번호를 다시 입력하세요</p>
+              <div class="s57-field-wrap" x-ref="fieldWrap4">
+                <input
+                  id="s57-passwordConfirm"
+                  :type="showPassword ? 'text' : 'password'"
+                  name="password_confirm"
+                  class="s57-input"
+                  placeholder="••••••••"
+                  autocomplete="new-password"
+                  required
+                  minlength="8"
+                  x-model="passwordConfirm"
+                  @blur="validatePasswordConfirm()"
+                  @keydown.enter.prevent="handleSubmit()"
+                  :aria-invalid="errors.passwordConfirm ? 'true' : 'false'"
+                />
+                <span class="s57-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+              </div>
+              <div class="s57-nav">
+                <button type="button" class="s57-btn s57-btn--sec" @click="goPrev()">이전</button>
+                <button type="submit" class="s57-btn s57-btn--pri" :disabled="submitting" :aria-busy="submitting">
+                  <span x-text="submitting ? '가입 중…' : '가입하기'"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

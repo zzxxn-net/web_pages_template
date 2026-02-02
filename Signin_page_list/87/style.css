@@ -1,0 +1,176 @@
+/* 시안 87: 사이버 미니멀 + 풀스크린 몰입형 + 스크롤 없는 고정 플로우 */
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s87 {
+  font-family: "JetBrains Mono", monospace;
+  color: #fafafa;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.6rem, 2vw, 1rem);
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.s87-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: #0f0f11;
+}
+
+.s87-viewport {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  max-height: 100%;
+  justify-content: center;
+}
+
+.s87-title {
+  font-size: clamp(1.25rem, 3.5vw, 1.5rem);
+  font-weight: 600;
+  color: #fafafa;
+  margin: 0 0 0.15rem;
+  letter-spacing: 0.06em;
+}
+
+.s87-desc {
+  font-size: 0.625rem;
+  color: #71717a;
+  margin: 0 0 0.6rem;
+  letter-spacing: 0.12em;
+}
+
+.s87-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.s87-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+}
+
+.s87-field--invalid .s87-input {
+  border-color: #f87171;
+  box-shadow: 0 0 0 1px rgba(248, 113, 113, 0.2);
+}
+
+.s87-label {
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: #71717a;
+}
+
+.s87-input {
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  padding-right: 3rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8125rem;
+  color: #fafafa;
+  background: #18181b;
+  border: 1px solid #27272a;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.s87-input::placeholder {
+  color: #71717a;
+  opacity: 0.7;
+}
+
+.s87-input:focus {
+  border-color: #22d3ee;
+  box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.12);
+}
+
+.s87-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.s87-pw-wrap .s87-input {
+  padding-right: 3rem;
+}
+
+.s87-pw-btn {
+  position: absolute;
+  right: 0.45rem;
+  padding: 0.2rem 0.4rem;
+  font-size: 0.5625rem;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: #22d3ee;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background 0.2s ease;
+}
+
+.s87-pw-btn:hover {
+  background: rgba(34, 211, 238, 0.12);
+}
+
+.s87-error {
+  font-size: 0.625rem;
+  color: #f87171;
+  display: block;
+}
+
+.s87-actions {
+  margin-top: 0.35rem;
+}
+
+.s87-submit {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: #0f0f11;
+  background: #22d3ee;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.s87-submit:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.s87-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+[x-cloak] {
+  display: none !important;
+}

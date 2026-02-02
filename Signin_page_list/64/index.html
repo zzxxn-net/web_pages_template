@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 64 · 다크 아카이브 마이크로 인터랙션 GSAP 전환</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;600&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s64 signup-fixed" x-data="signupForm()">
+    <div class="s64-bg" aria-hidden="true"></div>
+    <div class="s64-wrap" x-ref="wrap">
+      <header class="s64-header">
+        <h1 class="s64-title">회원가입</h1>
+        <p class="s64-desc">아카이브 톤의 폼에 마이크로 인터랙션이 적용됩니다.</p>
+      </header>
+      <form class="s64-form" method="post" action="#" hx-post="#" hx-swap="none" @submit.prevent="handleSubmit">
+        <div class="s64-field" :class="{ 's64-field--focused': focusedField === 'email', 's64-field--invalid': errors.email }" x-ref="fieldEmail">
+          <label for="s64-email" class="s64-label" x-ref="labelEmail">이메일</label>
+          <input id="s64-email" type="email" name="email" class="s64-input" placeholder="you@example.com" autocomplete="email" required x-model="email" @focus="focusedField = 'email'" @blur="focusedField = null; validateEmail()" :aria-invalid="errors.email ? 'true' : 'false'" x-ref="inputEmail" />
+          <span class="s64-error" x-show="errors.email" x-text="errors.email" x-cloak x-ref="errorEmail"></span>
+        </div>
+        <div class="s64-field" :class="{ 's64-field--focused': focusedField === 'name', 's64-field--invalid': errors.name }" x-ref="fieldName">
+          <label for="s64-name" class="s64-label" x-ref="labelName">이름</label>
+          <input id="s64-name" type="text" name="name" class="s64-input" placeholder="홍길동" autocomplete="name" required x-model="name" @focus="focusedField = 'name'" @blur="focusedField = null; validateName()" :aria-invalid="errors.name ? 'true' : 'false'" x-ref="inputName" />
+          <span class="s64-error" x-show="errors.name" x-text="errors.name" x-cloak x-ref="errorName"></span>
+        </div>
+        <div class="s64-field" :class="{ 's64-field--focused': focusedField === 'password', 's64-field--invalid': errors.password }" x-ref="fieldPassword">
+          <label for="s64-password" class="s64-label" x-ref="labelPassword">비밀번호</label>
+          <div class="s64-pw-wrap">
+            <input id="s64-password" :type="showPassword ? 'text' : 'password'" name="password" class="s64-input" placeholder="8자 이상" autocomplete="new-password" required minlength="8" x-model="password" @focus="focusedField = 'password'" @blur="focusedField = null; validatePassword()" :aria-invalid="errors.password ? 'true' : 'false'" x-ref="inputPassword" />
+            <button type="button" class="s64-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword"><span x-text="showPassword ? '숨기기' : '보기'"></span></button>
+          </div>
+          <span class="s64-error" x-show="errors.password" x-text="errors.password" x-cloak x-ref="errorPassword"></span>
+        </div>
+        <div class="s64-field" :class="{ 's64-field--focused': focusedField === 'passwordConfirm', 's64-field--invalid': errors.passwordConfirm }" x-ref="fieldPasswordConfirm">
+          <label for="s64-passwordConfirm" class="s64-label" x-ref="labelPasswordConfirm">비밀번호 확인</label>
+          <input id="s64-passwordConfirm" :type="showPassword ? 'text' : 'password'" name="password_confirm" class="s64-input" placeholder="다시 입력" autocomplete="new-password" required minlength="8" x-model="passwordConfirm" @focus="focusedField = 'passwordConfirm'" @blur="focusedField = null; validatePasswordConfirm()" :aria-invalid="errors.passwordConfirm ? 'true' : 'false'" x-ref="inputPasswordConfirm" />
+          <span class="s64-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak x-ref="errorPasswordConfirm"></span>
+        </div>
+        <div class="s64-actions">
+          <button type="submit" class="s64-submit" :disabled="submitting" :aria-busy="submitting" x-ref="submitBtn"><span class="s64-submit-text" x-text="submitting ? '가입 중…' : '가입하기'"></span></button>
+        </div>
+      </form>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

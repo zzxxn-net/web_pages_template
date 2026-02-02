@@ -1,0 +1,28 @@
+.signup-fixed { min-height: 100vh; min-height: 100dvh; overflow: auto; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.s68 { font-family: "Space Grotesk", system-ui, sans-serif; color: #e4e8ed; min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding: 2rem 1rem; position: relative; box-sizing: border-box; }
+.s68-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; background: #0c0e12; }
+.s68-wrap { position: relative; z-index: 1; width: 100%; max-width: 400px; }
+.s68-header { text-align: center; margin-bottom: 1.5rem; }
+.s68-title { font-family: "IBM Plex Mono", monospace; font-size: clamp(1.2rem, 3.5vw, 1.45rem); font-weight: 500; color: #e4e8ed; margin-bottom: 0.3rem; letter-spacing: -0.01em; }
+.s68-desc { font-size: 0.8125rem; color: #7d8590; }
+.s68-form { display: flex; flex-direction: column; gap: 1rem; }
+.s68-field { display: flex; flex-direction: column; gap: 0.35rem; transition: opacity 0.24s cubic-bezier(0.4, 0, 0.2, 1), transform 0.24s cubic-bezier(0.4, 0, 0.2, 1); }
+.s68-field--active .s68-label { color: #3b82f6; }
+.s68-field--active .s68-input { border-color: #3b82f6; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15); }
+.s68-field--dim { opacity: 0.4; }
+.s68-field--active { transform: scale(1.01); }
+.s68-field--invalid .s68-input { border-color: #f87171; }
+.s68-label { font-size: 0.8125rem; font-weight: 500; color: #7d8590; transition: color 0.24s; }
+.s68-input { width: 100%; padding: 0.75rem 1rem; font-family: inherit; font-size: 0.9375rem; color: #e4e8ed; background: #161a21; border: 1px solid #272c36; border-radius: 10px; outline: none; transition: border-color 0.24s, box-shadow 0.24s, transform 0.24s; }
+.s68-input::placeholder { color: #7d8590; opacity: 0.7; }
+.s68-pw-wrap { position: relative; display: flex; align-items: center; }
+.s68-pw-wrap .s68-input { padding-right: 4rem; }
+.s68-pw-btn { position: absolute; right: 0.6rem; padding: 0.35rem 0.6rem; font-size: 0.75rem; font-family: inherit; color: #3b82f6; background: transparent; border: none; cursor: pointer; border-radius: 6px; transition: background 0.24s; }
+.s68-pw-btn:hover { background: rgba(59, 130, 246, 0.15); }
+.s68-error { font-size: 0.75rem; color: #f87171; }
+.s68-actions { margin-top: 0.5rem; }
+.s68-submit { width: 100%; padding: 0.85rem 1.25rem; font-family: inherit; font-size: 0.9375rem; font-weight: 600; color: #fff; background: #3b82f6; border: none; border-radius: 10px; cursor: pointer; transition: opacity 0.24s, transform 0.24s; }
+.s68-submit:hover:not(:disabled) { opacity: 0.95; transform: translateY(-1px); }
+.s68-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+.s68-submit-text { display: block; }
+[x-cloak] { display: none !important; }

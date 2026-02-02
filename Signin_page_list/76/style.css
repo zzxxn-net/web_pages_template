@@ -1,0 +1,210 @@
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.s76 {
+  font-family: "Noto Sans KR", "Outfit", system-ui, sans-serif;
+  color: #2d2835;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 3vw, 2rem);
+  position: relative;
+  box-sizing: border-box;
+}
+.s76-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(160deg, #faf8fc 0%, #f0ebf5 100%);
+}
+.s76-viewport {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.s76-header {
+  text-align: center;
+  margin-bottom: 0.25rem;
+}
+.s76-title {
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 700;
+  color: #2d2835;
+  margin: 0 0 0.35rem;
+  letter-spacing: -0.02em;
+}
+.s76-desc {
+  font-size: 0.875rem;
+  color: #6b6374;
+  margin: 0;
+  font-weight: 400;
+}
+.s76-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.s76-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  transition: opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1), transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.s76-field--active {
+  opacity: 1;
+  transform: scale(1);
+}
+.s76-field--active .s76-label {
+  color: #8b7aa8;
+}
+.s76-field--active .s76-input-wrap {
+  border-color: #b8a9c9;
+  box-shadow: 0 0 0 3px rgba(139, 122, 168, 0.18);
+}
+.s76-field--dim {
+  opacity: 0.45;
+  transform: scale(0.995);
+}
+.s76-field--valid .s76-input-wrap {
+  border-color: #5b9a6e;
+  box-shadow: 0 0 0 2px rgba(91, 154, 110, 0.15);
+}
+.s76-field--valid .s76-label {
+  color: #5b9a6e;
+}
+.s76-field--invalid .s76-input-wrap {
+  border-color: #c75c5c;
+  box-shadow: 0 0 0 2px rgba(199, 92, 92, 0.12);
+}
+.s76-field--invalid .s76-label {
+  color: #c75c5c;
+}
+.s76-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #6b6374;
+  transition: color 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.s76-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #e5dfea;
+  border-radius: 12px;
+  padding: 0 1rem;
+  transition: border-color 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.s76-input {
+  flex: 1;
+  width: 100%;
+  padding: 0.75rem 0;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: #2d2835;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.s76-input::placeholder {
+  color: #6b6374;
+  opacity: 0.7;
+}
+.s76-pw-wrap .s76-input {
+  padding-right: 4rem;
+}
+.s76-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  font-family: inherit;
+  font-weight: 500;
+  color: #8b7aa8;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.28s, color 0.28s;
+}
+.s76-pw-btn:hover {
+  background: rgba(139, 122, 168, 0.18);
+  color: #7d6d96;
+}
+.s76-status {
+  position: absolute;
+  right: 1rem;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 50%;
+  background: #5b9a6e;
+  flex-shrink: 0;
+}
+.s76-status--valid::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 4px;
+  height: 8px;
+  margin-left: -3px;
+  margin-top: -5px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.s76-pw-wrap .s76-status--valid {
+  right: 3.5rem;
+}
+.s76-error {
+  font-size: 0.75rem;
+  color: #c75c5c;
+  margin-top: 0.2rem;
+  display: block;
+}
+.s76-actions {
+  margin-top: 0.5rem;
+}
+.s76-submit {
+  width: 100%;
+  padding: 0.9rem 1.25rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #8b7aa8 0%, #7d6d96 100%);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(139, 122, 168, 0.35);
+  transition: opacity 0.28s, transform 0.28s, box-shadow 0.28s;
+}
+.s76-submit:hover:not(:disabled) {
+  opacity: 0.95;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 122, 168, 0.4);
+}
+.s76-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+.s76-submit-text {
+  display: block;
+}
+[x-cloak] {
+  display: none !important;
+}

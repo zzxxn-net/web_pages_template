@@ -1,0 +1,279 @@
+// 시안 57: 감성 테크 + 단계 분할형(Progressive Form) + 입력 반응형 애니메이션
+// PC~모바일 반응형, 중앙 정렬, 단계별 패널·입력 포커스 반응
+
+$s57-font: 'Noto Sans KR', sans-serif;
+$s57-bg: #fdf8f5;
+$s57-surface: #fffbf8;
+$s57-border: #eeddd4;
+$s57-text: #3d3530;
+$s57-text-soft: #7a6f68;
+$s57-accent: #d4846a;
+$s57-accent-soft: #e8c4b4;
+$s57-error: #c45c5c;
+$s57-radius: 16px;
+$s57-transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s57 {
+  font-family: $s57-font;
+  color: $s57-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s57-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s57-bg;
+}
+
+.s57-soft {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.45;
+  animation: s57-soft-pulse 10s ease-in-out infinite;
+
+  &--1 {
+    width: 260px;
+    height: 260px;
+    background: $s57-accent-soft;
+    top: -5%;
+    left: -5%;
+    animation-delay: 0s;
+  }
+
+  &--2 {
+    width: 200px;
+    height: 200px;
+    background: #e8d5c8;
+    bottom: -5%;
+    right: -5%;
+    animation-delay: -5s;
+  }
+}
+
+@keyframes s57-soft-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(1.08); }
+}
+
+.s57-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+}
+
+.s57-card {
+  background: $s57-surface;
+  border: 1px solid $s57-border;
+  border-radius: $s57-radius;
+  padding: 1.75rem 1.5rem;
+  box-shadow: 0 12px 40px rgba(61, 53, 48, 0.08);
+}
+
+.s57-steps {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid $s57-border;
+}
+
+.s57-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.75rem;
+  color: $s57-text-soft;
+
+  &--on {
+    color: $s57-accent;
+    .s57-step-num { color: $s57-accent; font-weight: 600; }
+  }
+
+  &--done .s57-step-num {
+    color: $s57-accent-soft;
+  }
+}
+
+.s57-step-num {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: inherit;
+}
+
+.s57-step-label {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.s57-form {
+  position: relative;
+}
+
+.s57-panels {
+  position: relative;
+  min-height: 160px;
+}
+
+.s57-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity $s57-transition;
+}
+
+.s57-panel--active {
+  position: relative;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.s57-panel--invalid .s57-input {
+  border-color: $s57-error;
+  box-shadow: 0 0 0 2px rgba($s57-error, 0.15);
+}
+
+.s57-prompt {
+  font-size: 0.875rem;
+  color: $s57-text-soft;
+  margin-bottom: 0.75rem;
+}
+
+.s57-field-wrap {
+  margin-bottom: 1rem;
+}
+
+.s57-input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: $s57-text;
+  background: #fff;
+  border: 1px solid $s57-border;
+  border-radius: 12px;
+  outline: none;
+  transition: transform $s57-transition, border-color $s57-transition, box-shadow $s57-transition;
+
+  &::placeholder {
+    color: $s57-text-soft;
+    opacity: 0.8;
+  }
+
+  &:focus {
+    border-color: $s57-accent;
+    box-shadow: 0 0 0 3px rgba($s57-accent, 0.18);
+    transform: scale(1.02);
+  }
+}
+
+.s57-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .s57-input {
+    padding-right: 4rem;
+  }
+}
+
+.s57-pw-btn {
+  position: absolute;
+  right: 0.6rem;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  font-family: inherit;
+  color: $s57-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background $s57-transition, transform $s57-transition;
+
+  &:hover {
+    background: rgba($s57-accent, 0.1);
+    transform: scale(1.05);
+  }
+}
+
+.s57-error {
+  display: block;
+  margin-top: 0.45rem;
+  font-size: 0.75rem;
+  color: $s57-error;
+}
+
+.s57-nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.s57-btn {
+  padding: 0.65rem 1.25rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: opacity $s57-transition, transform $s57-transition;
+
+  &--pri {
+    color: #fff;
+    background: linear-gradient(135deg, $s57-accent 0%, darken($s57-accent, 8%) 100%);
+    box-shadow: 0 4px 14px rgba($s57-accent, 0.3);
+
+    &:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba($s57-accent, 0.35);
+    }
+
+    &:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+  }
+
+  &--sec {
+    color: $s57-text-soft;
+    background: rgba($s57-text-soft, 0.08);
+    border: 1px solid $s57-border;
+
+    &:hover {
+      color: $s57-text;
+      background: rgba($s57-text-soft, 0.12);
+    }
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

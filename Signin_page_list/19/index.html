@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 19 · 단일 포커스</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="signup-fantasy signup-single-focus" x-data="signupForm()">
+    <div class="fantasy-wrap">
+      <div class="fantasy-glow" aria-hidden="true"></div>
+      <div class="fantasy-card">
+        <form
+          class="fantasy-form"
+          method="post"
+          action="#"
+          hx-post="#"
+          hx-swap="none"
+          @submit.prevent="handleSubmit"
+        >
+          <div class="fantasy-step" x-show="step === 1" x-cloak x-ref="step1">
+            <p class="fantasy-prompt">이메일을 입력해 주세요</p>
+            <div class="fantasy-field">
+              <label for="email" class="fantasy-label">이메일</label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                class="fantasy-input"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required
+                x-model="email"
+                x-ref="inputEmail"
+                @blur="validateEmail()"
+                @keydown.enter.prevent="goNext()"
+                :aria-invalid="errors.email ? 'true' : 'false'"
+              />
+              <span class="fantasy-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+            </div>
+            <div class="fantasy-nav">
+              <button type="button" class="fantasy-btn fantasy-btn--next" @click="goNext()">다음</button>
+            </div>
+          </div>
+
+          <div class="fantasy-step" x-show="step === 2" x-cloak x-ref="step2">
+            <p class="fantasy-prompt">이름을 입력해 주세요</p>
+            <div class="fantasy-field">
+              <label for="name" class="fantasy-label">이름</label>
+              <input
+                id="name"
+                type="text"
+                name="name"
+                class="fantasy-input"
+                placeholder="홍길동"
+                autocomplete="name"
+                required
+                x-model="name"
+                x-ref="inputName"
+                @blur="validateName()"
+                @keydown.enter.prevent="goNext()"
+                :aria-invalid="errors.name ? 'true' : 'false'"
+              />
+              <span class="fantasy-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+            </div>
+            <div class="fantasy-nav">
+              <button type="button" class="fantasy-btn fantasy-btn--prev" @click="goPrev()">이전</button>
+              <button type="button" class="fantasy-btn fantasy-btn--next" @click="goNext()">다음</button>
+            </div>
+          </div>
+
+          <div class="fantasy-step" x-show="step === 3" x-cloak x-ref="step3">
+            <p class="fantasy-prompt">비밀번호를 설정해 주세요</p>
+            <div class="fantasy-field">
+              <label for="password" class="fantasy-label">비밀번호</label>
+              <div class="fantasy-pw-wrap">
+                <input
+                  id="password"
+                  :type="showPassword ? 'text' : 'password'"
+                  name="password"
+                  class="fantasy-input"
+                  placeholder="8자 이상"
+                  autocomplete="new-password"
+                  required
+                  minlength="8"
+                  x-model="password"
+                  x-ref="inputPassword"
+                  @blur="validatePassword()"
+                  @keydown.enter.prevent="goNext()"
+                  :aria-invalid="errors.password ? 'true' : 'false'"
+                />
+                <button type="button" class="fantasy-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword">
+                  <span x-text="showPassword ? '숨기기' : '보기'"></span>
+                </button>
+              </div>
+              <span class="fantasy-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+            </div>
+            <div class="fantasy-nav">
+              <button type="button" class="fantasy-btn fantasy-btn--prev" @click="goPrev()">이전</button>
+              <button type="button" class="fantasy-btn fantasy-btn--next" @click="goNext()">다음</button>
+            </div>
+          </div>
+
+          <div class="fantasy-step" x-show="step === 4" x-cloak x-ref="step4">
+            <p class="fantasy-prompt">비밀번호를 한 번 더 입력해 주세요</p>
+            <div class="fantasy-field">
+              <label for="passwordConfirm" class="fantasy-label">비밀번호 확인</label>
+              <input
+                id="passwordConfirm"
+                :type="showPassword ? 'text' : 'password'"
+                name="passwordConfirm"
+                class="fantasy-input"
+                placeholder="비밀번호 재입력"
+                autocomplete="new-password"
+                required
+                x-model="passwordConfirm"
+                x-ref="inputPasswordConfirm"
+                @blur="validatePasswordConfirm()"
+                @keydown.enter.prevent="handleSubmit()"
+                :aria-invalid="errors.passwordConfirm ? 'true' : 'false'"
+              />
+              <span class="fantasy-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+            </div>
+            <div class="fantasy-nav">
+              <button type="button" class="fantasy-btn fantasy-btn--prev" @click="goPrev()">이전</button>
+              <button type="submit" class="fantasy-btn fantasy-btn--submit" :disabled="submitting">
+                <span x-show="!submitting">가입하기</span>
+                <span x-show="submitting" x-cloak>처리 중...</span>
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <div class="fantasy-dots" role="tablist" aria-label="가입 단계">
+          <button type="button" class="fantasy-dot" :class="{ 'fantasy-dot--active': step >= 1 }" :aria-current="step === 1 ? 'step' : undefined" @click="goToStep(1)"></button>
+          <button type="button" class="fantasy-dot" :class="{ 'fantasy-dot--active': step >= 2 }" :aria-current="step === 2 ? 'step' : undefined" @click="goToStep(2)"></button>
+          <button type="button" class="fantasy-dot" :class="{ 'fantasy-dot--active': step >= 3 }" :aria-current="step === 3 ? 'step' : undefined" @click="goToStep(3)"></button>
+          <button type="button" class="fantasy-dot" :class="{ 'fantasy-dot--active': step >= 4 }" :aria-current="step === 4 ? 'step' : undefined" @click="goToStep(4)"></button>
+        </div>
+
+        <footer class="fantasy-footer">
+          <a href="#" class="fantasy-link">이미 계정이 있으신가요? 로그인</a>
+        </footer>
+      </div>
+    </div>
+  </main>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

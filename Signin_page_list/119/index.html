@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 119 - 감성 테크 풀스크린 몰입형 입력 반응형 애니메이션</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s119 signup-fixed" x-data="signupForm119()" x-init="initAnim()">
+    <div class="s119-inner" x-ref="inner">
+      <header class="s119-header">
+        <h1 class="s119-title">회원가입</h1>
+        <p class="s119-tagline">따뜻한 한 걸음, 함께 시작해요.</p>
+      </header>
+      <section class="s119-form-wrap" aria-label="회원가입 폼" x-ref="formWrap">
+        <form class="s119-form" method="post" action="#" hx-post="#" hx-swap="none" @submit.prevent="handleSubmit" aria-label="회원가입 폼">
+          <div class="s119-fields">
+            <div class="s119-field" :class="{ 's119-field--focused': focusedField === 'email', 's119-field--has-value': email, 's119-field--valid': touched.email && !errors.email && email, 's119-field--invalid': errors.email }" data-field="email">
+              <label for="s119-email" class="s119-label">이메일</label>
+              <input id="s119-email" type="email" name="email" class="s119-input" placeholder=" " autocomplete="email" required x-model="email" @focus="focusedField = 'email'" @blur="touched.email = true; validateEmail(); focusedField = null" @keydown.enter.prevent="focusNext('name')" :aria-invalid="errors.email ? 'true' : 'false'" />
+              <span class="s119-status s119-status--valid" x-show="touched.email && !errors.email && email" x-cloak aria-hidden="true">✓</span>
+              <span class="s119-error" x-show="errors.email" x-cloak x-text="errors.email"></span>
+            </div>
+            <div class="s119-field" :class="{ 's119-field--focused': focusedField === 'name', 's119-field--has-value': name, 's119-field--valid': touched.name && !errors.name && name, 's119-field--invalid': errors.name }" data-field="name">
+              <label for="s119-name" class="s119-label">이름</label>
+              <input id="s119-name" type="text" name="name" class="s119-input" placeholder=" " autocomplete="name" required x-model="name" @focus="focusedField = 'name'" @blur="touched.name = true; validateName(); focusedField = null" @keydown.enter.prevent="focusNext('password')" :aria-invalid="errors.name ? 'true' : 'false'" />
+              <span class="s119-status s119-status--valid" x-show="touched.name && !errors.name && name" x-cloak aria-hidden="true">✓</span>
+              <span class="s119-error" x-show="errors.name" x-cloak x-text="errors.name"></span>
+            </div>
+            <div class="s119-field" :class="{ 's119-field--focused': focusedField === 'password', 's119-field--has-value': password, 's119-field--valid': touched.password && !errors.password && password, 's119-field--invalid': errors.password }" data-field="password">
+              <label for="s119-password" class="s119-label">비밀번호</label>
+              <div class="s119-pw-wrap">
+                <input id="s119-password" :type="showPassword ? 'text' : 'password'" name="password" class="s119-input" placeholder=" " autocomplete="new-password" required minlength="8" x-model="password" @focus="focusedField = 'password'" @blur="touched.password = true; validatePassword(); focusedField = null" @keydown.enter.prevent="focusNext('passwordConfirm')" :aria-invalid="errors.password ? 'true' : 'false'" />
+                <button type="button" class="s119-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword"><span x-text="showPassword ? '숨기기' : '보기'"></span></button>
+              </div>
+              <span class="s119-status s119-status--valid" x-show="touched.password && !errors.password && password" x-cloak aria-hidden="true">✓</span>
+              <span class="s119-error" x-show="errors.password" x-cloak x-text="errors.password"></span>
+            </div>
+            <div class="s119-field" :class="{ 's119-field--focused': focusedField === 'passwordConfirm', 's119-field--has-value': passwordConfirm, 's119-field--valid': touched.passwordConfirm && !errors.passwordConfirm && passwordConfirm, 's119-field--invalid': errors.passwordConfirm }" data-field="passwordConfirm">
+              <label for="s119-passwordConfirm" class="s119-label">비밀번호 확인</label>
+              <input id="s119-passwordConfirm" :type="showPassword ? 'text' : 'password'" name="password_confirm" class="s119-input" placeholder=" " autocomplete="new-password" required minlength="8" x-model="passwordConfirm" @focus="focusedField = 'passwordConfirm'" @blur="touched.passwordConfirm = true; validatePasswordConfirm(); focusedField = null" @keydown.enter.prevent="handleSubmit" :aria-invalid="errors.passwordConfirm ? 'true' : 'false'" />
+              <span class="s119-status s119-status--valid" x-show="touched.passwordConfirm && !errors.passwordConfirm && passwordConfirm" x-cloak aria-hidden="true">✓</span>
+              <span class="s119-error" x-show="errors.passwordConfirm" x-cloak x-text="errors.passwordConfirm"></span>
+            </div>
+          </div>
+          <div class="s119-actions">
+            <button type="submit" class="s119-btn" :disabled="submitting" :class="{ 's119-btn--busy': submitting }" :aria-busy="submitting"><span x-text="submitting ? '처리 중...' : '가입하기'"></span></button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

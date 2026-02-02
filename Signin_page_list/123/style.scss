@@ -1,0 +1,216 @@
+// 시안 123: 실험적 인터페이스 + 카드 분리형 레이아웃 + 포커스 이동 중심 UX
+$s123-sans: 'DM Sans', 'Noto Sans KR', system-ui, sans-serif;
+$s123-bg: #0f0f14;
+$s123-surface: #1a1a22;
+$s123-card: #22222e;
+$s123-border: #2e2e3a;
+$s123-text: #e8e8f0;
+$s123-muted: #8888a0;
+$s123-accent: #00d4aa;
+$s123-glow: rgba(0, 212, 170, 0.35);
+$s123-valid: #00c853;
+$s123-error: #ff5252;
+$s123-ease: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+$s123-radius: 14px;
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.s123 {
+  font-family: $s123-sans;
+  color: $s123-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-sizing: border-box;
+  background: $s123-bg;
+}
+
+.s123-inner {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.25rem, 5vw, 2rem);
+  box-sizing: border-box;
+}
+
+.s123-header {
+  text-align: center;
+  margin-bottom: clamp(1.25rem, 4vw, 1.75rem);
+}
+
+.s123-title {
+  font-size: clamp(1.5rem, 4vw, 1.85rem);
+  font-weight: 700;
+  color: $s123-text;
+  margin: 0;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.s123-tagline {
+  font-size: clamp(0.75rem, 2vw, 0.8rem);
+  font-weight: 400;
+  color: $s123-muted;
+  margin: 0.4rem 0 0;
+  line-height: 1.5;
+}
+
+.s123-form-wrap {
+  width: 100%;
+  max-width: 420px;
+}
+
+.s123-form {
+  width: 100%;
+}
+
+.s123-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.s123-card {
+  position: relative;
+  padding: 1rem 1.1rem;
+  background: $s123-card;
+  border: 1px solid $s123-border;
+  border-radius: $s123-radius;
+  transition: transform $s123-ease, box-shadow $s123-ease, border-color $s123-ease, opacity $s123-ease;
+
+  &--focused {
+    border-color: $s123-accent;
+    box-shadow: 0 0 0 1px $s123-accent, 0 8px 32px $s123-glow;
+    transform: scale(1.02);
+    z-index: 1;
+  }
+
+  .s123-cards:has(&--focused) &:not(&--focused) {
+    opacity: 0.72;
+  }
+
+  &--valid {
+    border-color: rgba($s123-valid, 0.5);
+  }
+  &--valid .s123-label { color: $s123-valid; }
+
+  &--invalid {
+    border-color: $s123-error;
+    box-shadow: 0 0 0 1px rgba($s123-error, 0.4);
+  }
+  &--invalid .s123-label { color: $s123-error; }
+}
+
+.s123-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: $s123-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: block;
+  margin-bottom: 0.4rem;
+  transition: color $s123-ease;
+}
+
+.s123-input {
+  width: 100%;
+  padding: 0.65rem 2.2rem 0.65rem 0;
+  font-family: $s123-sans;
+  font-size: 0.95rem;
+  color: $s123-text;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  &::placeholder { color: $s123-muted; opacity: 0.8; }
+}
+
+.s123-status {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: $s123-valid;
+  pointer-events: none;
+  animation: s123-check 0.35s ease;
+}
+
+@keyframes s123-check {
+  0% { transform: translateY(-50%) scale(0.6); opacity: 0; }
+  100% { transform: translateY(-50%) scale(1); opacity: 1; }
+}
+
+.s123-pw-wrap {
+  position: relative;
+  .s123-input { padding-right: 3.2rem; }
+}
+
+.s123-pw-btn {
+  position: absolute;
+  right: 0.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.2rem 0.5rem;
+  font-family: $s123-sans;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: $s123-muted;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color $s123-ease;
+  &:hover { color: $s123-accent; }
+}
+
+.s123-error {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: $s123-error;
+  display: block;
+  margin-top: 0.35rem;
+}
+
+.s123-actions {
+  margin-top: 1.35rem;
+}
+
+.s123-btn {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font-family: $s123-sans;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: $s123-bg;
+  background: $s123-accent;
+  border: none;
+  border-radius: $s123-radius;
+  cursor: pointer;
+  transition: background $s123-ease, transform $s123-ease, box-shadow $s123-ease;
+  &:hover:not(:disabled) {
+    background: lighten($s123-accent, 6%);
+    box-shadow: 0 6px 24px $s123-glow;
+    transform: translateY(-1px);
+  }
+  &:active:not(:disabled) { transform: translateY(0); }
+  &:disabled, &--busy { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+}
+
+[x-cloak] {
+  display: none !important;
+}

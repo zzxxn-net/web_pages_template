@@ -1,0 +1,297 @@
+/* ============================================
+   회원가입 시안 15 - 단계 분할형(Progressive) + 사이버 미니멀
+   GSAP 전환, 포커스 이동 중심 UX
+   ============================================ */
+
+.signup-wrap.signup-progressive {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: #0f1419;
+  box-sizing: border-box;
+}
+
+.prog-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 2rem;
+  background: #1a1f26;
+  border: 1px solid #2d3640;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+  .prog-card {
+    padding: 1.5rem;
+  }
+}
+
+.prog-header {
+  margin-bottom: 1.75rem;
+}
+
+.prog-title {
+  margin: 0 0 0.375rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #e6edf3;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 480px) {
+  .prog-title {
+    font-size: 1.25rem;
+  }
+}
+
+.prog-desc {
+  margin: 0 0 1.25rem;
+  font-size: 0.8125rem;
+  font-family: "JetBrains Mono", "SF Mono", "Fira Code", Consolas, monospace;
+  color: #8b949e;
+  letter-spacing: 0.02em;
+}
+
+.prog-steps {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.prog-step-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  font-size: 0.8125rem;
+  font-family: "JetBrains Mono", "SF Mono", "Fira Code", Consolas, monospace;
+  font-weight: 500;
+  color: #8b949e;
+  background: transparent;
+  border: 1px solid #2d3640;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.prog-step-dot:hover {
+  color: #e6edf3;
+  border-color: #8b949e;
+}
+
+.prog-step-dot--active {
+  color: #00d4aa;
+  border-color: #00d4aa;
+  background: rgba(0, 212, 170, 0.08);
+}
+
+.prog-step-num {
+  line-height: 1;
+}
+
+.prog-step-line {
+  flex: 1;
+  max-width: 40px;
+  height: 1px;
+  margin: 0 4px;
+  background: #2d3640;
+  transition: background 0.25s;
+}
+
+.prog-step-line--filled {
+  background: #00d4aa;
+}
+
+.prog-form {
+  display: block;
+}
+
+.prog-panels {
+  position: relative;
+  min-height: 280px;
+}
+
+.prog-panel {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.prog-panel--current {
+  display: block;
+}
+
+.prog-panel-title {
+  margin: 0 0 1rem;
+  font-size: 0.8125rem;
+  font-family: "JetBrains Mono", "SF Mono", "Fira Code", Consolas, monospace;
+  font-weight: 500;
+  color: #8b949e;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.prog-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  margin-bottom: 1rem;
+}
+
+.prog-label {
+  font-size: 0.75rem;
+  font-family: "JetBrains Mono", "SF Mono", "Fira Code", Consolas, monospace;
+  font-weight: 500;
+  color: #8b949e;
+  letter-spacing: 0.03em;
+}
+
+.prog-input {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.9375rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+  color: #e6edf3;
+  background: #0f1419;
+  border: 1px solid #2d3640;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.prog-input::placeholder {
+  color: #6e7681;
+}
+
+.prog-input:focus {
+  outline: none;
+  border-color: #00d4aa;
+  box-shadow: 0 0 0 2px rgba(0, 212, 170, 0.2);
+}
+
+.prog-input[aria-invalid="true"] {
+  border-color: #f85149;
+  box-shadow: 0 0 0 2px rgba(248, 81, 73, 0.2);
+}
+
+.prog-pw-wrap {
+  display: flex;
+  border: 1px solid #2d3640;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.prog-pw-wrap:focus-within {
+  border-color: #00d4aa;
+  box-shadow: 0 0 0 2px rgba(0, 212, 170, 0.2);
+}
+
+.prog-pw-wrap .prog-input {
+  border: none;
+  border-radius: 0;
+  flex: 1;
+}
+
+.prog-pw-wrap .prog-input:focus {
+  box-shadow: none;
+}
+
+.prog-pw-wrap .prog-pw-btn {
+  padding: 0 0.75rem;
+  font-size: 0.75rem;
+  font-family: "JetBrains Mono", "SF Mono", "Fira Code", Consolas, monospace;
+  color: #8b949e;
+  background: transparent;
+  border: none;
+  border-left: 1px solid #2d3640;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.prog-pw-wrap .prog-pw-btn:hover {
+  color: #00d4aa;
+}
+
+.prog-error {
+  font-size: 0.75rem;
+  font-family: "JetBrains Mono", "SF Mono", "Fira Code", Consolas, monospace;
+  color: #f85149;
+}
+
+.prog-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.prog-actions--single {
+  justify-content: flex-end;
+}
+
+.prog-btn {
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  font-family: "JetBrains Mono", "SF Mono", "Fira Code", Consolas, monospace;
+  font-weight: 500;
+  line-height: 1.4;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, opacity 0.2s;
+}
+
+.prog-btn--primary {
+  color: #0f1419;
+  background: #00d4aa;
+  border: 1px solid #00d4aa;
+}
+
+.prog-btn--primary:hover:not(:disabled) {
+  background: #00f5c4;
+  border-color: #00f5c4;
+}
+
+.prog-btn--primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.prog-btn--secondary {
+  color: #8b949e;
+  background: transparent;
+  border: 1px solid #2d3640;
+}
+
+.prog-btn--secondary:hover {
+  color: #e6edf3;
+  border-color: #8b949e;
+}
+
+.prog-footer {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid #2d3640;
+  text-align: center;
+}
+
+.prog-link {
+  font-size: 0.8125rem;
+  font-family: "JetBrains Mono", "SF Mono", "Fira Code", Consolas, monospace;
+  color: #00d4aa;
+  text-decoration: none;
+}
+
+.prog-link:hover {
+  text-decoration: underline;
+}
+
+[x-cloak] {
+  display: none !important;
+}

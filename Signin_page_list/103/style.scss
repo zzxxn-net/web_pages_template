@@ -1,0 +1,314 @@
+// 시안 103: 실험적 인터페이스 + 단계 분할형(Progressive Form) + 입력 반응형 애니메이션
+$s103-font: 'Space Grotesk', system-ui, sans-serif;
+$s103-bg: #0c0c0e;
+$s103-surface: #18181b;
+$s103-border: rgba(255, 255, 255, 0.08);
+$s103-text: #fafafa;
+$s103-muted: #a1a1aa;
+$s103-accent: #a78bfa;
+$s103-accent-soft: rgba(167, 139, 250, 0.15);
+$s103-error: #f87171;
+$s103-radius: 8px;
+$s103-ease: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s103 {
+  font-family: $s103-font;
+  color: $s103-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 2rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s103-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s103-bg;
+}
+
+.s103-layout {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 1.25rem);
+}
+
+.s103-header {
+  text-align: center;
+}
+
+.s103-title {
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 600;
+  color: $s103-text;
+  margin: 0;
+  letter-spacing: -0.04em;
+  line-height: 1.2;
+}
+
+.s103-tagline {
+  font-size: clamp(0.75rem, 2vw, 0.8125rem);
+  font-weight: 400;
+  color: $s103-muted;
+  margin: 0.35rem 0 0;
+  line-height: 1.5;
+}
+
+.s103-steps {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  max-width: 360px;
+}
+
+.s103-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.6rem 0.5rem;
+  font-family: $s103-font;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: $s103-muted;
+  background: transparent;
+  border: 1px solid $s103-border;
+  border-radius: $s103-radius;
+  cursor: pointer;
+  transition: background $s103-ease, color $s103-ease, border-color $s103-ease;
+
+  &:first-of-type {
+    border-right: none;
+    border-radius: $s103-radius 0 0 $s103-radius;
+  }
+
+  &:last-of-type {
+    border-radius: 0 $s103-radius $s103-radius 0;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.04);
+    color: $s103-text;
+  }
+
+  &--active {
+    background: $s103-accent-soft;
+    color: $s103-accent;
+    border-color: rgba(167, 139, 250, 0.35);
+  }
+
+  &--done {
+    background: rgba(167, 139, 250, 0.08);
+    color: $s103-muted;
+    border-color: rgba(167, 139, 250, 0.2);
+  }
+}
+
+.s103-step-num {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  opacity: 0.9;
+}
+
+.s103-step-connector {
+  width: 12px;
+  height: 1px;
+  background: $s103-border;
+  flex-shrink: 0;
+}
+
+.s103-form {
+  width: 100%;
+}
+
+.s103-panels {
+  position: relative;
+  min-height: 200px;
+}
+
+.s103-panel {
+  width: 100%;
+  padding: clamp(1.25rem, 3.5vw, 1.5rem);
+  background: $s103-surface;
+  border: 1px solid $s103-border;
+  border-radius: $s103-radius;
+  transition: opacity $s103-ease;
+
+  &--hidden {
+    position: absolute;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+.s103-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.s103-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: transform $s103-ease;
+
+  &--focus .s103-input {
+    border-color: rgba(167, 139, 250, 0.5);
+    box-shadow: 0 0 0 2px $s103-accent-soft;
+  }
+
+  &--focus .s103-label {
+    color: $s103-accent;
+  }
+
+  &--invalid .s103-input {
+    border-color: $s103-error;
+    box-shadow: 0 0 0 1px rgba(248, 113, 113, 0.2);
+  }
+
+  &--invalid .s103-label {
+    color: $s103-error;
+  }
+}
+
+.s103-label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: $s103-muted;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color $s103-ease;
+}
+
+.s103-input {
+  width: 100%;
+  padding: 0.65rem 0.875rem;
+  padding-right: 3rem;
+  font-family: $s103-font;
+  font-size: 0.875rem;
+  color: $s103-text;
+  background: $s103-bg;
+  border: 1px solid $s103-border;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color $s103-ease, box-shadow $s103-ease;
+
+  &::placeholder {
+    color: $s103-muted;
+    opacity: 0.7;
+  }
+
+  &:focus {
+    border-color: rgba(167, 139, 250, 0.5);
+    box-shadow: 0 0 0 2px $s103-accent-soft;
+  }
+}
+
+.s103-pw-wrap {
+  position: relative;
+
+  .s103-input {
+    padding-right: 3rem;
+  }
+}
+
+.s103-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.3rem 0.45rem;
+  font-size: 0.625rem;
+  font-family: $s103-font;
+  font-weight: 500;
+  color: $s103-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background $s103-ease;
+
+  &:hover {
+    background: $s103-accent-soft;
+  }
+}
+
+.s103-error {
+  font-size: 0.6875rem;
+  color: $s103-error;
+  display: block;
+}
+
+.s103-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+}
+
+.s103-btn {
+  padding: 0.65rem 1.125rem;
+  font-family: $s103-font;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: opacity $s103-ease, background $s103-ease, border-color $s103-ease;
+
+  &--primary {
+    flex: 1;
+    min-width: 100px;
+    color: $s103-bg;
+    background: $s103-accent;
+    border: none;
+
+    &:hover:not(:disabled) {
+      opacity: 0.92;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &--outline {
+    color: $s103-muted;
+    background: transparent;
+    border: 1px solid $s103-border;
+
+    &:hover:not(:disabled) {
+      color: $s103-accent;
+      border-color: rgba(167, 139, 250, 0.35);
+      background: $s103-accent-soft;
+    }
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

@@ -1,0 +1,208 @@
+// 시안 79: 현대 판타지 + 마이크로 인터랙션 중심 + 입력 반응형 애니메이션
+$s79-head: "Cormorant Garamond", Georgia, serif;
+$s79-font: "Outfit", system-ui, sans-serif;
+$s79-bg: linear-gradient(145deg, #1a1625 0%, #2d2438 45%, #1f1b2e 100%);
+$s79-glow1: radial-gradient(ellipse 75% 45% at 25% 25%, rgba(180, 140, 80, 0.22) 0%, transparent 55%);
+$s79-glow2: radial-gradient(ellipse 55% 35% at 75% 75%, rgba(120, 90, 140, 0.18) 0%, transparent 55%);
+$s79-card: rgba(255, 255, 255, 0.06);
+$s79-border: rgba(212, 175, 55, 0.28);
+$s79-text: #f5f0e8;
+$s79-muted: #a89f8f;
+$s79-accent: #d4af37;
+$s79-accent-soft: rgba(212, 175, 55, 0.22);
+$s79-error: #c97a7a;
+$s79-radius: 10px;
+$s79-ease: 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s79 {
+  font-family: $s79-font;
+  color: $s79-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 3vw, 2rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s79-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s79-bg;
+}
+
+.s79-glow {
+  position: absolute;
+  inset: 0;
+  opacity: 0.9;
+  &--1 { background: $s79-glow1; }
+  &--2 { background: $s79-glow2; }
+}
+
+.s79-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  padding: 1.5rem 1.5rem 1.25rem;
+  background: $s79-card;
+  border: 1px solid $s79-border;
+  border-radius: $s79-radius;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+.s79-title {
+  font-family: $s79-head;
+  font-size: clamp(1.6rem, 4vw, 1.9rem);
+  font-weight: 600;
+  color: $s79-text;
+  margin: 0 0 0.25rem;
+  letter-spacing: -0.02em;
+}
+
+.s79-desc {
+  font-size: 0.8125rem;
+  color: $s79-muted;
+  margin: 0 0 1rem;
+}
+
+.s79-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.s79-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transition: transform $s79-ease;
+  will-change: transform;
+
+  &--focused {
+    transform: scale(1.01);
+  }
+
+  &--focused .s79-label {
+    color: $s79-accent;
+  }
+
+  &--focused .s79-input {
+    border-color: $s79-accent;
+    box-shadow: 0 0 0 2px $s79-accent-soft;
+  }
+
+  &--invalid .s79-input {
+    border-color: $s79-error;
+  }
+}
+
+.s79-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: $s79-muted;
+  transition: color $s79-ease;
+}
+
+.s79-input {
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: $s79-text;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color $s79-ease, box-shadow $s79-ease;
+
+  &::placeholder {
+    color: $s79-muted;
+    opacity: 0.75;
+  }
+}
+
+.s79-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  .s79-input { padding-right: 3.25rem; }
+}
+
+.s79-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.6875rem;
+  font-family: inherit;
+  font-weight: 500;
+  color: $s79-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background $s79-ease, transform $s79-ease;
+  &:hover {
+    background: $s79-accent-soft;
+    transform: scale(1.03);
+  }
+}
+
+.s79-error {
+  font-size: 0.75rem;
+  color: $s79-error;
+  display: block;
+}
+
+.s79-actions {
+  margin-top: 0.4rem;
+}
+
+.s79-submit {
+  width: 100%;
+  padding: 0.8rem 1.25rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #1a1625;
+  background: $s79-accent;
+  border: none;
+  border-radius: $s79-radius;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.35);
+  transition: opacity $s79-ease, transform $s79-ease, box-shadow $s79-ease;
+
+  &:hover:not(:disabled) {
+    opacity: 0.95;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 22px rgba(212, 175, 55, 0.4);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.s79-submit-text {
+  display: block;
+}
+
+[x-cloak] {
+  display: none !important;
+}

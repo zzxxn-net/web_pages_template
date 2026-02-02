@@ -1,0 +1,172 @@
+/* 회원가입 시안 34 - 미래적 클린 + 카드 분리형 레이아웃, GSAP 기반 부드러운 전환 */
+.signup-future-cards.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  background: linear-gradient(160deg, #f1f5f9 0%, #e2e8f0 50%, #f8fafc 100%);
+}
+
+.fuc-wrap {
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.fuc-card {
+  padding: 1rem 1.25rem;
+  background: #ffffff;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+@media (max-width: 480px) {
+  .fuc-card {
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+  }
+}
+
+.fuc-card--header {
+  padding: 1.25rem 1.25rem;
+}
+
+.fuc-card--field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.fuc-card--field.fuc-card--focused {
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.08);
+}
+
+.fuc-card--field.fuc-card--invalid {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.08);
+}
+
+.fuc-card--submit {
+  padding: 1rem 1.25rem;
+  display: flex;
+  justify-content: center;
+}
+
+.fuc-title {
+  margin: 0 0 0.25rem;
+  font-size: 1.375rem;
+  font-weight: 700;
+  font-family: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
+.fuc-desc {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-family: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #64748b;
+}
+
+.fuc-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-family: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #64748b;
+}
+
+.fuc-input {
+  width: 100%;
+  padding: 0.6rem 0;
+  font-size: 0.9375rem;
+  font-family: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #0f172a;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.fuc-input::placeholder {
+  color: #64748b;
+  opacity: 0.8;
+}
+
+.fuc-input:focus {
+  border-bottom-color: #0ea5e9;
+}
+
+.fuc-pw-wrap {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+  transition: border-color 0.2s ease;
+}
+
+.fuc-pw-wrap .fuc-input {
+  border-bottom: none;
+  flex: 1;
+}
+
+.fuc-pw-wrap:focus-within {
+  border-bottom-color: #0ea5e9;
+}
+
+.fuc-pw-btn {
+  padding: 0.5rem 0.25rem;
+  border: none;
+  background: transparent;
+  font-size: 0.8125rem;
+  font-family: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #64748b;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.fuc-pw-btn:hover {
+  color: #0ea5e9;
+}
+
+.fuc-error {
+  font-size: 0.8125rem;
+  font-family: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #ef4444;
+}
+
+.fuc-btn {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #fff;
+  background: #0ea5e9;
+  cursor: pointer;
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+
+.fuc-btn:hover:not(:disabled) {
+  background: #0284c7;
+}
+
+.fuc-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+[x-cloak] {
+  display: none !important;
+}

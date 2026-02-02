@@ -1,0 +1,259 @@
+// ============================================
+// 회원가입 시안 40 - 실험적 인터페이스 + 풀스크린 몰입형
+// 입력 반응형 애니메이션
+// ============================================
+
+$font: "Syne", -apple-system, BlinkMacSystemFont, sans-serif;
+$bg: #0d0d0f;
+$lines: rgba(255, 255, 255, 0.04);
+$blob-1: rgba(255, 107, 107, 0.08);
+$blob-2: rgba(78, 205, 196, 0.06);
+$card-bg: rgba(18, 18, 22, 0.85);
+$card-border: rgba(255, 255, 255, 0.06);
+$primary: #ff6b6b;
+$primary-soft: rgba(255, 107, 107, 0.18);
+$accent: #4ecdc4;
+$text: #f0f0f2;
+$text-muted: #888899;
+$error: #ff6b6b;
+$error-soft: rgba(255, 107, 107, 0.12);
+$radius: 8px;
+$break: 480px;
+$max-width: 400px;
+
+// 풀스크린 몰입형
+.signup-exp-full.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  overflow: auto;
+  position: relative;
+  background: $bg;
+}
+
+.expfull-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.expfull-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient($lines 1px, transparent 1px),
+    linear-gradient(90deg, $lines 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.7;
+}
+
+.expfull-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.8;
+
+  &--1 {
+    width: 320px;
+    height: 320px;
+    top: -10%;
+    left: -5%;
+    background: $blob-1;
+  }
+
+  &--2 {
+    width: 280px;
+    height: 280px;
+    bottom: -15%;
+    right: -8%;
+    background: $blob-2;
+  }
+}
+
+.expfull-inner {
+  position: relative;
+  width: 100%;
+  max-width: $max-width;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.expfull-card {
+  width: 100%;
+  padding: 2rem 1.5rem;
+  background: $card-bg;
+  border: 1px solid $card-border;
+  border-radius: $radius;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+
+  @media (max-width: $break) {
+    padding: 1.5rem 1.25rem;
+  }
+}
+
+.expfull-header {
+  margin-bottom: 1.75rem;
+}
+
+.expfull-title {
+  margin: 0 0 0.35rem;
+  font-size: 1.625rem;
+  font-weight: 700;
+  font-family: $font;
+  color: $text;
+  letter-spacing: -0.03em;
+}
+
+.expfull-desc {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-family: $font;
+  color: $text-muted;
+}
+
+.expfull-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+// 입력 반응형 애니메이션: 포커스 시 scale·glow·border
+.expfull-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: transform 0.2s ease;
+
+  &--focused {
+    .expfull-input,
+    .expfull-pw-wrap {
+      border-color: $primary;
+      box-shadow: 0 0 0 3px $primary-soft, 0 0 24px rgba($primary, 0.15);
+      transform: scale(1.01);
+    }
+  }
+
+  &--invalid .expfull-input,
+  &--invalid .expfull-pw-wrap {
+    border-color: $error;
+    box-shadow: 0 0 0 2px $error-soft;
+  }
+}
+
+.expfull-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-family: $font;
+  color: $text-muted;
+  letter-spacing: 0.02em;
+}
+
+.expfull-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  font-family: $font;
+  color: $text;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid $card-border;
+  border-radius: $radius;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+
+  &::placeholder {
+    color: $text-muted;
+    opacity: 0.7;
+  }
+
+  &:focus {
+    border-color: $primary;
+    box-shadow: 0 0 0 3px $primary-soft, 0 0 24px rgba($primary, 0.15);
+    transform: scale(1.01);
+  }
+}
+
+.expfull-pw-wrap {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid $card-border;
+  border-radius: $radius;
+  background: rgba(255, 255, 255, 0.04);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+
+  .expfull-input {
+    border: none;
+    background: transparent;
+    flex: 1;
+  }
+
+  &:focus-within {
+    border-color: $primary;
+    box-shadow: 0 0 0 3px $primary-soft, 0 0 24px rgba($primary, 0.15);
+    transform: scale(1.01);
+  }
+}
+
+.expfull-pw-btn {
+  padding: 0 0.75rem;
+  border: none;
+  background: transparent;
+  font-size: 0.8125rem;
+  font-family: $font;
+  color: $text-muted;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $accent;
+  }
+}
+
+.expfull-error {
+  font-size: 0.8125rem;
+  font-family: $font;
+  color: $error;
+}
+
+.expfull-submit {
+  margin-top: 0.5rem;
+}
+
+.expfull-btn {
+  width: 100%;
+  padding: 0.8rem 1.25rem;
+  border: none;
+  border-radius: $radius;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: $font;
+  color: $bg;
+  background: $primary;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background: lighten($primary, 4%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba($primary, 0.35);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

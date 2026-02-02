@@ -1,0 +1,247 @@
+// 시안 72: 다크 아카이브 + 단계 분할형(Progressive Form) + 포커스 이동 중심 UX
+$s72-font: 'Source Serif 4', Georgia, serif;
+$s72-title: 'Cormorant Garamond', serif;
+$s72-bg: #0f0f10;
+$s72-surface: #18191b;
+$s72-border: #2a2b2e;
+$s72-text: #e8e6e3;
+$s72-text-soft: #8c8986;
+$s72-accent: #c9a86c;
+$s72-accent-soft: rgba(201, 168, 108, 0.15);
+$s72-error: #c75c5c;
+$s72-transition: 0.24s ease;
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s72 {
+  font-family: $s72-font;
+  color: $s72-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 3vw, 2rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s72-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s72-bg;
+}
+
+.s72-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+}
+
+.s72-card {
+  background: $s72-surface;
+  border: 1px solid $s72-border;
+  padding: clamp(1.25rem, 3vw, 1.5rem);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.s72-title {
+  font-family: $s72-title;
+  font-size: clamp(1.35rem, 3.5vw, 1.6rem);
+  font-weight: 600;
+  color: $s72-text;
+  margin: 0 0 1.25rem;
+  letter-spacing: 0.02em;
+}
+
+.s72-steps {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.375rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.875rem;
+  border-bottom: 1px solid $s72-border;
+}
+
+.s72-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.5rem 0.25rem;
+  font-family: inherit;
+  font-size: 0.6875rem;
+  color: $s72-text-soft;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: color $s72-transition, background $s72-transition, border-color $s72-transition;
+
+  &:hover {
+    color: $s72-text;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  &--on {
+    color: $s72-accent;
+    border-color: rgba($s72-accent, 0.35);
+    background: $s72-accent-soft;
+  }
+
+  &--done .s72-step-num {
+    color: $s72-accent;
+  }
+}
+
+.s72-step-num {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: inherit;
+}
+
+.s72-step-label {
+  color: inherit;
+  opacity: 0.9;
+}
+
+.s72-form {
+  position: relative;
+}
+
+.s72-panels {
+  position: relative;
+  min-height: 5rem;
+}
+
+.s72-panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity $s72-transition;
+
+  &--active {
+    position: relative;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &--invalid .s72-input {
+    border-color: $s72-error;
+  }
+}
+
+.s72-prompt {
+  font-size: 0.875rem;
+  color: $s72-text-soft;
+  margin: 0;
+}
+
+.s72-input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: $s72-text;
+  background: $s72-bg;
+  border: 1px solid $s72-border;
+  outline: none;
+  transition: border-color $s72-transition;
+
+  &::placeholder {
+    color: $s72-text-soft;
+    opacity: 0.6;
+  }
+}
+
+.s72-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .s72-input {
+    padding-right: 3.5rem;
+  }
+}
+
+.s72-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.75rem;
+  font-family: inherit;
+  color: $s72-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: opacity $s72-transition;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.s72-error {
+  font-size: 0.75rem;
+  color: $s72-error;
+}
+
+.s72-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid $s72-border;
+}
+
+.s72-btn {
+  padding: 0.6rem 1.25rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  color: $s72-text;
+  background: transparent;
+  border: 1px solid $s72-border;
+  cursor: pointer;
+  transition: background $s72-transition, border-color $s72-transition, color $s72-transition;
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: $s72-text-soft;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &--pri {
+    color: $s72-bg;
+    background: $s72-accent;
+    border-color: $s72-accent;
+
+    &:hover:not(:disabled) {
+      background: lighten($s72-accent, 6%);
+      border-color: lighten($s72-accent, 6%);
+    }
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

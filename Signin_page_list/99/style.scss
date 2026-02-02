@@ -1,0 +1,311 @@
+// 시안 99: 네오 브루탈리즘 + 단계 분할형(Progressive Form) + 상태 변화 강조
+$s99-font: 'Noto Sans KR', system-ui, sans-serif;
+$s99-bg: #f5f5f5;
+$s99-surface: #ffffff;
+$s99-text: #0a0a0a;
+$s99-muted: #525252;
+$s99-border: #171717;
+$s99-accent: #0a0a0a;
+$s99-valid: #15803d;
+$s99-error: #b91c1c;
+$s99-ease: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s99 {
+  font-family: $s99-font;
+  color: $s99-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 2rem);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.s99-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: $s99-bg;
+}
+
+.s99-layout {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.25rem, 3.5vw, 1.5rem);
+}
+
+.s99-header {
+  text-align: center;
+}
+
+.s99-title {
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 700;
+  color: $s99-text;
+  margin: 0;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.s99-tagline {
+  font-size: clamp(0.8125rem, 2vw, 0.875rem);
+  font-weight: 400;
+  color: $s99-muted;
+  margin: 0.35rem 0 0;
+  line-height: 1.5;
+}
+
+.s99-steps {
+  display: flex;
+  gap: 0;
+  width: 100%;
+  border: 3px solid $s99-border;
+  border-radius: 0;
+  overflow: hidden;
+  background: $s99-surface;
+}
+
+.s99-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.75rem 0.5rem;
+  font-family: $s99-font;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: $s99-muted;
+  background: $s99-surface;
+  border: none;
+  border-right: 3px solid $s99-border;
+  cursor: pointer;
+  transition: background $s99-ease, color $s99-ease;
+
+  &:last-of-type {
+    border-right: none;
+  }
+
+  &:hover {
+    background: #e5e5e5;
+    color: $s99-text;
+  }
+
+  &--active {
+    background: $s99-accent;
+    color: $s99-surface;
+  }
+
+  &--done {
+    background: #e5e5e5;
+    color: $s99-text;
+  }
+}
+
+.s99-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 0.75rem;
+  border: 2px solid currentColor;
+  border-radius: 0;
+}
+
+.s99-step--active .s99-step-num {
+  border-color: $s99-surface;
+  color: $s99-surface;
+}
+
+.s99-form {
+  width: 100%;
+  border: 3px solid $s99-border;
+  border-radius: 0;
+  background: $s99-surface;
+  padding: clamp(1.25rem, 3.5vw, 1.5rem);
+}
+
+.s99-panels {
+  position: relative;
+  min-height: 180px;
+}
+
+.s99-panel {
+  &--hidden {
+    position: absolute;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+.s99-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.s99-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: opacity $s99-ease;
+
+  &--invalid .s99-input {
+    border-color: $s99-error;
+    border-width: 3px;
+    background: rgba(185, 28, 28, 0.06);
+  }
+
+  &--invalid .s99-label {
+    color: $s99-error;
+    font-weight: 600;
+  }
+
+  &--valid .s99-input {
+    border-color: $s99-valid;
+    border-width: 3px;
+    background: rgba(21, 128, 61, 0.06);
+  }
+
+  &--valid .s99-label {
+    color: $s99-valid;
+  }
+}
+
+.s99-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $s99-text;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: color $s99-ease;
+}
+
+.s99-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  padding-right: 3.25rem;
+  font-family: $s99-font;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: $s99-text;
+  background: $s99-surface;
+  border: 3px solid $s99-border;
+  border-radius: 0;
+  outline: none;
+  transition: border-color $s99-ease, background $s99-ease;
+
+  &::placeholder {
+    color: $s99-muted;
+  }
+
+  &:focus {
+    border-color: $s99-accent;
+    background: #fafafa;
+  }
+}
+
+.s99-pw-wrap {
+  position: relative;
+
+  .s99-input {
+    padding-right: 3.25rem;
+  }
+}
+
+.s99-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.35rem 0.5rem;
+  font-size: 0.6875rem;
+  font-family: $s99-font;
+  font-weight: 600;
+  color: $s99-text;
+  background: transparent;
+  border: 2px solid $s99-border;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background $s99-ease;
+
+  &:hover {
+    background: #e5e5e5;
+  }
+}
+
+.s99-error {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $s99-error;
+  display: block;
+}
+
+.s99-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.s99-btn {
+  padding: 0.75rem 1.25rem;
+  font-family: $s99-font;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border-radius: 0;
+  cursor: pointer;
+  transition: opacity $s99-ease, transform $s99-ease, background $s99-ease;
+
+  &--primary {
+    flex: 1;
+    min-width: 120px;
+    color: $s99-surface;
+    background: $s99-accent;
+    border: 3px solid $s99-border;
+
+    &:hover:not(:disabled) {
+      opacity: 0.9;
+    }
+
+    &:disabled,
+    &--busy {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  }
+
+  &--secondary {
+    color: $s99-text;
+    background: $s99-surface;
+    border: 3px solid $s99-border;
+
+    &:hover:not(:disabled) {
+      background: #e5e5e5;
+    }
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

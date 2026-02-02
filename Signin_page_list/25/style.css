@@ -1,0 +1,215 @@
+/* 회원가입 시안 25 - 풀스크린 몰입형 + 현대 판타지, 입력 반응형 애니메이션 */
+.signup-fantasy-full.signup-full {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: linear-gradient(145deg, #1a1625 0%, #2d2438 40%, #1f1a28 100%);
+  box-sizing: border-box;
+  position: relative;
+}
+
+.ff-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(180, 140, 200, 0.25), transparent);
+  pointer-events: none;
+}
+
+.ff-wrap {
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.ff-header {
+  margin-bottom: 1.75rem;
+  text-align: center;
+}
+
+.ff-title {
+  margin: 0 0 0.4rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  font-family: "Cormorant Garamond", "Noto Serif KR", Georgia, serif;
+  color: #f0e9f5;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 480px) {
+  .ff-title {
+    font-size: 1.5rem;
+  }
+}
+
+.ff-desc {
+  margin: 0;
+  font-size: 0.875rem;
+  font-family: "Pretendard", "Noto Sans KR", -apple-system, sans-serif;
+  color: #a89bb8;
+}
+
+.ff-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.ff-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  transition: transform 0.25s ease;
+}
+
+.ff-field--focused .ff-input,
+.ff-field--focused .ff-pw-wrap {
+  border-color: #c9a0dc;
+  box-shadow: 0 0 0 2px rgba(201, 160, 220, 0.2);
+  transform: scale(1.01);
+}
+
+.ff-field--invalid .ff-input,
+.ff-field--invalid .ff-pw-wrap {
+  border-color: #e8a0a0;
+  box-shadow: 0 0 0 2px rgba(232, 160, 160, 0.15);
+}
+
+.ff-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-family: "Pretendard", "Noto Sans KR", -apple-system, sans-serif;
+  color: #a89bb8;
+}
+
+.ff-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  font-family: "Pretendard", "Noto Sans KR", -apple-system, sans-serif;
+  color: #f0e9f5;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(168, 155, 184, 0.25);
+  border-radius: 12px;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.ff-input::placeholder {
+  color: #a89bb8;
+  opacity: 0.8;
+}
+
+.ff-input:focus {
+  border-color: #c9a0dc;
+  box-shadow: 0 0 0 2px rgba(201, 160, 220, 0.2);
+}
+
+.ff-input[aria-invalid="true"] {
+  border-color: #e8a0a0;
+  box-shadow: 0 0 0 2px rgba(232, 160, 160, 0.15);
+}
+
+.ff-pw-wrap {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border: 1px solid rgba(168, 155, 184, 0.25);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.ff-pw-wrap:focus-within {
+  border-color: #c9a0dc;
+  box-shadow: 0 0 0 2px rgba(201, 160, 220, 0.2);
+}
+
+.ff-pw-wrap .ff-input {
+  border: none;
+  box-shadow: none;
+  flex: 1;
+  min-width: 0;
+}
+
+.ff-pw-wrap .ff-input:focus {
+  box-shadow: none;
+}
+
+.ff-pw-btn {
+  padding: 0 0.875rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #c9a0dc;
+  background: transparent;
+  border: none;
+  border-left: 1px solid rgba(168, 155, 184, 0.25);
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.ff-pw-btn:hover {
+  color: #f0e9f5;
+  background: rgba(201, 160, 220, 0.2);
+}
+
+.ff-error {
+  font-size: 0.75rem;
+  color: #e8a0a0;
+  min-height: 1.25rem;
+}
+
+.ff-nav {
+  margin-top: 0.5rem;
+}
+
+.ff-btn {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: "Pretendard", "Noto Sans KR", -apple-system, sans-serif;
+  color: #1a1625;
+  background: #c9a0dc;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+
+.ff-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.ff-btn--primary:hover:not(:disabled) {
+  background: #d4b5e8;
+}
+
+.ff-footer {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(168, 155, 184, 0.25);
+  text-align: center;
+}
+
+.ff-link {
+  font-size: 0.875rem;
+  color: #c9a0dc;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.ff-link:hover {
+  color: #f0e9f5;
+  text-decoration: underline;
+}
+
+[x-cloak] {
+  display: none !important;
+}

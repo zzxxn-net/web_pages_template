@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 27 · 네오 브루탈리즘 단계형</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="signup-brutal-step signup-fixed" x-data="signupForm()">
+    <div class="brustep-wrap">
+      <div class="brustep-card">
+        <header class="brustep-header">
+          <h1 class="brustep-title">회원가입</h1>
+          <p class="brustep-desc">단계별로 입력해 주세요.</p>
+          <div class="brustep-indicator" role="tablist" aria-label="가입 단계">
+            <span class="brustep-dot" :class="{ 'brustep-dot--active': step >= 1 }">1</span>
+            <span class="brustep-line" :class="{ 'brustep-line--filled': step >= 2 }"></span>
+            <span class="brustep-dot" :class="{ 'brustep-dot--active': step >= 2 }">2</span>
+          </div>
+        </header>
+
+        <form
+          class="brustep-form"
+          method="post"
+          action="#"
+          hx-post="#"
+          hx-swap="none"
+          @submit.prevent="handleSubmit"
+        >
+          <div class="brustep-panel" x-show="step === 1" x-cloak>
+            <h2 class="brustep-panel-title">기본 정보</h2>
+            <div class="brustep-field">
+              <label for="email" class="brustep-label">이메일</label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                class="brustep-input"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required
+                x-model="email"
+                @blur="validateEmail()"
+                @keydown.enter.prevent="goNext()"
+                :aria-invalid="errors.email ? 'true' : 'false'"
+              />
+              <span class="brustep-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+            </div>
+            <div class="brustep-field">
+              <label for="name" class="brustep-label">이름</label>
+              <input
+                id="name"
+                type="text"
+                name="name"
+                class="brustep-input"
+                placeholder="홍길동"
+                autocomplete="name"
+                required
+                x-model="name"
+                @blur="validateName()"
+                @keydown.enter.prevent="goNext()"
+                :aria-invalid="errors.name ? 'true' : 'false'"
+              />
+              <span class="brustep-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+            </div>
+            <div class="brustep-nav">
+              <button type="button" class="brustep-btn brustep-btn--primary" @click="goNext()">다음</button>
+            </div>
+          </div>
+
+          <div class="brustep-panel" x-show="step === 2" x-cloak>
+            <h2 class="brustep-panel-title">비밀번호</h2>
+            <div class="brustep-field">
+              <label for="password" class="brustep-label">비밀번호</label>
+              <div class="brustep-pw-wrap">
+                <input
+                  id="password"
+                  :type="showPassword ? 'text' : 'password'"
+                  name="password"
+                  class="brustep-input"
+                  placeholder="8자 이상"
+                  autocomplete="new-password"
+                  required
+                  minlength="8"
+                  x-model="password"
+                  @blur="validatePassword()"
+                  :aria-invalid="errors.password ? 'true' : 'false'"
+                />
+                <button type="button" class="brustep-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword">
+                  <span x-text="showPassword ? '숨기기' : '보기'"></span>
+                </button>
+              </div>
+              <span class="brustep-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+            </div>
+            <div class="brustep-field">
+              <label for="passwordConfirm" class="brustep-label">비밀번호 확인</label>
+              <input
+                id="passwordConfirm"
+                :type="showPassword ? 'text' : 'password'"
+                name="passwordConfirm"
+                class="brustep-input"
+                placeholder="비밀번호 재입력"
+                autocomplete="new-password"
+                required
+                x-model="passwordConfirm"
+                @blur="validatePasswordConfirm()"
+                :aria-invalid="errors.passwordConfirm ? 'true' : 'false'"
+              />
+              <span class="brustep-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+            </div>
+            <div class="brustep-nav">
+              <button type="button" class="brustep-btn brustep-btn--secondary" @click="goPrev()">이전</button>
+              <button type="submit" class="brustep-btn brustep-btn--primary" :disabled="submitting">
+                <span x-show="!submitting">가입하기</span>
+                <span x-show="submitting" x-cloak>처리 중...</span>
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <footer class="brustep-footer">
+          <a href="#" class="brustep-link">이미 계정이 있으신가요? 로그인</a>
+        </footer>
+      </div>
+    </div>
+  </main>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

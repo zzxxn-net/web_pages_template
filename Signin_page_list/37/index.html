@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 37 · 사이버 미니멀 단일 포커스</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="signup-cyber-single signup-fixed" x-data="signupForm()">
+    <div class="cybs-wrap">
+      <div class="cybs-card" x-ref="card">
+        <div class="cybs-progress" role="tablist" aria-label="가입 단계">
+          <span class="cybs-dot" :class="{ 'cybs-dot--on': step >= 1, 'cybs-dot--done': step > 1 }">1</span>
+          <span class="cybs-line" :class="{ 'cybs-line--on': step > 1 }"></span>
+          <span class="cybs-dot" :class="{ 'cybs-dot--on': step >= 2, 'cybs-dot--done': step > 2 }">2</span>
+          <span class="cybs-line" :class="{ 'cybs-line--on': step > 2 }"></span>
+          <span class="cybs-dot" :class="{ 'cybs-dot--on': step >= 3, 'cybs-dot--done': step > 3 }">3</span>
+          <span class="cybs-line" :class="{ 'cybs-line--on': step > 3 }"></span>
+          <span class="cybs-dot" :class="{ 'cybs-dot--on': step >= 4, 'cybs-dot--done': step > 4 }">4</span>
+        </div>
+
+        <form
+          class="cybs-form"
+          method="post"
+          action="#"
+          hx-post="#"
+          hx-swap="none"
+          @submit.prevent="handleSubmit"
+        >
+          <div class="cybs-step" x-show="step === 1" x-cloak :class="{ 'cybs-step--invalid': errors.email }">
+            <p class="cybs-prompt">이메일</p>
+            <div class="cybs-field">
+              <input
+                id="cybs-email"
+                type="email"
+                name="email"
+                class="cybs-input"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required
+                x-model="email"
+                x-ref="inputStep1"
+                @focus="focusedField = 'email'"
+                @blur="focusedField = null; validateEmail()"
+                @keydown.enter.prevent="goNext()"
+                :aria-invalid="errors.email ? 'true' : 'false'"
+              />
+              <span class="cybs-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+            </div>
+            <div class="cybs-nav">
+              <button type="button" class="cybs-btn cybs-btn--pri" @click="goNext()">다음</button>
+            </div>
+          </div>
+
+          <div class="cybs-step" x-show="step === 2" x-cloak :class="{ 'cybs-step--invalid': errors.name }">
+            <p class="cybs-prompt">이름</p>
+            <div class="cybs-field">
+              <input
+                id="cybs-name"
+                type="text"
+                name="name"
+                class="cybs-input"
+                placeholder="홍길동"
+                autocomplete="name"
+                required
+                x-model="name"
+                x-ref="inputStep2"
+                @focus="focusedField = 'name'"
+                @blur="focusedField = null; validateName()"
+                @keydown.enter.prevent="goNext()"
+                :aria-invalid="errors.name ? 'true' : 'false'"
+              />
+              <span class="cybs-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+            </div>
+            <div class="cybs-nav">
+              <button type="button" class="cybs-btn cybs-btn--sec" @click="goPrev()">이전</button>
+              <button type="button" class="cybs-btn cybs-btn--pri" @click="goNext()">다음</button>
+            </div>
+          </div>
+
+          <div class="cybs-step" x-show="step === 3" x-cloak :class="{ 'cybs-step--invalid': errors.password }">
+            <p class="cybs-prompt">비밀번호</p>
+            <div class="cybs-field">
+              <div class="cybs-pw-wrap">
+                <input
+                  id="cybs-password"
+                  :type="showPassword ? 'text' : 'password'"
+                  name="password"
+                  class="cybs-input"
+                  placeholder="8자 이상"
+                  autocomplete="new-password"
+                  required
+                  minlength="8"
+                  x-model="password"
+                  x-ref="inputStep3"
+                  @focus="focusedField = 'password'"
+                  @blur="focusedField = null; validatePassword()"
+                  @keydown.enter.prevent="goNext()"
+                  :aria-invalid="errors.password ? 'true' : 'false'"
+                />
+                <button
+                  type="button"
+                  class="cybs-pw-btn"
+                  :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'"
+                  @click="showPassword = !showPassword"
+                >
+                  <span x-text="showPassword ? '숨기기' : '보기'"></span>
+                </button>
+              </div>
+              <span class="cybs-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+            </div>
+            <div class="cybs-nav">
+              <button type="button" class="cybs-btn cybs-btn--sec" @click="goPrev()">이전</button>
+              <button type="button" class="cybs-btn cybs-btn--pri" @click="goNext()">다음</button>
+            </div>
+          </div>
+
+          <div class="cybs-step" x-show="step === 4" x-cloak :class="{ 'cybs-step--invalid': errors.passwordConfirm }">
+            <p class="cybs-prompt">비밀번호 확인</p>
+            <div class="cybs-field">
+              <input
+                id="cybs-passwordConfirm"
+                :type="showPassword ? 'text' : 'password'"
+                name="passwordConfirm"
+                class="cybs-input"
+                placeholder="비밀번호 재입력"
+                autocomplete="new-password"
+                required
+                x-model="passwordConfirm"
+                x-ref="inputStep4"
+                @focus="focusedField = 'passwordConfirm'"
+                @blur="focusedField = null; validatePasswordConfirm()"
+                @keydown.enter.prevent="handleSubmit()"
+                :aria-invalid="errors.passwordConfirm ? 'true' : 'false'"
+              />
+              <span class="cybs-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+            </div>
+            <div class="cybs-nav">
+              <button type="button" class="cybs-btn cybs-btn--sec" @click="goPrev()">이전</button>
+              <button type="submit" class="cybs-btn cybs-btn--pri" :disabled="submitting">
+                <span x-text="submitting ? '처리 중…' : '가입하기'"></span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

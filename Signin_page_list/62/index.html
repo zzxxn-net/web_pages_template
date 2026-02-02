@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 62 · 네오 브루탈리즘 단일 포커스 고정 플로우</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s62 signup-fixed" x-data="signupForm()">
+    <div class="s62-bg" aria-hidden="true"></div>
+
+    <div class="s62-frame" x-ref="frame">
+      <header class="s62-header">
+        <h1 class="s62-title">회원가입</h1>
+        <p class="s62-desc">한 번에 하나의 항목에만 집중하세요.</p>
+      </header>
+
+      <form class="s62-form" method="post" action="#" hx-post="#" hx-swap="none" @submit.prevent="handleSubmit">
+        <div class="s62-fields">
+          <div class="s62-field" :class="{ 's62-field--active': focusedField === 'email', 's62-field--dim': focusedField && focusedField !== 'email' }" :data-state="focusedField === 'email' ? 'active' : (errors.email ? 'invalid' : '')" x-ref="fieldEmail">
+            <label for="s62-email" class="s62-label">이메일</label>
+            <input id="s62-email" type="email" name="email" class="s62-input" placeholder="you@example.com" autocomplete="email" required x-model="email" @focus="focusedField = 'email'" @blur="focusedField = null; validateEmail()" :aria-invalid="errors.email ? 'true' : 'false'" />
+            <span class="s62-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+          </div>
+
+          <div class="s62-field" :class="{ 's62-field--active': focusedField === 'name', 's62-field--dim': focusedField && focusedField !== 'name' }" :data-state="focusedField === 'name' ? 'active' : (errors.name ? 'invalid' : '')" x-ref="fieldName">
+            <label for="s62-name" class="s62-label">이름</label>
+            <input id="s62-name" type="text" name="name" class="s62-input" placeholder="홍길동" autocomplete="name" required x-model="name" @focus="focusedField = 'name'" @blur="focusedField = null; validateName()" :aria-invalid="errors.name ? 'true' : 'false'" />
+            <span class="s62-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+          </div>
+
+          <div class="s62-field" :class="{ 's62-field--active': focusedField === 'password', 's62-field--dim': focusedField && focusedField !== 'password' }" :data-state="focusedField === 'password' ? 'active' : (errors.password ? 'invalid' : '')" x-ref="fieldPassword">
+            <label for="s62-password" class="s62-label">비밀번호</label>
+            <div class="s62-pw-wrap">
+              <input id="s62-password" :type="showPassword ? 'text' : 'password'" name="password" class="s62-input" placeholder="8자 이상" autocomplete="new-password" required minlength="8" x-model="password" @focus="focusedField = 'password'" @blur="focusedField = null; validatePassword()" :aria-invalid="errors.password ? 'true' : 'false'" />
+              <button type="button" class="s62-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword"><span x-text="showPassword ? '숨기기' : '보기'"></span></button>
+            </div>
+            <span class="s62-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+          </div>
+
+          <div class="s62-field" :class="{ 's62-field--active': focusedField === 'passwordConfirm', 's62-field--dim': focusedField && focusedField !== 'passwordConfirm' }" :data-state="focusedField === 'passwordConfirm' ? 'active' : (errors.passwordConfirm ? 'invalid' : '')" x-ref="fieldPasswordConfirm">
+            <label for="s62-passwordConfirm" class="s62-label">비밀번호 확인</label>
+            <input id="s62-passwordConfirm" :type="showPassword ? 'text' : 'password'" name="password_confirm" class="s62-input" placeholder="다시 입력" autocomplete="new-password" required minlength="8" x-model="passwordConfirm" @focus="focusedField = 'passwordConfirm'" @blur="focusedField = null; validatePasswordConfirm()" :aria-invalid="errors.passwordConfirm ? 'true' : 'false'" />
+            <span class="s62-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+          </div>
+        </div>
+
+        <div class="s62-actions">
+          <button type="submit" class="s62-submit" :disabled="submitting" :aria-busy="submitting"><span class="s62-submit-text" x-text="submitting ? '가입 중…' : '가입하기'"></span></button>
+        </div>
+      </form>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

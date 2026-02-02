@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 35 · 네오 브루탈리즘 풀스크린</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="signup-brutal-full signup-fixed" x-data="signupForm()">
+    <div class="bful-inner" x-ref="inner">
+      <header class="bful-header">
+        <h1 class="bful-title">회원가입</h1>
+        <p class="bful-desc">필수 항목을 입력하세요.</p>
+      </header>
+
+      <form
+        class="bful-form"
+        method="post"
+        action="#"
+        hx-post="#"
+        hx-swap="none"
+        @submit.prevent="handleSubmit"
+      >
+        <div
+          class="bful-field"
+          :class="{
+            'bful-field--focused': focusedField === 'email',
+            'bful-field--valid': email && !errors.email,
+            'bful-field--invalid': errors.email
+          }"
+        >
+          <label for="bful-email" class="bful-label">이메일</label>
+          <div class="bful-input-wrap">
+            <input
+              id="bful-email"
+              type="email"
+              name="email"
+              class="bful-input"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+              x-model="email"
+              @focus="focusedField = 'email'"
+              @blur="focusedField = null; validateEmail()"
+              :aria-invalid="errors.email ? 'true' : 'false'"
+            />
+            <span class="bful-state bful-state--valid" x-show="email && !errors.email" x-cloak aria-hidden="true">✓</span>
+            <span class="bful-state bful-state--invalid" x-show="errors.email" x-cloak aria-hidden="true">!</span>
+          </div>
+          <span class="bful-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+        </div>
+
+        <div
+          class="bful-field"
+          :class="{
+            'bful-field--focused': focusedField === 'name',
+            'bful-field--valid': name && name.length >= 2 && !errors.name && focusedField !== 'name',
+            'bful-field--invalid': errors.name
+          }"
+        >
+          <label for="bful-name" class="bful-label">이름</label>
+          <div class="bful-input-wrap">
+            <input
+              id="bful-name"
+              type="text"
+              name="name"
+              class="bful-input"
+              placeholder="홍길동"
+              autocomplete="name"
+              required
+              x-model="name"
+              @focus="focusedField = 'name'"
+              @blur="focusedField = null; validateName()"
+              :aria-invalid="errors.name ? 'true' : 'false'"
+            />
+            <span class="bful-state bful-state--valid" x-show="name && name.length >= 2 && !errors.name" x-cloak aria-hidden="true">✓</span>
+            <span class="bful-state bful-state--invalid" x-show="errors.name" x-cloak aria-hidden="true">!</span>
+          </div>
+          <span class="bful-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+        </div>
+
+        <div
+          class="bful-field"
+          :class="{
+            'bful-field--focused': focusedField === 'password',
+            'bful-field--valid': password && password.length >= 8 && !errors.password && focusedField !== 'password',
+            'bful-field--invalid': errors.password
+          }"
+        >
+          <label for="bful-password" class="bful-label">비밀번호</label>
+          <div class="bful-input-wrap">
+            <input
+              id="bful-password"
+              :type="showPassword ? 'text' : 'password'"
+              name="password"
+              class="bful-input"
+              placeholder="8자 이상"
+              autocomplete="new-password"
+              required
+              minlength="8"
+              x-model="password"
+              @focus="focusedField = 'password'"
+              @blur="focusedField = null; validatePassword()"
+              :aria-invalid="errors.password ? 'true' : 'false'"
+            />
+            <button
+              type="button"
+              class="bful-pw-btn"
+              :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'"
+              @click="showPassword = !showPassword"
+            >
+              <span x-text="showPassword ? '숨기기' : '보기'"></span>
+            </button>
+            <span class="bful-state bful-state--valid" x-show="password && password.length >= 8 && !errors.password" x-cloak aria-hidden="true">✓</span>
+            <span class="bful-state bful-state--invalid" x-show="errors.password" x-cloak aria-hidden="true">!</span>
+          </div>
+          <span class="bful-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+        </div>
+
+        <div
+          class="bful-field"
+          :class="{
+            'bful-field--focused': focusedField === 'passwordConfirm',
+            'bful-field--valid': passwordConfirm && password === passwordConfirm && !errors.passwordConfirm && focusedField !== 'passwordConfirm',
+            'bful-field--invalid': errors.passwordConfirm
+          }"
+        >
+          <label for="bful-passwordConfirm" class="bful-label">비밀번호 확인</label>
+          <div class="bful-input-wrap">
+            <input
+              id="bful-passwordConfirm"
+              :type="showPassword ? 'text' : 'password'"
+              name="passwordConfirm"
+              class="bful-input"
+              placeholder="비밀번호 재입력"
+              autocomplete="new-password"
+              required
+              x-model="passwordConfirm"
+              @focus="focusedField = 'passwordConfirm'"
+              @blur="focusedField = null; validatePasswordConfirm()"
+              :aria-invalid="errors.passwordConfirm ? 'true' : 'false'"
+            />
+            <span class="bful-state bful-state--valid" x-show="passwordConfirm && password === passwordConfirm && !errors.passwordConfirm" x-cloak aria-hidden="true">✓</span>
+            <span class="bful-state bful-state--invalid" x-show="errors.passwordConfirm" x-cloak aria-hidden="true">!</span>
+          </div>
+          <span class="bful-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+        </div>
+
+        <div class="bful-submit">
+          <button type="submit" class="bful-btn" :disabled="submitting">
+            <span x-text="submitting ? '처리 중…' : '가입하기'"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

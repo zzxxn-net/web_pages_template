@@ -1,0 +1,230 @@
+// 시안 117: 다크 아카이브 + 카드 분리형 레이아웃 + 상태 변화 강조
+$s117-serif: 'IBM Plex Serif', Georgia, serif;
+$s117-sans: 'IBM Plex Sans', system-ui, sans-serif;
+$s117-bg: #14171c;
+$s117-surface: #1c2028;
+$s117-card: #1f242d;
+$s117-border: rgba(255, 255, 255, 0.08);
+$s117-text: #e2e6ed;
+$s117-muted: #8b92a0;
+$s117-accent: #c9a227;
+$s117-accent-soft: rgba(201, 162, 39, 0.2);
+$s117-valid: #4ade80;
+$s117-valid-soft: rgba(74, 222, 128, 0.12);
+$s117-error: #f87171;
+$s117-error-soft: rgba(248, 113, 113, 0.15);
+$s117-radius: 8px;
+$s117-ease: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+$s117-glow: 0 0 0 2px;
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.s117 {
+  font-family: $s117-sans;
+  color: $s117-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  position: relative;
+  box-sizing: border-box;
+  background: $s117-bg;
+}
+
+.s117-inner {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.25rem, 5vw, 2rem);
+  box-sizing: border-box;
+}
+
+.s117-header {
+  text-align: center;
+  margin-bottom: clamp(1.5rem, 4vw, 2rem);
+}
+
+.s117-title {
+  font-family: $s117-serif;
+  font-size: clamp(1.5rem, 4vw, 1.85rem);
+  font-weight: 600;
+  color: $s117-text;
+  margin: 0;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}
+
+.s117-tagline {
+  font-size: clamp(0.8rem, 2vw, 0.875rem);
+  font-weight: 400;
+  color: $s117-muted;
+  margin: 0.5rem 0 0;
+  line-height: 1.5;
+}
+
+.s117-form-wrap {
+  width: 100%;
+  max-width: 420px;
+}
+
+.s117-form {
+  width: 100%;
+}
+
+.s117-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.s117-card {
+  background: $s117-card;
+  border: 1px solid $s117-border;
+  border-radius: $s117-radius;
+  padding: 1rem 1.25rem;
+  position: relative;
+  transition: border-color $s117-ease, box-shadow $s117-ease, background $s117-ease, transform $s117-ease;
+
+  &:focus-within,
+  &.s117-card--focused {
+    border-color: $s117-accent;
+    box-shadow: $s117-glow $s117-accent-soft;
+    background: darken($s117-card, 1%);
+  }
+
+  &.s117-card--valid {
+    border-color: rgba(74, 222, 128, 0.5);
+    box-shadow: $s117-glow $s117-valid-soft;
+    background: rgba(74, 222, 128, 0.04);
+  }
+  &.s117-card--valid .s117-label {
+    color: $s117-valid;
+  }
+
+  &.s117-card--invalid {
+    border-color: rgba(248, 113, 113, 0.6);
+    box-shadow: $s117-glow $s117-error-soft;
+    background: rgba(248, 113, 113, 0.05);
+  }
+  &.s117-card--invalid .s117-label {
+    color: $s117-error;
+  }
+}
+
+.s117-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: $s117-muted;
+  display: block;
+  margin-bottom: 0.4rem;
+  transition: color $s117-ease;
+}
+
+.s117-input {
+  width: 100%;
+  padding: 0.65rem 2.5rem 0.65rem 0;
+  font-family: $s117-sans;
+  font-size: 0.9375rem;
+  color: $s117-text;
+  background: transparent;
+  border: none;
+  outline: none;
+  transition: color $s117-ease;
+
+  &::placeholder {
+    color: $s117-muted;
+    opacity: 0.7;
+  }
+}
+
+.s117-status {
+  position: absolute;
+  right: 1.25rem;
+  top: 2.1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: $s117-valid;
+  pointer-events: none;
+}
+
+.s117-pw-wrap {
+  position: relative;
+  .s117-input { padding-right: 3.5rem; }
+}
+
+.s117-pw-btn {
+  position: absolute;
+  right: 0.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.3rem 0.5rem;
+  font-size: 0.7rem;
+  font-family: $s117-sans;
+  font-weight: 500;
+  color: $s117-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background $s117-ease, color $s117-ease;
+  &:hover {
+    background: $s117-accent-soft;
+  }
+}
+
+.s117-error {
+  font-size: 0.75rem;
+  color: $s117-error;
+  display: block;
+  margin-top: 0.35rem;
+}
+
+.s117-actions {
+  margin-top: 1.75rem;
+}
+
+.s117-btn {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font-family: $s117-sans;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: $s117-bg;
+  background: $s117-accent;
+  border: none;
+  border-radius: $s117-radius;
+  cursor: pointer;
+  transition: opacity $s117-ease, transform $s117-ease, box-shadow $s117-ease;
+  &:hover:not(:disabled) {
+    opacity: 0.95;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(201, 162, 39, 0.3);
+  }
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+  &:disabled,
+  &.s117-btn--busy {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 114 - 네오 브루탈리즘 단일 포커스 입력 흐름 상태 변화 강조</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s114 signup-fixed" x-data="signupForm114()" x-init="initAnim()">
+    <div class="s114-inner" x-ref="inner">
+      <header class="s114-header">
+        <h1 class="s114-title">회원가입</h1>
+        <p class="s114-tagline">SIGN UP</p>
+      </header>
+      <section class="s114-form-wrap" aria-label="회원가입 폼" x-ref="formWrap">
+        <form class="s114-form" method="post" action="#" hx-post="#" hx-swap="none" @submit.prevent="handleSubmit" aria-label="회원가입 폼">
+          <div class="s114-fields">
+            <div class="s114-field" :class="{ 's114-field--focused': focusedField === 'email', 's114-field--invalid': errors.email, 's114-field--valid': touched.email && !errors.email && email }">
+              <label for="s114-email" class="s114-label">이메일</label>
+              <input id="s114-email" type="email" name="email" class="s114-input" placeholder="you@example.com" autocomplete="email" required x-model="email" @focus="focusedField = 'email'" @blur="touched.email = true; validateEmail(); focusedField = null" @keydown.enter.prevent="focusNext('name')" :aria-invalid="errors.email ? 'true' : 'false'" />
+              <span class="s114-status s114-status--valid" x-show="touched.email && !errors.email && email" x-cloak aria-hidden="true">✓</span>
+              <span class="s114-error" x-show="errors.email" x-cloak x-text="errors.email"></span>
+            </div>
+            <div class="s114-field" :class="{ 's114-field--focused': focusedField === 'name', 's114-field--invalid': errors.name, 's114-field--valid': touched.name && !errors.name && name }">
+              <label for="s114-name" class="s114-label">이름</label>
+              <input id="s114-name" type="text" name="name" class="s114-input" placeholder="홍길동" autocomplete="name" required x-model="name" @focus="focusedField = 'name'" @blur="touched.name = true; validateName(); focusedField = null" @keydown.enter.prevent="focusNext('password')" :aria-invalid="errors.name ? 'true' : 'false'" />
+              <span class="s114-status s114-status--valid" x-show="touched.name && !errors.name && name" x-cloak aria-hidden="true">✓</span>
+              <span class="s114-error" x-show="errors.name" x-cloak x-text="errors.name"></span>
+            </div>
+            <div class="s114-field" :class="{ 's114-field--focused': focusedField === 'password', 's114-field--invalid': errors.password, 's114-field--valid': touched.password && !errors.password && password }">
+              <label for="s114-password" class="s114-label">비밀번호</label>
+              <div class="s114-pw-wrap">
+                <input id="s114-password" :type="showPassword ? 'text' : 'password'" name="password" class="s114-input" placeholder="8자 이상" autocomplete="new-password" required minlength="8" x-model="password" @focus="focusedField = 'password'" @blur="touched.password = true; validatePassword(); focusedField = null" @keydown.enter.prevent="focusNext('passwordConfirm')" :aria-invalid="errors.password ? 'true' : 'false'" />
+                <button type="button" class="s114-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword"><span x-text="showPassword ? 'HIDE' : 'SHOW'"></span></button>
+              </div>
+              <span class="s114-status s114-status--valid" x-show="touched.password && !errors.password && password" x-cloak aria-hidden="true">✓</span>
+              <span class="s114-error" x-show="errors.password" x-cloak x-text="errors.password"></span>
+            </div>
+            <div class="s114-field" :class="{ 's114-field--focused': focusedField === 'passwordConfirm', 's114-field--invalid': errors.passwordConfirm, 's114-field--valid': touched.passwordConfirm && !errors.passwordConfirm && passwordConfirm }">
+              <label for="s114-passwordConfirm" class="s114-label">비밀번호 확인</label>
+              <input id="s114-passwordConfirm" :type="showPassword ? 'text' : 'password'" name="password_confirm" class="s114-input" placeholder="다시 입력" autocomplete="new-password" required minlength="8" x-model="passwordConfirm" @focus="focusedField = 'passwordConfirm'" @blur="touched.passwordConfirm = true; validatePasswordConfirm(); focusedField = null" @keydown.enter.prevent="handleSubmit" :aria-invalid="errors.passwordConfirm ? 'true' : 'false'" />
+              <span class="s114-status s114-status--valid" x-show="touched.passwordConfirm && !errors.passwordConfirm && passwordConfirm" x-cloak aria-hidden="true">✓</span>
+              <span class="s114-error" x-show="errors.passwordConfirm" x-cloak x-text="errors.passwordConfirm"></span>
+            </div>
+          </div>
+          <div class="s114-actions">
+            <button type="submit" class="s114-btn" :disabled="submitting" :class="{ 's114-btn--busy': submitting }" :aria-busy="submitting"><span x-text="submitting ? '처리 중...' : '가입하기'"></span></button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

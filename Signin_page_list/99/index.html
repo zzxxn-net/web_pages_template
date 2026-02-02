@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 99 - 네오 브루탈리즘 단계 분할형 상태 변화 강조</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s99 signup-fixed" x-data="signupForm99()" x-init="initAnim()">
+    <div class="s99-bg" aria-hidden="true"></div>
+    <div class="s99-layout" x-ref="layout">
+      <header class="s99-header" aria-label="페이지 제목">
+        <h1 class="s99-title">회원가입</h1>
+        <p class="s99-tagline">단계별로 진행합니다.</p>
+      </header>
+      <div class="s99-steps" role="tablist" aria-label="가입 단계">
+        <button type="button" class="s99-step" :class="{ 's99-step--active': step === 1, 's99-step--done': step > 1 }" aria-selected="true" aria-controls="panel-1" :id="'step-1'" @click="step = 1; goToStep(1)">
+          <span class="s99-step-num">1</span>
+          <span class="s99-step-label">기본 정보</span>
+        </button>
+        <button type="button" class="s99-step" :class="{ 's99-step--active': step === 2, 's99-step--done': step > 2 }" aria-selected="false" aria-controls="panel-2" :id="'step-2'" @click="step = 2; goToStep(2)">
+          <span class="s99-step-num">2</span>
+          <span class="s99-step-label">계정 보안</span>
+        </button>
+      </div>
+      <form class="s99-form" method="post" action="#" hx-post="#" hx-swap="none" @submit.prevent="handleSubmit" aria-label="회원가입 폼">
+        <div class="s99-panels">
+          <section class="s99-panel" id="panel-1" role="tabpanel" aria-labelledby="step-1" :class="{ 's99-panel--hidden': step !== 1 }" x-show="step === 1" x-transition x-ref="panel1">
+            <div class="s99-fields">
+              <div class="s99-field" :class="{ 's99-field--invalid': errors.email, 's99-field--valid': touched.email && !errors.email && email }">
+                <label for="s99-email" class="s99-label">이메일</label>
+                <input id="s99-email" type="email" name="email" class="s99-input" placeholder="you@example.com" autocomplete="email" required x-model="email" @blur="touched.email = true; validateEmail()" :aria-invalid="errors.email ? 'true' : 'false'" />
+                <span class="s99-error" x-show="errors.email" x-cloak x-text="errors.email"></span>
+              </div>
+              <div class="s99-field" :class="{ 's99-field--invalid': errors.name, 's99-field--valid': touched.name && !errors.name && name }">
+                <label for="s99-name" class="s99-label">이름</label>
+                <input id="s99-name" type="text" name="name" class="s99-input" placeholder="홍길동" autocomplete="name" required x-model="name" @blur="touched.name = true; validateName()" :aria-invalid="errors.name ? 'true' : 'false'" />
+                <span class="s99-error" x-show="errors.name" x-cloak x-text="errors.name"></span>
+              </div>
+            </div>
+            <div class="s99-actions">
+              <button type="button" class="s99-btn s99-btn--primary" @click="nextStep()">다음</button>
+            </div>
+          </section>
+          <section class="s99-panel" id="panel-2" role="tabpanel" aria-labelledby="step-2" :class="{ 's99-panel--hidden': step !== 2 }" x-show="step === 2" x-transition x-ref="panel2">
+            <div class="s99-fields">
+              <div class="s99-field" :class="{ 's99-field--invalid': errors.password, 's99-field--valid': touched.password && !errors.password && password }">
+                <label for="s99-password" class="s99-label">비밀번호</label>
+                <div class="s99-pw-wrap">
+                  <input id="s99-password" :type="showPassword ? 'text' : 'password'" name="password" class="s99-input" placeholder="8자 이상" autocomplete="new-password" required minlength="8" x-model="password" @blur="touched.password = true; validatePassword()" :aria-invalid="errors.password ? 'true' : 'false'" />
+                  <button type="button" class="s99-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword"><span x-text="showPassword ? '숨기기' : '보기'"></span></button>
+                </div>
+                <span class="s99-error" x-show="errors.password" x-cloak x-text="errors.password"></span>
+              </div>
+              <div class="s99-field" :class="{ 's99-field--invalid': errors.passwordConfirm, 's99-field--valid': touched.passwordConfirm && !errors.passwordConfirm && passwordConfirm }">
+                <label for="s99-passwordConfirm" class="s99-label">비밀번호 확인</label>
+                <input id="s99-passwordConfirm" :type="showPassword ? 'text' : 'password'" name="password_confirm" class="s99-input" placeholder="다시 입력" autocomplete="new-password" required minlength="8" x-model="passwordConfirm" @blur="touched.passwordConfirm = true; validatePasswordConfirm()" :aria-invalid="errors.passwordConfirm ? 'true' : 'false'" />
+                <span class="s99-error" x-show="errors.passwordConfirm" x-cloak x-text="errors.passwordConfirm"></span>
+              </div>
+            </div>
+            <div class="s99-actions">
+              <button type="button" class="s99-btn s99-btn--secondary" @click="prevStep()">이전</button>
+              <button type="submit" class="s99-btn s99-btn--primary" :disabled="submitting" :class="{ 's99-btn--busy': submitting }" :aria-busy="submitting"><span x-text="submitting ? '처리 중…' : '가입하기'"></span></button>
+            </div>
+          </section>
+        </div>
+      </form>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

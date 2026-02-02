@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 85 - 다크 아카이브 단일 포커스 입력 반응형</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s85 signup-fixed" x-data="signupForm85()" x-init="initAnim()">
+    <div class="s85-bg" aria-hidden="true"></div>
+    <div class="s85-wrap" x-ref="wrap">
+      <header class="s85-header">
+        <h1 class="s85-title">회원가입</h1>
+        <p class="s85-desc">한 번에 하나씩, 차분히</p>
+      </header>
+      <form class="s85-form" method="post" action="#" hx-post="#" hx-swap="none" @submit.prevent="handleSubmit">
+        <div class="s85-field" :class="{ 's85-field--focused': focusedField === 'email', 's85-field--dim': focusedField && focusedField !== 'email', 's85-field--invalid': errors.email }">
+          <label for="s85-email" class="s85-label">이메일</label>
+          <input
+            id="s85-email"
+            type="email"
+            name="email"
+            class="s85-input"
+            placeholder="you@example.com"
+            autocomplete="email"
+            required
+            x-model="email"
+            @focus="setFocused('email')"
+            @blur="validateEmail(); setFocused(null)"
+            :aria-invalid="errors.email ? 'true' : 'false'"
+          />
+          <span class="s85-error" x-show="errors.email" x-cloak x-text="errors.email"></span>
+        </div>
+        <div class="s85-field" :class="{ 's85-field--focused': focusedField === 'name', 's85-field--dim': focusedField && focusedField !== 'name', 's85-field--invalid': errors.name }">
+          <label for="s85-name" class="s85-label">이름</label>
+          <input
+            id="s85-name"
+            type="text"
+            name="name"
+            class="s85-input"
+            placeholder="홍길동"
+            autocomplete="name"
+            required
+            x-model="name"
+            @focus="setFocused('name')"
+            @blur="validateName(); setFocused(null)"
+            :aria-invalid="errors.name ? 'true' : 'false'"
+          />
+          <span class="s85-error" x-show="errors.name" x-cloak x-text="errors.name"></span>
+        </div>
+        <div class="s85-field" :class="{ 's85-field--focused': focusedField === 'password', 's85-field--dim': focusedField && focusedField !== 'password', 's85-field--invalid': errors.password }">
+          <label for="s85-password" class="s85-label">비밀번호</label>
+          <div class="s85-pw-wrap">
+            <input
+              id="s85-password"
+              :type="showPassword ? 'text' : 'password'"
+              name="password"
+              class="s85-input"
+              placeholder="8자 이상"
+              autocomplete="new-password"
+              required
+              minlength="8"
+              x-model="password"
+              @focus="setFocused('password')"
+              @blur="validatePassword(); setFocused(null)"
+              :aria-invalid="errors.password ? 'true' : 'false'"
+            />
+            <button type="button" class="s85-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword"><span x-text="showPassword ? '숨기기' : '보기'"></span></button>
+          </div>
+          <span class="s85-error" x-show="errors.password" x-cloak x-text="errors.password"></span>
+        </div>
+        <div class="s85-field" :class="{ 's85-field--focused': focusedField === 'passwordConfirm', 's85-field--dim': focusedField && focusedField !== 'passwordConfirm', 's85-field--invalid': errors.passwordConfirm }">
+          <label for="s85-passwordConfirm" class="s85-label">비밀번호 확인</label>
+          <input
+            id="s85-passwordConfirm"
+            :type="showPassword ? 'text' : 'password'"
+            name="password_confirm"
+            class="s85-input"
+            placeholder="다시 입력"
+            autocomplete="new-password"
+            required
+            minlength="8"
+            x-model="passwordConfirm"
+            @focus="setFocused('passwordConfirm')"
+            @blur="validatePasswordConfirm(); setFocused(null)"
+            :aria-invalid="errors.passwordConfirm ? 'true' : 'false'"
+          />
+          <span class="s85-error" x-show="errors.passwordConfirm" x-cloak x-text="errors.passwordConfirm"></span>
+        </div>
+        <div class="s85-actions">
+          <button type="submit" class="s85-btn" :disabled="submitting" :aria-busy="submitting"><span x-text="submitting ? '처리 중…' : '가입하기'"></span></button>
+        </div>
+      </form>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

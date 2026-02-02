@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 73 · 현대 판타지 풀스크린 상태 변화 강조</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Lora:ital,wght@0,400;0,500;0,600&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s73 signup-fixed" x-data="signupForm()">
+    <div class="s73-bg" aria-hidden="true"></div>
+    <div class="s73-full" x-ref="full">
+      <header class="s73-header">
+        <h1 class="s73-title">회원가입</h1>
+        <p class="s73-desc">정보를 입력하면 상태가 표시됩니다.</p>
+      </header>
+      <form class="s73-form" method="post" action="#" hx-post="#" hx-swap="none" @submit.prevent="handleSubmit">
+        <div class="s73-field" :class="fieldState('email')" x-ref="fieldEmail">
+          <label for="s73-email" class="s73-label">이메일</label>
+          <div class="s73-input-wrap">
+            <input id="s73-email" type="email" name="email" class="s73-input" placeholder="you@example.com" autocomplete="email" required x-model="email" @focus="focusedField = 'email'" @blur="focusedField = null; validateEmail()" :aria-invalid="errors.email ? 'true' : 'false'" />
+            <span class="s73-status" :class="{ 's73-status--ok': !errors.email && isOk('email'), 's73-status--err': errors.email }" aria-hidden="true"></span>
+          </div>
+          <span class="s73-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+        </div>
+        <div class="s73-field" :class="fieldState('name')" x-ref="fieldName">
+          <label for="s73-name" class="s73-label">이름</label>
+          <div class="s73-input-wrap">
+            <input id="s73-name" type="text" name="name" class="s73-input" placeholder="홍길동" autocomplete="name" required x-model="name" @focus="focusedField = 'name'" @blur="focusedField = null; validateName()" :aria-invalid="errors.name ? 'true' : 'false'" />
+            <span class="s73-status" :class="{ 's73-status--ok': !errors.name && isOk('name'), 's73-status--err': errors.name }" aria-hidden="true"></span>
+          </div>
+          <span class="s73-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+        </div>
+        <div class="s73-field" :class="fieldState('password')" x-ref="fieldPassword">
+          <label for="s73-password" class="s73-label">비밀번호</label>
+          <div class="s73-input-wrap">
+            <input id="s73-password" :type="showPassword ? 'text' : 'password'" name="password" class="s73-input" placeholder="8자 이상" autocomplete="new-password" required minlength="8" x-model="password" @focus="focusedField = 'password'" @blur="focusedField = null; validatePassword()" :aria-invalid="errors.password ? 'true' : 'false'" />
+            <button type="button" class="s73-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword"><span x-text="showPassword ? '숨기기' : '보기'"></span></button>
+            <span class="s73-status" :class="{ 's73-status--ok': !errors.password && isOk('password'), 's73-status--err': errors.password }" aria-hidden="true"></span>
+          </div>
+          <span class="s73-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+        </div>
+        <div class="s73-field" :class="fieldState('passwordConfirm')" x-ref="fieldPasswordConfirm">
+          <label for="s73-passwordConfirm" class="s73-label">비밀번호 확인</label>
+          <div class="s73-input-wrap">
+            <input id="s73-passwordConfirm" :type="showPassword ? 'text' : 'password'" name="password_confirm" class="s73-input" placeholder="다시 입력" autocomplete="new-password" required minlength="8" x-model="passwordConfirm" @focus="focusedField = 'passwordConfirm'" @blur="focusedField = null; validatePasswordConfirm()" :aria-invalid="errors.passwordConfirm ? 'true' : 'false'" />
+            <span class="s73-status" :class="{ 's73-status--ok': !errors.passwordConfirm && isOk('passwordConfirm'), 's73-status--err': errors.passwordConfirm }" aria-hidden="true"></span>
+          </div>
+          <span class="s73-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+        </div>
+        <div class="s73-actions">
+          <button type="submit" class="s73-submit" :disabled="submitting" :aria-busy="submitting" :class="{ 's73-submit--busy': submitting }"><span class="s73-submit-text" x-text="submitting ? '가입 중…' : '가입하기'"></span></button>
+        </div>
+      </form>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

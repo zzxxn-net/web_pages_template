@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 8</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="signup-wrap" x-data="signupForm()">
+    <div class="signup-underline">
+      <header class="underline-header">
+        <h1 class="underline-title">회원가입</h1>
+        <p class="underline-desc">아래 항목을 입력하고 가입을 완료해 주세요.</p>
+      </header>
+
+      <form
+        class="underline-form"
+        method="post"
+        action="#"
+        hx-post="#"
+        hx-swap="none"
+        @submit.prevent="handleSubmit"
+      >
+        <div class="underline-field">
+          <label for="email" class="underline-label">이메일</label>
+          <input
+            id="email"
+            type="email"
+            name="email"
+            class="underline-input"
+            placeholder="you@example.com"
+            autocomplete="email"
+            required
+            x-model="email"
+            @blur="validateEmail"
+            :aria-invalid="errors.email ? 'true' : 'false'"
+          />
+          <span class="underline-line" aria-hidden="true"></span>
+          <span class="underline-error" x-show="errors.email" x-text="errors.email" x-cloak></span>
+        </div>
+        <div class="underline-field">
+          <label for="name" class="underline-label">이름</label>
+          <input
+            id="name"
+            type="text"
+            name="name"
+            class="underline-input"
+            placeholder="홍길동"
+            autocomplete="name"
+            required
+            x-model="name"
+            @blur="validateName"
+            :aria-invalid="errors.name ? 'true' : 'false'"
+          />
+          <span class="underline-line" aria-hidden="true"></span>
+          <span class="underline-error" x-show="errors.name" x-text="errors.name" x-cloak></span>
+        </div>
+        <div class="underline-field">
+          <label for="password" class="underline-label">비밀번호</label>
+          <div class="underline-pw-wrap">
+            <div class="underline-pw-inner">
+              <input
+                id="password"
+                :type="showPassword ? 'text' : 'password'"
+                name="password"
+                class="underline-input"
+                placeholder="8자 이상"
+                autocomplete="new-password"
+                required
+                minlength="8"
+                x-model="password"
+                @blur="validatePassword"
+                :aria-invalid="errors.password ? 'true' : 'false'"
+              />
+              <span class="underline-line" aria-hidden="true"></span>
+            </div>
+            <button type="button" class="underline-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword">
+              <span x-text="showPassword ? '숨기기' : '보기'"></span>
+            </button>
+          </div>
+          <span class="underline-error" x-show="errors.password" x-text="errors.password" x-cloak></span>
+        </div>
+        <div class="underline-field">
+          <label for="passwordConfirm" class="underline-label">비밀번호 확인</label>
+          <input
+            id="passwordConfirm"
+            :type="showPassword ? 'text' : 'password'"
+            name="passwordConfirm"
+            class="underline-input"
+            placeholder="비밀번호 재입력"
+            autocomplete="new-password"
+            required
+            x-model="passwordConfirm"
+            @blur="validatePasswordConfirm"
+            :aria-invalid="errors.passwordConfirm ? 'true' : 'false'"
+          />
+          <span class="underline-line" aria-hidden="true"></span>
+          <span class="underline-error" x-show="errors.passwordConfirm" x-text="errors.passwordConfirm" x-cloak></span>
+        </div>
+        <button type="submit" class="underline-btn" :disabled="submitting">
+          <span x-show="!submitting">가입하기</span>
+          <span x-show="submitting" x-cloak>처리 중...</span>
+        </button>
+      </form>
+
+      <footer class="underline-footer">
+        <a href="#" class="underline-link">이미 계정이 있으신가요? 로그인</a>
+      </footer>
+    </div>
+  </main>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

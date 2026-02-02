@@ -1,0 +1,293 @@
+/* 회원가입 시안 27 - 단계 분할형 + 네오 브루탈리즘, GSAP 기반 부드러운 전환 */
+.signup-brutal-step.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: #f2f2ed;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+.brustep-wrap {
+  width: 100%;
+  max-width: 440px;
+  margin: auto;
+}
+
+.brustep-card {
+  width: 100%;
+  padding: 1.75rem 1.5rem;
+  background: #ffffff;
+  border: 3px solid #0a0a0a;
+  border-radius: 0;
+  box-sizing: border-box;
+  box-shadow: 8px 8px 0 #0a0a0a;
+}
+
+@media (max-width: 480px) {
+  .brustep-card {
+    padding: 1.5rem 1.25rem;
+    box-shadow: 6px 6px 0 #0a0a0a;
+  }
+}
+
+.brustep-header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.brustep-title {
+  margin: 0 0 0.35rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #0a0a0a;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 480px) {
+  .brustep-title {
+    font-size: 1.35rem;
+  }
+}
+
+.brustep-desc {
+  margin: 0 0 1rem;
+  font-size: 0.875rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #555;
+  font-weight: 500;
+}
+
+.brustep-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.brustep-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 0;
+  font-size: 0.875rem;
+  font-weight: 800;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #555;
+  background: #f2f2ed;
+  border: 2px solid #0a0a0a;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.brustep-dot--active {
+  color: #ffffff;
+  background: #0a0a0a;
+  border-color: #0a0a0a;
+}
+
+.brustep-line {
+  width: 36px;
+  height: 3px;
+  background: #0a0a0a;
+  transition: background 0.2s ease;
+}
+
+.brustep-line--filled {
+  background: #0a0a0a;
+}
+
+.brustep-form {
+  position: relative;
+  min-height: 200px;
+}
+
+.brustep-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.brustep-panel-title {
+  margin: 0 0 0.25rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #0a0a0a;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.brustep-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.brustep-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #0a0a0a;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.brustep-input {
+  width: 100%;
+  padding: 0.75rem 0.875rem;
+  font-size: 0.9375rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #0a0a0a;
+  background: #ffffff;
+  border: 2px solid #0a0a0a;
+  border-radius: 0;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.brustep-input::placeholder {
+  color: #555;
+}
+
+.brustep-input:focus {
+  border-color: #0a0a0a;
+  box-shadow: 4px 4px 0 #0a0a0a;
+}
+
+.brustep-input[aria-invalid="true"] {
+  border-color: #c00;
+  box-shadow: 0 0 0 2px rgba(204, 0, 0, 0.1);
+}
+
+.brustep-pw-wrap {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border: 2px solid #0a0a0a;
+  border-radius: 0;
+  background: #ffffff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.brustep-pw-wrap:focus-within {
+  border-color: #0a0a0a;
+  box-shadow: 4px 4px 0 #0a0a0a;
+}
+
+.brustep-pw-wrap .brustep-input {
+  border: none;
+  box-shadow: none;
+  flex: 1;
+  min-width: 0;
+}
+
+.brustep-pw-wrap .brustep-input:focus {
+  box-shadow: none;
+}
+
+.brustep-pw-btn {
+  padding: 0 0.875rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #0a0a0a;
+  background: #f2f2ed;
+  border: none;
+  border-left: 2px solid #0a0a0a;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.brustep-pw-btn:hover {
+  background: #0a0a0a;
+  color: #ffffff;
+}
+
+.brustep-error {
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #c00;
+  min-height: 1.25rem;
+}
+
+.brustep-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+}
+
+.brustep-btn {
+  padding: 0.7rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border-radius: 0;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+
+.brustep-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.brustep-btn--primary {
+  color: #ffffff;
+  background: #0a0a0a;
+  border: 2px solid #0a0a0a;
+}
+
+.brustep-btn--primary:hover:not(:disabled) {
+  background: #333;
+  border-color: #333;
+}
+
+.brustep-btn--secondary {
+  color: #0a0a0a;
+  background: transparent;
+  border: 2px solid #0a0a0a;
+}
+
+.brustep-btn--secondary:hover:not(:disabled) {
+  background: #0a0a0a;
+  color: #ffffff;
+  border-color: #0a0a0a;
+}
+
+.brustep-footer {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 2px solid #0a0a0a;
+  text-align: center;
+}
+
+.brustep-link {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #0a0a0a;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.brustep-link:hover {
+  color: #333;
+}
+
+[x-cloak] {
+  display: none !important;
+}

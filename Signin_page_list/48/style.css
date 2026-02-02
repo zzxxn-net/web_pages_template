@@ -1,0 +1,99 @@
+/* 시안 48 - 다크 아카이브 + 마이크로 인터랙션 중심 + 스크롤 없는 고정 플로우 */
+.signup-dam.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.4rem, 1.5vw, 0.75rem);
+  box-sizing: border-box;
+  background: #0c0a09;
+  position: relative;
+}
+.dam-bg { position: fixed; inset: 0; pointer-events: none; background: #0c0a09; }
+.dam-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(139,115,85,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(139,115,85,0.04) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+.dam-inner {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  max-height: 100%;
+  margin: auto;
+  padding: clamp(0.75rem, 2vh, 1rem) clamp(1rem, 3vw, 1.25rem);
+  background: rgba(28,25,23,0.9);
+  border: 1px solid rgba(139,115,85,0.2);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: clamp(0.4rem, 1.2vh, 0.6rem);
+  flex-shrink: 1;
+  min-height: 0;
+  backdrop-filter: blur(8px);
+}
+.dam-header { flex-shrink: 0; text-align: center; margin-bottom: 0.25rem; }
+.dam-title { margin: 0 0 0.15em; font-size: clamp(1rem, 2.2vw, 1.2rem); font-weight: 600; font-family: "IBM Plex Sans KR", sans-serif; color: #e7e5e4; letter-spacing: -0.02em; }
+.dam-desc { margin: 0; font-size: clamp(0.6875rem, 1.6vw, 0.75rem); font-family: "IBM Plex Sans KR", sans-serif; color: #78716c; }
+.dam-form { display: flex; flex-direction: column; gap: clamp(0.35rem, 1vh, 0.5rem); flex-shrink: 1; min-height: 0; }
+.dam-field { position: relative; display: flex; flex-direction: column; gap: 0.25rem; }
+.dam-field--focused .dam-label-underline { width: 100%; }
+.dam-field--focused .dam-label-text { color: #a78b71; }
+.dam-field--focused .dam-input,
+.dam-field--focused .dam-pw-wrap { border-color: #a78b71; box-shadow: 0 0 0 2px rgba(167,139,113,0.12); transform: scale(1.008); }
+.dam-field--invalid .dam-input,
+.dam-field--invalid .dam-pw-wrap { border-color: #b85450; box-shadow: 0 0 0 2px rgba(184,84,80,0.12); }
+.dam-label { display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer; }
+.dam-label-text { font-size: clamp(0.6875rem, 1.5vw, 0.75rem); font-weight: 500; font-family: "IBM Plex Mono", monospace; color: #78716c; transition: color 0.22s ease; }
+.dam-label-underline { flex: 1; max-width: 32px; height: 1px; background: #a78b71; width: 0; transition: width 0.28s ease; }
+.dam-input {
+  width: 100%;
+  padding: 0.45rem 0.75rem;
+  font-size: clamp(0.8125rem, 1.8vw, 0.875rem);
+  font-family: "IBM Plex Sans KR", sans-serif;
+  color: #e7e5e4;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(139,115,85,0.2);
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.2s ease;
+}
+.dam-input::placeholder { color: #78716c; opacity: 0.7; }
+.dam-input:focus { border-color: #a78b71; box-shadow: 0 0 0 2px rgba(167,139,113,0.12); transform: scale(1.008); }
+.dam-pw-wrap {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid rgba(139,115,85,0.2);
+  border-radius: 6px;
+  background: rgba(255,255,255,0.04);
+  transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.2s ease;
+}
+.dam-pw-wrap .dam-input { border: none; background: transparent; flex: 1; padding-right: 0.4rem; transform: none; }
+.dam-pw-wrap:focus-within { border-color: #a78b71; box-shadow: 0 0 0 2px rgba(167,139,113,0.12); transform: scale(1.008); }
+.dam-pw-btn { flex-shrink: 0; padding: 0 0.5rem; border: none; background: transparent; font-size: 0.6875rem; font-family: "IBM Plex Mono", monospace; color: #78716c; cursor: pointer; transition: color 0.2s ease; }
+.dam-pw-btn:hover { color: #a78b71; }
+.dam-error { font-size: clamp(0.625rem, 1.4vw, 0.6875rem); font-family: "IBM Plex Sans KR", sans-serif; color: #b85450; }
+.dam-actions { flex-shrink: 0; margin-top: 0.25rem; }
+.dam-btn {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid #a78b71;
+  border-radius: 6px;
+  font-size: clamp(0.8125rem, 1.8vw, 0.875rem);
+  font-weight: 500;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  color: #a78b71;
+  background: rgba(167,139,113,0.12);
+  cursor: pointer;
+  transition: background 0.22s ease, transform 0.2s ease, opacity 0.2s ease;
+}
+.dam-btn:hover:not(:disabled) { background: rgba(167,139,113,0.22); transform: translateY(-0.5px); }
+.dam-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+[x-cloak] { display: none !important; }

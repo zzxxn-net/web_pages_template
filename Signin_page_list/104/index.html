@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입 | 시안 104 - 현대 판타지 비대칭 레이아웃 상태 변화 강조</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="s104 signup-fixed" x-data="signupForm104()" x-init="initAnim()">
+    <div class="s104-bg" aria-hidden="true"></div>
+    <div class="s104-layout" x-ref="layout">
+      <aside class="s104-aside" aria-label="브랜드 영역" x-ref="aside">
+        <div class="s104-aside-inner">
+          <h1 class="s104-title">회원가입</h1>
+          <p class="s104-tagline">환상의 세계로 초대합니다.</p>
+        </div>
+      </aside>
+      <section class="s104-form-wrap" aria-label="회원가입 폼 영역" x-ref="formWrap">
+        <form class="s104-form" method="post" action="#" hx-post="#" hx-swap="none" @submit.prevent="handleSubmit" aria-label="회원가입 폼">
+          <div class="s104-fields">
+            <div class="s104-field" :class="{ 's104-field--invalid': errors.email, 's104-field--valid': touched.email && !errors.email && email }">
+              <label for="s104-email" class="s104-label">이메일</label>
+              <input id="s104-email" type="email" name="email" class="s104-input" placeholder="you@example.com" autocomplete="email" required x-model="email" @blur="touched.email = true; validateEmail()" :aria-invalid="errors.email ? 'true' : 'false'" />
+              <span class="s104-error" x-show="errors.email" x-cloak x-text="errors.email"></span>
+            </div>
+            <div class="s104-field" :class="{ 's104-field--invalid': errors.name, 's104-field--valid': touched.name && !errors.name && name }">
+              <label for="s104-name" class="s104-label">이름</label>
+              <input id="s104-name" type="text" name="name" class="s104-input" placeholder="홍길동" autocomplete="name" required x-model="name" @blur="touched.name = true; validateName()" :aria-invalid="errors.name ? 'true' : 'false'" />
+              <span class="s104-error" x-show="errors.name" x-cloak x-text="errors.name"></span>
+            </div>
+            <div class="s104-field" :class="{ 's104-field--invalid': errors.password, 's104-field--valid': touched.password && !errors.password && password }">
+              <label for="s104-password" class="s104-label">비밀번호</label>
+              <div class="s104-pw-wrap">
+                <input id="s104-password" :type="showPassword ? 'text' : 'password'" name="password" class="s104-input" placeholder="8자 이상" autocomplete="new-password" required minlength="8" x-model="password" @blur="touched.password = true; validatePassword()" :aria-invalid="errors.password ? 'true' : 'false'" />
+                <button type="button" class="s104-pw-btn" :aria-label="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'" @click="showPassword = !showPassword"><span x-text="showPassword ? '숨기기' : '보기'"></span></button>
+              </div>
+              <span class="s104-error" x-show="errors.password" x-cloak x-text="errors.password"></span>
+            </div>
+            <div class="s104-field" :class="{ 's104-field--invalid': errors.passwordConfirm, 's104-field--valid': touched.passwordConfirm && !errors.passwordConfirm && passwordConfirm }">
+              <label for="s104-passwordConfirm" class="s104-label">비밀번호 확인</label>
+              <input id="s104-passwordConfirm" :type="showPassword ? 'text' : 'password'" name="password_confirm" class="s104-input" placeholder="다시 입력" autocomplete="new-password" required minlength="8" x-model="passwordConfirm" @blur="touched.passwordConfirm = true; validatePasswordConfirm()" :aria-invalid="errors.passwordConfirm ? 'true' : 'false'" />
+              <span class="s104-error" x-show="errors.passwordConfirm" x-cloak x-text="errors.passwordConfirm"></span>
+            </div>
+          </div>
+          <div class="s104-actions">
+            <button type="submit" class="s104-btn" :disabled="submitting" :class="{ 's104-btn--busy': submitting }" :aria-busy="submitting"><span x-text="submitting ? '처리 중…' : '가입하기'"></span></button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

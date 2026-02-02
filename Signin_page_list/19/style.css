@@ -1,0 +1,268 @@
+/* ============================================
+   회원가입 시안 19 - 단일 포커스 입력 흐름 + 현대 판타지
+   포커스 이동 중심 UX
+   ============================================ */
+
+.signup-fantasy.signup-single-focus {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: linear-gradient(165deg, #1a1625 0%, #2d1f3d 40%, #1e1b2e 100%);
+  box-sizing: border-box;
+}
+
+.fantasy-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+.fantasy-glow {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(192, 132, 252, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.fantasy-card {
+  position: relative;
+  width: 100%;
+  padding: 2rem 1.75rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(192, 132, 252, 0.2);
+  border-radius: 14px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 480px) {
+  .fantasy-card {
+    padding: 1.5rem 1.5rem;
+    border-radius: 12px;
+  }
+}
+
+.fantasy-form {
+  display: block;
+}
+
+.fantasy-step {
+  display: block;
+  min-height: 200px;
+}
+
+.fantasy-prompt {
+  margin: 0 0 1.25rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #f5f3ff;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+}
+
+@media (max-width: 480px) {
+  .fantasy-prompt {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.fantasy-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.fantasy-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #a78bfa;
+}
+
+.fantasy-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+  color: #f5f3ff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(192, 132, 252, 0.2);
+  border-radius: 10px;
+  box-sizing: border-box;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.fantasy-input::placeholder {
+  color: rgba(167, 139, 250, 0.5);
+}
+
+.fantasy-input:focus {
+  outline: none;
+  border-color: rgba(192, 132, 252, 0.5);
+  box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.15);
+}
+
+.fantasy-input[aria-invalid="true"] {
+  border-color: rgba(248, 113, 113, 0.5);
+  box-shadow: 0 0 0 2px rgba(248, 113, 113, 0.2);
+}
+
+.fantasy-pw-wrap {
+  display: flex;
+  border: 1px solid rgba(192, 132, 252, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.fantasy-pw-wrap:focus-within {
+  border-color: rgba(192, 132, 252, 0.5);
+  box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.15);
+}
+
+.fantasy-pw-wrap .fantasy-input {
+  border: none;
+  flex: 1;
+}
+
+.fantasy-pw-wrap .fantasy-input:focus {
+  box-shadow: none;
+}
+
+.fantasy-pw-wrap .fantasy-pw-btn {
+  padding: 0 1rem;
+  font-size: 0.8125rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #a78bfa;
+  background: transparent;
+  border: none;
+  border-left: 1px solid rgba(192, 132, 252, 0.2);
+  cursor: pointer;
+}
+
+.fantasy-pw-wrap .fantasy-pw-btn:hover {
+  color: #c084fc;
+}
+
+.fantasy-error {
+  font-size: 0.8125rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #f87171;
+}
+
+.fantasy-nav {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.fantasy-btn {
+  padding: 0.625rem 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.fantasy-btn--prev {
+  color: #a78bfa;
+  background: transparent;
+  border: 1px solid rgba(192, 132, 252, 0.2);
+}
+
+.fantasy-btn--prev:hover {
+  color: #f5f3ff;
+  border-color: rgba(192, 132, 252, 0.4);
+}
+
+.fantasy-btn--next {
+  color: #1a1625;
+  background: #c084fc;
+  border: none;
+}
+
+.fantasy-btn--next:hover {
+  background: #d8b4fe;
+  transform: translateY(-1px);
+}
+
+.fantasy-btn--submit {
+  color: #1a1625;
+  background: #c084fc;
+  border: none;
+}
+
+.fantasy-btn--submit:hover:not(:disabled) {
+  background: #d8b4fe;
+  transform: translateY(-1px);
+}
+
+.fantasy-btn--submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.fantasy-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(192, 132, 252, 0.2);
+}
+
+.fantasy-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(192, 132, 252, 0.25);
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.fantasy-dot:hover {
+  background: rgba(192, 132, 252, 0.5);
+}
+
+.fantasy-dot--active {
+  background: #c084fc;
+  transform: scale(1.2);
+}
+
+.fantasy-footer {
+  margin-top: 1.25rem;
+  text-align: center;
+}
+
+.fantasy-link {
+  font-size: 0.875rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #c084fc;
+  text-decoration: none;
+}
+
+.fantasy-link:hover {
+  color: #d8b4fe;
+  text-decoration: underline;
+}
+
+[x-cloak] {
+  display: none !important;
+}

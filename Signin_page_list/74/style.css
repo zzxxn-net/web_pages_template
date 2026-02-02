@@ -1,0 +1,28 @@
+.signup-fixed{min-height:100vh;min-height:100dvh;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.s74{font-family:'Syne',system-ui,sans-serif;color:#f0f0f2;min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:clamp(0.75rem,2.5vw,1.25rem);position:relative;box-sizing:border-box;overflow:hidden}
+.s74-bg{position:absolute;inset:0;z-index:0;pointer-events:none;background:#0a0a0b}
+.s74-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:20px 20px}
+.s74-viewport{position:relative;z-index:1;width:100%;max-width:380px;display:flex;flex-direction:column;gap:0.5rem;max-height:100%;justify-content:center}
+.s74-title{font-size:clamp(1.75rem,4.5vw,2rem);font-weight:700;color:#f0f0f2;margin:0 0 0.5rem;letter-spacing:0.08em}
+.s74-form{display:flex;flex-direction:column;gap:0.5rem}
+.s74-field{display:flex;flex-direction:column;gap:0.2rem;transition:opacity 0.22s ease,transform 0.22s ease}
+.s74-field--active{opacity:1;transform:scale(1)}
+.s74-field--active .s74-label{color:#00d4aa}
+.s74-field--active .s74-input{border-color:#00d4aa;box-shadow:0 0 0 2px rgba(0,212,170,0.12)}
+.s74-field--dim{opacity:0.35;transform:scale(0.98)}
+.s74-field--invalid .s74-input{border-color:#ff6b6b}
+.s74-label{font-family:'JetBrains Mono',monospace;font-size:0.6875rem;font-weight:500;letter-spacing:0.1em;color:#6b6b70;transition:color 0.22s ease}
+.s74-input{width:100%;padding:0.5rem 0.65rem;font-family:'JetBrains Mono',monospace;font-size:0.8125rem;color:#f0f0f2;background:#121214;border:1px solid #252528;outline:none;transition:border-color 0.22s ease,box-shadow 0.22s ease}
+.s74-input::placeholder{color:#6b6b70;opacity:0.6}
+.s74-pw-wrap{position:relative;display:flex;align-items:center}
+.s74-pw-wrap .s74-input{padding-right:3.5rem}
+.s74-pw-btn{position:absolute;right:0.5rem;padding:0.25rem 0.45rem;font-family:'JetBrains Mono',monospace;font-size:0.625rem;font-weight:500;letter-spacing:0.05em;color:#00d4aa;background:transparent;border:none;cursor:pointer;transition:opacity 0.22s ease}
+.s74-pw-btn:hover{opacity:0.85}
+.s74-error{font-size:0.6875rem;color:#ff6b6b;font-family:'JetBrains Mono',monospace}
+.s74-actions{margin-top:0.35rem}
+.s74-submit{width:100%;padding:0.65rem 1rem;font-family:'Syne',system-ui,sans-serif;font-size:0.8125rem;font-weight:600;letter-spacing:0.08em;color:#0a0a0b;background:#00d4aa;border:none;border-radius:0;cursor:pointer;transition:opacity 0.22s ease,transform 0.22s ease}
+.s74-submit:hover:not(:disabled){opacity:0.95;transform:scale(1.01)}
+.s74-submit:disabled{opacity:0.5;cursor:not-allowed}
+.s74-submit-text{display:block}
+@media (max-width:480px){.s74{overflow:auto}.signup-fixed{overflow:auto}}
+[x-cloak]{display:none!important}

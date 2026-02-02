@@ -1,0 +1,235 @@
+// 시안 121: 사이버 미니멀 + 단계 분할형(Progressive Form) + GSAP 기반 부드러운 전환
+$s121-sans: 'DM Sans', system-ui, sans-serif;
+$s121-bg: #f0f4f8;
+$s121-surface: #fff;
+$s121-border: rgba(100, 116, 139, 0.18);
+$s121-text: #1e293b;
+$s121-muted: #64748b;
+$s121-accent: #06b6d4;
+$s121-accent-soft: rgba(6, 182, 212, 0.12);
+$s121-valid: #10b981;
+$s121-valid-soft: rgba(16, 185, 129, 0.08);
+$s121-error: #ef4444;
+$s121-error-soft: rgba(239, 68, 68, 0.08);
+$s121-radius: 10px;
+$s121-ease: 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+
+.signup-fixed {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.s121 {
+  font-family: $s121-sans;
+  color: $s121-text;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-sizing: border-box;
+  background: $s121-bg;
+}
+
+.s121-inner {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.25rem, 5vw, 2rem);
+  box-sizing: border-box;
+}
+
+.s121-header {
+  text-align: center;
+  margin-bottom: clamp(1.25rem, 4vw, 1.75rem);
+}
+
+.s121-title {
+  font-size: clamp(1.4rem, 4vw, 1.75rem);
+  font-weight: 600;
+  color: $s121-text;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.s121-steps-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.s121-step-dot {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: $s121-border;
+  color: $s121-muted;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background $s121-ease, color $s121-ease;
+  &--active {
+    background: $s121-accent;
+    color: #fff;
+  }
+}
+
+.s121-step-line {
+  width: 2rem;
+  height: 2px;
+  background: $s121-border;
+  transition: background $s121-ease;
+  &--done { background: $s121-accent; }
+}
+
+.s121-form-wrap {
+  width: 100%;
+  max-width: 380px;
+}
+
+.s121-form {
+  width: 100%;
+}
+
+.s121-steps {
+  position: relative;
+  min-height: 12rem;
+}
+
+.s121-step {
+  width: 100%;
+}
+
+.s121-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.s121-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  position: relative;
+  &--focused .s121-input {
+    border-color: $s121-accent;
+    box-shadow: 0 0 0 3px $s121-accent-soft;
+  }
+  &--valid .s121-input { border-color: $s121-valid; background: $s121-valid-soft; }
+  &--valid .s121-label { color: $s121-valid; }
+  &--invalid .s121-input { border-color: $s121-error; background: $s121-error-soft; }
+  &--invalid .s121-label { color: $s121-error; }
+}
+
+.s121-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: $s121-muted;
+  transition: color $s121-ease;
+}
+
+.s121-input {
+  width: 100%;
+  padding: 0.7rem 2.25rem 0.7rem 1rem;
+  font-family: $s121-sans;
+  font-size: 0.9375rem;
+  color: $s121-text;
+  background: $s121-surface;
+  border: 1px solid $s121-border;
+  border-radius: $s121-radius;
+  outline: none;
+  transition: border-color $s121-ease, box-shadow $s121-ease, background $s121-ease;
+  &::placeholder { color: $s121-muted; opacity: 0.8; }
+}
+
+.s121-status {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: $s121-valid;
+  pointer-events: none;
+}
+
+.s121-pw-wrap {
+  position: relative;
+  .s121-input { padding-right: 3rem; }
+}
+
+.s121-pw-btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.25rem 0.4rem;
+  font-size: 0.7rem;
+  font-family: $s121-sans;
+  font-weight: 500;
+  color: $s121-accent;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background $s121-ease;
+  &:hover { background: $s121-accent-soft; }
+}
+
+.s121-error {
+  font-size: 0.75rem;
+  color: $s121-error;
+  display: block;
+}
+
+.s121-actions {
+  margin-top: 1.5rem;
+  &--row {
+    display: flex;
+    gap: 0.75rem;
+    .s121-btn { flex: 1; }
+  }
+}
+
+.s121-btn {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-family: $s121-sans;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  border: none;
+  border-radius: $s121-radius;
+  cursor: pointer;
+  transition: opacity $s121-ease, transform $s121-ease;
+  &--primary {
+    color: #fff;
+    background: $s121-accent;
+    &:hover:not(:disabled) { opacity: 0.92; transform: translateY(-1px); }
+  }
+  &--secondary {
+    color: $s121-muted;
+    background: $s121-surface;
+    border: 1px solid $s121-border;
+    &:hover { background: $s121-border; }
+  }
+  &:active:not(:disabled) { transform: translateY(0); }
+  &:disabled, &--busy { opacity: 0.6; cursor: not-allowed; transform: none; }
+}
+
+[x-cloak] {
+  display: none !important;
+}
