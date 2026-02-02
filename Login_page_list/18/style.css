@@ -1,0 +1,26 @@
+/* Design 18: Emotional Tech · Fullscreen · GSAP */
+*,*::before,*::after{box-sizing:border-box;}
+html{font-size:16px;-webkit-text-size-adjust:100%;}
+body{margin:0;min-height:100vh;min-height:100dvh;font-family:"Inter",-apple-system,sans-serif;font-weight:500;line-height:1.5;color:#f0eef4;background:#1e1b2e;display:flex;align-items:center;justify-content:center;padding:1rem;}
+.login-emotion-full{width:100%;min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:2rem;position:relative;}
+.login-emotion-full__bg{position:absolute;inset:0;background:linear-gradient(160deg,#1e1b2e 0%,#2d2640 100%);pointer-events:none;}
+.login-emotion-full__inner{width:100%;max-width:380px;margin:0 auto;position:relative;z-index:1;}
+.login-emotion-full__head{margin-bottom:2rem;text-align:center;}
+.login-emotion-full__title{margin:0 0 0.35rem;font-size:clamp(1.5rem,3.5vw,1.875rem);font-weight:700;letter-spacing:-0.02em;color:#f0eef4;}
+.login-emotion-full__desc{margin:0;font-size:0.9375rem;color:#a89bb8;}
+.login-emotion-full__form{display:flex;flex-direction:column;gap:1.5rem;}
+.emotion-full-field{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:1rem;transition:border-color 0.28s ease,box-shadow 0.28s ease;}
+.emotion-full-field:focus-within{border-color:rgba(201,184,232,0.5);box-shadow:0 0 0 2px rgba(201,184,232,0.15);}
+.emotion-full-field__label{display:block;font-size:0.8125rem;font-weight:600;color:#a89bb8;margin-bottom:0.35rem;}
+.emotion-full-field__input{width:100%;font:inherit;font-size:1rem;color:#f0eef4;background:transparent;border:none;padding:0.25rem 0;outline:none;}
+.emotion-full-field__input::placeholder{color:#a89bb8;}
+.emotion-full-field__wrap{display:flex;align-items:center;gap:1rem;}
+.emotion-full-field__wrap .emotion-full-field__input{flex:1;min-width:0;}
+.emotion-full-field__toggle{font:inherit;font-size:0.8125rem;color:#a89bb8;background:none;border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:0.25rem 0.5rem;cursor:pointer;transition:color 0.28s ease,border-color 0.28s ease;}
+.emotion-full-field__toggle:hover{color:#c9b8e8;border-color:#c9b8e8;}
+.emotion-full-field__toggle:focus-visible{outline:2px solid #c9b8e8;outline-offset:2px;}
+.emotion-full-btn{margin-top:1rem;font:inherit;font-size:1rem;font-weight:600;color:#1e1b2e;background:#c9b8e8;border:none;border-radius:10px;padding:1rem 2rem;cursor:pointer;transition:opacity 0.28s ease,transform 0.28s ease;}
+.emotion-full-btn:hover:not(:disabled){opacity:0.95;transform:translateY(-1px);}
+.emotion-full-btn:focus-visible{outline:2px solid #c9b8e8;outline-offset:2px;}
+.emotion-full-btn:disabled{opacity:0.7;cursor:not-allowed;}
+@media (max-width:480px){.login-emotion-full{padding:1rem;}}
