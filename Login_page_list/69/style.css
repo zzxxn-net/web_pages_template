@@ -1,0 +1,167 @@
+/* Design 69: Neo Brutalism · Progressive · Input Reactive */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: system-ui, "Noto Sans KR", sans-serif;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #1a1a1a;
+  background: #f5f3ef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.login-brutal-prog {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.75rem;
+  overflow: auto;
+}
+
+.login-brutal-prog__wrap {
+  width: 100%;
+  max-width: 400px;
+  padding: 1.75rem;
+  background: #fff;
+  border: 3px solid #1a1a1a;
+  box-shadow: 6px 6px 0 #1a1a1a;
+}
+
+.brutal-prog-steps {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+.brutal-prog-step {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #555;
+  border: 2px solid #1a1a1a;
+  background: #fff;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.brutal-prog-step.is-current { color: #fff; background: #1a1a1a; }
+.brutal-prog-step.is-done { color: #fff; background: #1a1a1a; }
+.brutal-prog-bar {
+  flex: 1;
+  max-width: 40px;
+  height: 3px;
+  background: #555;
+  transition: background 0.2s ease;
+}
+.brutal-prog-bar.is-done { background: #1a1a1a; }
+
+.brutal-prog__head { margin-bottom: 1.25rem; text-align: center; }
+.brutal-prog__title { margin: 0 0 0.25rem; font-size: clamp(1.35rem, 3vw, 1.6rem); font-weight: 800; letter-spacing: 0.02em; color: #1a1a1a; }
+.brutal-prog__desc { margin: 0; font-size: 0.8125rem; font-weight: 600; color: #555; }
+.brutal-prog__form { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.brutal-prog-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.brutal-prog-panel.is-hidden { display: none; }
+
+.brutal-prog-field {
+  padding: 0.75rem 1rem;
+  border: 2px solid #1a1a1a;
+  background: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.brutal-prog-field.has-focus {
+  border-color: #1a1a1a;
+  box-shadow: 0 0 0 2px #f5f3ef, 0 0 0 4px #1a1a1a;
+}
+.brutal-prog-field.has-focus .brutal-prog-field__label { color: #1a1a1a; font-weight: 800; }
+.brutal-prog-field.has-value:not(.has-focus) { border-color: #555; }
+.brutal-prog-field.has-value:not(.has-focus) .brutal-prog-field__label { color: #1a1a1a; }
+
+.brutal-prog-field__label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #555;
+  transition: color 0.2s ease, font-weight 0.2s ease;
+}
+
+.brutal-prog-field__input {
+  width: 100%;
+  padding: 0.25rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.brutal-prog-field__input::placeholder { color: rgba(85, 85, 85, 0.8); }
+
+.brutal-prog-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.brutal-prog-field__row .brutal-prog-field__input { flex: 1; }
+
+.brutal-prog-field__toggle {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #555;
+  background: #fff;
+  border: 2px solid #1a1a1a;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.brutal-prog-field__toggle:hover { color: #1a1a1a; background: #f5f3ef; }
+
+.brutal-prog-btn {
+  padding: 0.8rem 1.3rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  border: 2px solid #1a1a1a;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.brutal-prog-btn--next {
+  color: #fff;
+  background: #1a1a1a;
+}
+.brutal-prog-btn--next:hover:not(:disabled) { background: #1a1a1a; }
+.brutal-prog-btn--next:disabled { opacity: 0.5; cursor: not-allowed; background: #555; border-color: #555; }
+.brutal-prog-btn--back {
+  color: #1a1a1a;
+  background: #fff;
+}
+.brutal-prog-btn--back:hover { background: #f5f3ef; }
+.brutal-prog-btn--submit {
+  color: #fff;
+  background: #1a1a1a;
+}
+.brutal-prog-btn--submit:hover:not(:disabled) { background: #1a1a1a; }
+.brutal-prog-btn--submit:disabled { cursor: not-allowed; opacity: 0.7; }
+.brutal-prog-btn--submit.is-loading { pointer-events: none; }
+
+.brutal-prog-actions { display: flex; gap: 1rem; margin-top: 0.2rem; }
+
+@media (max-width: 480px) {
+  .login-brutal-prog { padding: 1rem; }
+  .login-brutal-prog__wrap { padding: 1.25rem; }
+}
