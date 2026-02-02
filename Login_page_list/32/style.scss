@@ -1,0 +1,171 @@
+// Design 32: Dark Archive · Card Split Layout · Focus-movement UX
+$bg: #1a1918;
+$card: #242220;
+$card-border: rgba(180, 165, 140, 0.12);
+$text: #e8e4de;
+$muted: #9a9288;
+$accent: #c9a227;
+$glow: rgba(201, 162, 39, 0.25);
+$radius: 12px;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 640px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-dark-split {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+}
+.login-dark-split__wrap { width: 100%; max-width: 720px; }
+
+.dark-split-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-radius: $radius;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  border: 1px solid $card-border;
+  @media (max-width: $bp) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+}
+
+.dark-split-card {
+  background: $card;
+  border: none;
+  &:first-child { border-right: 1px solid $card-border; }
+  @media (max-width: $bp) {
+    &:first-child { border-right: none; border-bottom: 1px solid $card-border; }
+  }
+}
+.dark-split-card__inner {
+  padding: $space-xl;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  @media (max-width: $bp) { min-height: auto; padding: $space-lg; }
+}
+.dark-split-card--brand .dark-split-card__inner { position: relative; }
+.dark-split-card__title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.35rem, 3vw, 1.5rem);
+  font-weight: 700;
+  color: $text;
+}
+.dark-split-card__desc {
+  margin: 0;
+  font-size: 0.875rem;
+  color: $muted;
+  line-height: 1.5;
+}
+.dark-split-card__accent {
+  position: absolute;
+  bottom: $space-lg;
+  right: $space-lg;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, $accent);
+  border-radius: 2px;
+  opacity: 0.7;
+}
+
+.dark-split-form { width: 100%; }
+.dark-split-field {
+  margin-bottom: $space-lg;
+  padding: $space $space-lg;
+  border: 1px solid $card-border;
+  border-radius: 8px;
+  background: rgba(26, 25, 24, 0.5);
+  transition: border-color $ease, box-shadow $ease, background $ease;
+}
+.dark-split-field.has-focus {
+  border-color: $accent;
+  box-shadow: 0 0 0 2px $glow;
+  background: rgba(26, 25, 24, 0.7);
+}
+.dark-split-field__label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: $muted;
+  margin-bottom: 0.4rem;
+}
+.dark-split-field__input {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  color: $text;
+  background: transparent;
+  border: none;
+  padding: 0.4rem 0;
+  outline: none;
+}
+.dark-split-field__input::placeholder { color: $muted; opacity: 0.6; }
+.dark-split-field__input:focus { outline: none; }
+.dark-split-field__wrap { display: flex; align-items: center; gap: 0.5rem; }
+.dark-split-field__wrap .dark-split-field__input { flex: 1; min-width: 0; }
+.dark-split-field__toggle {
+  font: inherit;
+  font-size: 0.8125rem;
+  color: $muted;
+  background: rgba(201, 162, 39, 0.1);
+  border: 1px solid $card-border;
+  border-radius: 6px;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  transition: color $ease, border-color $ease;
+}
+.dark-split-field__toggle:hover { color: $accent; border-color: rgba(201, 162, 39, 0.4); }
+.dark-split-field__toggle:focus-visible { outline: 2px solid $accent; outline-offset: 2px; }
+
+.dark-split-btn {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $bg;
+  background: $accent;
+  border: none;
+  border-radius: 8px;
+  padding: $space $space-xl;
+  cursor: pointer;
+  margin-top: 0.25rem;
+  transition: opacity $ease, transform $ease, box-shadow $ease;
+  box-shadow: 0 4px 14px rgba(201, 162, 39, 0.3);
+}
+.dark-split-btn:focus-visible { outline: 2px solid $text; outline-offset: 2px; }
+.dark-split-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(201, 162, 39, 0.35); }
+.dark-split-btn.is-loading { opacity: 0.85; pointer-events: none; }
+.dark-split-btn:disabled { cursor: not-allowed; }
+
+@media (max-width: $bp) {
+  .login-dark-split { padding: $space-lg; }
+  .dark-split-card__inner { padding: $space-lg; }
+}
