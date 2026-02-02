@@ -1,0 +1,165 @@
+// Design 28: Neo Brutalism · Card-separated · Input-reactive animation
+$bg: #f5f3ef;
+$card: #ffffff;
+$border: #1a1a1a;
+$text: #1a1a1a;
+$muted: #5a5a5a;
+$accent: #ff3366;
+$radius: 0;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.2s ease;
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-brutal-card {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $space-xl;
+  min-height: 100%;
+  padding: $space-xl;
+}
+.login-brutal-card__brand {
+  width: 100%;
+  max-width: 320px;
+  padding: $space-lg $space-xl;
+  background: $card;
+  border: 3px solid $border;
+  border-radius: $radius;
+  text-align: center;
+  box-shadow: 6px 6px 0 $border;
+}
+.brutal-card-brand__logo {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: $text;
+  margin-bottom: 0.35rem;
+}
+.brutal-card-brand__tagline {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: $muted;
+}
+
+.login-brutal-card__form-card {
+  width: 100%;
+  max-width: 320px;
+  padding: $space-xl;
+  background: $card;
+  border: 3px solid $border;
+  border-radius: $radius;
+  box-shadow: 6px 6px 0 $border;
+}
+.brutal-card-form__head {
+  margin-bottom: $space-xl;
+  text-align: center;
+}
+.brutal-card-form__title {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.35rem, 3vw, 1.5rem);
+  font-weight: 800;
+  color: $text;
+}
+.brutal-card-form__desc {
+  margin: 0;
+  font-size: 0.875rem;
+  color: $muted;
+}
+.brutal-card-form__form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+
+.brutal-card-field {
+  padding: $space $space-lg;
+  border: 2px solid $border;
+  border-radius: $radius;
+  background: $bg;
+  transition: transform $ease;
+}
+.brutal-card-field__label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: $muted;
+  margin-bottom: 0.35rem;
+}
+.brutal-card-field__input {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $text;
+  background: transparent;
+  border: none;
+  padding: 0.4rem 0;
+  outline: none;
+}
+.brutal-card-field__input::placeholder { color: $muted; opacity: 0.8; }
+.brutal-card-field__wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.brutal-card-field__wrap .brutal-card-field__input { flex: 1; min-width: 0; }
+.brutal-card-field__toggle {
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: $muted;
+  background: none;
+  border: 2px solid $border;
+  border-radius: $radius;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  transition: color $ease, border-color $ease;
+}
+.brutal-card-field__toggle:hover { color: $accent; border-color: $accent; }
+
+.brutal-card-btn {
+  margin-top: 0.25rem;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 800;
+  color: $card;
+  background: $border;
+  border: 3px solid $border;
+  border-radius: $radius;
+  padding: $space $space-xl;
+  cursor: pointer;
+  transition: transform $ease, background $ease;
+  box-shadow: 4px 4px 0 $text;
+}
+.brutal-card-btn:hover:not(:disabled) { transform: translate(2px, 2px); box-shadow: 2px 2px 0 $text; }
+.brutal-card-btn:disabled { cursor: not-allowed; opacity: 0.6; }
+
+@media (max-width: $bp) {
+  .login-brutal-card { padding: $space-lg; gap: $space-lg; }
+  .login-brutal-card__form-card { padding: $space-lg; }
+}
