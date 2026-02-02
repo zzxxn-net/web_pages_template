@@ -1,0 +1,217 @@
+// Design 60: Modern Fantasy · Progressive Form · State change emphasis
+$bg: #1a1f1e;
+$bg-light: #232a28;
+$surface: rgba(35, 42, 40, 0.92);
+$border: rgba(180, 165, 120, 0.25);
+$text: #e8e4d8;
+$muted: #8a8578;
+$accent: #c4a84a;
+$accent-soft: rgba(196, 168, 74, 0.2);
+$radius: 10px;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 480px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: Georgia, "Noto Serif KR", serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-fantasy-prog {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+  overflow: auto;
+}
+
+.login-fantasy-prog__bg {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 40%, $bg-light 0%, $bg 100%);
+  pointer-events: none;
+}
+
+.login-fantasy-prog__box {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  padding: $space-xl;
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $radius;
+  box-shadow: 0 20px 56px rgba(0, 0, 0, 0.4);
+}
+
+.fantasy-prog-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: $space-xl;
+}
+
+.fantasy-prog-dot {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: $muted;
+  border: 1px solid $border;
+  border-radius: 50%;
+  transition: color $ease, border-color $ease, background $ease, box-shadow $ease;
+}
+.fantasy-prog-dot.is-active {
+  color: $accent;
+  border-color: $accent;
+  background: $accent-soft;
+  box-shadow: 0 0 12px rgba($accent, 0.35);
+}
+.fantasy-prog-dot.is-done {
+  color: $bg;
+  border-color: $accent;
+  background: $accent;
+}
+
+.fantasy-prog-line {
+  width: 28px;
+  height: 2px;
+  background: $border;
+  transition: background $ease;
+}
+.fantasy-prog-line.is-done { background: $accent; }
+
+.login-fantasy-prog__head { margin-bottom: $space-lg; text-align: center; }
+.login-fantasy-prog__title {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.4rem, 3.2vw, 1.65rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: $text;
+}
+.login-fantasy-prog__desc { margin: 0; font-size: 0.875rem; color: $muted; }
+.login-fantasy-prog__form { display: flex; flex-direction: column; gap: $space-lg; }
+
+.fantasy-prog-panel {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+  transition: opacity $ease, transform $ease;
+  &.is-hidden { display: none; }
+}
+
+.fantasy-prog-field {
+  padding: $space $space-lg;
+  border: 1px solid $border;
+  border-radius: 8px;
+  background: rgba(26, 31, 30, 0.5);
+  transition: border-color $ease, box-shadow $ease, background $ease;
+  &.has-focus {
+    border-color: $accent;
+    box-shadow: 0 0 0 3px $accent-soft;
+    background: rgba(26, 31, 30, 0.7);
+    .fantasy-prog-field__label { color: $accent; font-weight: 600; }
+  }
+  &.has-value:not(.has-focus) {
+    border-color: rgba($accent, 0.4);
+    .fantasy-prog-field__label { color: $text; }
+  }
+}
+
+.fantasy-prog-field__label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: $muted;
+  transition: color $ease, font-weight $ease;
+}
+
+.fantasy-prog-field__input {
+  width: 100%;
+  padding: 0.35rem 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+  &::placeholder { color: rgba($muted, 0.8); }
+}
+
+.fantasy-prog-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  .fantasy-prog-field__input { flex: 1; }
+}
+
+.fantasy-prog-field__toggle {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $muted;
+  background: transparent;
+  border: 1px solid $border;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color $ease, border-color $ease, background $ease;
+  &:hover { color: $accent; border-color: $accent; background: $accent-soft; }
+}
+
+.fantasy-prog-btn {
+  padding: 0.85rem 1.4rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border: 1px solid $border;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background $ease, color $ease, border-color $ease, opacity $ease, transform $ease;
+}
+.fantasy-prog-btn--next {
+  color: $muted;
+  background: transparent;
+  &:not(:disabled).is-ready { color: $bg; background: $accent; border-color: $accent; }
+  &:hover:not(:disabled).is-ready { background: lighten($accent, 8%); border-color: lighten($accent, 8%); }
+  &:disabled { cursor: not-allowed; opacity: 0.6; }
+}
+.fantasy-prog-btn--back {
+  color: $muted;
+  background: transparent;
+  &:hover { color: $accent; border-color: $accent; }
+}
+.fantasy-prog-btn--primary {
+  color: $bg;
+  background: $accent;
+  border-color: $accent;
+  &:hover:not(:disabled) { background: lighten($accent, 8%); border-color: lighten($accent, 8%); }
+  &:disabled { opacity: 0.7; cursor: not-allowed; }
+  &.is-loading { pointer-events: none; }
+}
+
+.fantasy-prog-actions {
+  display: flex;
+  gap: $space;
+  margin-top: 0.25rem;
+}
