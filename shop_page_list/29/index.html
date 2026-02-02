@@ -1,0 +1,66 @@
+<!-- mvp -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — 실험적 · 마이크로 인터랙션</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <main class="shop-page-29" x-data="shopPage29()">
+    <div class="shop-page-29__wrap">
+      <header class="shop-page-29__head">
+        <h1 class="shop-page-29__title">SHOP</h1>
+        <p class="shop-page-29__lead">No scroll · One screen</p>
+      </header>
+      <div class="shop-page-29__grid" id="shop-grid-29">
+        <article class="card-29" data-product="1">
+          <div class="card-29__img-wrap">
+            <img class="card-29__image" src="https://placehold.co/160x160/0a0a0a/333?text=1" alt="Product 1" width="160" height="160">
+          </div>
+          <div class="card-29__body">
+            <h2 class="card-29__name">Product 1</h2>
+            <p class="card-29__price">₩29,000</p>
+            <button type="button" class="btn-29" @click="addToCart(1)"><span class="btn-29__txt">장바구니</span></button>
+          </div>
+        </article>
+        <article class="card-29" data-product="2">
+          <div class="card-29__img-wrap">
+            <img class="card-29__image" src="https://placehold.co/160x160/0a0a0a/333?text=2" alt="Product 2" width="160" height="160">
+          </div>
+          <div class="card-29__body">
+            <h2 class="card-29__name">Product 2</h2>
+            <p class="card-29__price">₩39,000</p>
+            <button type="button" class="btn-29" @click="addToCart(2)"><span class="btn-29__txt">장바구니</span></button>
+          </div>
+        </article>
+        <article class="card-29" data-product="3">
+          <div class="card-29__img-wrap">
+            <img class="card-29__image" src="https://placehold.co/160x160/0a0a0a/333?text=3" alt="Product 3" width="160" height="160">
+          </div>
+          <div class="card-29__body">
+            <h2 class="card-29__name">Product 3</h2>
+            <p class="card-29__price">₩49,000</p>
+            <button type="button" class="btn-29" @click="addToCart(3)"><span class="btn-29__txt">장바구니</span></button>
+          </div>
+        </article>
+        <article class="card-29" data-product="4">
+          <div class="card-29__img-wrap">
+            <img class="card-29__image" src="https://placehold.co/160x160/0a0a0a/333?text=4" alt="Product 4" width="160" height="160">
+          </div>
+          <div class="card-29__body">
+            <h2 class="card-29__name">Product 4</h2>
+            <p class="card-29__price">₩19,000</p>
+            <button type="button" class="btn-29" @click="addToCart(4)"><span class="btn-29__txt">장바구니</span></button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

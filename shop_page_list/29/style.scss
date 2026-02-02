@@ -1,0 +1,157 @@
+// mvp
+$bp-tablet: 768px;
+$color-bg: #0a0a0a;
+$color-surface: #141414;
+$color-border: #2a2a2a;
+$color-text: #fafafa;
+$color-muted: #737373;
+$color-accent: #a3a3a3;
+$ease: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+.shop-page-29 {
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  background: $color-bg;
+  color: $color-text;
+}
+
+.shop-page-29__wrap {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.shop-page-29__head {
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.shop-page-29__title {
+  font-size: clamp(1.1rem, 2.8vw, 1.35rem);
+  font-weight: 700;
+  margin: 0 0 0.2rem;
+  letter-spacing: 0.2em;
+  font-family: ui-monospace, "Cascadia Code", monospace;
+  color: $color-text;
+}
+
+.shop-page-29__lead {
+  font-size: 0.75rem;
+  color: $color-muted;
+  margin: 0;
+  letter-spacing: 0.1em;
+  font-family: ui-monospace, monospace;
+}
+
+.shop-page-29__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  justify-items: center;
+  align-items: start;
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: calc(100dvh - 5rem);
+}
+
+.card-29 {
+  width: 100%;
+  max-width: 160px;
+  background: $color-surface;
+  border: 2px solid $color-border;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: border-color 0.2s ease, transform 0.2s $ease;
+  box-sizing: border-box;
+}
+
+.card-29:hover {
+  border-color: $color-muted;
+}
+
+.card-29:focus-within {
+  border-color: $color-accent;
+  outline: none;
+}
+
+.card-29__img-wrap {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+}
+
+.card-29__image {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+}
+
+.card-29__body {
+  text-align: center;
+  width: 100%;
+}
+
+.card-29__name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin: 0 0 0.2rem;
+  font-family: ui-monospace, monospace;
+  color: $color-text;
+}
+
+.card-29__price {
+  font-size: 0.75rem;
+  color: $color-accent;
+  margin: 0 0 0.5rem;
+  font-family: ui-monospace, monospace;
+}
+
+.btn-29 {
+  padding: 0.35rem 0.65rem;
+  border: 2px solid $color-muted;
+  background: transparent;
+  color: $color-muted;
+  font-size: 0.7rem;
+  font-family: ui-monospace, monospace;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-29:hover {
+  border-color: $color-text;
+  color: $color-text;
+}
+
+.btn-29:focus-visible {
+  outline: none;
+  border-color: $color-accent;
+  box-shadow: 0 0 0 2px $color-bg, 0 0 0 4px $color-accent;
+}
+
+@media (min-width: $bp-tablet) {
+  .shop-page-29__grid {
+    gap: 1rem;
+    max-width: 400px;
+  }
+  .card-29 {
+    max-width: 180px;
+  }
+}
