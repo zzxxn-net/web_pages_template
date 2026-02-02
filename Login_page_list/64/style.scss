@@ -1,0 +1,175 @@
+// Design 64: Modern Fantasy · Card split layout · GSAP smooth transitions
+$bg: #1c211f;
+$bg-light: #252c29;
+$card-brand: linear-gradient(160deg, #2a3228 0%, #1e2522 100%);
+$card-form: rgba(35, 42, 40, 0.94);
+$border: rgba(180, 168, 130, 0.22);
+$text: #e6e2d8;
+$muted: #868478;
+$accent: #b8a050;
+$accent-soft: rgba(184, 160, 80, 0.18);
+$radius: 8px;
+$space: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+$ease: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$bp: 640px;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: Georgia, "Noto Serif KR", serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: $text;
+  background: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+}
+
+.login-fantasy-split {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xl;
+}
+
+.login-fantasy-split__wrap {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+  width: 100%;
+  max-width: 440px;
+  @media (min-width: $bp) {
+    flex-direction: row;
+    max-width: 720px;
+    align-items: stretch;
+  }
+}
+
+.fantasy-split-card {
+  padding: $space-xl;
+  border-radius: $radius;
+  border: 1px solid $border;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  transition: box-shadow $ease, transform $ease;
+  &--brand {
+    background: $card-brand;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 130px;
+    @media (min-width: $bp) { flex: 0 0 40%; min-height: auto; }
+  }
+  &--form {
+    background: $card-form;
+    @media (min-width: $bp) { flex: 1 1 60%; }
+  }
+}
+
+.fantasy-split-card__label {
+  margin: 0 0 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: $muted;
+  text-transform: uppercase;
+}
+.fantasy-split-card__title {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.25rem, 2.8vw, 1.45rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: $text;
+}
+.fantasy-split-card__desc { margin: 0; font-size: 0.875rem; color: $muted; }
+
+.fantasy-split-form { display: flex; flex-direction: column; gap: $space-lg; }
+
+.fantasy-split-field {
+  padding: $space $space-lg;
+  border: 1px solid $border;
+  border-radius: 6px;
+  background: rgba(28, 33, 31, 0.5);
+  transition: border-color $ease, box-shadow $ease, background $ease, transform $ease;
+  &.has-focus {
+    border-color: $accent;
+    box-shadow: 0 0 0 2px $accent-soft;
+    background: rgba(28, 33, 31, 0.7);
+    .fantasy-split-field__label { color: $accent; font-weight: 600; }
+  }
+  &.has-value:not(.has-focus) {
+    border-color: rgba($accent, 0.35);
+    .fantasy-split-field__label { color: $text; }
+  }
+}
+
+.fantasy-split-field__label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: $muted;
+  transition: color $ease, font-weight $ease;
+}
+
+.fantasy-split-field__input {
+  width: 100%;
+  padding: 0.35rem 0;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: inherit;
+  color: $text;
+  background: transparent;
+  border: none;
+  outline: none;
+  &::placeholder { color: rgba($muted, 0.8); }
+}
+
+.fantasy-split-field__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  .fantasy-split-field__input { flex: 1; }
+}
+
+.fantasy-split-field__toggle {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: $muted;
+  background: transparent;
+  border: 1px solid $border;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color $ease, border-color $ease, background $ease;
+  &:hover { color: $accent; border-color: $accent; background: $accent-soft; }
+}
+
+.fantasy-split-btn {
+  margin-top: 0.25rem;
+  padding: 0.85rem 1.4rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: $bg;
+  background: $accent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background $ease, opacity $ease, transform $ease;
+  &:hover:not(:disabled) { background: lighten($accent, 8%); }
+  &:active:not(:disabled) { transform: scale(0.98); }
+  &:disabled { opacity: 0.7; cursor: not-allowed; }
+  &.is-loading { pointer-events: none; }
+}
