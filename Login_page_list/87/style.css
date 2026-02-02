@@ -1,0 +1,39 @@
+/* Design 87: 실험적 인터페이스, 단계 분할형(Progressive Form), 상태 변화 강조 - MVP 시안 전용 */
+*,*::before,*::after{box-sizing:border-box}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;min-height:100dvh;font-family:"Outfit",sans-serif;font-weight:400;line-height:1.5;color:#e8e4f0;background:#1a0a2e;display:flex;align-items:center;justify-content:center;padding:1rem}
+.exp-step-login{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:1.25rem;overflow:auto}
+.exp-step-login__bg{position:absolute;inset:0;background:linear-gradient(145deg,#1a0a2e 0%,#16213e 100%)}
+.exp-step-login__bg::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 30%,rgba(167,139,250,.08) 0%,transparent 55%);pointer-events:none}
+.exp-step-login__wrap{position:relative;z-index:1;display:flex;flex-direction:column;gap:1.25rem;width:100%;max-width:400px}
+.exp-step-header{padding:1.25rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;backdrop-filter:blur(12px);text-align:center}
+.exp-step-header__title{margin:0 0 .75rem;font-size:clamp(1.3rem,3vw,1.55rem);font-weight:600;color:#e8e4f0;letter-spacing:-.02em}
+.exp-step-header__indicator{display:inline-flex;align-items:center;gap:.5rem;margin-bottom:.5rem}
+.exp-step-header__step{width:2rem;height:2rem;display:inline-flex;align-items:center;justify-content:center;font-size:.875rem;font-weight:600;color:#9c8fb5;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:50%;transition:color .32s,background .32s,border-color .32s,box-shadow .32s}
+.exp-step-header__step.is-active{color:#a78bfa;background:rgba(167,139,250,.2);border-color:#a78bfa;box-shadow:0 0 0 2px rgba(167,139,250,.2)}
+.exp-step-header__divider{width:1.25rem;height:1px;background:rgba(255,255,255,.1)}
+.exp-step-header__desc{margin:0;font-size:.875rem;color:#9c8fb5;font-weight:500}
+.exp-step-card{padding:1.25rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;backdrop-filter:blur(12px);box-shadow:0 16px 40px rgba(0,0,0,.2);transition:box-shadow .32s,opacity .32s}
+.exp-step-card.is-loading{opacity:.9;box-shadow:0 12px 32px rgba(0,0,0,.18)}
+.exp-step-card__form{display:flex;flex-direction:column;gap:1rem}
+.exp-step-field{padding:.75rem 1rem;border:1px solid rgba(255,255,255,.1);border-radius:10px;background:rgba(0,0,0,.15);transition:border-color .32s,box-shadow .32s,opacity .32s,max-height .32s;outline:2px solid transparent;outline-offset:2px}
+.exp-step-field--pw{opacity:0;max-height:0;padding-top:0;padding-bottom:0;margin:0;overflow:hidden;border-width:0}
+.exp-step-field--pw.is-visible{opacity:1;max-height:120px;padding:.75rem 1rem;margin:0;border-width:1px}
+.exp-step-field:focus-within{border-color:#a78bfa;box-shadow:0 0 0 3px rgba(167,139,250,.2);outline-color:#a78bfa}
+.exp-step-field.has-focus{border-color:#a78bfa;box-shadow:0 0 0 3px rgba(167,139,250,.2);outline-color:#a78bfa}
+.exp-step-field.has-value:not(.has-focus){border-color:rgba(167,139,250,.5)}
+.exp-step-field__label{display:block;margin-bottom:.35rem;font-size:.8125rem;font-weight:600;color:#9c8fb5;transition:color .32s}
+.exp-step-field.has-focus .exp-step-field__label,.exp-step-field:focus-within .exp-step-field__label{color:#a78bfa}
+.exp-step-field__input{width:100%;padding:.25rem 0;font-size:.9375rem;font-family:inherit;color:#e8e4f0;background:transparent;border:none;outline:none}
+.exp-step-field__input::placeholder{color:rgba(156,143,181,.6)}
+.exp-step-field__row{display:flex;align-items:center;gap:.5rem}
+.exp-step-field__row .exp-step-field__input{flex:1}
+.exp-step-field__toggle{padding:.35rem .6rem;font-size:.75rem;font-weight:600;font-family:inherit;color:#9c8fb5;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.1);border-radius:8px;cursor:pointer;transition:color .32s,border-color .32s}
+.exp-step-field__toggle:hover{color:#a78bfa;border-color:#a78bfa}
+.exp-step-field__toggle:focus-visible{outline:2px solid #a78bfa;outline-offset:2px}
+.exp-step-btn{margin-top:.25rem;padding:.85rem 1.2rem;font-size:.9375rem;font-weight:600;font-family:inherit;color:#1a0a2e;background:#a78bfa;border:none;border-radius:10px;cursor:pointer;transition:background .32s,transform .32s,opacity .32s}
+.exp-step-btn:hover:not(:disabled){background:#b59cff;transform:translateY(-1px)}
+.exp-step-btn:focus-visible{outline:2px solid #a78bfa;outline-offset:2px}
+.exp-step-btn:disabled{cursor:not-allowed;opacity:.7}
+.exp-step-btn.is-loading{pointer-events:none;opacity:.88}
+@media (max-width:480px){.exp-step-login{padding:1rem}.exp-step-header,.exp-step-card{padding:1rem}}
